@@ -12,6 +12,8 @@
   <head>
     {% include head.html %}
     {% include head/custom.html %}
+    {% inclue mathjax_support.html %}
+    <!-- inclue에 있는 mathjax_support.html을 조립식으로 적어주는 것 -->
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
