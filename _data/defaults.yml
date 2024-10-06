@@ -1,4 +1,5 @@
 home:
-  heading: "안녕하세요 Brewing Code, One Sip at a Time"
+  heading1: "첫 번째 인사!"
+  heading2: "두 번째 인사!"
   subheading: "차처럼 천천히, 그리고 점점 깊어지는 개발 이야기"
   banner: "Your image url"

@@ -1,99 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-10-06T22:51:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">UlongchaS2’s Dev Steeps</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>GitHub User</name></author><entry><title type="html">새로운 블로그, 새로운 시작</title><link href="http://localhost:4000/devlog/2024/10/03/new-blog-newlife.html" rel="alternate" type="text/html" title="새로운 블로그, 새로운 시작" /><published>2024-10-03T00:00:00+09:00</published><updated>2024-10-03T00:00:00+09:00</updated><id>http://localhost:4000/devlog/2024/10/03/new%20blog%20newlife</id><content type="html" xml:base="http://localhost:4000/devlog/2024/10/03/new-blog-newlife.html"><![CDATA[<p>You can write regular <a href="https://markdowntutorial.com/">markdown</a> here and Jekyll will automatically convert it to a nice webpage. I strongly encourage you to <a href="http://markdowntutorial.com/">take 5 minutes to learn how to write in markdown</a> - it’ll teach you how to transform regular text into bold/italics/headings/tables/etc.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-10-06T23:21:51+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">UlongchaS2’s Dev Steeps</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>GitHub User</name></author><entry><title type="html">새로운 블로그, 새로운 시작</title><link href="http://localhost:4000/devlog/2024/10/03/newblog-newlife.html" rel="alternate" type="text/html" title="새로운 블로그, 새로운 시작" /><published>2024-10-03T00:00:00+09:00</published><updated>2024-10-03T00:00:00+09:00</updated><id>http://localhost:4000/devlog/2024/10/03/newblog%20newlife</id><content type="html" xml:base="http://localhost:4000/devlog/2024/10/03/newblog-newlife.html"><![CDATA[<blockquote>
+  <p>어언 3년만에 다시 블로그를 적는다. 이렇게 개인적인 공부에 손을 놓게 될줄 꿈에도 몰랐다.</p>
 
-<p><strong>Here is some bold text</strong></p>
+  <p>변명을 하자면 새로운 환경 적응, 내일을 누구보다 빠르게 정확하게 끝내는 것만이 최우선이고 나머지는 필요없다고 생각했다.</p>
 
-<h2 id="here-is-a-secondary-heading">Here is a secondary heading</h2>
+  <p>그렇게 직장 안의 일만 주구장창 하다보니, 개인적인 발전에 대한 갈망은 항상 커졌다.</p>
 
-<p>Here’s a useless table:</p>
+  <p>그러던 와중 직장 동료의 github.io에서 새롭게 블로그를 만들었는데, 그것을 보고 좋은 회사에서 이력서를 내보지 않겠냐는 제의가 왔다.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Number</th>
-      <th style="text-align: left">Next number</th>
-      <th style="text-align: left">Previous number</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Five</td>
-      <td style="text-align: left">Six</td>
-      <td style="text-align: left">Four</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Ten</td>
-      <td style="text-align: left">Eleven</td>
-      <td style="text-align: left">Nine</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Seven</td>
-      <td style="text-align: left">Eight</td>
-      <td style="text-align: left">Six</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Two</td>
-      <td style="text-align: left">Three</td>
-      <td style="text-align: left">One</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>How about a yummy crepe?</p>
-
-<p><img src="https://s3-media3.fl.yelpcdn.com/bphoto/cQ1Yoa75m2yUFFbY2xwuqw/348s.jpg" alt="Crepe" /></p>
-
-<p>It can also be centered!</p>
-
-<p><img src="https://s3-media3.fl.yelpcdn.com/bphoto/cQ1Yoa75m2yUFFbY2xwuqw/348s.jpg" alt="Crepe" class="center-block" /></p>
-
-<p>Here’s a code chunk:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-</code></pre></div></div>
-
-<p>And here is the same code with syntax highlighting:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="nx">foo</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>And here is the same code yet again but with line numbers:</p>
-
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
-<span class="k">return</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nx">foo</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></figure>
-
-<h2 id="boxes">Boxes</h2>
-
-<p>You can add notification, warning and error boxes like this:</p>
-
-<h3 id="notification">Notification</h3>
-
-<p class="box-note"><strong>Note:</strong> This is a notification box.</p>
-
-<h3 id="warning">Warning</h3>
-
-<p class="box-warning"><strong>Warning:</strong> This is a warning box.</p>
-
-<h3 id="error">Error</h3>
-
-<p class="box-error"><strong>Error:</strong> This is an error box.</p>
-
-<h3 id="emoji">Emoji</h3>
-
-<p>This single quote code <code class="language-plaintext highlighter-rouge">inet:email:message:to</code> will not be parsed to emoji icon
-:+1:.</p>]]></content><author><name>GitHub User</name></author><category term="Devlog" /><category term="blog" /><summary type="html"><![CDATA[You can write regular markdown here and Jekyll will automatically convert it to a nice webpage. I strongly encourage you to take 5 minutes to learn how to write in markdown - it’ll teach you how to transform regular text into bold/italics/headings/tables/etc.]]></summary></entry><entry><title type="html">An exhibit of Markdown</title><link href="http://localhost:4000/markdown/2018/12/05/an-exhibit-of-markdown.html" rel="alternate" type="text/html" title="An exhibit of Markdown" /><published>2018-12-05T00:00:00+09:00</published><updated>2018-12-05T00:00:00+09:00</updated><id>http://localhost:4000/markdown/2018/12/05/an-exhibit-of-markdown</id><content type="html" xml:base="http://localhost:4000/markdown/2018/12/05/an-exhibit-of-markdown.html"><![CDATA[<p>This note demonstrates some of what <a href="https://daringfireball.net/projects/markdown/">Markdown</a> is capable of doing.</p>
+  <p>부러웠고 지금도 부럽다. 하지만 부럽다고해서 상황은 바뀌지 않는다. 나도 그렇게 되지 않는 법도 없으니 이제부터라도 나의 블로그 제목처럼 천천히 차를 우리듯이 깊게 공부하는 블로그를 만들 것이다.</p>
+</blockquote>]]></content><author><name>GitHub User</name></author><category term="Devlog" /><category term="blog" /><summary type="html"><![CDATA[어언 3년만에 다시 블로그를 적는다. 이렇게 개인적인 공부에 손을 놓게 될줄 꿈에도 몰랐다. 변명을 하자면 새로운 환경 적응, 내일을 누구보다 빠르게 정확하게 끝내는 것만이 최우선이고 나머지는 필요없다고 생각했다. 그렇게 직장 안의 일만 주구장창 하다보니, 개인적인 발전에 대한 갈망은 항상 커졌다. 그러던 와중 직장 동료의 github.io에서 새롭게 블로그를 만들었는데, 그것을 보고 좋은 회사에서 이력서를 내보지 않겠냐는 제의가 왔다. 부러웠고 지금도 부럽다. 하지만 부럽다고해서 상황은 바뀌지 않는다. 나도 그렇게 되지 않는 법도 없으니 이제부터라도 나의 블로그 제목처럼 천천히 차를 우리듯이 깊게 공부하는 블로그를 만들 것이다.]]></summary></entry><entry><title type="html">An exhibit of Markdown</title><link href="http://localhost:4000/markdown/2018/12/05/an-exhibit-of-markdown.html" rel="alternate" type="text/html" title="An exhibit of Markdown" /><published>2018-12-05T00:00:00+09:00</published><updated>2018-12-05T00:00:00+09:00</updated><id>http://localhost:4000/markdown/2018/12/05/an-exhibit-of-markdown</id><content type="html" xml:base="http://localhost:4000/markdown/2018/12/05/an-exhibit-of-markdown.html"><![CDATA[<p>This note demonstrates some of what <a href="https://daringfireball.net/projects/markdown/">Markdown</a> is capable of doing.</p>
 
 <h2 id="an-exhibit-of-markdown">An exhibit of Markdown</h2>
 
