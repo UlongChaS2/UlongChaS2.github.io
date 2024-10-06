@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Test markdown
-subtitle: Each post also has a subtitle
-categories: markdown
-tags: [test]
+title: 새로운 블로그, 새로운 시작
+subtitle: 예전 깃헙 블로그를 다시 시작하다.
+categories: Devlog
+tags: [blog]
 ---
 
 You can write regular [markdown](https://markdowntutorial.com/) here and Jekyll will automatically convert it to a nice webpage. I strongly encourage you to [take 5 minutes to learn how to write in markdown](http://markdowntutorial.com/) - it'll teach you how to transform regular text into bold/italics/headings/tables/etc.
