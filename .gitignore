@@ -1,6 +1,9 @@
 
-/.idea/
-/.vscode/
-/.cache/
-/.DS_Store/
-/node_modules/
+.idea/
+.vscode/
+.DS_Store/
+
+.cache/
+node_modules/
+public/
+package-lock.json
