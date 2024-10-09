@@ -1,8 +1,4 @@
 var plugins = [{
-      name: 'gatsby-plugin-react-helmet',
-      plugin: require('/Users/ulongchas2/Desktop/personal/UlongChaS2.github.io/node_modules/gatsby-plugin-react-helmet/gatsby-ssr.js'),
-      options: {"plugins":[]},
-    },{
       name: 'gatsby-plugin-image',
       plugin: require('/Users/ulongchas2/Desktop/personal/UlongChaS2.github.io/node_modules/gatsby-plugin-image/gatsby-ssr.js'),
       options: {"plugins":[]},
