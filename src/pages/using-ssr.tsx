@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const UsingSSR = ({ serverData }) => {
+const UsingSSR = ({ serverData }: {serverData: any}) => {
   return (
     <Layout>
       <h1>
@@ -32,7 +32,7 @@ const UsingSSR = ({ serverData }) => {
   )
 }
 
-export const Head = () => <Seo title="Using SSR" />
+export const Head = () => <Seo title="Using SSR" description={undefined} children={undefined} />
 
 export default UsingSSR
 

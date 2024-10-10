@@ -25,6 +25,7 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    `gatsby-plugin-typescript`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-image`,
     {
