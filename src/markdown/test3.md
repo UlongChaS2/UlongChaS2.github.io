@@ -1,5 +1,5 @@
 ---
-path: "/my-first-post"
+path: "/my-first-post3"
 title: "My First Blog Post"
 date: "2024-01-01"
 ---
