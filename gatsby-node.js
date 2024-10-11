@@ -23,13 +23,13 @@ exports.createPages = async ({ actions, graphql }) => {
   // Deferred Static Generation 예시 페이지 생성
   createPage({
     path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
+    component: require.resolve("./src/templates/using-dsg.tsx"),
     context: {},
     defer: true, // Deferred Static Generation 설정
   });
 
   // 마크다운 템플릿 설정
-  const blogPostTemplate = path.resolve(`src/templates/markdown-template.js`);
+  const blogPostTemplate = path.resolve(`src/templates/markdown-template.tsx`);
 
   // GraphQL로 모든 마크다운 파일 정보 가져오기
   const result = await graphql(`
