@@ -1,17 +1,14 @@
 // src/pages/index.js
 
-import React from "react";
-import Layout from "../components/layout";
-import GlobalStyles from "../components/GlobalStyles";
-import { graphql, useStaticQuery } from "gatsby";
+import React from 'react';
+import Layout from '../components/GlobalLayout';
+import GlobalStyles from '../components/GlobalStyles';
+import { graphql, useStaticQuery } from 'gatsby';
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 5
-      ) {
+      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 5) {
         edges {
           node {
             id
@@ -46,10 +43,7 @@ const IndexPage = () => {
 export const Head = () => (
   <>
     <title>Home | My Gatsby Blog</title>
-    <meta
-      name="description"
-      content="This is the homepage of my Gatsby blog."
-    />
+    <meta name="description" content="This is the homepage of my Gatsby blog." />
   </>
 );
 
