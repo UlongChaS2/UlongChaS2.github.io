@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[478],{1130:function(e,t,a){a.r(t);var l=a(6540),r=a(300);t.default=e=>{let{data:t}=e;const a=t.markdownRemark;return l.createElement(r.A,null,l.createElement("h1",null,a.frontmatter.title),l.createElement("p",null,l.createElement("strong",null,"작성일:")," ",a.frontmatter.date),l.createElement("div",{dangerouslySetInnerHTML:{__html:a.html}}))}}}]);
+//# sourceMappingURL=component---src-templates-study-template-tsx-f38f324d7440bb98e5ec.js.map
