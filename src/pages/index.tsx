@@ -6,28 +6,6 @@ import GlobalStyles from '../components/GlobalStyles';
 import { graphql, useStaticQuery } from 'gatsby';
 
 const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 5) {
-        edges {
-          node {
-            id
-            frontmatter {
-              title
-              date(formatString: "YYYY-MM-DD")
-            }
-            excerpt
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  const posts = data.allMarkdownRemark.edges;
-  console.log(data, posts);
   return (
     <>
       <GlobalStyles />

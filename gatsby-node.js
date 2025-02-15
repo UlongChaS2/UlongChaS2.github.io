@@ -1,50 +1,48 @@
 const { createFilePath } = require(`gatsby-source-filesystem`); // 슬러그 생성 함수
-const path = require("path");
+const path = require('path');
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-  
-  // 마크다운 파일의 slug 필드를 생성
-  if (node.internal.type === `MarkdownRemark`) {
+
+  if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
     const slug = createFilePath({ node, getNode, basePath: `pages` });
-    
-    // 각 노드에 slug 필드 추가
+
     createNodeField({
       node,
       name: `slug`,
       value: slug,
     });
+
+    // 부모 노드 확인 후 category 필드 추가
+    const parentNode = getNode(node.parent);
+    if (parentNode && parentNode.sourceInstanceName) {
+      createNodeField({
+        node,
+        name: 'category',
+        value: parentNode.sourceInstanceName, // "study" 또는 "project"
+      });
+    } else {
+      console.warn(`🚨 [gatsby-node] 부모 노드가 없거나 sourceInstanceName이 없습니다: ${node.id}`);
+    }
   }
 };
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
 
-  // Deferred Static Generation 예시 페이지 생성
-  createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.tsx"),
-    context: {},
-    defer: true, // Deferred Static Generation 설정
-  });
+  const studyTemplate = path.resolve(`src/templates/study-template.tsx`);
+  const projectTemplate = path.resolve(`src/templates/project-template.tsx`);
 
-  // 마크다운 템플릿 설정
-  const blogPostTemplate = path.resolve(`src/templates/markdown-template.tsx`);
-
-  // GraphQL로 모든 마크다운 파일 정보 가져오기
   const result = await graphql(`
     {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
+      allMarkdownRemark {
         edges {
           node {
             fields {
               slug
+              category
             }
             frontmatter {
-              title
               date
             }
           }
@@ -53,19 +51,39 @@ exports.createPages = async ({ actions, graphql }) => {
     }
   `);
 
-  // 오류 처리
-  if (result.errors) {
-    throw new Error(result.errors);
-  }
-
-  // 마크다운 파일마다 페이지 생성
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    createPage({
-      path: node.fields.slug, // 생성된 slug를 경로로 사용
-      component: blogPostTemplate,
-      context: {
-        slug: node.fields.slug, // 슬러그를 템플릿에 전달하여 사용
+    const postDate = new Date(node.frontmatter.date);
+    const currentYear = new Date().getFullYear();
+    const isOldPost = postDate.getFullYear() < currentYear - 1; // 1년 이상 지난 글은 DSG 적용
+
+    if (node.fields.category === 'study') {
+      createPage({
+        path: `/study${node.fields.slug}`,
+        component: studyTemplate,
+        context: {
+          slug: node.fields.slug,
+        },
+        defer: isOldPost, // ✅ 1년 이상 지난 글만 DSG 적용
+      });
+    } else if (node.fields.category === 'project') {
+      createPage({
+        path: `/project${node.fields.slug}`,
+        component: projectTemplate,
+        context: {
+          slug: node.fields.slug,
+        },
+        defer: isOldPost, // ✅ 1년 이상 지난 글만 DSG 적용
+      });
+    }
+  });
+};
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        src: path.resolve(__dirname, 'src'),
       },
-    });
+    },
   });
 };

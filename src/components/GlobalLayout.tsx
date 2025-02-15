@@ -1,11 +1,10 @@
+import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import styled from '@emotion/styled';
-
 import './layout.css';
 
 import { ReactNode } from 'react';
-import Header from './GlobalHeader2';
+import { Container, Footer } from 'src/styles/LayoutStyles';
+import Header from './GlobalHeader';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const data = useStaticQuery(graphql`
@@ -17,17 +16,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
       }
     }
   `);
-
-  const Container = styled.div`
-    margin: 0 auto;
-    max-width: var(--size-content);
-    padding: var(--size-gutter);
-  `;
-
-  const Footer = styled.footer`
-    margin-top: var(--space-5);
-    font-size: var(--font-sx);
-  `;
 
   return (
     <>
