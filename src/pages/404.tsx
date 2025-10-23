@@ -125,8 +125,8 @@ const NotFoundPage = () => (
         </ErrorDescription>
         <LinksContainer>
           <LinkButton to="/">홈으로 가기</LinkButton>
-          <SecondaryButton to="/study">스터디 보기</SecondaryButton>
-          <SecondaryButton to="/project">프로젝트 보기</SecondaryButton>
+          <SecondaryButton to="/study/">스터디 보기</SecondaryButton>
+          <SecondaryButton to="/project/">프로젝트 보기</SecondaryButton>
         </LinksContainer>
       </NotFoundContainer>
     </Layout>

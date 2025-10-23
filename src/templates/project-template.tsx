@@ -39,7 +39,7 @@ const ProjectPost: React.FC<ProjectPostProps> = ({ data }) => {
           <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
 
           <PostNavigation>
-            <Link to="/project" style={{ textDecoration: 'none' }}>
+            <Link to="/project/" style={{ textDecoration: 'none' }}>
               <NavLink as="div" className="prev">
                 <div className="label">목록으로</div>
                 <div className="title">프로젝트 포스트</div>

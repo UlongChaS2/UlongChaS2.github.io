@@ -19,11 +19,12 @@ const wrapESMPlugin = (name) =>
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `Dev.log`,
+    description: `개발 공부와 프로젝트를 기록하는 블로그`,
+    author: `@ulongchas2`,
+    siteUrl: `https://ulongchas2.github.io/`,
   },
+  trailingSlash: 'always',
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-plugin-emotion`,

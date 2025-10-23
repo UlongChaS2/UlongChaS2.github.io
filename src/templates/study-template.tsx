@@ -39,7 +39,7 @@ const StudyPost: React.FC<StudyPostProps> = ({ data }) => {
           <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
 
           <PostNavigation>
-            <Link to="/study" style={{ textDecoration: 'none' }}>
+            <Link to="/study/" style={{ textDecoration: 'none' }}>
               <NavLink as="div" className="prev">
                 <div className="label">목록으로</div>
                 <div className="title">스터디 포스트</div>

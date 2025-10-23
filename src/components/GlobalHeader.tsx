@@ -13,13 +13,13 @@ const Header = () => {
           <Link to="/" activeClassName="active">
             홈
           </Link>
-          <Link to="/study" activeClassName="active">
+          <Link to="/study/" activeClassName="active" partiallyActive={true}>
             스터디
           </Link>
-          <Link to="/project" activeClassName="active">
+          <Link to="/project/" activeClassName="active" partiallyActive={true}>
             프로젝트
           </Link>
-          <Link to="/about" activeClassName="active">
+          <Link to="/about/" activeClassName="active" partiallyActive={true}>
             소개
           </Link>
         </Nav>
