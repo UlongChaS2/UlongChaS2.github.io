@@ -29,7 +29,7 @@ const ErrorCode = styled.h1`
 const ErrorMessage = styled.h2`
   font-size: ${theme.fontSize['2xl']};
   font-weight: ${theme.fontWeight.semibold};
-  color: ${theme.colors.text.primary};
+  color: var(--color-text-primary);
   margin: 0 0 ${theme.spacing.md} 0;
 
   @media (min-width: ${theme.breakpoints.tablet}) {
@@ -39,7 +39,7 @@ const ErrorMessage = styled.h2`
 
 const ErrorDescription = styled.p`
   font-size: ${theme.fontSize.base};
-  color: ${theme.colors.text.secondary};
+  color: var(--color-text-secondary);
   margin: 0 0 ${theme.spacing['2xl']} 0;
   max-width: 600px;
   line-height: 1.6;
@@ -82,17 +82,17 @@ const LinkButton = styled(Link)`
 const SecondaryButton = styled(Link)`
   display: inline-block;
   padding: ${theme.spacing.md} ${theme.spacing.xl};
-  background: ${theme.colors.surface};
-  color: ${theme.colors.text.primary};
+  background: var(--color-surface);
+  color: var(--color-text-primary);
   text-decoration: none;
   border-radius: ${theme.borderRadius.md};
   font-weight: ${theme.fontWeight.semibold};
-  border: 1px solid ${theme.colors.border};
+  border: 1px solid var(--color-border);
   transition: all ${theme.transition.base};
 
   &:hover {
     border-color: ${theme.colors.primary};
-    background: ${theme.colors.hover};
+    background: var(--color-hover);
   }
 `;
 

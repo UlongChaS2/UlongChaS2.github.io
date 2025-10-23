@@ -11,8 +11,8 @@ const AboutSection = styled.section`
 `;
 
 const Card = styled.div`
-  background: ${theme.colors.background};
-  border: 1px solid ${theme.colors.border};
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: ${theme.borderRadius.lg};
   padding: ${theme.spacing.xl};
   margin-bottom: ${theme.spacing.xl};
@@ -25,7 +25,7 @@ const Card = styled.div`
 const SectionTitle = styled.h2`
   font-size: ${theme.fontSize['2xl']};
   font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.text.primary};
+  color: var(--color-text-primary);
   margin-bottom: ${theme.spacing.lg};
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@ const SectionTitle = styled.h2`
 
 const Text = styled.p`
   font-size: ${theme.fontSize.base};
-  color: ${theme.colors.text.secondary};
+  color: var(--color-text-secondary);
   line-height: 1.8;
   margin-bottom: ${theme.spacing.md};
 
@@ -55,14 +55,14 @@ const SkillGrid = styled.div`
 `;
 
 const SkillTag = styled.div`
-  background: ${theme.colors.surface};
-  color: ${theme.colors.text.primary};
+  background: var(--color-surface);
+  color: var(--color-text-primary);
   padding: ${theme.spacing.sm} ${theme.spacing.md};
   border-radius: ${theme.borderRadius.md};
   text-align: center;
   font-size: ${theme.fontSize.sm};
   font-weight: ${theme.fontWeight.medium};
-  border: 1px solid ${theme.colors.border};
+  border: 1px solid var(--color-border);
   transition: all ${theme.transition.fast};
 
   &:hover {
@@ -84,16 +84,16 @@ const ContactItem = styled.a`
   align-items: center;
   gap: ${theme.spacing.md};
   padding: ${theme.spacing.md};
-  background: ${theme.colors.surface};
+  background: var(--color-surface);
   border-radius: ${theme.borderRadius.md};
   text-decoration: none;
-  color: ${theme.colors.text.primary};
+  color: var(--color-text-primary);
   transition: all ${theme.transition.fast};
-  border: 1px solid ${theme.colors.border};
+  border: 1px solid var(--color-border);
 
   &:hover {
     border-color: ${theme.colors.primary};
-    background: ${theme.colors.hover};
+    background: var(--color-hover);
   }
 
   .icon {
@@ -105,13 +105,13 @@ const ContactItem = styled.a`
 
     .label {
       font-size: ${theme.fontSize.sm};
-      color: ${theme.colors.text.tertiary};
+      color: var(--color-text-tertiary);
     }
 
     .value {
       font-size: ${theme.fontSize.base};
       font-weight: ${theme.fontWeight.medium};
-      color: ${theme.colors.text.primary};
+      color: var(--color-text-primary);
     }
   }
 `;

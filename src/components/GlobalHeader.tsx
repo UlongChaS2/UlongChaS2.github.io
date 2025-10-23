@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
 import { HeaderContainer, HeaderInner, Logo, Nav } from 'src/styles/HeaderStyles';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
   return (
@@ -22,6 +23,7 @@ const Header = () => {
           <Link to="/about/" activeClassName="active" partiallyActive={true}>
             소개
           </Link>
+          <ThemeToggle />
         </Nav>
       </HeaderInner>
     </HeaderContainer>

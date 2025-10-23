@@ -13,7 +13,7 @@ export const PageHeader = styled.div`
 export const PageTitle = styled.h1`
   font-size: ${theme.fontSize['3xl']};
   font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.text.primary};
+  color: var(--color-text-primary);
   margin: 0 0 ${theme.spacing.md} 0;
 
   @media (min-width: ${theme.breakpoints.tablet}) {
@@ -23,7 +23,7 @@ export const PageTitle = styled.h1`
 
 export const PageSubtitle = styled.p`
   font-size: ${theme.fontSize.base};
-  color: ${theme.colors.text.secondary};
+  color: var(--color-text-secondary);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -91,7 +91,7 @@ export const Section = styled.section`
 export const SectionTitle = styled.h2`
   font-size: ${theme.fontSize['2xl']};
   font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.text.primary};
+  color: var(--color-text-primary);
   margin: 0 0 ${theme.spacing.xl} 0;
   display: flex;
   align-items: center;
@@ -105,14 +105,14 @@ export const SectionTitle = styled.h2`
     content: '';
     flex: 1;
     height: 2px;
-    background: linear-gradient(to right, ${theme.colors.border}, transparent);
+    background: linear-gradient(to right, var(--color-border), transparent);
   }
 `;
 
 export const EmptyState = styled.div`
   text-align: center;
   padding: ${theme.spacing['3xl']} ${theme.spacing.md};
-  color: ${theme.colors.text.tertiary};
+  color: var(--color-text-tertiary);
 
   p {
     font-size: ${theme.fontSize.lg};

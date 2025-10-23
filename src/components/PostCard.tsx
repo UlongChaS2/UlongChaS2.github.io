@@ -1,14 +1,14 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-
 import { Link } from 'gatsby';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { theme } from 'src/styles/theme';
 
 const Card = styled.article`
-  background: ${theme.colors.background};
-  border: 1px solid ${theme.colors.border};
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: ${theme.borderRadius.lg};
-  padding: ${theme.spacing.lg};
+  overflow: hidden;
   transition: all ${theme.transition.base};
   height: 100%;
   display: flex;
@@ -19,35 +19,75 @@ const Card = styled.article`
     box-shadow: ${theme.shadow.lg};
     border-color: ${theme.colors.primary};
   }
+`;
+
+const CardLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--color-surface);
+
+  .gatsby-image-wrapper {
+    height: 100%;
+    width: 100%;
+  }
+
+  img {
+    transition: transform ${theme.transition.slow};
+  }
+
+  ${Card}:hover & img {
+    transform: scale(1.05);
+  }
+`;
+
+const NoThumbnail = styled.div`
+  width: 100%;
+  height: 200px;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${theme.fontSize.sm};
+  color: var(--color-text-secondary);
+`;
+
+const CardContent = styled.div`
+  padding: ${theme.spacing.lg};
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
   @media (min-width: ${theme.breakpoints.tablet}) {
     padding: ${theme.spacing.xl};
   }
 `;
 
-const CardLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  height: 100%;
-`;
-
 const Category = styled.span`
   display: inline-block;
   padding: ${theme.spacing.xs} ${theme.spacing.md};
-  background-color: ${theme.colors.surface};
+  background-color: var(--color-surface);
   color: ${theme.colors.primary};
   border-radius: ${theme.borderRadius.full};
   font-size: ${theme.fontSize.xs};
   font-weight: ${theme.fontWeight.semibold};
   margin-bottom: ${theme.spacing.md};
   text-transform: uppercase;
+  width: max-content;
 `;
 
 const Title = styled.h3`
   font-size: ${theme.fontSize.xl};
   font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.text.primary};
+  color: var(--color-text-primary);
   margin: 0 0 ${theme.spacing.sm} 0;
   line-height: 1.4;
 
@@ -57,7 +97,7 @@ const Title = styled.h3`
 `;
 
 const Excerpt = styled.p`
-  color: ${theme.colors.text.secondary};
+  color: var(--color-text-secondary);
   font-size: ${theme.fontSize.sm};
   line-height: 1.6;
   margin: 0 0 ${theme.spacing.md} 0;
@@ -73,9 +113,9 @@ const Meta = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-top: ${theme.spacing.md};
-  border-top: 1px solid ${theme.colors.border};
+  border-top: 1px solid var(--color-border);
   font-size: ${theme.fontSize.sm};
-  color: ${theme.colors.text.tertiary};
+  color: var(--color-text-primary);
 `;
 
 const Date = styled.time`
@@ -105,22 +145,31 @@ interface PostCardProps {
   category: string;
   slug: string;
   readTime?: string;
+  thumbnail?: IGatsbyImageData | null;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ title, excerpt, date, category, slug, readTime = '5분' }) => {
+const PostCard: React.FC<PostCardProps> = ({ title, excerpt, date, category, slug, readTime = '5분', thumbnail }) => {
   // category를 기반으로 올바른 경로 생성
   const fullPath = `/${category}${slug}`;
+  const thumbnailImage = thumbnail ? getImage(thumbnail) : null;
 
   return (
     <Card>
       <CardLink to={fullPath}>
-        <Category>{category}</Category>
-        <Title>{title}</Title>
-        <Excerpt>{excerpt}</Excerpt>
-        <Meta>
-          <Date>{date}</Date>
-          <ReadTime>{readTime}</ReadTime>
-        </Meta>
+        <ImageWrapper>
+          {thumbnailImage ? <GatsbyImage image={thumbnailImage} alt={title} /> : <NoThumbnail>No thumbnail</NoThumbnail>}
+        </ImageWrapper>
+
+        <CardContent>
+          <Category>{category}</Category>
+          <Title>{title}</Title>
+          <Excerpt>{excerpt}</Excerpt>
+
+          <Meta>
+            <Date>{date}</Date>
+            <ReadTime>{readTime}</ReadTime>
+          </Meta>
+        </CardContent>
       </CardLink>
     </Card>
   );

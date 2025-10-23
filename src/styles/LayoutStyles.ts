@@ -13,11 +13,11 @@ export const Container = styled.div`
 `;
 
 export const Footer = styled.footer`
-  background-color: ${theme.colors.surface};
-  border-top: 1px solid ${theme.colors.border};
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
   padding: ${theme.spacing.xl} ${theme.spacing.md};
   text-align: center;
-  color: ${theme.colors.text.secondary};
+  color: var(--color-text-secondary);
   font-size: ${theme.fontSize.sm};
   margin-top: ${theme.spacing['3xl']};
 

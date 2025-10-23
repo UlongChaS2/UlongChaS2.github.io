@@ -18,6 +18,28 @@ const GlobalStyles = () => (
         scroll-behavior: smooth;
       }
 
+      /* CSS Variables for theming */
+      :root,
+      [data-theme='light'] {
+        --color-background: ${theme.colors.light.background};
+        --color-surface: ${theme.colors.light.surface};
+        --color-text-primary: ${theme.colors.light.text.primary};
+        --color-text-secondary: ${theme.colors.light.text.secondary};
+        --color-text-tertiary: ${theme.colors.light.text.tertiary};
+        --color-border: ${theme.colors.light.border};
+        --color-hover: ${theme.colors.light.hover};
+      }
+
+      [data-theme='dark'] {
+        --color-background: ${theme.colors.dark.background};
+        --color-surface: ${theme.colors.dark.surface};
+        --color-text-primary: ${theme.colors.dark.text.primary};
+        --color-text-secondary: ${theme.colors.dark.text.secondary};
+        --color-text-tertiary: ${theme.colors.dark.text.tertiary};
+        --color-border: ${theme.colors.dark.border};
+        --color-hover: ${theme.colors.dark.hover};
+      }
+
       body {
         font-family:
           'Inter',
@@ -28,11 +50,14 @@ const GlobalStyles = () => (
           'Helvetica Neue',
           Arial,
           sans-serif;
-        background-color: ${theme.colors.background};
-        color: ${theme.colors.text.primary};
+        background-color: var(--color-background);
+        color: var(--color-text-primary);
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
       }
 
       h1,
@@ -77,15 +102,15 @@ const GlobalStyles = () => (
       }
 
       ::-webkit-scrollbar-track {
-        background: ${theme.colors.surface};
+        background: var(--color-surface);
       }
 
       ::-webkit-scrollbar-thumb {
-        background: ${theme.colors.border};
+        background: var(--color-border);
         border-radius: ${theme.borderRadius.full};
 
         &:hover {
-          background: ${theme.colors.text.tertiary};
+          background: var(--color-text-tertiary);
         }
       }
     `}

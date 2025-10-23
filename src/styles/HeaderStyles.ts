@@ -2,13 +2,15 @@ import styled from '@emotion/styled';
 import { theme } from './theme';
 
 export const HeaderContainer = styled.header`
-  background-color: ${theme.colors.background};
-  border-bottom: 1px solid ${theme.colors.border};
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 100;
   backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--color-background);
+  opacity: 0.95;
+  transition: all ${theme.transition.fast};
 `;
 
 export const HeaderInner = styled.div`
@@ -18,6 +20,7 @@ export const HeaderInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: ${theme.spacing.md};
 
   @media (min-width: ${theme.breakpoints.tablet}) {
     padding: ${theme.spacing.lg} ${theme.spacing.xl};
@@ -42,6 +45,7 @@ export const Logo = styled.div`
 
 export const Nav = styled.nav`
   display: flex;
+  align-items: center;
   gap: ${theme.spacing.sm};
 
   @media (min-width: ${theme.breakpoints.tablet}) {
@@ -50,7 +54,7 @@ export const Nav = styled.nav`
 
   a {
     padding: ${theme.spacing.sm} ${theme.spacing.md};
-    color: ${theme.colors.text.secondary};
+    color: var(--color-text-secondary);
     text-decoration: none;
     font-weight: ${theme.fontWeight.medium};
     border-radius: ${theme.borderRadius.md};
@@ -62,13 +66,13 @@ export const Nav = styled.nav`
     }
 
     &:hover {
-      color: ${theme.colors.text.primary};
-      background-color: ${theme.colors.hover};
+      color: var(--color-text-primary);
+      background-color: var(--color-hover);
     }
 
     &.active {
       color: ${theme.colors.primary};
-      background-color: ${theme.colors.surface};
+      background-color: var(--color-surface);
     }
   }
 `;

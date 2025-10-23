@@ -22,8 +22,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Header />
       <Container>
         <main>{children}</main>
-        <Footer>© {new Date().getFullYear()} &middot; ulongchas2 all rights reserved.</Footer>
       </Container>
+      <Footer>© {new Date().getFullYear()} &middot; ulongchas2 all rights reserved.</Footer>
     </>
   );
 };

@@ -14,6 +14,11 @@ interface ProjectPageProps {
           title: string;
           date: string;
           category: string;
+          thumbnail?: {
+            childImageSharp: {
+              gatsbyImageData: any;
+            };
+          };
         };
         excerpt: string;
         fields: {
@@ -46,6 +51,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ data }) => {
                 date={post.frontmatter.date}
                 category={post.frontmatter.category}
                 slug={post.fields.slug}
+                thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
               />
             ))}
           </PostGrid>
@@ -69,8 +75,13 @@ export const query = graphql`
           title
           date(formatString: "YYYY년 MM월 DD일")
           category
+          thumbnail {
+            childImageSharp {
+              gatsbyImageData(width: 400, height: 200, placeholder: BLURRED)
+            }
+          }
         }
-        excerpt(pruneLength: 150)
+        excerpt(pruneLength: 140)
         fields {
           slug
         }

@@ -2,6 +2,8 @@
 title: '블로그 플랫폼 개발기'
 date: '2025-01-10'
 category: 'project'
+thumbnail: ../../images/example.png
+featuredImage: ../../images/example.png
 ---
 
 Gatsby와 React를 활용하여 개인 블로그 플랫폼을 만든 과정을 공유합니다.

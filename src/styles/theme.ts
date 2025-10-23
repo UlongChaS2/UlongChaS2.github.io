@@ -2,15 +2,30 @@ export const theme = {
   colors: {
     primary: '#2563eb',
     secondary: '#7c3aed',
-    background: '#ffffff',
-    surface: '#f8fafc',
-    text: {
-      primary: '#1e293b',
-      secondary: '#64748b',
-      tertiary: '#94a3b8',
+    // Light mode colors
+    light: {
+      background: '#ffffff',
+      surface: '#f8fafc',
+      text: {
+        primary: '#1e293b',
+        secondary: '#64748b',
+        tertiary: '#94a3b8',
+      },
+      border: '#e2e8f0',
+      hover: '#f1f5f9',
     },
-    border: '#e2e8f0',
-    hover: '#f1f5f9',
+    // Dark mode colors
+    dark: {
+      background: '#0f172a',
+      surface: '#1e293b',
+      text: {
+        primary: '#f1f5f9',
+        secondary: '#cbd5e1',
+        tertiary: '#94a3b8',
+      },
+      border: '#334155',
+      hover: '#334155',
+    },
   },
 
   breakpoints: {

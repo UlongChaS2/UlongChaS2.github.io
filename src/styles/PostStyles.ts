@@ -8,14 +8,36 @@ export const PostContainer = styled.article`
 
 export const PostHeader = styled.header`
   margin-bottom: ${theme.spacing['2xl']};
+`;
+
+export const FeaturedImage = styled.div`
+  width: 100%;
+  margin-bottom: ${theme.spacing['2xl']};
+  border-radius: ${theme.borderRadius.lg};
+  overflow: hidden;
+
+  .gatsby-image-wrapper {
+    width: 100%;
+    max-height: 400px;
+  }
+
+  @media (min-width: ${theme.breakpoints.tablet}) {
+    .gatsby-image-wrapper {
+      max-height: 500px;
+    }
+  }
+`;
+
+export const PostHeaderContent = styled.div`
   padding-bottom: ${theme.spacing.xl};
-  border-bottom: 2px solid ${theme.colors.border};
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: ${theme.spacing['2xl']};
 `;
 
 export const PostCategory = styled.span`
   display: inline-block;
   padding: ${theme.spacing.xs} ${theme.spacing.md};
-  background-color: ${theme.colors.surface};
+  background-color: var(--color-surface);
   color: ${theme.colors.primary};
   border-radius: ${theme.borderRadius.full};
   font-size: ${theme.fontSize.xs};
@@ -27,7 +49,7 @@ export const PostCategory = styled.span`
 export const PostTitle = styled.h1`
   font-size: ${theme.fontSize['3xl']};
   font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.text.primary};
+  color: var(--color-text-primary);
   margin: 0 0 ${theme.spacing.lg} 0;
   line-height: 1.3;
 
@@ -40,7 +62,7 @@ export const PostMeta = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${theme.spacing.md};
-  color: ${theme.colors.text.tertiary};
+  color: var(--color-text-tertiary);
   font-size: ${theme.fontSize.sm};
 
   time {
@@ -67,7 +89,8 @@ export const PostMeta = styled.div`
 export const PostContent = styled.div`
   font-size: ${theme.fontSize.base};
   line-height: 1.8;
-  color: ${theme.colors.text.primary};
+  color: var(--color-text-primary);
+  scroll-margin-top: 80px; /* 스크롤 시 헤더 아래로 위치 조정 */
 
   @media (min-width: ${theme.breakpoints.tablet}) {
     font-size: ${theme.fontSize.lg};
@@ -80,10 +103,11 @@ export const PostContent = styled.div`
   h5,
   h6 {
     font-weight: ${theme.fontWeight.bold};
-    color: ${theme.colors.text.primary};
+    color: var(--color-text-primary);
     margin-top: ${theme.spacing['2xl']};
     margin-bottom: ${theme.spacing.lg};
     line-height: 1.3;
+    scroll-margin-top: 100px; /* 앵커 링크 클릭 시 헤더 아래로 위치 */
   }
 
   h1 {
@@ -97,7 +121,7 @@ export const PostContent = styled.div`
   h2 {
     font-size: ${theme.fontSize['2xl']};
     padding-bottom: ${theme.spacing.sm};
-    border-bottom: 2px solid ${theme.colors.border};
+    border-bottom: 2px solid var(--color-border);
 
     @media (min-width: ${theme.breakpoints.tablet}) {
       font-size: ${theme.fontSize['3xl']};
@@ -145,7 +169,7 @@ export const PostContent = styled.div`
   }
 
   code {
-    background: ${theme.colors.surface};
+    background: var(--color-surface);
     padding: ${theme.spacing.xs} ${theme.spacing.sm};
     border-radius: ${theme.borderRadius.sm};
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
@@ -154,17 +178,17 @@ export const PostContent = styled.div`
   }
 
   pre {
-    background: ${theme.colors.surface};
+    background: var(--color-surface);
     padding: ${theme.spacing.lg};
     border-radius: ${theme.borderRadius.md};
     overflow-x: auto;
     margin-bottom: ${theme.spacing.lg};
-    border: 1px solid ${theme.colors.border};
+    border: 1px solid var(--color-border);
 
     code {
       background: none;
       padding: 0;
-      color: ${theme.colors.text.primary};
+      color: var(--color-text-primary);
     }
   }
 
@@ -172,7 +196,7 @@ export const PostContent = styled.div`
     border-left: 4px solid ${theme.colors.primary};
     padding-left: ${theme.spacing.lg};
     margin: ${theme.spacing.xl} 0;
-    color: ${theme.colors.text.secondary};
+    color: var(--color-text-secondary);
     font-style: italic;
   }
 
@@ -185,7 +209,7 @@ export const PostContent = styled.div`
 
   hr {
     border: none;
-    border-top: 2px solid ${theme.colors.border};
+    border-top: 2px solid var(--color-border);
     margin: ${theme.spacing['2xl']} 0;
   }
 
@@ -203,12 +227,12 @@ export const PostContent = styled.div`
     th,
     td {
       padding: ${theme.spacing.sm} ${theme.spacing.md};
-      border: 1px solid ${theme.colors.border};
+      border: 1px solid var(--color-border);
       text-align: left;
     }
 
     th {
-      background: ${theme.colors.surface};
+      background: var(--color-surface);
       font-weight: ${theme.fontWeight.semibold};
     }
   }
@@ -220,7 +244,7 @@ export const PostNavigation = styled.nav`
   gap: ${theme.spacing.md};
   margin-top: ${theme.spacing['3xl']};
   padding-top: ${theme.spacing['2xl']};
-  border-top: 2px solid ${theme.colors.border};
+  border-top: 2px solid var(--color-border);
 
   @media (max-width: ${theme.breakpoints.tablet}) {
     flex-direction: column;
@@ -230,8 +254,8 @@ export const PostNavigation = styled.nav`
 export const NavLink = styled.a`
   flex: 1;
   padding: ${theme.spacing.lg};
-  background: ${theme.colors.surface};
-  border: 1px solid ${theme.colors.border};
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: ${theme.borderRadius.md};
   text-decoration: none;
   transition: all ${theme.transition.base};
@@ -244,7 +268,7 @@ export const NavLink = styled.a`
 
   .label {
     font-size: ${theme.fontSize.xs};
-    color: ${theme.colors.text.tertiary};
+    color: var(--color-text-tertiary);
     text-transform: uppercase;
     margin-bottom: ${theme.spacing.xs};
   }
@@ -252,7 +276,7 @@ export const NavLink = styled.a`
   .title {
     font-size: ${theme.fontSize.base};
     font-weight: ${theme.fontWeight.semibold};
-    color: ${theme.colors.text.primary};
+    color: var(--color-text-primary);
   }
 
   &.prev {
