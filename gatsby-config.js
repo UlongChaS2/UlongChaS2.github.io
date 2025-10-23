@@ -26,6 +26,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-typescript`,
+    `gatsby-plugin-emotion`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-image`,
     {

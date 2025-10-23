@@ -1,99 +1,164 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+# 📝 Dev.log - 개발자 블로그
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+Gatsby와 React를 활용한 모던하고 반응형인 개인 블로그입니다.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+## ✨ 주요 기능
 
-## 🚀 Quick start
+- 📱 **반응형 디자인**: 모바일부터 태블릿, 데스크톱까지 모든 기기 지원
+- 🎨 **Emotion Styled**: CSS-in-JS를 활용한 모던한 스타일링
+- 📝 **마크다운 지원**: 편리한 글 작성
+- ⚡ **빠른 성능**: Gatsby의 정적 사이트 생성 기능 활용
+- 🏷️ **카테고리 분류**: 스터디와 프로젝트 카테고리 구분
+- 🔍 **SEO 최적화**: 검색 엔진 최적화
 
-1.  **Create a Gatsby site.**
+## 🛠️ 기술 스택
 
-    Use the Gatsby CLI ([install instructions](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-0/#gatsby-cli)) to create a new site, specifying the default starter.
+- **Frontend**: React 18, TypeScript
+- **Framework**: Gatsby 5
+- **Styling**: Emotion (CSS-in-JS)
+- **Content**: Markdown
+- **Deployment**: GitHub Pages
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+## 🚀 시작하기
 
-1.  **Start developing.**
+### 필수 요구사항
 
-    Navigate into your new site’s directory and start it up.
+- Node.js 18 이상
+- npm 또는 yarn
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
+### 설치 및 실행
 
-1.  **Open the source code and start editing!**
+```bash
+# 의존성 설치
+npm install
 
-    Your site is now running at `http://localhost:8000`!
+# 개발 서버 실행
+npm run develop
 
-    Note: You'll also see a second link: `http://localhost:8000/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby Tutorial](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries).
+# 프로덕션 빌드
+npm run build
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+# 로컬에서 프로덕션 빌드 테스트
+npm run serve
 
-## 🚀 Quick start (Netlify)
+# GitHub Pages 배포
+npm run deploy
+```
 
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
+개발 서버는 `http://localhost:8000`에서 실행됩니다.
 
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+GraphQL 쿼리 테스트는 `http://localhost:8000/___graphql`에서 가능합니다.
 
-## 🧐 What's inside?
+## 📁 프로젝트 구조
 
-A quick look at the top-level files and directories you'll see in a typical Gatsby project.
+```
+.
+├── src/
+│   ├── components/        # React 컴포넌트
+│   │   ├── GlobalHeader.tsx
+│   │   ├── GlobalLayout.tsx
+│   │   ├── GlobalStyles.tsx
+│   │   └── PostCard.tsx
+│   ├── contents/          # 마크다운 콘텐츠
+│   │   ├── study/        # 스터디 포스트
+│   │   └── project/      # 프로젝트 포스트
+│   ├── pages/            # 페이지 컴포넌트
+│   │   ├── index.tsx     # 메인 페이지
+│   │   ├── study.tsx     # 스터디 목록
+│   │   ├── project.tsx   # 프로젝트 목록
+│   │   └── about.tsx     # 소개 페이지
+│   ├── styles/           # 스타일 정의
+│   │   ├── theme.ts      # 테마 설정
+│   │   ├── HeaderStyles.ts
+│   │   ├── LayoutStyles.ts
+│   │   ├── PageStyles.ts
+│   │   └── PostStyles.ts
+│   └── templates/        # 포스트 템플릿
+│       ├── study-template.tsx
+│       └── project-template.tsx
+├── gatsby-config.js      # Gatsby 설정
+├── gatsby-node.js        # 페이지 생성 로직
+└── package.json
+```
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package.json
-    └── README.md
+## 📝 포스트 작성하기
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+### 스터디 포스트
 
-1.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+`src/contents/study/` 디렉토리에 마크다운 파일을 생성하세요.
 
-1.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+```markdown
+---
+title: '포스트 제목'
+date: '2025-01-15'
+category: 'study'
+---
 
-1.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+포스트 내용을 여기에 작성하세요.
+```
 
-1.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/) for more detail).
+### 프로젝트 포스트
 
-1.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+`src/contents/project/` 디렉토리에 마크다운 파일을 생성하세요.
 
-1.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-ssr/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+```markdown
+---
+title: '프로젝트 제목'
+date: '2025-01-15'
+category: 'project'
+---
 
-1.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
+프로젝트 내용을 여기에 작성하세요.
+```
 
-1.  **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+## 🎨 테마 커스터마이징
 
-1.  **`README.md`**: A text file containing useful reference information about your project.
+`src/styles/theme.ts` 파일에서 색상, 폰트, 간격 등을 수정할 수 있습니다.
 
-## 🎓 Learning Gatsby
+```typescript
+export const theme = {
+  colors: {
+    primary: '#2563eb',
+    secondary: '#7c3aed',
+    // ...
+  },
+  breakpoints: {
+    mobile: '320px',
+    tablet: '768px',
+    desktop: '1024px',
+    // ...
+  },
+  // ...
+};
+```
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
+## 📱 반응형 브레이크포인트
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/docs/tutorial/getting-started/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+- **Mobile**: 320px ~
+- **Tablet**: 768px ~
+- **Desktop**: 1024px ~
+- **Wide**: 1280px ~
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+## 🚀 배포
 
-## 💫 Deploy
+GitHub Pages에 자동 배포됩니다:
 
-[Build, Deploy, and Host On Netlify](https://netlify.com)
+```bash
+npm run deploy
+```
 
-The fastest way to combine your favorite tools and APIs to build the fastest sites, stores, and apps for the web. And also the best place to build, deploy, and host your Gatsby sites.
+이 명령어는 다음을 수행합니다:
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+1. `gatsby build`로 정적 사이트 생성
+2. `public` 폴더를 `main` 브랜치에 배포
+
+## 📄 라이선스
+
+이 프로젝트는 개인 포트폴리오 및 블로그 용도로 만들어졌습니다.
+
+## 🙏 감사의 말
+
+- [Gatsby](https://www.gatsbyjs.com/)
+- [React](https://reactjs.org/)
+- [Emotion](https://emotion.sh/)
+- [TypeScript](https://www.typescriptlang.org/)
