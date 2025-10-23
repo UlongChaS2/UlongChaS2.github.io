@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[694],{5364:function(t,e,u){u.r(e);var a=u(6540),r=u(300);e.default=function(){return a.createElement(r.A,null,"study")}}}]);
-//# sourceMappingURL=component---src-pages-study-tsx-a30e685a41a3111dc890.js.map
