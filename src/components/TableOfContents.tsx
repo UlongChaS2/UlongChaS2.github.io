@@ -6,37 +6,42 @@ import styled from '@emotion/styled';
 // Stitch MCP 디자인 참조: Dev.log Table of Contents Sidebar
 // ============================================================
 
-const TOCWrapper = styled.div``;
+const TOCWrapper = styled.div`
+  @media (min-width: 1024px) {
+    position: sticky;
+    top: 128px;
+    align-self: flex-start;
+  }
+`;
 
 const TOCContainer = styled.aside<{ isOpen: boolean }>`
-  position: fixed;
-  right: ${(props) => (props.isOpen ? '0' : '-300px')};
-  top: 100px;
-  width: 280px;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  padding: var(--space-6);
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
-  transition: right var(--transition-base);
-  z-index: var(--z-sticky);
-  box-shadow: var(--shadow-lg);
-
   /* 모바일: 슬라이드 인 패널 */
   @media (max-width: 1023px) {
+    position: fixed;
+    right: ${(props) => (props.isOpen ? '0' : '-300px')};
+    top: 100px;
+    width: 280px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    padding: var(--space-6);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    transition: right var(--transition-base);
+    z-index: var(--z-sticky);
     box-shadow: var(--shadow-lg);
   }
 
-  /* 데스크톱: 우측 고정 */
+  /* 데스크톱: 우측 고정 (Sticky는 TOCWrapper에서 처리) */
   @media (min-width: 1024px) {
-    right: 20px;
-    box-shadow: var(--shadow-md);
-  }
-
-  /* 와이드 스크린: 컨텐츠 옆에 위치 */
-  @media (min-width: 1600px) {
-    right: calc((100vw - 1200px) / 2 - 100px);
+    width: 240px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding-left: var(--space-6);
+    border-left: 2px solid var(--color-border-subtle);
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
   }
 
   /* 커스텀 스크롤바 */
@@ -64,8 +69,12 @@ const TOCTitle = styled.h3`
   color: var(--color-text-primary);
   margin: 0 0 var(--space-4) 0;
   padding-bottom: var(--space-3);
-  border-bottom: 2px solid var(--color-border-default);
   letter-spacing: var(--ls-tight);
+
+  /* 모바일에서만 구분선 표시 */
+  @media (max-width: 1023px) {
+    border-bottom: 2px solid var(--color-border-default);
+  }
 `;
 
 const TOCList = styled.ul`
@@ -106,7 +115,8 @@ const TOCItem = styled.li<{ level: number; isActive: boolean }>`
 const TOCToggleButton = styled.button<{ isOpen: boolean }>`
   position: fixed;
   right: 20px;
-  top: 100px;
+  bottom: 20px;
+  top: auto;
   width: 48px;
   height: 48px;
   border-radius: var(--radius-full);

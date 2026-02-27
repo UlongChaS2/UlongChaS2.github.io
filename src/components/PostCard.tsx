@@ -4,9 +4,9 @@ import { Link } from 'gatsby';
 import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 
 // ============================================================
-// PostCard — Daangn Blog Style
+// PostCard — Channel Talk Style
 // - 16:9 이미지 비율
-// - 오렌지 카테고리 태그
+// - 이미지 안 우측 상단 배치된 뱃지
 // - 굵고 큰 제목, 넉넉한 여백
 // - 보더 없음, 호버 그림자
 // ============================================================
@@ -43,6 +43,7 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   background: var(--color-bg-subtle);
   flex-shrink: 0;
+  position: relative;
 
   .gatsby-image-wrapper {
     height: 100%;
@@ -59,6 +60,23 @@ const ImageWrapper = styled.div`
   ${Card}:hover & img {
     transform: scale(1.04);
   }
+`;
+
+const ImageBadge = styled.div`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  text-transform: uppercase;
 `;
 
 const NoThumbnail = styled.div`
@@ -79,7 +97,7 @@ const NoThumbnail = styled.div`
   font-weight: var(--fw-medium);
 
   &::before {
-    content: '✍️';
+    content: '📚';
     font-size: 2rem;
     opacity: 0.5;
   }
@@ -95,20 +113,6 @@ const CardContent = styled.div`
   @media (min-width: 768px) {
     padding: var(--space-5) var(--space-6) var(--space-6);
   }
-`;
-
-const CategoryTag = styled.span`
-  display: inline-flex;
-  align-items: center;
-  padding: var(--space-1) var(--space-2);
-  background-color: var(--color-brand-subtle);
-  color: var(--color-brand-primary);
-  border-radius: var(--radius-sm);
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-wide);
-  text-transform: uppercase;
-  width: max-content;
 `;
 
 const Title = styled.h3`
@@ -186,6 +190,7 @@ const PostCard: React.FC<PostCardProps> = ({
     <Card>
       <CardLink to={fullPath}>
         <ImageWrapper>
+          <ImageBadge>{category}</ImageBadge>
           {thumbnailImage ? (
             <GatsbyImage image={thumbnailImage} alt={title} />
           ) : (
@@ -194,7 +199,6 @@ const PostCard: React.FC<PostCardProps> = ({
         </ImageWrapper>
 
         <CardContent>
-          <CategoryTag>{category}</CategoryTag>
           <Title>{title}</Title>
           <Excerpt>{excerpt}</Excerpt>
 

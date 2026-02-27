@@ -3,7 +3,7 @@ import Layout from 'src/components/GlobalLayout';
 import GlobalStyles from 'src/components/GlobalStyles';
 import PostCard from 'src/components/PostCard';
 import { graphql } from 'gatsby';
-import { PageHeader, PageTitle, PageSubtitle, PostGrid, EmptyState } from 'src/styles/PageStyles';
+import { PageWrapper, PageHeader, PageTitle, PageSubtitle, PostGrid, EmptyState } from 'src/styles/PageStyles';
 
 interface ProjectPageProps {
   data: {
@@ -36,31 +36,33 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ data }) => {
     <>
       <GlobalStyles />
       <Layout>
-        <PageHeader>
-          <PageTitle>🚀 프로젝트</PageTitle>
-          <PageSubtitle>직접 진행한 프로젝트들의 과정과 결과를 공유합니다</PageSubtitle>
-        </PageHeader>
+        <PageWrapper>
+          <PageHeader>
+            <PageTitle>🚀 프로젝트</PageTitle>
+            <PageSubtitle>직접 진행한 프로젝트들의 과정과 결과를 공유합니다</PageSubtitle>
+          </PageHeader>
 
-        {posts.length > 0 ? (
-          <PostGrid>
-            {posts.map((post) => (
-              <PostCard
-                key={post.id}
-                title={post.frontmatter.title}
-                excerpt={post.excerpt}
-                date={post.frontmatter.date}
-                category={post.frontmatter.category}
-                slug={post.fields.slug}
-                thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
-              />
-            ))}
-          </PostGrid>
-        ) : (
-          <EmptyState>
-            <div className="emoji">🔨</div>
-            <p>아직 프로젝트 포스트가 없습니다.</p>
-          </EmptyState>
-        )}
+          {posts.length > 0 ? (
+            <PostGrid>
+              {posts.map((post) => (
+                <PostCard
+                  key={post.id}
+                  title={post.frontmatter.title}
+                  excerpt={post.excerpt}
+                  date={post.frontmatter.date}
+                  category={post.frontmatter.category}
+                  slug={post.fields.slug}
+                  thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
+                />
+              ))}
+            </PostGrid>
+          ) : (
+            <EmptyState>
+              <div className="emoji">🔨</div>
+              <p>아직 프로젝트 포스트가 없습니다.</p>
+            </EmptyState>
+          )}
+        </PageWrapper>
       </Layout>
     </>
   );

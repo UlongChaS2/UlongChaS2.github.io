@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from 'src/components/GlobalLayout';
 import GlobalStyles from 'src/components/GlobalStyles';
 import styled from '@emotion/styled';
-import { PageHeader, PageTitle, PageSubtitle } from 'src/styles/PageStyles';
+import { PageWrapper, PageHeader, PageTitle, PageSubtitle } from 'src/styles/PageStyles';
 
 // ============================================================
 // About Page — New Token API
@@ -141,55 +141,57 @@ const AboutPage = () => {
     <>
       <GlobalStyles />
       <Layout>
-        <PageHeader>
-          <PageTitle>👋 소개</PageTitle>
-          <PageSubtitle>안녕하세요! 개발자 블로그를 방문해주셔서 감사합니다</PageSubtitle>
-        </PageHeader>
+        <PageWrapper>
+          <PageHeader>
+            <PageTitle>👋 소개</PageTitle>
+            <PageSubtitle>안녕하세요! 개발자 블로그를 방문해주셔서 감사합니다</PageSubtitle>
+          </PageHeader>
 
-        <AboutSection>
-          <Card>
-            <SectionTitle>💡 About Me</SectionTitle>
-            <Text>
-              안녕하세요! 새로운 기술을 배우고 성장하는 것을 좋아하는 개발자입니다. 이 블로그는 제가 공부하고 경험한
-              내용들을 정리하고 공유하기 위해 만들었습니다.
-            </Text>
-            <Text>코드를 작성하는 것뿐만 아니라, 문제를 해결하는 과정에서 배운 것들을 기록하고 다른 사람들과 나누는 것을 즐깁니다.</Text>
-          </Card>
+          <AboutSection>
+            <Card>
+              <SectionTitle>💡 About Me</SectionTitle>
+              <Text>
+                안녕하세요! 새로운 기술을 배우고 성장하는 것을 좋아하는 개발자입니다. 이 블로그는 제가 공부하고 경험한
+                내용들을 정리하고 공유하기 위해 만들었습니다.
+              </Text>
+              <Text>코드를 작성하는 것뿐만 아니라, 문제를 해결하는 과정에서 배운 것들을 기록하고 다른 사람들과 나누는 것을 즐깁니다.</Text>
+            </Card>
 
-          <Card>
-            <SectionTitle>🛠️ Skills</SectionTitle>
-            <SkillGrid>
-              <SkillTag>JavaScript</SkillTag>
-              <SkillTag>TypeScript</SkillTag>
-              <SkillTag>React</SkillTag>
-              <SkillTag>Node.js</SkillTag>
-              <SkillTag>Gatsby</SkillTag>
-              <SkillTag>HTML/CSS</SkillTag>
-              <SkillTag>Git</SkillTag>
-              <SkillTag>Emotion</SkillTag>
-            </SkillGrid>
-          </Card>
+            <Card>
+              <SectionTitle>🛠️ Skills</SectionTitle>
+              <SkillGrid>
+                <SkillTag>JavaScript</SkillTag>
+                <SkillTag>TypeScript</SkillTag>
+                <SkillTag>React</SkillTag>
+                <SkillTag>Node.js</SkillTag>
+                <SkillTag>Gatsby</SkillTag>
+                <SkillTag>HTML/CSS</SkillTag>
+                <SkillTag>Git</SkillTag>
+                <SkillTag>Emotion</SkillTag>
+              </SkillGrid>
+            </Card>
 
-          <Card>
-            <SectionTitle>📬 Contact</SectionTitle>
-            <ContactList>
-              <ContactItem href="https://github.com" target="_blank" rel="noopener noreferrer">
-                <div className="icon">💻</div>
-                <div className="content">
-                  <div className="label">GitHub</div>
-                  <div className="value">github.com/username</div>
-                </div>
-              </ContactItem>
-              <ContactItem href="mailto:your.email@example.com">
-                <div className="icon">✉️</div>
-                <div className="content">
-                  <div className="label">Email</div>
-                  <div className="value">your.email@example.com</div>
-                </div>
-              </ContactItem>
-            </ContactList>
-          </Card>
-        </AboutSection>
+            <Card>
+              <SectionTitle>📬 Contact</SectionTitle>
+              <ContactList>
+                <ContactItem href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  <div className="icon">💻</div>
+                  <div className="content">
+                    <div className="label">GitHub</div>
+                    <div className="value">github.com/username</div>
+                  </div>
+                </ContactItem>
+                <ContactItem href="mailto:your.email@example.com">
+                  <div className="icon">✉️</div>
+                  <div className="content">
+                    <div className="label">Email</div>
+                    <div className="value">your.email@example.com</div>
+                  </div>
+                </ContactItem>
+              </ContactList>
+            </Card>
+          </AboutSection>
+        </PageWrapper>
       </Layout>
     </>
   );

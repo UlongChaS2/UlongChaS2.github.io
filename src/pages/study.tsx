@@ -3,7 +3,7 @@ import Layout from 'src/components/GlobalLayout';
 import GlobalStyles from 'src/components/GlobalStyles';
 import PostCard from 'src/components/PostCard';
 import { graphql } from 'gatsby';
-import { PageHeader, PageTitle, PageSubtitle, PostGrid, EmptyState } from 'src/styles/PageStyles';
+import { PageWrapper, PageHeader, PageTitle, PageSubtitle, PostGrid, EmptyState } from 'src/styles/PageStyles';
 
 interface StudyPageProps {
   data: {
@@ -30,31 +30,33 @@ const StudyPage: React.FC<StudyPageProps> = ({ data }) => {
     <>
       <GlobalStyles />
       <Layout>
-        <PageHeader>
-          <PageTitle>📚 스터디</PageTitle>
-          <PageSubtitle>새로운 기술과 개념을 학습하며 정리한 내용들입니다</PageSubtitle>
-        </PageHeader>
+        <PageWrapper>
+          <PageHeader>
+            <PageTitle>📚 스터디</PageTitle>
+            <PageSubtitle>새로운 기술과 개념을 학습하며 정리한 내용들입니다</PageSubtitle>
+          </PageHeader>
 
-        {posts.length > 0 ? (
-          <PostGrid>
-            {posts.map((post) => (
-              <PostCard
-                key={post.id}
-                title={post.frontmatter.title}
-                excerpt={post.excerpt}
-                date={post.frontmatter.date}
-                category={post.frontmatter.category}
-                slug={post.fields.slug}
-                thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
-              />
-            ))}
-          </PostGrid>
-        ) : (
-          <EmptyState>
-            <div className="emoji">📝</div>
-            <p>아직 스터디 포스트가 없습니다.</p>
-          </EmptyState>
-        )}
+          {posts.length > 0 ? (
+            <PostGrid>
+              {posts.map((post) => (
+                <PostCard
+                  key={post.id}
+                  title={post.frontmatter.title}
+                  excerpt={post.excerpt}
+                  date={post.frontmatter.date}
+                  category={post.frontmatter.category}
+                  slug={post.fields.slug}
+                  thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
+                />
+              ))}
+            </PostGrid>
+          ) : (
+            <EmptyState>
+              <div className="emoji">📝</div>
+              <p>아직 스터디 포스트가 없습니다.</p>
+            </EmptyState>
+          )}
+        </PageWrapper>
       </Layout>
     </>
   );

@@ -17,16 +17,14 @@ import {
   FeaturedExcerpt,
   FeaturedMeta,
   FeaturedLink,
-  SectionHeader,
   SectionTitle,
-  SectionMore,
   PostGrid,
   Section,
   EmptyState,
 } from 'src/styles/PageStyles';
 
 // ============================================================
-// index.tsx — Daangn 스타일 PostList 메인 페이지
+// index.tsx — Channel Talk 스타일 PostList 메인 페이지
 // ============================================================
 
 const PageInner = styled.div`
@@ -37,6 +35,11 @@ const PageInner = styled.div`
   @media (min-width: 768px) {
     padding: var(--space-10) var(--space-8) var(--space-24);
   }
+`;
+
+const MainTitle = styled(SectionTitle)`
+  margin-bottom: var(--space-6);
+  font-size: 28px;
 `;
 
 const MetaDot = styled.span`
@@ -84,12 +87,14 @@ const IndexPage = () => {
       <GlobalStyles />
       <Layout>
         <PageInner>
+          <MainTitle>최근 아티클</MainTitle>
+
           {/* ── Featured Post ── */}
           {featuredPost && (
             <FeaturedLink
               to={`/${featuredPost.frontmatter.category}${featuredPost.fields.slug}`}
             >
-              <FeaturedCard>
+              <FeaturedCard style={{ marginBottom: '40px' }}>
                 <FeaturedImageWrapper>
                   {getFeaturedImage(featuredPost) ? (
                     <GatsbyImage
@@ -97,29 +102,21 @@ const IndexPage = () => {
                       alt={featuredPost.frontmatter.title}
                     />
                   ) : (
-                    <FeaturedNoThumbnail>✍️</FeaturedNoThumbnail>
+                    <FeaturedNoThumbnail>📚</FeaturedNoThumbnail>
                   )}
                 </FeaturedImageWrapper>
 
                 <FeaturedContent>
-                  <FeaturedBadge>
-                    <FeaturedLabel>최신 글</FeaturedLabel>
-                    <FeaturedCategoryTag>
-                      {featuredPost.frontmatter.category}
-                    </FeaturedCategoryTag>
+                  <FeaturedBadge style={{ marginBottom: '12px' }}>
+                    <FeaturedLabel>{featuredPost.frontmatter.category}</FeaturedLabel>
                   </FeaturedBadge>
-
                   <FeaturedTitle>{featuredPost.frontmatter.title}</FeaturedTitle>
-                  <FeaturedExcerpt>{featuredPost.excerpt}</FeaturedExcerpt>
+                  <FeaturedExcerpt style={{ marginTop: '16px', marginBottom: '16px' }}>{featuredPost.excerpt}</FeaturedExcerpt>
 
                   <FeaturedMeta>
                     <time>{featuredPost.frontmatter.date}</time>
                     <MetaDot>·</MetaDot>
-                    <span>
-                      {featuredPost.timeToRead
-                        ? `${featuredPost.timeToRead}분 읽기`
-                        : '5분 읽기'}
-                    </span>
+                    <span>Channel Talk</span>
                   </FeaturedMeta>
                 </FeaturedContent>
               </FeaturedCard>
@@ -128,11 +125,6 @@ const IndexPage = () => {
 
           {/* ── 포스트 그리드 ── */}
           <Section>
-            <SectionHeader>
-              <SectionTitle>최근 글</SectionTitle>
-              <SectionMore to="/study/">모두 보기</SectionMore>
-            </SectionHeader>
-
             {restPosts.length > 0 ? (
               <PostGrid>
                 {restPosts.map((post: any) => (
@@ -155,7 +147,7 @@ const IndexPage = () => {
               </PostGrid>
             ) : posts.length === 0 ? (
               <EmptyState>
-                <span className="emoji">✍️</span>
+                <span className="emoji">📚</span>
                 <p>아직 작성된 글이 없어요.<br />첫 번째 글을 써보세요!</p>
               </EmptyState>
             ) : null}
