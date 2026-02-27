@@ -3,11 +3,15 @@ import { Link } from 'gatsby';
 import Layout from '../components/GlobalLayout';
 import GlobalStyles from '../components/GlobalStyles';
 import styled from '@emotion/styled';
-import { theme } from 'src/styles/theme';
+
+// ============================================================
+// 404 Page — New Token API
+// Uses CSS var() tokens from tokens.css for theme responsiveness
+// ============================================================
 
 const NotFoundContainer = styled.div`
   text-align: center;
-  padding: ${theme.spacing['3xl']} ${theme.spacing.md};
+  padding: var(--space-16) var(--space-4);
   min-height: 60vh;
   display: flex;
   flex-direction: column;
@@ -16,47 +20,50 @@ const NotFoundContainer = styled.div`
 `;
 
 const ErrorCode = styled.h1`
-  font-size: ${theme.fontSize['5xl']};
-  font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.primary};
-  margin: 0 0 ${theme.spacing.lg} 0;
+  font-size: 5rem;
+  font-weight: var(--fw-extrabold);
+  color: var(--color-brand-primary);
+  margin: 0 0 var(--space-4) 0;
+  letter-spacing: var(--ls-tighter);
+  line-height: 1;
 
-  @media (min-width: ${theme.breakpoints.tablet}) {
-    font-size: 6rem;
+  @media (min-width: 768px) {
+    font-size: 7rem;
   }
 `;
 
 const ErrorMessage = styled.h2`
-  font-size: ${theme.fontSize['2xl']};
-  font-weight: ${theme.fontWeight.semibold};
+  font-size: var(--fs-title-md);
+  font-weight: var(--fw-semibold);
   color: var(--color-text-primary);
-  margin: 0 0 ${theme.spacing.md} 0;
+  margin: 0 0 var(--space-4) 0;
+  letter-spacing: var(--ls-tight);
 
-  @media (min-width: ${theme.breakpoints.tablet}) {
-    font-size: ${theme.fontSize['3xl']};
+  @media (min-width: 768px) {
+    font-size: var(--fs-title-lg);
   }
 `;
 
 const ErrorDescription = styled.p`
-  font-size: ${theme.fontSize.base};
+  font-size: var(--fs-body-md);
   color: var(--color-text-secondary);
-  margin: 0 0 ${theme.spacing['2xl']} 0;
-  max-width: 600px;
-  line-height: 1.6;
+  margin: 0 0 var(--space-8) 0;
+  max-width: 500px;
+  line-height: var(--lh-relaxed);
 
-  @media (min-width: ${theme.breakpoints.tablet}) {
-    font-size: ${theme.fontSize.lg};
+  @media (min-width: 768px) {
+    font-size: var(--fs-body-lg);
   }
 `;
 
 const LinksContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing.md};
+  gap: var(--space-3);
   width: 100%;
   max-width: 400px;
 
-  @media (min-width: ${theme.breakpoints.tablet}) {
+  @media (min-width: 768px) {
     flex-direction: row;
     justify-content: center;
   }
@@ -64,50 +71,61 @@ const LinksContainer = styled.div`
 
 const LinkButton = styled(Link)`
   display: inline-block;
-  padding: ${theme.spacing.md} ${theme.spacing.xl};
-  background: ${theme.colors.primary};
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-brand-primary);
   color: white;
   text-decoration: none;
-  border-radius: ${theme.borderRadius.md};
-  font-weight: ${theme.fontWeight.semibold};
-  transition: all ${theme.transition.base};
+  border-radius: var(--radius-md);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-body-md);
+  transition: all var(--transition-base);
+  border: 1px solid transparent;
 
   &:hover {
-    background: ${theme.colors.secondary};
+    background: var(--color-brand-hover);
     transform: translateY(-2px);
-    box-shadow: ${theme.shadow.md};
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;
 
 const SecondaryButton = styled(Link)`
   display: inline-block;
-  padding: ${theme.spacing.md} ${theme.spacing.xl};
-  background: var(--color-surface);
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-bg-subtle);
   color: var(--color-text-primary);
   text-decoration: none;
-  border-radius: ${theme.borderRadius.md};
-  font-weight: ${theme.fontWeight.semibold};
-  border: 1px solid var(--color-border);
-  transition: all ${theme.transition.base};
+  border-radius: var(--radius-md);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-body-md);
+  border: 1px solid var(--color-border-default);
+  transition: all var(--transition-base);
 
   &:hover {
-    border-color: ${theme.colors.primary};
-    background: var(--color-hover);
+    border-color: var(--color-brand-primary);
+    background: var(--color-interactive-hover);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;
 
 const Emoji = styled.div`
-  font-size: 5rem;
-  margin-bottom: ${theme.spacing.xl};
+  font-size: 4rem;
+  margin-bottom: var(--space-6);
   animation: bounce 2s ease-in-out infinite;
 
   @keyframes bounce {
-    0%,
-    100% {
+    0%, 100% {
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-20px);
+      transform: translateY(-16px);
     }
   }
 `;

@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
+import 'src/styles/tokens.css';
 import './layout.css';
 
 import { ReactNode } from 'react';
@@ -7,7 +8,7 @@ import { Container, Footer } from 'src/styles/LayoutStyles';
 import Header from './GlobalHeader';
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  const data = useStaticQuery(graphql`
+  useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
@@ -23,7 +24,12 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Container>
         <main>{children}</main>
       </Container>
-      <Footer>© {new Date().getFullYear()} &middot; ulongchas2 all rights reserved.</Footer>
+      <Footer>
+        <p>© {new Date().getFullYear()} Dev.log · ulongchas2</p>
+        <p style={{ marginTop: '4px', fontSize: '0.75rem', opacity: 0.6 }}>
+          Built with Gatsby & ❤️
+        </p>
+      </Footer>
     </>
   );
 };

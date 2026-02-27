@@ -1,0 +1,239 @@
+/* ============================================================
+   Design Tokens — CSS Custom Properties
+   Reference: Toss Feed + Daangn Blog + ChannelTalk Blog
+   Usage:
+     - Import in gatsby-browser.js: import './src/styles/tokens.css'
+     - Toggle dark mode: document.documentElement.dataset.theme = 'dark'
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. Shared (Mode-independent) Tokens
+   ---------------------------------------------------------- */
+:root {
+  /* === Font Family === */
+  --font-base: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+
+  /* === Font Size Scale === */
+  --fs-display-lg: 3rem;       /* 48px */
+  --fs-display-md: 2.25rem;    /* 36px */
+  --fs-title-xl:   1.875rem;   /* 30px */
+  --fs-title-lg:   1.5rem;     /* 24px */
+  --fs-title-md:   1.25rem;    /* 20px */
+  --fs-title-sm:   1.125rem;   /* 18px */
+  --fs-body-lg:    1rem;       /* 16px */
+  --fs-body-md:    0.9375rem;  /* 15px */
+  --fs-body-sm:    0.875rem;   /* 14px */
+  --fs-caption:    0.75rem;    /* 12px */
+
+  /* === Line Height === */
+  --lh-tight:   1.2;
+  --lh-snug:    1.3;
+  --lh-normal:  1.4;
+  --lh-relaxed: 1.6;
+  --lh-loose:   1.75; /* Toss-level readable body text */
+
+  /* === Font Weight === */
+  --fw-normal:    400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-extrabold: 800;
+
+  /* === Letter Spacing === */
+  --ls-tighter: -0.03em;
+  --ls-tight:   -0.02em; /* Toss heading style */
+  --ls-normal:   0em;
+  --ls-wide:     0.02em;
+
+  /* === Spacing (4px base) === */
+  --space-0:  0px;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* === Border Radius (Daangn style) === */
+  --radius-none: 0px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;    /* Daangn signature card radius */
+  --radius-xl:   20px;
+  --radius-2xl:  28px;
+  --radius-full: 9999px;
+
+  /* === Transition === */
+  --transition-fast:   120ms ease-in-out;
+  --transition-base:   200ms ease-in-out;
+  --transition-slow:   320ms ease-in-out;
+  --transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* === z-index === */
+  --z-base:     0;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-toast:    500;
+
+  /* === Brand Color (Daangn Orange) === */
+  --color-brand-50:  #FFF4EE;
+  --color-brand-100: #FFE4D0;
+  --color-brand-200: #FFCAA3;
+  --color-brand-300: #FFA672;
+  --color-brand-400: #FF8C4A;
+  --color-brand-500: #FF7E36;
+  --color-brand-600: #F05A00;
+  --color-brand-700: #CC4A00;
+  --color-brand-800: #A53C00;
+  --color-brand-900: #7A2D00;
+
+  /* === Gray Scale === */
+  --color-gray-50:  #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+}
+
+/* ----------------------------------------------------------
+   2. Light Mode (Default)
+   ---------------------------------------------------------- */
+:root,
+[data-theme='light'] {
+  /* Background */
+  --color-bg-default: #FFFFFF;
+  --color-bg-subtle:  #F6F8FA;
+  --color-bg-card:    #FFFFFF;
+  --color-bg-code:    #F3F4F6;
+
+  /* Text */
+  --color-text-primary:   #0D1117;
+  --color-text-secondary: #57606A;
+  --color-text-tertiary:  #8C959F;
+  --color-text-disabled:  #B1BAC4;
+  --color-text-inverse:   #FFFFFF;
+  --color-text-link:      #3B82F6;
+  --color-text-link-hover: #2563EB;
+
+  /* Border */
+  --color-border-default: #D0D7DE;
+  --color-border-subtle:  #EAEEF2;
+  --color-border-strong:  #9CA3AF;
+
+  /* Interactive */
+  --color-interactive-hover:  #F6F8FA;
+  --color-interactive-active: #EFF6FF;
+
+  /* Semantic Brand (Daangn Orange) */
+  --color-brand-primary: #FF7E36;
+  --color-brand-hover:   #F05A00;
+  --color-brand-subtle:  #FFF4EE;
+
+  /* Shadows (Light) */
+  --shadow-xs:         0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm:         0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.14);
+}
+
+/* ----------------------------------------------------------
+   3. Dark Mode
+   Toggle: document.documentElement.dataset.theme = 'dark'
+   ---------------------------------------------------------- */
+[data-theme='dark'] {
+  /* Background */
+  --color-bg-default: #0D1117;
+  --color-bg-subtle:  #161B22;
+  --color-bg-card:    #21262D;
+  --color-bg-code:    #2D333B;
+
+  /* Text */
+  --color-text-primary:    #E6EDF3;
+  --color-text-secondary:  #8B949E;
+  --color-text-tertiary:   #6E7681;
+  --color-text-disabled:   #484F58;
+  --color-text-inverse:    #0D1117;
+  --color-text-link:       #60A5FA;
+  --color-text-link-hover: #93C5FD;
+
+  /* Border */
+  --color-border-default: #30363D;
+  --color-border-subtle:  #21262D;
+  --color-border-strong:  #484F58;
+
+  /* Interactive */
+  --color-interactive-hover:  #1C252F;
+  --color-interactive-active: #1E3A5F;
+
+  /* Semantic Brand (Daangn Orange - dark) */
+  --color-brand-primary: #FF8C4A;
+  --color-brand-hover:   #FFA672;
+  --color-brand-subtle:  #3D1A00;
+
+  /* Shadows (Dark — higher opacity for visibility) */
+  --shadow-xs:         0 1px 2px rgba(0, 0, 0, 0.16);
+  --shadow-sm:         0 2px 8px rgba(0, 0, 0, 0.24);
+  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.32);
+  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.40);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.48);
+}
+
+/* ----------------------------------------------------------
+   4. System preference fallback (no JS dark mode toggle yet)
+   ---------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    /* Background */
+    --color-bg-default: #0D1117;
+    --color-bg-subtle:  #161B22;
+    --color-bg-card:    #21262D;
+    --color-bg-code:    #2D333B;
+
+    /* Text */
+    --color-text-primary:    #E6EDF3;
+    --color-text-secondary:  #8B949E;
+    --color-text-tertiary:   #6E7681;
+    --color-text-disabled:   #484F58;
+    --color-text-inverse:    #0D1117;
+    --color-text-link:       #60A5FA;
+    --color-text-link-hover: #93C5FD;
+
+    /* Border */
+    --color-border-default: #30363D;
+    --color-border-subtle:  #21262D;
+    --color-border-strong:  #484F58;
+
+    /* Interactive */
+    --color-interactive-hover:  #1C252F;
+    --color-interactive-active: #1E3A5F;
+
+    /* Brand (Daangn Orange) */
+    --color-brand-primary: #FF8C4A;
+    --color-brand-hover:   #FFA672;
+    --color-brand-subtle:  #3D1A00;
+
+    /* Shadows */
+    --shadow-xs:         0 1px 2px rgba(0, 0, 0, 0.16);
+    --shadow-sm:         0 2px 8px rgba(0, 0, 0, 0.24);
+    --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.32);
+    --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.40);
+    --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.48);
+  }
+}

@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { lightTheme, darkTheme } from '../styles/theme';
+
 
 type ThemeMode = 'light' | 'dark' | 'system';
 type ResolvedTheme = 'light' | 'dark';
@@ -78,4 +80,19 @@ export const useTheme = () => {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
+};
+
+/**
+ * useThemeTokens - Returns the current Emotion-compatible theme tokens
+ * based on the resolved theme (light | dark).
+ * Used by EmotionWrapper in gatsby-browser.js to supply tokens
+ * to styled-components via ThemeProvider.
+ */
+export const useThemeTokens = () => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    // Fallback for SSR where context may not be available
+    return lightTheme;
+  }
+  return context.resolvedTheme === 'dark' ? darkTheme : lightTheme;
 };

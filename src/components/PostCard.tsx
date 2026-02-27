@@ -2,22 +2,30 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import { theme } from 'src/styles/theme';
+
+// ============================================================
+// PostCard — Daangn Blog Style
+// - 16:9 이미지 비율
+// - 오렌지 카테고리 태그
+// - 굵고 큰 제목, 넉넉한 여백
+// - 보더 없음, 호버 그림자
+// ============================================================
 
 const Card = styled.article`
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
-  border-radius: ${theme.borderRadius.lg};
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all ${theme.transition.base};
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
   height: 100%;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: ${theme.shadow.lg};
-    border-color: ${theme.colors.primary};
+    box-shadow: var(--shadow-card-hover);
   }
 `;
 
@@ -31,9 +39,10 @@ const CardLink = styled(Link)`
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: var(--color-surface);
+  background: var(--color-bg-subtle);
+  flex-shrink: 0;
 
   .gatsby-image-wrapper {
     height: 100%;
@@ -41,104 +50,117 @@ const ImageWrapper = styled.div`
   }
 
   img {
-    transition: transform ${theme.transition.slow};
+    transition: transform var(--transition-slow);
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 
   ${Card}:hover & img {
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
 `;
 
 const NoThumbnail = styled.div`
   width: 100%;
-  height: 200px;
-  background: var(--color-surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: ${theme.fontSize.sm};
-  color: var(--color-text-secondary);
-`;
-
-const CardContent = styled.div`
-  padding: ${theme.spacing.lg};
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-subtle) 0%,
+    var(--color-brand-subtle) 100%
+  );
   display: flex;
   flex-direction: column;
-  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  color: var(--color-text-tertiary);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
 
-  @media (min-width: ${theme.breakpoints.tablet}) {
-    padding: ${theme.spacing.xl};
+  &::before {
+    content: '✍️';
+    font-size: 2rem;
+    opacity: 0.5;
   }
 `;
 
-const Category = styled.span`
-  display: inline-block;
-  padding: ${theme.spacing.xs} ${theme.spacing.md};
-  background-color: var(--color-surface);
-  color: ${theme.colors.primary};
-  border-radius: ${theme.borderRadius.full};
-  font-size: ${theme.fontSize.xs};
-  font-weight: ${theme.fontWeight.semibold};
-  margin-bottom: ${theme.spacing.md};
+const CardContent = styled.div`
+  padding: var(--space-5) var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--space-3);
+
+  @media (min-width: 768px) {
+    padding: var(--space-5) var(--space-6) var(--space-6);
+  }
+`;
+
+const CategoryTag = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  background-color: var(--color-brand-subtle);
+  color: var(--color-brand-primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
   text-transform: uppercase;
   width: max-content;
 `;
 
 const Title = styled.h3`
-  font-size: ${theme.fontSize.xl};
-  font-weight: ${theme.fontWeight.bold};
+  font-size: var(--fs-title-sm);
+  font-weight: var(--fw-bold);
   color: var(--color-text-primary);
-  margin: 0 0 ${theme.spacing.sm} 0;
-  line-height: 1.4;
+  margin: 0;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: keep-all;
 
-  @media (min-width: ${theme.breakpoints.tablet}) {
-    font-size: ${theme.fontSize['2xl']};
+  @media (min-width: 768px) {
+    font-size: var(--fs-title-md);
   }
 `;
 
 const Excerpt = styled.p`
   color: var(--color-text-secondary);
-  font-size: ${theme.fontSize.sm};
-  line-height: 1.6;
-  margin: 0 0 ${theme.spacing.md} 0;
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-relaxed);
+  margin: 0;
   flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: keep-all;
 
-  @media (min-width: ${theme.breakpoints.tablet}) {
-    font-size: ${theme.fontSize.base};
+  @media (min-width: 768px) {
+    font-size: var(--fs-body-md);
   }
 `;
 
 const Meta = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-top: ${theme.spacing.md};
-  border-top: 1px solid var(--color-border);
-  font-size: ${theme.fontSize.sm};
-  color: var(--color-text-primary);
+  gap: var(--space-3);
+  font-size: var(--fs-caption);
+  color: var(--color-text-tertiary);
+  margin-top: auto;
+  padding-top: var(--space-3);
 `;
 
-const Date = styled.time`
-  display: flex;
-  align-items: center;
-  gap: ${theme.spacing.xs};
-
-  &::before {
-    content: '📅';
-  }
+const Dot = styled.span`
+  color: var(--color-border-default);
 `;
 
-const ReadTime = styled.span`
-  display: flex;
-  align-items: center;
-  gap: ${theme.spacing.xs};
-
-  &::before {
-    content: '⏱️';
-  }
-`;
-
-interface PostCardProps {
+export interface PostCardProps {
   title: string;
   excerpt: string;
   date: string;
@@ -148,8 +170,15 @@ interface PostCardProps {
   thumbnail?: IGatsbyImageData | null;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ title, excerpt, date, category, slug, readTime = '5분', thumbnail }) => {
-  // category를 기반으로 올바른 경로 생성
+const PostCard: React.FC<PostCardProps> = ({
+  title,
+  excerpt,
+  date,
+  category,
+  slug,
+  readTime = '5분',
+  thumbnail,
+}) => {
   const fullPath = `/${category}${slug}`;
   const thumbnailImage = thumbnail ? getImage(thumbnail) : null;
 
@@ -157,17 +186,22 @@ const PostCard: React.FC<PostCardProps> = ({ title, excerpt, date, category, slu
     <Card>
       <CardLink to={fullPath}>
         <ImageWrapper>
-          {thumbnailImage ? <GatsbyImage image={thumbnailImage} alt={title} /> : <NoThumbnail>No thumbnail</NoThumbnail>}
+          {thumbnailImage ? (
+            <GatsbyImage image={thumbnailImage} alt={title} />
+          ) : (
+            <NoThumbnail>글 보기</NoThumbnail>
+          )}
         </ImageWrapper>
 
         <CardContent>
-          <Category>{category}</Category>
+          <CategoryTag>{category}</CategoryTag>
           <Title>{title}</Title>
           <Excerpt>{excerpt}</Excerpt>
 
           <Meta>
-            <Date>{date}</Date>
-            <ReadTime>{readTime}</ReadTime>
+            <time>{date}</time>
+            <Dot>·</Dot>
+            <span>{readTime} 읽기</span>
           </Meta>
         </CardContent>
       </CardLink>

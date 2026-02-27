@@ -1,6 +1,12 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { theme } from 'src/styles/theme';
+
+// ============================================================
+// TableOfContents — Emotion 기반 (CSS var() 토큰 사용)
+// Stitch MCP 디자인 참조: Dev.log Table of Contents Sidebar
+// ============================================================
+
+const TOCWrapper = styled.div``;
 
 const TOCContainer = styled.aside<{ isOpen: boolean }>`
   position: fixed;
@@ -9,33 +15,33 @@ const TOCContainer = styled.aside<{ isOpen: boolean }>`
   width: 280px;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
-  padding: ${theme.spacing.lg};
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: ${theme.borderRadius.lg};
-  transition: right ${theme.transition.base};
-  z-index: 50;
-  box-shadow: ${theme.shadow.lg};
+  padding: var(--space-6);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  transition: right var(--transition-base);
+  z-index: var(--z-sticky);
+  box-shadow: var(--shadow-lg);
 
-  /* 태블릿 미만: 모바일 */
-  @media (max-width: calc(${theme.breakpoints.desktop} - 1px)) {
-    box-shadow: ${theme.shadow.xl};
+  /* 모바일: 슬라이드 인 패널 */
+  @media (max-width: 1023px) {
+    box-shadow: var(--shadow-lg);
   }
 
-  /* 데스크톱 이상: 우측에 고정 */
-  @media (min-width: ${theme.breakpoints.desktop}) {
+  /* 데스크톱: 우측 고정 */
+  @media (min-width: 1024px) {
     right: 20px;
-    box-shadow: ${theme.shadow.md};
+    box-shadow: var(--shadow-md);
   }
 
-  /* 화면이 충분히 넓을 때: 컨텐츠 옆에 위치 */
+  /* 와이드 스크린: 컨텐츠 옆에 위치 */
   @media (min-width: 1600px) {
     right: calc((100vw - 1200px) / 2 - 100px);
   }
 
-  /* 스크롤바 스타일 */
+  /* 커스텀 스크롤바 */
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
   }
 
   &::-webkit-scrollbar-track {
@@ -43,8 +49,8 @@ const TOCContainer = styled.aside<{ isOpen: boolean }>`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--color-border);
-    border-radius: ${theme.borderRadius.full};
+    background: var(--color-border-default);
+    border-radius: var(--radius-full);
 
     &:hover {
       background: var(--color-text-tertiary);
@@ -53,38 +59,46 @@ const TOCContainer = styled.aside<{ isOpen: boolean }>`
 `;
 
 const TOCTitle = styled.h3`
-  font-size: ${theme.fontSize.base};
-  font-weight: ${theme.fontWeight.bold};
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-bold);
   color: var(--color-text-primary);
-  margin: 0 0 ${theme.spacing.md} 0;
-  padding-bottom: ${theme.spacing.sm};
-  border-bottom: 2px solid var(--color-border);
+  margin: 0 0 var(--space-4) 0;
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--color-border-default);
+  letter-spacing: var(--ls-tight);
 `;
 
 const TOCList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 `;
 
 const TOCItem = styled.li<{ level: number; isActive: boolean }>`
   margin-left: ${(props) => (props.level - 1) * 12}px;
-  margin-bottom: ${theme.spacing.xs};
 
   a {
     display: block;
-    padding: ${theme.spacing.xs} ${theme.spacing.sm};
-    color: ${(props) => (props.isActive ? theme.colors.primary : 'var(--color-text-secondary)')};
+    padding: var(--space-1) var(--space-2);
+    padding-left: ${(props) => (props.level > 2 ? 'var(--space-4)' : 'var(--space-2)')};
+    color: ${(props) => (props.isActive ? 'var(--color-brand-primary)' : 'var(--color-text-secondary)')};
     text-decoration: none;
-    font-size: ${theme.fontSize.sm};
-    border-left: 2px solid ${(props) => (props.isActive ? theme.colors.primary : 'transparent')};
-    transition: all ${theme.transition.fast};
-    line-height: 1.4;
+    font-size: var(--fs-body-sm);
+    font-weight: ${(props) => (props.isActive ? 'var(--fw-medium)' : 'var(--fw-normal)')};
+    border-left: 2px solid
+      ${(props) => (props.isActive ? 'var(--color-brand-primary)' : 'transparent')};
+    background-color: ${(props) => (props.isActive ? 'var(--color-brand-subtle)' : 'transparent')};
+    transition: all var(--transition-fast);
+    line-height: var(--lh-normal);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 
     &:hover {
-      color: ${theme.colors.primary};
-      background-color: var(--color-hover);
-      border-left-color: ${theme.colors.primary};
+      color: var(--color-brand-primary);
+      background-color: var(--color-interactive-hover);
+      border-left-color: var(--color-brand-primary);
     }
   }
 `;
@@ -95,30 +109,44 @@ const TOCToggleButton = styled.button<{ isOpen: boolean }>`
   top: 100px;
   width: 48px;
   height: 48px;
-  border-radius: ${theme.borderRadius.full};
-  background: ${theme.colors.primary};
+  border-radius: var(--radius-full);
+  background: var(--color-brand-primary);
   color: white;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${theme.fontSize.xl};
-  box-shadow: ${theme.shadow.lg};
-  z-index: 51;
-  transition: all ${theme.transition.base};
+  font-size: var(--fs-title-md);
+  box-shadow: var(--shadow-lg);
+  z-index: calc(var(--z-sticky) + 1);
+  transition: all var(--transition-base);
 
   &:hover {
     transform: scale(1.1);
-    box-shadow: ${theme.shadow.xl};
+    box-shadow: var(--shadow-card-hover);
   }
 
   &:active {
     transform: scale(0.95);
   }
 
-  @media (min-width: ${theme.breakpoints.desktop}) {
+  /* 데스크톱에서 숨김 */
+  @media (min-width: 1024px) {
     display: none;
+  }
+`;
+
+// 데스크톱에서 오버레이 닫기용 배경
+const Backdrop = styled.div<{ isOpen: boolean }>`
+  display: none;
+
+  @media (max-width: 1023px) {
+    display: ${(props) => (props.isOpen ? 'block' : 'none')};
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: calc(var(--z-sticky) - 1);
   }
 `;
 
@@ -138,18 +166,16 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ html }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
-    // HTML에서 heading 추출
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
-    const headingElements = tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const headingElements = tempDiv.querySelectorAll('h1, h2, h3, h4');
 
     const extractedHeadings: Heading[] = [];
-    headingElements.forEach((heading, index) => {
+    headingElements.forEach((heading) => {
       const level = parseInt(heading.tagName.substring(1));
       const text = heading.textContent || '';
       let id = heading.id;
 
-      // ID가 없으면 생성
       if (!id) {
         id = text
           .toLowerCase()
@@ -163,10 +189,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ html }) => {
 
     setHeadings(extractedHeadings);
 
-    // 실제 DOM에도 ID 추가
     setTimeout(() => {
       const contentHeadings = document.querySelectorAll(
-        '.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6',
+        '.post-content h1, .post-content h2, .post-content h3, .post-content h4',
       );
       contentHeadings.forEach((heading, index) => {
         if (extractedHeadings[index]) {
@@ -177,14 +202,13 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ html }) => {
   }, [html]);
 
   React.useEffect(() => {
-    // 스크롤 시 활성 섹션 추적
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length > 0) {
+          // 가장 위쪽에 보이는 항목을 active로
+          setActiveId(visible[0].target.id);
+        }
       },
       {
         rootMargin: '-20% 0px -35% 0px',
@@ -194,17 +218,13 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ html }) => {
 
     headings.forEach(({ id }) => {
       const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
+      if (element) observer.observe(element);
     });
 
     return () => {
       headings.forEach(({ id }) => {
         const element = document.getElementById(id);
-        if (element) {
-          observer.unobserve(element);
-        }
+        if (element) observer.unobserve(element);
       });
     };
   }, [headings]);
@@ -213,22 +233,22 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ html }) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -80; // 헤더 높이만큼 오프셋
+      const yOffset = -80;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
-      setIsOpen(false); // 모바일에서 클릭 후 닫기
+      setIsOpen(false);
     }
   };
 
-  if (headings.length === 0) {
-    return null;
-  }
+  if (headings.length === 0) return null;
 
   return (
-    <>
+    <TOCWrapper>
       <TOCToggleButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} aria-label="목차 토글">
         {isOpen ? '✕' : '📑'}
       </TOCToggleButton>
+
+      <Backdrop isOpen={isOpen} onClick={() => setIsOpen(false)} />
 
       <TOCContainer isOpen={isOpen}>
         <TOCTitle>목차</TOCTitle>
@@ -242,7 +262,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ html }) => {
           ))}
         </TOCList>
       </TOCContainer>
-    </>
+    </TOCWrapper>
   );
 };
 

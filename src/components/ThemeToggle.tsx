@@ -1,7 +1,11 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { useTheme } from 'src/contexts/ThemeContext';
-import { theme } from 'src/styles/theme';
+
+// ============================================================
+// ThemeToggle — New Token API
+// Uses CSS var() tokens from tokens.css for theme responsiveness
+// ============================================================
 
 const ToggleContainer = styled.div`
   position: relative;
@@ -10,16 +14,18 @@ const ToggleContainer = styled.div`
 const ToggleButton = styled.button`
   background: transparent;
   border: none;
-  padding: ${theme.spacing.sm};
+  padding: var(--space-2);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${theme.fontSize.xl};
-  transition: transform ${theme.transition.fast};
+  font-size: var(--fs-title-md);
+  transition: transform var(--transition-fast);
+  border-radius: var(--radius-sm);
 
   &:hover {
     transform: scale(1.1);
+    background: var(--color-interactive-hover);
   }
 
   &:active {
@@ -29,39 +35,40 @@ const ToggleButton = styled.button`
 
 const DropdownMenu = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  top: calc(100% + ${theme.spacing.sm});
+  top: calc(100% + var(--space-2));
   right: 0;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: ${theme.borderRadius.md};
-  box-shadow: ${theme.shadow.lg};
-  padding: ${theme.spacing.xs};
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-1);
   min-width: 150px;
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  z-index: 1000;
+  z-index: var(--z-dropdown);
 `;
 
 const MenuItem = styled.button<{ isActive: boolean }>`
   width: 100%;
-  padding: ${theme.spacing.sm} ${theme.spacing.md};
-  background: ${(props) => (props.isActive ? 'var(--color-hover)' : 'transparent')};
+  padding: var(--space-2) var(--space-4);
+  background: ${(props) => (props.isActive ? 'var(--color-interactive-active)' : 'transparent')};
   border: none;
-  border-radius: ${theme.borderRadius.sm};
+  border-radius: var(--radius-sm);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
-  font-size: ${theme.fontSize.sm};
+  gap: var(--space-2);
+  font-size: var(--fs-body-sm);
   color: var(--color-text-primary);
-  transition: background ${theme.transition.fast};
+  transition: background var(--transition-fast);
   text-align: left;
+  font-family: var(--font-base);
 
   &:hover {
-    background: var(--color-hover);
+    background: var(--color-interactive-hover);
   }
 
   .icon {
-    font-size: ${theme.fontSize.lg};
+    font-size: var(--fs-title-sm);
   }
 
   .label {
@@ -70,6 +77,8 @@ const MenuItem = styled.button<{ isActive: boolean }>`
 
   .check {
     opacity: ${(props) => (props.isActive ? 1 : 0)};
+    color: var(--color-brand-primary);
+    font-weight: var(--fw-bold);
   }
 `;
 

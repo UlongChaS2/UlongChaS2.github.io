@@ -1,27 +1,23 @@
 import styled from '@emotion/styled';
-import { theme } from './theme';
 
+// ============================================================
+// LayoutStyles — Daangn Blog Style
+// ============================================================
+
+/* Layout shell — 각 페이지/템플릿이 자체 max-width·padding 제어 */
 export const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: ${theme.spacing.xl} ${theme.spacing.md};
   min-height: calc(100vh - 200px);
-
-  @media (min-width: ${theme.breakpoints.tablet}) {
-    padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
-  }
 `;
 
 export const Footer = styled.footer`
-  background-color: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  padding: ${theme.spacing.xl} ${theme.spacing.md};
+  border-top: 1px solid var(--color-border-subtle);
+  padding: var(--space-10) var(--space-6);
   text-align: center;
-  color: var(--color-text-secondary);
-  font-size: ${theme.fontSize.sm};
-  margin-top: ${theme.spacing['3xl']};
+  color: var(--color-text-tertiary);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-relaxed);
 
-  @media (min-width: ${theme.breakpoints.tablet}) {
-    padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
+  @media (min-width: 768px) {
+    padding: var(--space-10) var(--space-8);
   }
 `;

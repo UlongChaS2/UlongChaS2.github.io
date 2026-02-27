@@ -1,5 +1,10 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
+/* ============================================================
+   layout.css — base HTML reset only
+   NOTE: --space-* tokens are defined in tokens.css (via gatsby-browser.js)
+   DO NOT redefine --space-* here — it will override design system tokens!
+   ============================================================ */
 :root {
   --border-radius: 4px;
   --color-text: #333;
@@ -16,15 +21,7 @@
   --line-height-loose: 1.75;
   --line-height-normal: 1.5;
   --line-height-dense: 1.1;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 64px;
   --size-content: 54rem;
-  --size-gutter: var(--space-5);
-  --size-gap: var(--space-6);
 }
 html {
   -webkit-text-size-adjust: 100%;
