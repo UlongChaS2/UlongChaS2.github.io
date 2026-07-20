@@ -24,12 +24,6 @@ const base = (size: number) => ({
   focusable: false,
 });
 
-export const IconCode: React.FC<IconProps> = ({ size = 18, strokeWidth = 2.4, className }) => (
-  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
-    <path d="M9 6L4 12l5 6M15 6l5 6-5 6" />
-  </svg>
-);
-
 /**
  * 파비콘과 같은 그림이다. 꺾쇠는 currentColor를 따르지만 커서만은
  * 노란색을 고정으로 쓴다 — 이 두 색 대비가 마크의 정체성이라
