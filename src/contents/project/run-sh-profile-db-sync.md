@@ -7,6 +7,8 @@ keywords: ['스크립트', 'Docker', 'Infra']
 
 > local 프로파일 제거, 실행 메뉴 단순화, Docker 볼륨 초기화 시 원격 dev DB 데이터를 로컬로 복제하는 기능 추가
 
+<!--more-->
+
 ## 개요
 
 Spring Boot 멀티모듈 프로젝트에서 개발 환경 실행 스크립트(`run.sh`)를 개선했다. 불필요한 프로파일을 제거하고 docker / dev 두 가지로 단순화했으며, Docker 볼륨 초기화 시 원격 dev 서버 DB 데이터를 그대로 로컬 Docker DB로 가져오는 기능을 추가했다.

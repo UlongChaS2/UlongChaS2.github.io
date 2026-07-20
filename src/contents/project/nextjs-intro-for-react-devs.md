@@ -7,6 +7,8 @@ keywords: ['Next.js', 'React', 'FE']
 
 > React 개발자 기준, 새 Next.js 프로젝트 투입 시 파악해야 할 것들
 
+<!--more-->
+
 ---
 
 ## 개요

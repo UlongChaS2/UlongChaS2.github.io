@@ -7,6 +7,8 @@ keywords: ['JVM', 'Gradle', 'BE']
 
 > 런타임에 클래스를 못 찾는 에러는 대부분 빌드 설정 문제다. 증상을 보고 원인 계층을 역추적하는 법을 파헤치자.
 
+<!--more-->
+
 ## 개요
 
 Java 프로젝트를 운영하다 보면 분명히 코드에 클래스가 있는데 실행하면 `ClassNotFoundException`이나 `NoClassDefFoundError`가 발생하는 경우가 있다.

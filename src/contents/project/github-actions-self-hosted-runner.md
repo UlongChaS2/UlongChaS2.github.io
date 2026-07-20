@@ -7,6 +7,8 @@ keywords: ['runner', 'GitHub Actions', 'Infra']
 
 > GitHub Actions 작업을 서버 안에서 실행해야 한다면 self-hosted runner를 두되, 앱 실행 계정과 runner 실행 계정은 반드시 분리한다.
 
+<!--more-->
+
 ## 개요
 
 브라우저 QA를 GitHub Actions에서 돌리려면 러너가 테스트 대상 URL에 실제로 접근할 수 있어야 한다. **외부 러너가 대상 서버에 네트워크로 접근할 수 없는 환경**에서는 GitHub-hosted runner로 QA를 실행할 수 없다. 내부 네트워크 안에만 존재하는 개발 서버, 특정 대역에서만 접근 가능한 스테이징 환경 등이 여기 해당한다.

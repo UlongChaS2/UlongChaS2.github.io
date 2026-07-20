@@ -28,7 +28,13 @@ module.exports = {
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-plugin-emotion`,
-    `gatsby-transformer-remark`,
+    {
+      // 모든 글이 한 줄 요약 인용구로 시작한다. 구분자를 그 뒤에 두면
+      // 카드에 쓰이는 excerpt가 딱 그 요약문이 된다. 구분자가 없으면
+      // excerpt는 본문을 평문으로 눌러서 헤딩("개요")까지 문장에 섞는다.
+      resolve: `gatsby-transformer-remark`,
+      options: { excerpt_separator: `<!--more-->` },
+    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,

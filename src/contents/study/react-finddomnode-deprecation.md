@@ -7,6 +7,8 @@ keywords: ['React', 'DOM']
 
 > recharts로 두 개의 Stacked Bar Chart를 비교하는 작업에서 결국 `findDOMNode()`를 쓸 수밖에 없었던 이유와 그 과정을 정리한다.
 
+<!--more-->
+
 ## 개요
 
 `findDOMNode()`는 **컴포넌트의 실제 DOM 노드를 직접 가져오는 API**로, 예전에는 특정 컴포넌트가 실제로 렌더링된 DOM을 가져와야 할 때 유용했다. 그러나 React 16 이후로 점진적으로 사용이 제한되었고, React 18에서는 Strict Mode에서 아예 사용할 수 없게 되었다.

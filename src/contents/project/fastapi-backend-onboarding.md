@@ -7,6 +7,8 @@ keywords: ['FastAPI', 'Python', 'BE']
 
 > React 개발자가 풀스택으로 전환하며 처음 접하는 FastAPI 백엔드를 정리한 기록이다.
 
+<!--more-->
+
 ## 개요
 
 ```

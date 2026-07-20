@@ -7,6 +7,8 @@ keywords: ['502', 'Flyway', 'Infra']
 
 > 502 Bad Gateway의 원인은 앱이 뜨지 않는 것, Flyway 마이그레이션 누락이 흔한 원인 중 하나
 
+<!--more-->
+
 ## 개요
 
 `deploy.sh`로 배포 후 502 에러가 발생했다. Nginx 같은 리버스 프록시가 502를 반환하는 건

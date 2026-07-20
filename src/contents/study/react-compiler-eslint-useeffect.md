@@ -7,6 +7,8 @@ keywords: ['compiler', 'useEffect', 'ESLint']
 
 > exhaustive-deps를 꺼둔 채 React Compiler를 도입하려다, 의존성 배열이 컴파일러의 신뢰 입력값이라는 걸 문서·코드·빌드 산출물까지 톺아보며 확인한 기록.
 
+<!--more-->
+
 ## 개요
 
 React 19.2 / React Compiler 1.0 소식 듣자마자, '바로 마이그레이션 해야지'하고 실무 프로젝트 코드베이스를 훑고, 커서 AI로 리스크 맵을 찍어봤다. 역시 예상대로 ref 패턴이랑 state 직접 덮어쓰기가 신경 쓰였는데, 충격이였던 것은 eslint.config에서 exhaustive-deps를 꺼둔 상태가 🔴 Critical로 찍힌 것.

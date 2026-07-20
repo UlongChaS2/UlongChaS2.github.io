@@ -7,6 +7,8 @@ keywords: ['CI/CD', 'GitHub Actions', 'Infra']
 
 > 없던 CI/CD + QA 운영 파이프라인을 만들기 위해, JAR 롤백 구조 위에 GitHub Actions, self-hosted runner, Playwright QA, 실패 증적 수집 흐름을 단계적으로 붙인 기록이다.
 
+<!--more-->
+
 ## 개요
 
 1편에서는 운영 서버의 배포 기준을 정리했다.

@@ -7,6 +7,8 @@ keywords: ['아키텍처', 'Spring Boot', 'BE']
 
 > Spring Boot는 Controller → UseCase → Repository → Entity 순으로 계층이 나뉘며, 각 계층은 인터페이스로 연결된다
 
+<!--more-->
+
 ## 개요
 
 Spring Boot 백엔드는 역할별로 계층을 분리한다. 이 구조를 클린 아키텍처라고 하며, 각 계층이 한 가지 역할만 담당해서 코드가 명확하고 유지보수가 쉬워진다. 처음엔 왜 이렇게 나누는지 이해하기 어렵지만, "만드는 순서"를 따라가면 자연스럽게 이해된다.

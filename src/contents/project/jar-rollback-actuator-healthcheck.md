@@ -7,6 +7,8 @@ keywords: ['롤백', 'health check', 'Infra']
 
 > Spring Boot JAR 배포에서 `releases/current/previous` 구조를 사용하면 신규 배포 실패 시 이전 JAR로 빠르게 되돌릴 수 있다.
 
+<!--more-->
+
 ## 개요
 
 이번 작업의 핵심은 기존처럼 새 JAR를 올리고 기존 파일을 삭제하는 방식에서 벗어나, 서버에 이전 배포 산출물을 남겨두고 health check 실패 시 자동으로 되돌릴 수 있는 구조를 만드는 것이다.

@@ -7,6 +7,8 @@ keywords: ['React', 'Concurrent']
 
 > React 18의 Concurrent Mode가 무엇이고, 어떤 특징과 API로 UI 응답성을 높이는지 정리한다.
 
+<!--more-->
+
 ## 개요
 
 **Concurrent Mode**(동시성 모드)는 React 18에서 도입된 개념으로, **UI의 응답성을 향상**시키고, 여러 개의 업데이트를 보다 **부드럽고 유연하게 처리**하기 위한 새로운 렌더링 방식이다.

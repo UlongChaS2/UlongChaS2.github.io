@@ -7,6 +7,8 @@ keywords: ['코드 읽기', 'Spring', 'BE']
 
 > 백엔드 코드는 `Controller → Request DTO → Criteria/Search DTO → Service → Repository → QueryDSL` 순서로 따라가면 읽기 쉬워진다.
 
+<!--more-->
+
 ## 개요
 
 Spring 백엔드 코드를 처음 읽을 때 가장 어려운 점은 클래스가 너무 많이 연결되어 있다는 것이다. DTO, Mapper, Service, Repository, QueryDSL을 한 번에 이해하려고 하면 흐름이 끊긴다. 먼저 요청 하나가 어디서 시작해서 DB 조회까지 어떻게 이동하는지만 파악해야 한다.

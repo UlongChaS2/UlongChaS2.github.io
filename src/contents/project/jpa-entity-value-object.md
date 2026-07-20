@@ -7,6 +7,8 @@ keywords: ['JPA', 'DDD', 'BE']
 
 > DB 테이블과 매핑되는 엔티티 클래스와, 값을 안전하게 다루는 Value Object를 이해한다.
 
+<!--more-->
+
 ## 개요
 Spring Boot에서 DB 테이블은 Java 클래스로 표현된다. 이 클래스를 엔티티라고 하며, JPA 애노테이션으로 DB와 매핑한다. Value Object는 ID처럼 값 자체가 의미인 객체를 별도 클래스로 분리해서 타입 안전성을 높이는 패턴이다.
 
