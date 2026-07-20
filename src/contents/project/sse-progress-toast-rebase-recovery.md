@@ -99,7 +99,7 @@ interface SyncSourceAdapter {
 
 컴파일·유닛테스트는 통과했는데 앱이 아예 안 떴다. 실행이 진실.
 
-1. **마이그레이션 번호 충돌** — 다른 브랜치가 먼저 머지한 `V40`과 내 `V40`이 공유 DB에서 checksum mismatch → Flyway validate 실패로 기동 불가. `git cherry`로 "원격 것이 내 히스토리에 내용상 포함됐는지" 확인 후 V41로 비킴.
+1. **마이그레이션 번호 충돌** — 다른 브랜치가 먼저 머지한 `V40`과 내 `V40`이 공유 DB에서 checksum mismatch → Flyway validate 실패로 기동 불가. 내 것을 V41로 비켜서 해결.
 2. **컬럼 타입 불일치** — 이 코드베이스는 `@Converter(autoApply=true)`로 `LocalDate`를 VARCHAR로 저장하는데, 마이그레이션은 `DATE`로 선언 → Hibernate 스키마 검증 실패로 기동 불가. 기존 테이블 관례(`VARCHAR(8)`)로 정렬.
 3. **연타 시 N번 스크래핑** — 동시성 방어(active 1개)만 있고 연타 방어(멱등)가 없어, dev 스크래핑이 0.6초에 끝나니 재클릭 시점엔 이미 DONE → 매번 새 job. → 멱등으로 해결(위 §3).
 
@@ -136,16 +136,6 @@ const onSync = () => trigger(body).then(r => {
 }).catch(() => toast.error('시작 실패'))     // 무피드백 금지
 ```
 
-## Git: 이미 push한 커밋을 rebase하면
-
-`git push` 거부(non-fast-forward), 로컬/원격 갈라짐. 진단:
-- `git cherry HEAD origin/<branch>` — `-` 접두 = 내용상 이미 로컬에 포함(중복), `+` = 진짜 새것.
-- `git reflog -30` — `rebase (start): checkout origin/main` 같은 줄이 범인.
-
-원리: `git rebase origin/main`은 **이미 push된 커밋도 베이스가 바뀌며 해시가 새로 찍힌다.** 원격=옛 해시, 로컬=같은 내용 새 해시.
-복구: `git cherry`가 원격을 `-`(중복)로 확인했다면 `git push --force-with-lease`로 손실 0(로컬 정본으로 덮기). 혼자 쓰는 브랜치일 때만. 아니면 `merge`(지저분).
-주의: pushed 커밋은 rebase 금지, main 최신화는 `merge`로.
-
 ## 주의사항 / 자주 하는 실수
 - **실시간 채널(SSE)을 유일한 truth로 삼기** — 끊기면 영구 고착. 항상 조회로 닫을 수 있게.
 - **에러를 `.catch(()=>{})`/`catch{return 200}`로 삼키기** — 무피드백/성공위장. 최소한 실패를 드러내라.
@@ -158,5 +148,4 @@ const onSync = () => trigger(body).then(r => {
 - 멱등성과 재시도 안전성
 - 전략 패턴과 레지스트리
 - react-query invalidateQueries 패턴
-- git rebase vs merge
 - 낙관적 UI와 상태 동기화
