@@ -2,6 +2,7 @@
 title: '파일명 언더스코어 prefix 관례와 내부 구현 은닉'
 date: '2026-05-13'
 category: 'project'
+keywords: ['FE', '컨벤션']
 ---
 
 > 파일명 앞에 `_`를 붙이면 "이 파일은 내부 구현용이니 직접 import하지 마세요"라는 팀 내 약속이 된다. 은닉화(information hiding)가 아니라 **관례적 접근 제어**다.

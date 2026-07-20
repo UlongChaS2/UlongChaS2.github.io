@@ -2,6 +2,7 @@
 title: 'React Concurrent Mode 파헤치기'
 date: '2026-02-24'
 category: 'study'
+keywords: ['React', 'Concurrent']
 ---
 
 # Concurrent Mode란?

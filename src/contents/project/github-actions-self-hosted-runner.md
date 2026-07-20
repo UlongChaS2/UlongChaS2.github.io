@@ -2,6 +2,7 @@
 title: 'GitHub Actions Self-hosted Runner 운영 — 실행 계정 분리'
 date: '2026-05-27'
 category: 'project'
+keywords: ['Infra', 'GitHub Actions', 'runner']
 ---
 
 > GitHub Actions 작업을 서버 안에서 실행해야 한다면 self-hosted runner를 두되, 앱 실행 계정과 runner 실행 계정은 반드시 분리한다.

@@ -2,6 +2,7 @@
 title: 'DevExtreme DataGrid에서 무한 스크롤 구현하기'
 date: '2025-07-22'
 category: 'study'
+keywords: ['DataGrid', '무한 스크롤']
 ---
 
 DevExtreme DataGrid에서 무한 스크롤을 구현하려면 `CustomStore`의 `load` 함수를 직접 정의해야 합니다. 이때 상태를 `useState`로 관리하면 리렌더링마다 `load` 함수가 재생성되고, 그 결과 `dataSource`까지 새로 만들어져 그리드가 통째로 리셋됩니다. 그래서 페이지 번호·fetching 여부·다음 페이지 존재 여부 같은 상태는 모두 `useRef`로 관리합니다.

@@ -2,6 +2,7 @@
 title: 'React.memo 커스텀 comparator vs useMemo 안정화'
 date: '2026-05-11'
 category: 'project'
+keywords: ['FE', 'React', '최적화']
 ---
 
 > 커스텀 comparator는 대부분 부모가 참조를 안정화하지 않아서 생긴다 — 부모를 고치는 게 더 낫다.

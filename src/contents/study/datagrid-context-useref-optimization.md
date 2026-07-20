@@ -2,6 +2,7 @@
 title: '데이터 그리드 최적화 — Context API와 useRef, 그리고 wrapper가 만든 성능 저하'
 date: '2026-03-04'
 category: 'study'
+keywords: ['useRef', 'Context', '렌더링']
 ---
 
 실무 프로젝트에서 복잡한 UI, 특히 데이터 그리드의 일괄 편집(Bulk Edit) 기능을 구현하며 겪었던 상태 관리 및 렌더링 최적화 이슈와, 이를 해결하기 위해 React의 **Context API** 및 **`useRef` 콜백 패턴**을 적용한 과정을 정리한 개발 노트입니다. 후반부에는 같은 화면에서 wrapper 하나 때문에 발생한 성능 저하 트러블슈팅도 함께 다룹니다.

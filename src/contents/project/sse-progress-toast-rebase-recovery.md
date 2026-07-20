@@ -2,6 +2,7 @@
 title: 'SSE 진행 토스트 구현과 rebase 사고 복구기'
 date: '2026-07-15'
 category: 'project'
+keywords: ['FE', 'SSE', 'git']
 ---
 
 > 외부 데이터 동기화를 비동기 job으로 돌리고 SSE로 진행상황을 화면 넘어 토스트로 보여주는 패턴 + 이미 push한 커밋을 rebase했을 때 생기는 히스토리 갈라짐 진단·복구.

@@ -2,6 +2,7 @@
 title: 'React에서 findDOMNode() 사용이 제한된 이유와 해결 과정'
 date: '2025-11-18'
 category: 'study'
+keywords: ['React', 'DOM']
 ---
 
 # 개요

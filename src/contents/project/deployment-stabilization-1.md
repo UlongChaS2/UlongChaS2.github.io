@@ -2,6 +2,7 @@
 title: '운영 배포 안정화기 (1) — 삭제 후 재업로드에서 벗어나기'
 date: '2026-05-20'
 category: 'project'
+keywords: ['Infra', '배포', '롤백']
 ---
 
 기존 JAR 삭제 후 재업로드 방식에서 생긴 불안정함을 계기로, 운영 경로 정리, 운영 디렉터리 이동, JAR rollback, health check, QA 증적까지 단계적으로 배포 안정성을 높인 기록이다.

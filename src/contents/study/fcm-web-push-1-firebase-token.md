@@ -2,6 +2,7 @@
 title: 'Firebase Cloud Messaging으로 웹 푸시 구현하기 (1) — Firebase Token'
 date: '2025-09-02'
 category: 'study'
+keywords: ['FCM', 'Firebase', '웹 푸시']
 ---
 
 # 개요

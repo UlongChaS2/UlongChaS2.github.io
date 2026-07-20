@@ -2,6 +2,7 @@
 title: '운영 배포 안정화기 (2) — CI/CD와 QA 파이프라인 붙이기'
 date: '2026-05-27'
 category: 'project'
+keywords: ['Infra', 'CI/CD', 'GitHub Actions']
 ---
 
 없던 CI/CD + QA 운영 파이프라인을 만들기 위해, JAR 롤백 구조 위에 GitHub Actions, self-hosted runner, Playwright QA, 실패 증적 수집 흐름을 단계적으로 붙인 기록이다.

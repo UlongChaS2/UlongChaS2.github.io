@@ -2,6 +2,7 @@
 title: 'Flyway 마이그레이션 관리'
 date: '2026-03-23'
 category: 'project'
+keywords: ['BE', 'Flyway', 'migration']
 ---
 
 DB 스키마 변경 이력을 코드처럼 버전으로 관리하는 도구.

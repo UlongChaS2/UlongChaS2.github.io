@@ -2,6 +2,7 @@
 title: 'JPA 엔티티와 Value Object'
 date: '2026-03-24'
 category: 'project'
+keywords: ['BE', 'JPA', 'DDD']
 ---
 
 DB 테이블과 매핑되는 엔티티 클래스와, 값을 안전하게 다루는 Value Object를 이해한다.

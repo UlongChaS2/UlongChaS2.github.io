@@ -2,6 +2,7 @@
 title: '클라이언트에서 멱등성 키를 UUID로 만드는 이유'
 date: '2026-01-20'
 category: 'study'
+keywords: ['멱등성', 'UUID']
 ---
 
 # 개요

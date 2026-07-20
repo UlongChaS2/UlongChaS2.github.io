@@ -2,6 +2,7 @@
 title: 'react-compiler 도입 시도하다 ESLint & useEffect 톺은 이야기'
 date: '2025-10-14'
 category: 'study'
+keywords: ['compiler', 'useEffect', 'ESLint']
 ---
 
 React 19.2 / React Compiler 1.0 소식 듣자마자, '바로 마이그레이션 해야지'하고 실무 프로젝트 코드베이스를 훑고, 커서 AI로 리스크 맵을 찍어봤다. 역시 예상대로 ref 패턴이랑 state 직접 덮어쓰기가 신경 쓰였는데, 충격이였던 것은 eslint.config에서 exhaustive-deps를 꺼둔 상태가 🔴 Critical로 찍힌 것.

@@ -2,6 +2,7 @@
 title: 'JAR 롤백 배포 구조와 Actuator Health Check'
 date: '2026-05-20'
 category: 'project'
+keywords: ['Infra', '롤백', 'health check']
 ---
 
 > Spring Boot JAR 배포에서 `releases/current/previous` 구조를 사용하면 신규 배포 실패 시 이전 JAR로 빠르게 되돌릴 수 있다.

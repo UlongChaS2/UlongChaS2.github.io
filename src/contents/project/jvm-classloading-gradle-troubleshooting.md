@@ -2,6 +2,7 @@
 title: 'JVM 클래스 로딩과 Gradle 빌드 트러블슈팅'
 date: '2026-03-25'
 category: 'project'
+keywords: ['BE', 'JVM', 'Gradle']
 ---
 
 런타임에 클래스를 못 찾는 에러는 대부분 빌드 설정 문제다. 증상을 보고 원인 계층을 역추적하는 법을 파헤치자.

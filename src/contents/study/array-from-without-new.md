@@ -2,6 +2,7 @@
 title: 'Array.from은 왜 앞에 new가 붙으면 안 되나?'
 date: '2025-06-10'
 category: 'study'
+keywords: ['JavaScript', 'Array']
 ---
 
 # 개요
