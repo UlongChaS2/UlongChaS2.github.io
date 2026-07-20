@@ -2,7 +2,7 @@
 title: 'SSE로 실시간 알림 구현하기'
 date: '2026-03-26'
 category: 'project'
-keywords: ['FE', 'SSE', '실시간']
+keywords: ['SSE', '실시간', 'FE']
 ---
 
 > 웹앱에서 승인 요청을 보내면 외부 시스템이 처리하고, 처리 결과를 SSE로 실시간 수신한다

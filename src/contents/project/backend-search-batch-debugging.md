@@ -2,7 +2,7 @@
 title: '백엔드 검색·배치 디버깅 흐름 정리'
 date: '2026-06-02'
 category: 'project'
-keywords: ['BE', '디버깅', 'Spring']
+keywords: ['디버깅', 'Spring', 'BE']
 ---
 
 > Spring 백엔드는 컨트롤러에서 바로 DB를 조회/저장하지 않고, Request DTO, 인터페이스, 서비스 구현체, Repository를 따라가야 실제 조회와 저장 위치를 찾을 수 있다.

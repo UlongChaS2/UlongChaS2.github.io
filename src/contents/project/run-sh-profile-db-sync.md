@@ -2,7 +2,7 @@
 title: '개발 실행 스크립트 개선 — 프로파일 정리와 dev DB 동기화'
 date: '2026-05-15'
 category: 'project'
-keywords: ['Infra', '스크립트', 'Docker']
+keywords: ['스크립트', 'Docker', 'Infra']
 ---
 
 > local 프로파일 제거, 실행 메뉴 단순화, Docker 볼륨 초기화 시 원격 dev DB 데이터를 로컬로 복제하는 기능 추가

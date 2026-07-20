@@ -2,7 +2,7 @@
 title: 'Next.js 입문 — React 개발자를 위한 핵심 개념'
 date: '2026-03-12'
 category: 'project'
-keywords: ['FE', 'Next.js', 'React']
+keywords: ['Next.js', 'React', 'FE']
 ---
 
 > React 개발자 기준, 새 Next.js 프로젝트 투입 시 파악해야 할 것들

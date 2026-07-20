@@ -2,7 +2,7 @@
 title: 'Spring Boot 백엔드 구조 이해하기'
 date: '2026-03-23'
 category: 'project'
-keywords: ['BE', 'Spring Boot']
+keywords: ['Spring Boot', '아키텍처', 'BE']
 ---
 
 Controller → UseCase → Repository → Entity → DB 흐름을 게시판 예시로 이해한다.

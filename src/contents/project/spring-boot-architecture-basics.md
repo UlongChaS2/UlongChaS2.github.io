@@ -2,7 +2,7 @@
 title: 'Spring Boot 아키텍처 기초 — 계층 구조와 핵심 개념'
 date: '2026-03-31'
 category: 'project'
-keywords: ['BE', 'Spring Boot', '아키텍처']
+keywords: ['아키텍처', 'Spring Boot', 'BE']
 ---
 
 > Spring Boot는 Controller → UseCase → Repository → Entity 순으로 계층이 나뉘며, 각 계층은 인터페이스로 연결된다

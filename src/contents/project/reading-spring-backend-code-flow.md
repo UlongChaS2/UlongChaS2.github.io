@@ -2,7 +2,7 @@
 title: 'Spring 백엔드 코드 흐름 읽기'
 date: '2026-06-04'
 category: 'project'
-keywords: ['BE', 'Spring', '코드 읽기']
+keywords: ['코드 읽기', 'Spring', 'BE']
 ---
 
 > 백엔드 코드는 `Controller → Request DTO → Criteria/Search DTO → Service → Repository → QueryDSL` 순서로 따라가면 읽기 쉬워진다.

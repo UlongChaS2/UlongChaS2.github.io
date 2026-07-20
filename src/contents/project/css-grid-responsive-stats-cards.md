@@ -2,7 +2,7 @@
 title: 'CSS Grid 반응형 레이아웃과 통계 카드 UI 패턴'
 date: '2026-05-14'
 category: 'project'
-keywords: ['FE', 'CSS Grid', '반응형']
+keywords: ['CSS Grid', '반응형', 'FE']
 ---
 
 > `repeat(auto-fit, minmax())` 으로 flex-wrap과 유사한 반응형 grid 구현 + 카드 stat 항목 통일 패턴

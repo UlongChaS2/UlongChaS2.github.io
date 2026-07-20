@@ -2,7 +2,7 @@
 title: '오픈 전 최소한의 배포 QA 파이프라인'
 date: '2026-05-18'
 category: 'project'
-keywords: ['Infra', 'QA', '배포']
+keywords: ['QA', '배포', 'Infra']
 ---
 
 > 첫 운영 배포 전에는 화려한 CI/CD보다 백업, 롤백, 마이그레이션 안전장치, QA 증적이 먼저다.

@@ -2,7 +2,7 @@
 title: '배포 후 502 에러 진단하기 — Flyway 마이그레이션 누락'
 date: '2026-05-07'
 category: 'project'
-keywords: ['Infra', '502', 'Flyway']
+keywords: ['502', 'Flyway', 'Infra']
 ---
 
 > 502 Bad Gateway의 원인은 앱이 뜨지 않는 것, Flyway 마이그레이션 누락이 흔한 원인 중 하나
