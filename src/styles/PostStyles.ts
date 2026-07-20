@@ -294,6 +294,36 @@ export const PostContent = styled.div`
     white-space: nowrap;
   }
 
+  /* ----------------------------------------------------------
+     좁은 화면의 표
+     폭이 모자라면 브라우저가 열을 눌러 "10+ / 파일"처럼 단어를
+     세로로 쪼갠다. 열에 하한을 줘서 눌리는 대신 가로로 넘치게
+     하고, 넘친 만큼은 위에 걸어둔 overflow-x로 밀어서 본다.
+     ---------------------------------------------------------- */
+  @media (max-width: 767px) {
+    table {
+      margin: 28px 0;
+      font-size: var(--fs-body-sm);
+    }
+
+    thead th,
+    tbody td {
+      min-width: 108px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    /* 첫 열은 대개 이름이라 길다. 한 줄로 붙들면 폭을 다 먹으므로
+       여기서만 줄바꿈을 허용한다. */
+    thead th:first-of-type,
+    tbody td:first-of-type {
+      width: auto;
+      min-width: 116px;
+      white-space: normal;
+      padding-left: 0;
+    }
+  }
+
   img {
     max-width: 100%;
     height: auto;
