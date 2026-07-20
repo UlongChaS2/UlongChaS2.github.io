@@ -106,7 +106,6 @@ const Header: React.FC = () => {
     { to: '/study/', label: '스터디', partial: true },
     { to: '/project/', label: '프로젝트', partial: true },
     { to: '/about/', label: '소개', partial: true },
-    { to: '/resume/', label: '이력서', partial: true },
   ];
 
   return (
