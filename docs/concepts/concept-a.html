@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>Dev.log — Concept A: Dark Editorial</title>
+<meta name="viewport" content="width=1440" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&family=Pretendard:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#0a0a0a;}
+  body{font-family:'Inter','Pretendard',system-ui,-apple-system,sans-serif;}
+  .stage{width:1440px;height:900px;margin:40px auto;position:relative;background:#111111;color:#e8e8e8;overflow:hidden;}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+  .serif{font-family:'Playfair Display',serif;}
+  .top-meta{position:absolute;top:48px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#666;letter-spacing:.2em;}
+  .top-meta .right{display:flex;gap:24px;}
+  .red{color:#D4400A;}
+  .bg-objects{position:absolute;inset:0;pointer-events:none;}
+  .terminal{position:absolute;top:80px;left:120px;width:280px;height:170px;border:1px solid #242424;border-radius:4px;}
+  .terminal .dots{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid #1f1f1f;}
+  .terminal .dots span{width:8px;height:8px;border-radius:50%;background:#2A2A2A;}
+  .terminal pre{margin:0;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#2A2A2A;line-height:18px;}
+  .code-snippet{position:absolute;bottom:120px;left:80px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#222;line-height:16px;white-space:pre;}
+  .vol-tag{position:absolute;top:120px;right:480px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#1f1f1f;letter-spacing:.2em;}
+  .keyboard{position:absolute;bottom:200px;right:120px;width:200px;height:60px;border:1px solid #1f1f1f;border-radius:6px;display:flex;gap:4px;padding:8px;flex-wrap:wrap;}
+  .keyboard i{display:block;width:24px;height:18px;border:1px solid #232323;border-radius:2px;}
+  .hero{position:absolute;top:280px;left:80px;}
+  .hero h1{margin:0;font-family:'Playfair Display',serif;font-weight:900;font-size:160px;line-height:140px;color:#E8E8E8;letter-spacing:-.04em;}
+  .hero .name-row{display:flex;align-items:baseline;gap:24px;margin-top:24px;}
+  .hero .red-bar{width:120px;height:4px;background:#D4400A;}
+  .hero .name{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:40px;color:#D4400A;letter-spacing:-.02em;}
+  .character-zone{position:absolute;top:240px;right:80px;display:flex;gap:24px;align-items:flex-start;}
+  .meta-stack{display:flex;flex-direction:column;gap:8px;align-items:flex-end;padding-top:24px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:.25em;}
+  .meta-stack .sep{width:32px;height:1px;background:#D4400A;margin:8px 0;}
+  .char-box{width:300px;height:420px;border:1px solid #E8E8E8;background:#111;position:relative;display:flex;align-items:center;justify-content:center;}
+  .char-box .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#3a3a3a;letter-spacing:.3em;}
+  .char-box::before,.char-box::after{content:"";position:absolute;width:12px;height:12px;}
+  .char-box::before{top:-1px;left:-1px;border-top:2px solid #D4400A;border-left:2px solid #D4400A;}
+  .char-box::after{bottom:-1px;right:-1px;border-bottom:2px solid #D4400A;border-right:2px solid #D4400A;}
+  .bottom{position:absolute;bottom:64px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:flex-end;}
+  .intro{font-family:'Inter','Pretendard',sans-serif;font-weight:300;font-size:18px;line-height:28px;color:#888;max-width:480px;margin-bottom:32px;}
+  .cta-row{display:flex;gap:16px;}
+  .cta{border:1px solid #D4400A;padding:14px 28px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#D4400A;letter-spacing:.2em;display:inline-flex;align-items:center;gap:12px;text-decoration:none;cursor:pointer;}
+  .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .dots-row{display:flex;gap:6px;align-items:center;}
+  .dots-row i{width:6px;height:6px;border-radius:50%;background:#D4400A;display:block;}
+  .est{font-family:'JetBrains Mono',monospace;font-size:10px;color:#444;letter-spacing:.25em;margin-top:8px;}
+</style>
+</head>
+<body>
+<section class="stage" aria-label="Concept A: Dark Editorial">
+  <div class="bg-objects" aria-hidden="true">
+    <div class="terminal">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <pre>$ git init dev.log
+$ npm run develop
+> ready in 1.2s
+> compiled successfully
+$ _</pre>
+    </div>
+    <pre class="code-snippet">const year = 2026;
+function build() {
+  return record();
+}</pre>
+    <div class="vol-tag">// VOL.01</div>
+    <div class="keyboard"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+
+  <header class="top-meta">
+    <div>DEV.LOG / VOL.01</div>
+    <div class="right">
+      <span>STUDY</span><span>PROJECT</span><span class="red">● 2026</span>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>Dev.log</h1>
+    <div class="name-row">
+      <div class="red-bar"></div>
+      <div class="name">정유정</div>
+    </div>
+  </div>
+
+  <div class="character-zone">
+    <div class="meta-stack">
+      <div>SEOUL</div>
+      <div>2026</div>
+      <div class="sep"></div>
+      <div>DEV</div>
+      <div>&amp; DESIGN</div>
+      <div class="sep"></div>
+      <div class="red">VOL.01</div>
+    </div>
+    <div class="char-box"><div class="label">[ CHARACTER ]</div></div>
+  </div>
+
+  <div class="bottom">
+    <div>
+      <div class="intro">2026년의 나. 이것저것 만들고,<br/>기록합니다.</div>
+      <div class="cta-row">
+        <a class="cta"><span>STUDY</span><span>→</span></a>
+        <a class="cta"><span>PROJECT</span><span>→</span></a>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="dots-row"><i></i><i></i><i></i></div>
+      <div class="est">EST. 2026 — JEONG YUJEONG</div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

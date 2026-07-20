@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>Dev.log — Concept C: Editorial Cutout</title>
+<meta name="viewport" content="width=1440" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#e8e3dc;}
+  body{font-family:'DM Sans',system-ui,sans-serif;}
+  .stage{width:1440px;height:900px;margin:40px auto;position:relative;background:#F2EFE8;overflow:hidden;}
+  .nav{position:absolute;top:0;left:0;right:0;padding:28px 64px;display:flex;justify-content:space-between;align-items:center;z-index:10;}
+  .nav .logo{font-family:'Anton',sans-serif;font-size:20px;color:#111;letter-spacing:.05em;}
+  .nav-links{display:flex;gap:40px;font-size:14px;font-weight:500;color:#555;}
+  .big-type{position:absolute;top:72px;left:0;right:0;text-align:center;font-family:'Anton',sans-serif;font-size:320px;line-height:280px;color:#E8003A;letter-spacing:-.03em;pointer-events:none;z-index:1;}
+  .circle-char{position:absolute;top:140px;left:50%;transform:translateX(-50%);width:400px;height:400px;border-radius:50%;background:#D0C9BE;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .circle-char .head{width:100px;height:100px;background:#A09790;border-radius:50%;position:absolute;bottom:260px;}
+  .circle-char .inner{width:160px;height:220px;background:#A09790;border-radius:80px 80px 60px 60px;position:absolute;bottom:60px;}
+  .circle-char .label{position:absolute;bottom:16px;font-size:10px;letter-spacing:.2em;color:#888;}
+  .year-band{position:absolute;bottom:0;left:0;right:0;height:180px;background:#E8003A;display:flex;align-items:center;padding:0 64px;z-index:5;}
+  .year-band .year{font-family:'Anton',sans-serif;font-size:120px;line-height:1;color:#F2EFE8;letter-spacing:-.04em;}
+  .year-band .right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
+  .year-band .name{font-family:'Anton',sans-serif;font-size:40px;color:#F2EFE8;}
+  .year-band .intro{font-size:15px;color:rgba(242,239,232,.75);max-width:300px;text-align:right;line-height:22px;}
+  .cta-strip{position:absolute;bottom:190px;left:64px;display:flex;gap:16px;z-index:6;}
+  .cta{background:#111;color:#F2EFE8;padding:14px 32px;font-size:13px;font-weight:500;letter-spacing:.05em;cursor:pointer;display:inline-flex;align-items:center;gap:10px;}
+  .cta.outline{background:transparent;border:2px solid #111;color:#111;}
+  .dots-left{position:absolute;top:80px;left:64px;display:flex;flex-direction:column;gap:8px;z-index:3;}
+  .dots-left i{width:8px;height:8px;border-radius:50%;background:#E8003A;display:block;}
+  .tag-right{position:absolute;top:80px;right:64px;font-size:11px;letter-spacing:.25em;color:#999;writing-mode:vertical-rl;z-index:3;}
+</style>
+</head>
+<body>
+<section class="stage">
+  <nav class="nav">
+    <div class="logo">DEV.LOG</div>
+    <div class="nav-links"><span>Study</span><span>Project</span><span>About</span></div>
+  </nav>
+  <div class="big-type">26</div>
+  <div class="circle-char">
+    <div class="head"></div>
+    <div class="inner"></div>
+    <div class="label">CHARACTER</div>
+  </div>
+  <div class="dots-left"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="tag-right">DEV &amp; DESIGN · 2026</div>
+  <div class="cta-strip">
+    <a class="cta outline">Study →</a>
+    <a class="cta">Project →</a>
+  </div>
+  <div class="year-band">
+    <div class="year">2026</div>
+    <div class="right">
+      <div class="name">정유정</div>
+      <div class="intro">이것저것 만들고, 기록합니다.</div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

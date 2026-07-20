@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>Dev.log — Concept D: Punk Zine</title>
+<meta name="viewport" content="width=1440" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@500;700&family=Pretendard:wght@500;700;900&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#dcdcdc;}
+  body{font-family:'Space Grotesk','Pretendard',system-ui,sans-serif;}
+  .stage{width:1440px;height:900px;margin:40px auto;position:relative;background:#F5F5F5;color:#0F0F0F;overflow:hidden;}
+  .display{font-family:'Anton',sans-serif;}
+  .top-row{position:absolute;top:60px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:flex-start;}
+  .character{width:240px;height:280px;background:#fff;border:3px solid #0F0F0F;position:relative;display:flex;align-items:center;justify-content:center;}
+  .character .label{font-weight:700;font-size:11px;color:#0F0F0F;letter-spacing:.25em;}
+  .character .chip{position:absolute;top:-12px;left:-12px;width:20px;height:20px;background:#D40000;border:3px solid #0F0F0F;}
+  .year-stack{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .year-big{font-family:'Anton',sans-serif;font-size:200px;line-height:170px;color:#0F0F0F;letter-spacing:-.04em;}
+  .year-meta{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px;color:#0F0F0F;letter-spacing:.18em;}
+  .year-meta .bar{width:24px;height:2px;background:#D40000;}
+  .banner{position:absolute;top:380px;left:0;right:0;height:200px;background:#0F0F0F;display:flex;align-items:center;justify-content:center;}
+  .banner .title{font-family:'Anton',sans-serif;font-size:180px;line-height:160px;color:#fff;letter-spacing:-.02em;}
+  .banner .spark1,.banner .spark2{position:absolute;font-family:'Anton',sans-serif;color:#D40000;}
+  .banner .spark1{top:-30px;left:240px;font-size:80px;transform:rotate(-12deg);}
+  .banner .spark2{bottom:-26px;right:200px;font-size:60px;transform:rotate(18deg);}
+  .marquee{position:absolute;top:580px;left:0;right:0;height:38px;background:#0F0F0F;display:flex;align-items:center;overflow:hidden;border-top:2px solid #D40000;}
+  .marquee .strip{font-weight:700;font-size:13px;color:#fff;letter-spacing:.15em;white-space:nowrap;padding-left:32px;}
+  .bottom{position:absolute;bottom:60px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:flex-end;}
+  .intro-block{display:flex;flex-direction:column;gap:18px;max-width:520px;}
+  .intro-tag{display:flex;align-items:center;gap:10px;}
+  .intro-tag .star{font-family:'Anton',sans-serif;font-size:36px;color:#D40000;}
+  .intro-tag .label{font-weight:700;font-size:12px;color:#0F0F0F;letter-spacing:.3em;border-bottom:2px solid #0F0F0F;padding-bottom:4px;}
+  .intro-text{font-weight:500;font-size:22px;line-height:30px;color:#0F0F0F;}
+  .cta-row{display:flex;gap:14px;}
+  .cta{padding:18px 36px;border:3px solid #0F0F0F;font-family:'Anton',sans-serif;font-size:24px;letter-spacing:.05em;box-shadow:6px 6px 0 #0F0F0F;cursor:pointer;}
+  .cta.white{background:#fff;color:#0F0F0F;}
+  .cta.red{background:#D40000;color:#fff;}
+</style>
+</head>
+<body>
+<section class="stage" aria-label="Concept D: Punk Zine">
+  <div class="top-row">
+    <div class="character">
+      <span class="label">CHARACTER</span>
+      <span class="chip"></span>
+    </div>
+    <div class="year-stack">
+      <div class="year-big">26</div>
+      <div class="year-meta"><span class="bar"></span><span>JEONG YU-JEONG · SEOUL</span></div>
+    </div>
+  </div>
+
+  <div class="banner">
+    <span class="title">DEV.LOG</span>
+    <span class="spark1">✦</span>
+    <span class="spark2">↯</span>
+  </div>
+
+  <div class="marquee">
+    <div class="strip">★ DEV.LOG ★ DEV.LOG ★ 2026 ★ 정유정 ★ STUDY ★ PROJECT ★ DEV.LOG ★ DEV.LOG ★ 2026 ★ 정유정 ★ STUDY ★ PROJECT ★ DEV.LOG ★</div>
+  </div>
+
+  <div class="bottom">
+    <div class="intro-block">
+      <div class="intro-tag">
+        <span class="star">✦</span>
+        <span class="label">ISSUE / VOL.01</span>
+      </div>
+      <div class="intro-text">2026년의 나. 이것저것 만들고, 기록합니다.</div>
+    </div>
+    <div class="cta-row">
+      <a class="cta white">STUDY →</a>
+      <a class="cta red">PROJECT →</a>
+    </div>
+  </div>
+</section>
+</body>
+</html>
