@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
-import { HeaderContainer, HeaderInner, Logo, Nav } from 'src/styles/HeaderStyles';
+import { HeaderContainer, HeaderInner, Logo, LogoMark, Nav } from 'src/styles/HeaderStyles';
 import ThemeToggle from './ThemeToggle';
+import { IconCode } from './icons';
 
 // ============================================================
 // GlobalHeader — Daangn Blog Style
@@ -111,7 +112,12 @@ const Header: React.FC = () => {
     <HeaderContainer scrolled={isScrolled} style={{ position: 'sticky' }}>
       <HeaderInner>
         <Logo>
-          <Link to="/">Dev.log</Link>
+          <Link to="/">
+            <LogoMark>
+              <IconCode />
+            </LogoMark>
+            Dev.log
+          </Link>
         </Logo>
 
         {/* Desktop Nav */}
