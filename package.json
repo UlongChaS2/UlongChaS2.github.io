@@ -9,6 +9,7 @@
     "@emotion/styled": "^11.13.0",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
+    "framer-motion": "^12.42.2",
     "gatsby": "^5.13.7",
     "gatsby-plugin-emotion": "^8.13.1",
     "gatsby-plugin-image": "^3.13.1",
