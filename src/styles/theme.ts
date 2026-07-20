@@ -8,30 +8,32 @@
 // 1. Primitive Color Palette (원시 컬러 팔레트)
 // ----------------------------------------------------------
 export const primitives = {
+  // 주의: 아래 값은 tokens.css와 짝을 맞춰야 한다.
+  // 현재 Emotion theme을 읽는 컴포넌트는 없으므로 tokens.css가 사실상 단일 소스다.
   brand: {
-    50: '#EFF6FF',
-    100: '#DBEAFE',
-    200: '#BFDBFE',
-    300: '#93C5FD',
-    400: '#60A5FA',
-    500: '#3B82F6', // Primary brand color (Toss-inspired Blue)
-    600: '#2563EB', // Hover / active
-    700: '#1D4ED8',
-    800: '#1E40AF',
-    900: '#1E3A8A',
+    50: '#EAF2FE',
+    100: '#D6E7FD',
+    200: '#ADCCFB',
+    300: '#7FAEF9',
+    400: '#4E90F7',
+    500: '#3182F6', // Primary brand color (Ink Blue)
+    600: '#1B64DA', // Hover / active
+    700: '#144BAA',
+    800: '#0F3A83',
+    900: '#0B2A60',
   },
   gray: {
     50: '#F9FAFB',
-    100: '#F3F4F6',
-    200: '#E5E7EB',
-    300: '#D1D5DB',
-    400: '#9CA3AF',
-    500: '#6B7280',
-    600: '#4B5563',
-    700: '#374151',
-    800: '#1F2937',
-    900: '#111827',
-    950: '#030712',
+    100: '#F2F4F6',
+    200: '#E5E8EB',
+    300: '#D1D6DB',
+    400: '#B0B8C1',
+    500: '#8B95A1',
+    600: '#6B7684',
+    700: '#4E5968',
+    800: '#333D4B',
+    900: '#191F28',
+    950: '#0F1319',
   },
   // GitHub-style semantic neutrals (for dark mode realism)
   neutral: {
