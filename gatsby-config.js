@@ -56,15 +56,15 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Dev.log`,
+        short_name: `Dev.log`,
         start_url: `/`,
-        background_color: `#663399`,
-        // This will impact how browsers show your PWA/website
-        // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#663399`,
+        background_color: `#FFFFFF`,
+        theme_color: `#3182F6`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        // 모서리를 깎지 않은 정사각형을 넘긴다. iOS는 홈 화면에서 한 번 더
+        // 깎기 때문에, 둥근 아이콘을 주면 모서리가 두 번 잘려 뭉개진다.
+        icon: `src/images/icon.png`,
       },
     },
   ],

@@ -41,11 +41,22 @@ const setInitialTheme = `
 })();
 `;
 
-export const onRenderBody = ({ setPreBodyComponents }) => {
+export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
   setPreBodyComponents([
     <script
       key="initial-theme"
       dangerouslySetInnerHTML={{ __html: setInitialTheme }}
+    />,
+  ]);
+
+  // SVG 파비콘. manifest 플러그인이 넣어주는 PNG는 고해상도 화면에서 뭉개진다.
+  // SVG를 먼저 선언하면 지원하는 브라우저가 이걸 쓰고, 나머지는 PNG로 내려간다.
+  setHeadComponents([
+    <link
+      key="favicon-svg"
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
     />,
   ]);
 };
