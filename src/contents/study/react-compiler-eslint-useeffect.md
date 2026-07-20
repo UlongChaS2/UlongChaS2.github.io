@@ -190,7 +190,7 @@ React.useEffect(() => {
 | 외부 함수 | fetchData, refreshToken | ✅ | 참조 바뀌면 재실행 |
 | ref.current | ref.current 읽기 | ⚙️(상황) | 직접 읽으면 deps 포함 |
 | 로컬 useState **setter** | setUser | ❌ | React가 참조 안정 보장 |
-| **props로 받은 setter처럼 보이는 함수** | setHeaderBasicInfo | ✅ | ESLint는 일반 함수로 간주 |
+| **props로 받은 setter처럼 보이는 함수** | setHeaderInfo | ✅ | ESLint는 일반 함수로 간주 |
 | useMemo/useCallback 결과 | memoizedFn, memoizedValue | ✅ | deps로 관리 |
 | ref 객체 자체 | ref | ❌ | 객체 참조 불변(.current만 변함) |
 
@@ -235,7 +235,7 @@ exhaustive-deps를 끄면?
 
 내가 정리한 룰을 정리하면:
 
-- userId, title, **props/ctx 함수(setHeaderBasicInfo)** → deps에 포함
+- userId, title, **props/ctx 함수(setHeaderInfo)** → deps에 포함
 - **로컬 setUser**는 안정적이므로 deps 불필요
 - 하나라도 빠지면 **컴파일러의 그래프가 깨짐**
 
@@ -248,15 +248,15 @@ exhaustive-deps를 끄면?
 ```tsx
 // Parent
 const [header, setHeader] = useState({ title: '', subtitle: '' });
-const setHeaderBasicInfo = useCallback(
+const setHeaderInfo = useCallback(
   (patch: Partial<typeof header>) => setHeader(prev => ({ ...prev, ...patch })),
   [] // setHeader는 안정적
 );
 
 // Child
 useEffect(() => {
-  setHeaderBasicInfo({ title });
-}, [title, setHeaderBasicInfo]); // ✅ 안전
+  setHeaderInfo({ title });
+}, [title, setHeaderInfo]); // ✅ 안전
 ```
 
 ### 2) effect 없이 설계 바꾸기 (가능하면 이게 더 깔끔)
@@ -273,7 +273,7 @@ function Child({ initialHeader }: { initialHeader: Header }) {
 ```tsx
 // 명시적 코멘트와 함께 단일 라인 예외
 // eslint-disable-next-line react-hooks/exhaustive-deps
-useEffect(() => { setHeaderBasicInfo({ title }); }, []);
+useEffect(() => { setHeaderInfo({ title }); }, []);
 ```
 
 ---
