@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'gatsby';
 import Layout from 'src/components/GlobalLayout';
 import GlobalStyles from 'src/components/GlobalStyles';
 import { IconArrowRight } from 'src/components/icons';
@@ -249,14 +250,10 @@ const SKILLS: Array<{ name: string; accent: Parameters<typeof accentVars>[0] }> 
   { name: 'Playwright', accent: 'yellow' },
 ];
 
-const CONTACTS = [
+const CONTACTS: Array<{ label: string; value: string; href: string; internal?: boolean }> = [
   { label: 'GitHub', value: 'github.com/UlongChaS2', href: 'https://github.com/UlongChaS2' },
   { label: 'Email', value: 'jyujung2@gmail.com', href: 'mailto:jyujung2@gmail.com' },
-  {
-    label: 'Design',
-    value: 'Paper에서 그린 화면 설계',
-    href: 'https://app.paper.design/file/01KNNMSY2JXTDVR24D906KWNWH',
-  },
+  { label: 'Resume', value: '이력서 보기', href: '/resume/', internal: true },
 ];
 
 const AboutPage = () => (
@@ -334,7 +331,13 @@ const AboutPage = () => (
         <Block>
           <BlockTitle>연락</BlockTitle>
           {CONTACTS.map((contact) => (
-            <ContactRow key={contact.label} href={contact.href} target="_blank" rel="noopener noreferrer">
+            <ContactRow
+              key={contact.label}
+              /* 사이트 안으로 가는 링크는 새 탭으로 띄우지 않는다 */
+              {...(contact.internal
+                ? { as: Link, to: contact.href }
+                : { href: contact.href, target: '_blank', rel: 'noopener noreferrer' })}
+            >
               <ContactLabel>{contact.label}</ContactLabel>
               <ContactValue>{contact.value}</ContactValue>
               <ContactArrow className="arrow">
