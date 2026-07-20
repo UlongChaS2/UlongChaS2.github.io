@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import { HeaderContainer, HeaderInner, Logo, LogoMark, Nav } from 'src/styles/HeaderStyles';
 import ThemeToggle from './ThemeToggle';
-import { IconCode } from './icons';
+import { IconPrompt } from './icons';
 
 // ============================================================
 // GlobalHeader — Daangn Blog Style
@@ -115,7 +115,7 @@ const Header: React.FC = () => {
         <Logo>
           <Link to="/">
             <LogoMark>
-              <IconCode />
+              <IconPrompt />
             </LogoMark>
             Dev.log
           </Link>

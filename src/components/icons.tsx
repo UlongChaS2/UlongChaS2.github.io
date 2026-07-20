@@ -30,6 +30,18 @@ export const IconCode: React.FC<IconProps> = ({ size = 18, strokeWidth = 2.4, cl
   </svg>
 );
 
+/**
+ * 파비콘과 같은 그림이다. 꺾쇠는 currentColor를 따르지만 커서만은
+ * 노란색을 고정으로 쓴다 — 이 두 색 대비가 마크의 정체성이라
+ * 부모 색에 딸려가면 그냥 꺾쇠가 되어버린다.
+ */
+export const IconPrompt: React.FC<IconProps> = ({ size = 18, strokeWidth = 3, className }) => (
+  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
+    <path d="M7 7.5l3.5 4.5L7 16.5" />
+    <rect x="13" y="13.5" width="4.5" height="2.8" rx="1.4" fill="#FFD84D" stroke="none" />
+  </svg>
+);
+
 export const IconChevronRight: React.FC<IconProps> = ({ size = 16, strokeWidth = 2.4, className }) => (
   <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
     <path d="M9 6l6 6-6 6" />
