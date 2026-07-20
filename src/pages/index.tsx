@@ -3,8 +3,10 @@ import styled from '@emotion/styled';
 import Layout from '../components/GlobalLayout';
 import GlobalStyles from '../components/GlobalStyles';
 import PostCard from '../components/PostCard';
-import { graphql, useStaticQuery } from 'gatsby';
+import AboutCTA from '../components/AboutCTA';
+import { graphql, useStaticQuery, Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { pickAccent, postLabel } from 'src/styles/accents';
 import {
   FeaturedCard,
   FeaturedImageWrapper,
@@ -12,7 +14,6 @@ import {
   FeaturedContent,
   FeaturedBadge,
   FeaturedLabel,
-  FeaturedCategoryTag,
   FeaturedTitle,
   FeaturedExcerpt,
   FeaturedMeta,
@@ -21,29 +22,56 @@ import {
   PostGrid,
   Section,
   EmptyState,
+  HomeHero,
+  HeroChip,
+  HeroHeadline,
+  HeroHighlight,
+  HeroLede,
 } from 'src/styles/PageStyles';
 
 // ============================================================
-// index.tsx — Channel Talk 스타일 PostList 메인 페이지
+// index.tsx — 홈
+// 히어로 → Featured 포스트 → 최근 글 그리드 → 구독 배너
 // ============================================================
 
 const PageInner = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-8) var(--space-6) var(--space-20);
+  padding: 0 var(--space-6) var(--space-20);
 
   @media (min-width: 768px) {
-    padding: var(--space-10) var(--space-8) var(--space-24);
+    padding: 0 var(--space-8) var(--space-24);
   }
 `;
 
-const MainTitle = styled(SectionTitle)`
-  margin-bottom: var(--space-6);
-  font-size: 28px;
+const SectionHeadRow = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+`;
+
+const SectionCount = styled.span`
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--color-brand-primary);
+  margin-left: var(--space-2);
+`;
+
+const MoreLink = styled(Link)`
+  font-size: var(--fs-body-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
 `;
 
 const MetaDot = styled.span`
-  color: var(--color-border-default);
+  color: var(--color-border-strong);
 `;
 
 const IndexPage = () => {
@@ -56,6 +84,7 @@ const IndexPage = () => {
             title
             date(formatString: "YYYY년 MM월 DD일")
             category
+            keywords
             thumbnail {
               childImageSharp {
                 gatsbyImageData(width: 800, height: 500, placeholder: BLURRED)
@@ -87,72 +116,91 @@ const IndexPage = () => {
       <GlobalStyles />
       <Layout>
         <PageInner>
-          <MainTitle>최근 아티클</MainTitle>
+          <HomeHero>
+            <HeroChip>오늘도 한 개 배웠어요</HeroChip>
+            <HeroHeadline>
+              배운 걸 잊지 않으려고
+              <br />
+              <HeroHighlight>기록해두는 곳</HeroHighlight>
+            </HeroHeadline>
+            <HeroLede>
+              React, TypeScript, 그리고 매일 부딪히는 문제들.
+              <br />
+              삽질한 과정까지 그대로 남겨둡니다.
+            </HeroLede>
+          </HomeHero>
 
           {/* ── Featured Post ── */}
           {featuredPost && (
-            <FeaturedLink
-              to={`/${featuredPost.frontmatter.category}${featuredPost.fields.slug}`}
-            >
-              <FeaturedCard style={{ marginBottom: '40px' }}>
-                <FeaturedImageWrapper>
-                  {getFeaturedImage(featuredPost) ? (
-                    <GatsbyImage
-                      image={getFeaturedImage(featuredPost)!}
-                      alt={featuredPost.frontmatter.title}
-                    />
-                  ) : (
-                    <FeaturedNoThumbnail>📚</FeaturedNoThumbnail>
-                  )}
-                </FeaturedImageWrapper>
+            <FeaturedLink to={`/${featuredPost.frontmatter.category}${featuredPost.fields.slug}`}>
+              <FeaturedCard style={pickAccent(featuredPost.fields.slug)}>
+                {getFeaturedImage(featuredPost) ? (
+                  <FeaturedImageWrapper>
+                    <GatsbyImage image={getFeaturedImage(featuredPost)!} alt={featuredPost.frontmatter.title} />
+                  </FeaturedImageWrapper>
+                ) : (
+                  <FeaturedNoThumbnail>
+                    {postLabel(featuredPost.frontmatter.keywords, featuredPost.frontmatter.category)}
+                  </FeaturedNoThumbnail>
+                )}
 
                 <FeaturedContent>
-                  <FeaturedBadge style={{ marginBottom: '12px' }}>
+                  <FeaturedBadge>
                     <FeaturedLabel>{featuredPost.frontmatter.category}</FeaturedLabel>
                   </FeaturedBadge>
                   <FeaturedTitle>{featuredPost.frontmatter.title}</FeaturedTitle>
-                  <FeaturedExcerpt style={{ marginTop: '16px', marginBottom: '16px' }}>{featuredPost.excerpt}</FeaturedExcerpt>
+                  <FeaturedExcerpt>{featuredPost.excerpt}</FeaturedExcerpt>
 
                   <FeaturedMeta>
                     <time>{featuredPost.frontmatter.date}</time>
                     <MetaDot>·</MetaDot>
-                    <span>Channel Talk</span>
+                    <span>{featuredPost.timeToRead || 5}분</span>
                   </FeaturedMeta>
                 </FeaturedContent>
               </FeaturedCard>
             </FeaturedLink>
           )}
 
-          {/* ── 포스트 그리드 ── */}
+          {/* ── 최근 글 그리드 ── */}
           <Section>
             {restPosts.length > 0 ? (
-              <PostGrid>
-                {restPosts.map((post: any) => (
-                  <PostCard
-                    key={post.id}
-                    title={post.frontmatter.title}
-                    excerpt={post.excerpt}
-                    date={post.frontmatter.date}
-                    category={post.frontmatter.category}
-                    slug={post.fields.slug}
-                    readTime={
-                      post.timeToRead ? `${post.timeToRead}분` : undefined
-                    }
-                    thumbnail={
-                      post.frontmatter.thumbnail?.childImageSharp
-                        ?.gatsbyImageData
-                    }
-                  />
-                ))}
-              </PostGrid>
+              <>
+                <SectionHeadRow>
+                  <SectionTitle>
+                    최근에 쓴 글
+                    <SectionCount>{data.allMarkdownRemark.totalCount}</SectionCount>
+                  </SectionTitle>
+                  <MoreLink to="/study/">전체 보기</MoreLink>
+                </SectionHeadRow>
+
+                <PostGrid>
+                  {restPosts.map((post: any) => (
+                    <PostCard
+                      key={post.id}
+                      title={post.frontmatter.title}
+                      excerpt={post.excerpt}
+                      date={post.frontmatter.date}
+                      category={post.frontmatter.category}
+                      slug={post.fields.slug}
+                      keywords={post.frontmatter.keywords}
+                      readTime={post.timeToRead ? `${post.timeToRead}분` : undefined}
+                      thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
+                    />
+                  ))}
+                </PostGrid>
+              </>
             ) : posts.length === 0 ? (
               <EmptyState>
-                <span className="emoji">📚</span>
-                <p>아직 작성된 글이 없어요.<br />첫 번째 글을 써보세요!</p>
+                <p>
+                  아직 작성된 글이 없어요.
+                  <br />첫 번째 글을 써보세요!
+                </p>
               </EmptyState>
             ) : null}
           </Section>
         </PageInner>
+
+        <AboutCTA />
       </Layout>
     </>
   );
