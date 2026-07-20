@@ -231,6 +231,69 @@ export const PostContent = styled.div`
     }
   }
 
+  /* ----------------------------------------------------------
+     표
+     마크다운 표는 래퍼 없이 <table>만 나오므로 table 자체에
+     스크롤을 건다. 세로선을 긋지 않고 행 구분선만 두는 편이
+     열 폭이 들쭉날쭉해도 덜 어지럽다.
+     ---------------------------------------------------------- */
+  table {
+    width: 100%;
+    margin: 40px 0;
+    border-collapse: collapse;
+    font-size: var(--fs-body-md);
+    line-height: var(--lh-relaxed);
+    display: block;
+    overflow-x: auto;
+  }
+
+  thead th {
+    padding: 0 16px 12px;
+    border-bottom: 1px solid var(--color-border-strong);
+    color: var(--color-text-tertiary);
+    font-size: 13px;
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-wide);
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
+
+  tbody td {
+    padding: 16px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    color: var(--color-text-body);
+    vertical-align: top;
+    word-break: keep-all;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* 번호·기호처럼 짧은 첫 열이 본문 폭을 뺏지 않게 눌러둔다 */
+  tbody td:first-of-type,
+  thead th:first-of-type {
+    padding-left: 0;
+    width: 1%;
+    white-space: nowrap;
+    color: var(--color-text-tertiary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  tbody td strong {
+    color: var(--color-text-primary);
+    font-weight: var(--fw-bold);
+  }
+
+  /* 표 안에서는 인라인 코드가 줄을 밀어내지 않도록 조금 줄인다 */
+  td code,
+  th code {
+    font-size: 0.82em;
+    padding: 1px 6px;
+    white-space: nowrap;
+  }
+
   img {
     max-width: 100%;
     height: auto;

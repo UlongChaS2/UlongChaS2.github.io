@@ -14,7 +14,17 @@ const TOCWrapper = styled.div`
   }
 `;
 
+/**
+ * 카드 자체는 스크롤하지 않는다.
+ * 컨테이너가 스크롤하면 스크롤바가 패딩 영역까지 훑고 지나가서
+ * 항목이 카드 모서리에 붙어 잘린 것처럼 보인다.
+ * 높이만 여기서 제한하고 실제 스크롤은 TOCList가 맡는다.
+ */
 const TOCContainer = styled.aside<{ isOpen: boolean }>`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
   /* 모바일: 슬라이드 인 패널 */
   @media (max-width: 1023px) {
     position: fixed;
@@ -22,7 +32,6 @@ const TOCContainer = styled.aside<{ isOpen: boolean }>`
     top: 100px;
     width: 280px;
     max-height: calc(100vh - 120px);
-    overflow-y: auto;
     padding: var(--space-6);
     background: var(--color-bg-card);
     border: 1px solid var(--color-border-default);
@@ -36,30 +45,11 @@ const TOCContainer = styled.aside<{ isOpen: boolean }>`
   @media (min-width: 1024px) {
     width: 240px;
     max-height: calc(100vh - 200px);
-    overflow-y: auto;
     padding: var(--space-6);
     border: none;
     background: var(--color-bg-subtle);
     box-shadow: none;
     border-radius: 18px;
-  }
-
-  /* 커스텀 스크롤바 */
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--color-border-default);
-    border-radius: var(--radius-full);
-
-    &:hover {
-      background: var(--color-text-tertiary);
-    }
   }
 `;
 
@@ -79,11 +69,37 @@ const TOCTitle = styled.h3`
 
 const TOCList = styled.ul`
   list-style: none;
-  padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
+
+  /* 목차가 길면 여기서만 스크롤한다. min-height:0이 없으면
+     flex 항목이 내용만큼 늘어나서 스크롤이 아예 걸리지 않는다. */
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+
+  /* 스크롤바가 항목 글자에 닿지 않도록 오른쪽에 자리를 비워둔다 */
+  padding: 0 var(--space-2) 0 0;
+  scrollbar-gutter: stable;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: var(--radius-full);
+
+    &:hover {
+      background: var(--color-text-tertiary);
+    }
+  }
 `;
 
 const TOCItem = styled.li<{ level: number; isActive: boolean }>`
