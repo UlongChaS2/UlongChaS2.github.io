@@ -32,16 +32,16 @@ const TOCContainer = styled.aside<{ isOpen: boolean }>`
     box-shadow: var(--shadow-lg);
   }
 
-  /* 데스크톱: 우측 고정 (Sticky는 TOCWrapper에서 처리) */
+  /* 데스크톱: 우측 고정 카드 (Sticky는 TOCWrapper에서 처리) */
   @media (min-width: 1024px) {
     width: 240px;
     max-height: calc(100vh - 200px);
     overflow-y: auto;
-    padding-left: var(--space-6);
-    border-left: 2px solid var(--color-border-subtle);
-    background: transparent;
+    padding: var(--space-6);
+    border: none;
+    background: var(--color-bg-subtle);
     box-shadow: none;
-    border-radius: 0;
+    border-radius: 18px;
   }
 
   /* 커스텀 스크롤바 */
@@ -64,12 +64,12 @@ const TOCContainer = styled.aside<{ isOpen: boolean }>`
 `;
 
 const TOCTitle = styled.h3`
-  font-size: var(--fs-body-lg);
+  font-size: var(--fs-caption);
   font-weight: var(--fw-bold);
-  color: var(--color-text-primary);
-  margin: 0 0 var(--space-4) 0;
-  padding-bottom: var(--space-3);
-  letter-spacing: var(--ls-tight);
+  color: var(--color-text-tertiary);
+  margin: 0 0 var(--space-3) 0;
+  padding-bottom: var(--space-2);
+  letter-spacing: 0.04em;
 
   /* 모바일에서만 구분선 표시 */
   @media (max-width: 1023px) {
