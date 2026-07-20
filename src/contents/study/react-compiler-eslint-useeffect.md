@@ -5,11 +5,15 @@ category: 'study'
 keywords: ['compiler', 'useEffect', 'ESLint']
 ---
 
+> exhaustive-deps를 꺼둔 채 React Compiler를 도입하려다, 의존성 배열이 컴파일러의 신뢰 입력값이라는 걸 문서·코드·빌드 산출물까지 톺아보며 확인한 기록.
+
+## 개요
+
 React 19.2 / React Compiler 1.0 소식 듣자마자, '바로 마이그레이션 해야지'하고 실무 프로젝트 코드베이스를 훑고, 커서 AI로 리스크 맵을 찍어봤다. 역시 예상대로 ref 패턴이랑 state 직접 덮어쓰기가 신경 쓰였는데, 충격이였던 것은 eslint.config에서 exhaustive-deps를 꺼둔 상태가 🔴 Critical로 찍힌 것.
 
 의존성 배열에 관한 eslint rule과 React Compiler이 상관관계가 궁금해 문서, 코드, 빌드 산출물까지 전부 톺아봤고, 결론적으로 React 19에는 exhaustive-deps가 단순 린트 에러가 아니라 컴파일러의 '신뢰도 입력값' 이라는 걸 체감했다.
 
-## 📊 프로젝트 위험도 요약
+## 프로젝트 위험도 요약
 
 | 이슈                   | 위험도         | 영향 범위     | 우선순위 |
 | -------------------- | ----------- | --------- | ---- |
@@ -32,16 +36,16 @@ exhaustive-deps은 의존성에 들어있는 state, props로 넘겨온값들을 
 - 불필요한 재실행은 **부모에서 useCallback(그리고 컨텍스트면 useMemo)로 안정화**해서 막는다.
 - 정말 한 번만 실행 의도가 분명하면, 설계를 바꾸거나(상태 올리기/초깃값 전달), 불가피할 때만 라인 예외.
 
-## 🚨 주요 문제점
+## 주요 문제점
 
-### 1. exhaustive-deps 규칙이 꺼져 있음 ⚠️ (Critical)
+### 1. exhaustive-deps 규칙이 꺼져 있음 (Critical)
 
 ```js
 // eslint.config.js
 'react-hooks/exhaustive-deps': 'off'
 ```
 
-문제: React Compiler는 의존성 배열을 기반으로 메모이제이션을 자동화하는데, 의존성이 누락되면 오작동할 수 있습니다.
+문제: React Compiler는 의존성 배열을 기반으로 메모이제이션을 자동화하는데, 의존성이 누락되면 오작동할 수 있다.
 
 발견된 케이스:
 
@@ -61,7 +65,7 @@ React.useEffect(() => {
 
 ---
 
-### 2. Ref를 렌더링 로직에서 변경 ⚠️ (High Risk)
+### 2. Ref를 렌더링 로직에서 변경 (High Risk)
 
 ```ts
 // 목록 조회 훅들 (pages/*/hook.ts)
@@ -72,7 +76,7 @@ const load = useCallback(async (loadOptions) => {
 }, [...])
 ```
 
-문제: React Compiler는 ref가 렌더링 로직 중에 변경되지 않는다고 가정합니다. 이를 위반하면 무한 루프나 예측 불가능한 동작이 발생할 수 있습니다.
+문제: React Compiler는 ref가 렌더링 로직 중에 변경되지 않는다고 가정한다. 이를 위반하면 무한 루프나 예측 불가능한 동작이 발생할 수 있다.
 
 해결:
 
@@ -91,7 +95,7 @@ useEffect(() => {
 
 ---
 
-### 3. 객체를 직접 spread로 덮어쓰는 패턴 ⚠️ (Medium Risk)
+### 3. 객체를 직접 spread로 덮어쓰는 패턴 (Medium Risk)
 
 ```tsx
 // 각종 폼 모달 컴포넌트
@@ -103,7 +107,7 @@ setState({
 })
 ```
 
-문제: 이 패턴은 이전 state 참조를 사용하므로 stale closure 문제를 일으킬 수 있습니다.
+문제: 이 패턴은 이전 state 참조를 사용하므로 stale closure 문제를 일으킬 수 있다.
 
 해결:
 
@@ -118,7 +122,7 @@ setState((prev) => ({  // ✅ updater 함수 사용
 
 ---
 
-### 4. 인라인 객체/배열 생성 (불필요한 리렌더) ⚠️ (Low-Medium Risk)
+### 4. 인라인 객체/배열 생성 (불필요한 리렌더) (Low-Medium Risk)
 
 ```tsx
 // 트리 선택 모달
@@ -138,13 +142,13 @@ useMemo(() => {
 }, [documentItems, opened])
 ```
 
-문제: Compiler가 자동 메모이제이션을 시도하지만, 이미 복잡한 참조 체인이면 최적화가 덜 효과적일 수 있습니다.
+문제: Compiler가 자동 메모이제이션을 시도하지만, 이미 복잡한 참조 체인이면 최적화가 덜 효과적일 수 있다.
 
 해결: 대부분 Compiler가 알아서 처리하지만, 성능 이슈 시 useMemo로 명시적 최적화.
 
 ---
 
-### 5. useEffect에서 조건부 refetch 호출 ⚠️ (Medium Risk)
+### 5. useEffect에서 조건부 refetch 호출 (Medium Risk)
 
 ```ts
 // 목록 조회 훅
@@ -153,13 +157,13 @@ React.useEffect(() => {
 }, [forceFetchKey])
 ```
 
-문제: refetch 함수가 의존성 배열에 없으면 stale 참조를 사용할 수 있습니다.
+문제: refetch 함수가 의존성 배열에 없으면 stale 참조를 사용할 수 있다.
 
 해결: refetch를 의존성에 추가하거나, React Query의 `queryClient.invalidateQueries` 사용.
 
 결국 나는 swc(rust 기반)을 사용중이라서 아직 공식적으로 제공하지 않아 [(링크 참고)](https://react.dev/blog/2025/10/07/react-compiler-1#swc-support-experimental)
 
-## 🔥 SWC vs React Compiler 비교
+## SWC vs React Compiler 비교
 
 | 항목     | SWC                    | React Compiler           |
 | ------ | ---------------------- | ------------------------ |
@@ -172,7 +176,7 @@ React.useEffect(() => {
 
 ---
 
-## 🧭 개요
+## 핵심 전제
 
 - React 19 + Compiler는 **정적 분석 기반 자동 최적화**를 한다.
 - 최적화의 전제는 **의존성 그래프가 정확할 것**.
@@ -180,7 +184,7 @@ React.useEffect(() => {
 
 ---
 
-## 🧩 What — useEffect 의존성 배열, 정확히 뭘 넣나
+## What — useEffect 의존성 배열, 정확히 뭘 넣나
 
 > "**effect 내부에서 참조하는 모든 가변 외부 값**"을 넣는다. (렌더마다 바뀔 수 있는 것)
 
@@ -199,7 +203,7 @@ React.useEffect(() => {
 
 ---
 
-## 🤔 Why — 왜 이제 더 빡세졌나 (React Compiler 연결고리)
+## Why — 왜 이제 더 빡세졌나 (React Compiler 연결고리)
 
 내가 느낀 포인트 3개:
 
@@ -217,7 +221,7 @@ React.useEffect(() => {
 
 ---
 
-## 🔧 How — 내가 Babel/빌드 산출물 보며 이해한 동작
+## How — 내가 Babel/빌드 산출물 보며 이해한 동작
 
 ### 빌드 파이프라인 한 장 요약
 
@@ -242,7 +246,7 @@ exhaustive-deps를 끄면?
 
 ---
 
-## 🧪 ex — 내가 실제로 정리한 패턴
+## ex — 내가 실제로 정리한 패턴
 
 ### 1) props로 받은 setter-like 함수는 deps에 넣고, 부모에서 안정화
 
@@ -279,7 +283,7 @@ useEffect(() => { setHeaderInfo({ title }); }, []);
 
 ---
 
-## ✅ 맺음말 — 정리
+## 맺음말
 
 - React 19 + Compiler 이후, **의존성 배열은 컴파일러의 신뢰 근거**다.
 - **로컬 useState setter만 예외**, 외부 함수(심지어 "setter 타입"이라도)는 deps 포함.

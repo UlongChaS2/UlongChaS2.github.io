@@ -5,14 +5,16 @@ category: 'study'
 keywords: ['React', 'Concurrent']
 ---
 
-# Concurrent Mode란?
+> React 18의 Concurrent Mode가 무엇이고, 어떤 특징과 API로 UI 응답성을 높이는지 정리한다.
 
-**Concurrent Mode(동시성 모드)**는 React 18에서 도입된 개념으로, **UI의 응답성을 향상**시키고, 여러 개의 업데이트를 보다 **부드럽고 유연하게 처리**하기 위한 새로운 렌더링 방식입니다.
+## 개요
+
+**Concurrent Mode**(동시성 모드)는 React 18에서 도입된 개념으로, **UI의 응답성을 향상**시키고, 여러 개의 업데이트를 보다 **부드럽고 유연하게 처리**하기 위한 새로운 렌더링 방식이다.
 
 **기존 React(Rendering 방식)와의 차이점**
 
-- **기존 React(Fiber 이전)**: 렌더링이 **단일 스레드(Synchronous, 동기식)**로 진행됨 → 하나의 업데이트가 실행되면 그게 끝날 때까지 다른 작업을 못 함.
-- **Concurrent Mode**: React가 업데이트를 **비동기적으로 처리(Asynchronous)**할 수 있도록 개선 → 중간에 렌더링을 **일시 중단(pausing)**하고, **우선순위(priority)**가 높은 작업을 먼저 실행할 수 있음.
+- **기존 React(Fiber 이전)**: 렌더링이 **단일 스레드**(Synchronous, 동기식)로 진행됨 → 하나의 업데이트가 실행되면 그게 끝날 때까지 다른 작업을 못 함.
+- **Concurrent Mode**: React가 업데이트를 **비동기적으로 처리**(Asynchronous)할 수 있도록 개선 → 중간에 렌더링을 **일시 중단**(pausing)하고, **우선순위**(priority)가 높은 작업을 먼저 실행할 수 있음.
 
 ---
 
@@ -35,7 +37,7 @@ React 18부터 **업데이트의 우선순위를 다르게 설정할 수 있음*
 
 ### 3. 유휴 시간 활용(Time-Slicing)
 
-React 18에서는 브라우저가 **유휴 시간(Idle Time)**을 활용해서 작업을 조금씩 나눠 실행할 수 있음. 이를 **Time-Slicing(시간 분할)**이라고 함.
+React 18에서는 브라우저가 **유휴 시간**(Idle Time)을 활용해서 작업을 조금씩 나눠 실행할 수 있음. 이를 **Time-Slicing**(시간 분할)이라고 함.
 
 예제:
 
@@ -143,13 +145,13 @@ function SearchComponent({ results }) {
 
 ## 결론
 
-**Concurrent Mode는 React 18에서 UI의 성능을 최적화하는 핵심적인 렌더링 방식**입니다.
+**Concurrent Mode는 React 18에서 UI의 성능을 최적화하는 핵심적인 렌더링 방식**이다.
 
 - 렌더링을 **비동기적으로 실행**하여 성능을 높임.
 - **우선순위가 높은 작업**(예: 사용자 입력)을 먼저 실행.
 - UI가 멈추지 않도록 **시간을 쪼개서 렌더링(Time-Slicing)**.
 - `startTransition()`, `useDeferredValue()`, `Suspense` 등의 API를 활용하여 **보다 부드러운 사용자 경험 제공**.
 
-즉, 사용자 인터랙션이 많은 애플리케이션에서 UI를 더욱 자연스럽고 부드럽게 만드는 기술입니다.
+즉, 사용자 인터랙션이 많은 애플리케이션에서 UI를 더욱 자연스럽고 부드럽게 만드는 기술이다.
 
-React 18부터 기본적으로 적용되는 개념이니, **최신 React 프로젝트에서는 필수적으로 고려해야 할 요소**입니다.
+React 18부터 기본적으로 적용되는 개념이니, **최신 React 프로젝트에서는 필수적으로 고려해야 할 요소**다.

@@ -5,7 +5,7 @@ category: 'project'
 keywords: ['컨벤션', '캡슐화', 'FE']
 ---
 
-> 파일명 앞에 `_`를 붙이면 "이 파일은 내부 구현용이니 직접 import하지 마세요"라는 팀 내 약속이 된다. 은닉화(information hiding)가 아니라 **관례적 접근 제어**다.
+> 파일명 앞에 `_`를 붙이면 "이 파일은 내부 구현용이니 직접 import하지 마라"라는 팀 내 약속이 된다. 은닉화(information hiding)가 아니라 **관례적 접근 제어**다.
 
 ## 개요
 
@@ -72,7 +72,7 @@ export function createHook() { ... }
 - 각 훅 파일들만 내부적으로 import하면 된다
 - `index.ts`에 export하지 않는다
 
-`#`을 쓰고 싶어도 파일 수준에서는 쓸 수 없으니, `_createMessageHook.ts`처럼 `_` prefix를 붙여서 "이건 내부 구현이니 직접 import하지 마세요"를 관례로 표시한 것이다.
+`#`을 쓰고 싶어도 파일 수준에서는 쓸 수 없으니, `_createMessageHook.ts`처럼 `_` prefix를 붙여서 "이건 내부 구현이니 직접 import하지 마라"를 관례로 표시한 것이다.
 
 ## 코드 예시
 

@@ -5,7 +5,7 @@ category: 'project'
 keywords: ['Spring Boot', '아키텍처', 'BE']
 ---
 
-Controller → UseCase → Repository → Entity → DB 흐름을 게시판 예시로 이해한다.
+> Controller → UseCase → Repository → Entity → DB 흐름을 게시판 예시로 이해한다.
 
 ## 개요
 Spring Boot 백엔드는 계층이 명확하게 나뉘어 있다. 각 계층이 역할을 분리해서 담당하기 때문에 유지보수가 쉽고 변경에 유연하다. 이 글은 게시판 게시글 조회(`GET /posts`) 를 기준으로 전체 흐름을 정리한다.

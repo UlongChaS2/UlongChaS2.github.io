@@ -9,6 +9,12 @@ keywords: ['Next.js', 'React', 'FE']
 
 ---
 
+## 개요
+
+React 개발자가 새 Next.js 프로젝트에 투입될 때 파악해야 할 핵심 개념을 정리한다. 폴더 구조를 읽는 순서에서 시작해 App Router의 파일 기반 라우팅, `"use client"`와 Server Component의 경계, 컴포넌트 분리 원칙, BFF 패턴과 `next.config.ts` rewrite까지 순서대로 본다.
+
+---
+
 ## 1. 폴더 구조 파악 우선순위
 
 새 Next.js 프로젝트를 받으면 이 순서로 읽는다.
