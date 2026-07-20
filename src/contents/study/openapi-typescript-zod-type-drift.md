@@ -2,6 +2,7 @@
 title: '손으로 베낀 API 타입 지우기 — openapi-typescript와 zod로 타입 drift 없애기'
 date: '2026-07-14'
 category: 'study'
+keywords: ['zod', 'openapi', 'CI']
 ---
 
 실무 프로젝트의 FE 타입을 정리하다가 세어보니 API 응답을 손으로 베껴 적은 인터페이스가 200개를 넘게 있었다. 백엔드 개발자가 DTO를 만들면 내가 그걸 보고 TypeScript 인터페이스로 옮겨 적는 방식이었는데, 처음엔 잘 맞았지만 시간이 지나면서 BE가 필드를 바꿔도 FE 타입은 그대로인 케이스가 쌓였다. 타입은 있는데 믿을 수가 없는 상태. 어디가 어긋났는지는 화면에서 undefined가 떠야 알 수 있었다.
