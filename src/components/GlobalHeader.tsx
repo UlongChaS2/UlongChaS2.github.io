@@ -115,7 +115,7 @@ const Header: React.FC = () => {
         <Logo>
           <Link to="/">
             <LogoMark size={34} />
-            Dev.log
+            UlongChaS2.log
           </Link>
         </Logo>
 

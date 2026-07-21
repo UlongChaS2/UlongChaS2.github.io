@@ -42,7 +42,7 @@ export const query = graphql`
 
 export const Head = () => (
   <>
-    <title>스터디 | Dev.log</title>
+    <title>스터디 | UlongChaS2.log</title>
     <meta name="description" content="개발 학습 내용을 정리한 포스트" />
   </>
 );

@@ -120,7 +120,7 @@ const SiteFooter: React.FC<SiteFooterProps> = ({ showCta = true }) => (
       )}
 
       <Meta divided={showCta}>
-        <span>© {new Date().getFullYear()} Dev.log · ulongchas2</span>
+        <span>© {new Date().getFullYear()} UlongChaS2.log · ulongchas2</span>
         <span className="sub">Built with Gatsby & ❤️</span>
       </Meta>
     </Inner>

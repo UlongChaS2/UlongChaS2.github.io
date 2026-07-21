@@ -19,7 +19,7 @@ const wrapESMPlugin = (name) =>
 
 module.exports = {
   siteMetadata: {
-    title: `Dev.log`,
+    title: `UlongChaS2.log`,
     description: `개발 공부와 프로젝트를 기록하는 블로그`,
     author: `@ulongchas2`,
     siteUrl: `https://ulongchas2.github.io/`,
@@ -62,8 +62,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Dev.log`,
-        short_name: `Dev.log`,
+        name: `UlongChaS2.log`,
+        short_name: `UlongChaS2.log`,
         start_url: `/`,
         background_color: `#FFFFFF`,
         theme_color: `#3182F6`,

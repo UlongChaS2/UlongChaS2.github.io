@@ -202,7 +202,7 @@ const IndexPage = () => {
 
 export const Head = () => (
   <>
-    <title>Dev.log</title>
+    <title>UlongChaS2.log</title>
     <meta name="description" content="개발 공부와 프로젝트를 기록하는 블로그" />
   </>
 );

@@ -149,7 +149,7 @@ const NotFoundPage = () => (
 
 export const Head = () => (
   <>
-    <title>404 - 페이지를 찾을 수 없습니다 | Dev.log</title>
+    <title>404 - 페이지를 찾을 수 없습니다 | UlongChaS2.log</title>
     <meta name="description" content="요청하신 페이지를 찾을 수 없습니다." />
   </>
 );

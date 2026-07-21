@@ -201,7 +201,7 @@ const ResumePage = () => (
 
 export const Head = () => (
   <>
-    <title>이력서 | Dev.log</title>
+    <title>이력서 | UlongChaS2.log</title>
     <meta name="description" content="정유정 이력서" />
   </>
 );

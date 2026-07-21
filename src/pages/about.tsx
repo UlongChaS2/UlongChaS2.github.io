@@ -349,7 +349,7 @@ const AboutPage = () => (
 
 export const Head = () => (
   <>
-    <title>소개 | Dev.log</title>
+    <title>소개 | UlongChaS2.log</title>
     <meta name="description" content="블로그를 쓰는 사람과 글 쓰는 원칙" />
   </>
 );

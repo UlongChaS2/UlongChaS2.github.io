@@ -68,7 +68,7 @@ export const query = graphql`
 
 export const Head = ({ data }: StudyPostProps) => (
   <>
-    <title>{data.markdownRemark.frontmatter.title} | Dev.log</title>
+    <title>{data.markdownRemark.frontmatter.title} | UlongChaS2.log</title>
     <meta name="description" content={data.markdownRemark.frontmatter.title} />
   </>
 );

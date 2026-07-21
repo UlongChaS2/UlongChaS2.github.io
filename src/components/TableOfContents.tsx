@@ -4,7 +4,7 @@ import { IconList, IconClose } from './icons';
 
 // ============================================================
 // TableOfContents — Emotion 기반 (CSS var() 토큰 사용)
-// Stitch MCP 디자인 참조: Dev.log Table of Contents Sidebar
+// Stitch MCP 디자인 참조: UlongChaS2.log Table of Contents Sidebar
 // ============================================================
 
 const TOCWrapper = styled.div`
