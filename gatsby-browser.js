@@ -42,3 +42,21 @@ export const wrapPageElement = ({ element }) => {
     </>
   );
 };
+
+/**
+ * GoatCounter 방문 카운트 (클라이언트 라우팅 전환용).
+ * 초기 로드는 count.js가 스스로 세므로 여기서 첫 호출은 건너뛴다.
+ * 그 뒤 페이지 이동마다 한 번씩 센다 — 중복 없이 정확히 집계된다.
+ */
+let skipFirstRouteCount = true;
+export const onRouteUpdate = ({ location }) => {
+  if (typeof window === 'undefined') return;
+  if (skipFirstRouteCount) {
+    skipFirstRouteCount = false;
+    return;
+  }
+  const gc = window.goatcounter;
+  if (gc && typeof gc.count === 'function') {
+    gc.count({ path: location.pathname + location.search + location.hash });
+  }
+};

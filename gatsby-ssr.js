@@ -8,6 +8,7 @@ import * as React from 'react';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 import { ThemeProvider, useThemeTokens } from './src/contexts/ThemeContext';
 import GlobalStyles from './src/components/GlobalStyles';
+import { goatcounterEndpoint } from './src/config/analytics';
 
 const EmotionWrapper = ({ children }) => {
   const tokens = useThemeTokens();
@@ -62,12 +63,30 @@ export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
 
   // SVG 파비콘. manifest 플러그인이 넣어주는 PNG는 고해상도 화면에서 뭉개진다.
   // SVG를 먼저 선언하면 지원하는 브라우저가 이걸 쓰고, 나머지는 PNG로 내려간다.
-  setHeadComponents([
+  const head = [
     <link
       key="favicon-svg"
       rel="icon"
       type="image/svg+xml"
       href="/favicon.svg"
     />,
-  ]);
+  ];
+
+  // GoatCounter 방문 추적. 코드가 설정된 경우에만 스크립트를 넣는다.
+  // count.js가 로드되며 첫 페이지를 자동으로 센다(async라 첫 전환보다 늦게
+  // 뜰 수 있어, 초기 로드는 스크립트에 맡기는 편이 확실하다).
+  // 이후 클라이언트 라우팅 전환은 gatsby-browser의 onRouteUpdate가 센다.
+  const gc = goatcounterEndpoint();
+  if (gc) {
+    head.push(
+      <script
+        key="goatcounter"
+        async
+        src="//gc.zgo.at/count.js"
+        data-goatcounter={gc}
+      />,
+    );
+  }
+
+  setHeadComponents(head);
 };
