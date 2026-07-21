@@ -1,7 +1,7 @@
 ---
 title: 'Spring 백엔드 코드 흐름 읽기'
 date: '2026-06-04'
-category: 'project'
+category: 'study'
 keywords: ['코드 읽기', 'Spring', 'BE']
 ---
 

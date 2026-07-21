@@ -1,7 +1,7 @@
 ---
 title: '공통 로직 추출 — 언제 하고 언제 하지 말아야 하나'
 date: '2026-03-26'
-category: 'project'
+category: 'study'
 keywords: ['리팩터링', '설계', 'BE']
 ---
 

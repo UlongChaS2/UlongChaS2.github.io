@@ -1,7 +1,7 @@
 ---
 title: '파일 전송 프로토콜 정리 — FTP, SFTP, SCP, RDP'
 date: '2026-03-12'
-category: 'project'
+category: 'study'
 keywords: ['FTP', 'SFTP', 'BE']
 ---
 

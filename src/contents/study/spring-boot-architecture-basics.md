@@ -1,7 +1,7 @@
 ---
 title: 'Spring Boot 아키텍처 기초 — 계층 구조와 핵심 개념'
 date: '2026-03-31'
-category: 'project'
+category: 'study'
 keywords: ['아키텍처', 'Spring Boot', 'BE']
 ---
 

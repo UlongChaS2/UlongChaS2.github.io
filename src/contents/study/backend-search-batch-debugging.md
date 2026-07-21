@@ -1,7 +1,7 @@
 ---
 title: '백엔드 검색·배치 디버깅 흐름 정리'
 date: '2026-06-02'
-category: 'project'
+category: 'study'
 keywords: ['디버깅', 'Spring', 'BE']
 ---
 

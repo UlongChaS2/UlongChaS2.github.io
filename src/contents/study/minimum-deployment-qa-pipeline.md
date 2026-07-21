@@ -1,7 +1,7 @@
 ---
 title: '오픈 전 최소한의 배포 QA 파이프라인'
 date: '2026-05-18'
-category: 'project'
+category: 'study'
 keywords: ['QA', '배포', 'Infra']
 ---
 

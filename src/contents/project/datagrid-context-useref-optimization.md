@@ -1,7 +1,7 @@
 ---
 title: '데이터 그리드 최적화 — Context API와 useRef, 그리고 wrapper가 만든 성능 저하'
 date: '2026-03-04'
-category: 'study'
+category: 'project'
 keywords: ['useRef', 'Context', '렌더링']
 ---
 

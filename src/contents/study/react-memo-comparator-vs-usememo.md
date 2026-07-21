@@ -1,7 +1,7 @@
 ---
 title: 'React.memo 커스텀 comparator vs useMemo 안정화'
 date: '2026-05-11'
-category: 'project'
+category: 'study'
 keywords: ['memo', 'React', 'FE']
 ---
 

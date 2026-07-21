@@ -1,7 +1,7 @@
 ---
 title: 'Spring Boot 백엔드 구조 이해하기'
 date: '2026-03-23'
-category: 'project'
+category: 'study'
 keywords: ['Spring Boot', '아키텍처', 'BE']
 ---
 

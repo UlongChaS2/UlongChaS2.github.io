@@ -1,7 +1,7 @@
 ---
 title: '손으로 베낀 API 타입 지우기 — openapi-typescript와 zod로 타입 drift 없애기'
 date: '2026-07-14'
-category: 'study'
+category: 'project'
 keywords: ['zod', 'openapi', 'CI']
 ---
 

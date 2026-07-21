@@ -1,7 +1,7 @@
 ---
 title: 'Next.js 입문 — React 개발자를 위한 핵심 개념'
 date: '2026-03-12'
-category: 'project'
+category: 'study'
 keywords: ['Next.js', 'React', 'FE']
 ---
 

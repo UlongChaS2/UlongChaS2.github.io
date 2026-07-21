@@ -1,7 +1,7 @@
 ---
 title: 'react-compiler 도입 시도하다 ESLint & useEffect 톺은 이야기'
 date: '2025-10-14'
-category: 'study'
+category: 'project'
 keywords: ['compiler', 'useEffect', 'ESLint']
 ---
 

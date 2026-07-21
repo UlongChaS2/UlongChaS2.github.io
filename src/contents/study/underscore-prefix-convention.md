@@ -1,7 +1,7 @@
 ---
 title: '파일명 언더스코어 prefix 관례와 내부 구현 은닉'
 date: '2026-05-13'
-category: 'project'
+category: 'study'
 keywords: ['컨벤션', '캡슐화', 'FE']
 ---
 

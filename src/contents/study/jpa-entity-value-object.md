@@ -1,7 +1,7 @@
 ---
 title: 'JPA 엔티티와 Value Object'
 date: '2026-03-24'
-category: 'project'
+category: 'study'
 keywords: ['JPA', 'DDD', 'BE']
 ---
 
