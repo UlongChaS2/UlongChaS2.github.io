@@ -63,9 +63,11 @@ export const IconSun: React.FC<IconProps> = ({ size = 18, strokeWidth = 2, class
   </svg>
 );
 
-export const IconMoon: React.FC<IconProps> = ({ size = 18, strokeWidth = 2, className }) => (
+export const IconMoon: React.FC<IconProps> = ({ size = 18, strokeWidth = 1.9, className }) => (
+  // 얇은 초승달은 양 끝이 뾰족해 날카롭다. 안쪽을 더 파내 두툼하게 만들고
+  // 획을 살짝 얇혀 다른 아이콘과 톤을 맞춘다.
   <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
-    <path d="M20 14.5A8.5 8.5 0 019.5 4 7 7 0 1020 14.5z" />
+    <path d="M21 12.9A8.4 8.4 0 1 1 11.1 3.2a6.6 6.6 0 0 0 9.9 9.7z" />
   </svg>
 );
 
