@@ -56,6 +56,32 @@ export const IconArrowRight: React.FC<IconProps> = ({ size = 16, strokeWidth = 2
   </svg>
 );
 
+export const IconSun: React.FC<IconProps> = ({ size = 18, strokeWidth = 2, className }) => (
+  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
+    <circle cx="12" cy="12" r="4.2" />
+    <path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8" />
+  </svg>
+);
+
+export const IconMoon: React.FC<IconProps> = ({ size = 18, strokeWidth = 2, className }) => (
+  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
+    <path d="M20 14.5A8.5 8.5 0 019.5 4 7 7 0 1020 14.5z" />
+  </svg>
+);
+
+export const IconMonitor: React.FC<IconProps> = ({ size = 18, strokeWidth = 2, className }) => (
+  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
+    <rect x="3" y="4" width="18" height="12" rx="2" />
+    <path d="M8 20h8M12 16v4" />
+  </svg>
+);
+
+export const IconCheck: React.FC<IconProps> = ({ size = 16, strokeWidth = 2.4, className }) => (
+  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
+    <path d="M5 12.5l4.5 4.5L19 6.5" />
+  </svg>
+);
+
 export const IconMenu: React.FC<IconProps> = ({ size = 22, strokeWidth = 2, className }) => (
   <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
     <path d="M4 7h16M4 12h16M4 17h16" />
@@ -65,6 +91,12 @@ export const IconMenu: React.FC<IconProps> = ({ size = 22, strokeWidth = 2, clas
 export const IconClose: React.FC<IconProps> = ({ size = 22, strokeWidth = 2, className }) => (
   <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
     <path d="M6 6l12 12M18 6L6 18" />
+  </svg>
+);
+
+export const IconList: React.FC<IconProps> = ({ size = 20, strokeWidth = 2, className }) => (
+  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
+    <path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" />
   </svg>
 );
 

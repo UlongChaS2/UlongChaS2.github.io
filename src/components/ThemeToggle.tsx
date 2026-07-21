@@ -1,6 +1,13 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { useTheme } from 'src/contexts/ThemeContext';
+import { IconSun, IconMoon, IconMonitor, IconCheck } from './icons';
+
+const THEME_ICON = {
+  light: IconSun,
+  dark: IconMoon,
+  system: IconMonitor,
+} as const;
 
 // ============================================================
 // ThemeToggle — New Token API
@@ -12,24 +19,22 @@ const ToggleContainer = styled.div`
 `;
 
 const ToggleButton = styled.button`
-  background: transparent;
+  background: var(--color-bg-subtle);
   border: none;
-  padding: var(--space-2);
+  width: 36px;
+  height: 36px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--fs-title-md);
-  transition: transform var(--transition-fast);
-  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
 
   &:hover {
-    transform: scale(1.1);
     background: var(--color-interactive-hover);
-  }
-
-  &:active {
-    transform: scale(0.95);
+    color: var(--color-text-primary);
   }
 `;
 
@@ -68,7 +73,8 @@ const MenuItem = styled.button<{ isActive: boolean }>`
   }
 
   .icon {
-    font-size: var(--fs-title-sm);
+    display: inline-flex;
+    color: var(--color-text-secondary);
   }
 
   .label {
@@ -76,9 +82,9 @@ const MenuItem = styled.button<{ isActive: boolean }>`
   }
 
   .check {
+    display: inline-flex;
     opacity: ${(props) => (props.isActive ? 1 : 0)};
     color: var(--color-brand-primary);
-    font-weight: var(--fw-bold);
   }
 `;
 
@@ -99,59 +105,42 @@ const ThemeToggle: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const getIcon = () => {
-    switch (currentTheme) {
-      case 'light':
-        return '☀️';
-      case 'dark':
-        return '🌙';
-      case 'system':
-        return '💻';
-    }
-  };
+  const CurrentIcon = THEME_ICON[currentTheme];
+
+  const options = [
+    { value: 'light', label: '라이트' },
+    { value: 'dark', label: '다크' },
+    { value: 'system', label: '시스템' },
+  ] as const;
 
   return (
     <ToggleContainer ref={containerRef}>
       <ToggleButton onClick={() => setIsOpen(!isOpen)} aria-label="테마 선택">
-        {getIcon()}
+        <CurrentIcon size={18} />
       </ToggleButton>
 
       <DropdownMenu isOpen={isOpen}>
-        <MenuItem
-          isActive={currentTheme === 'light'}
-          onClick={() => {
-            setTheme('light');
-            setIsOpen(false);
-          }}
-        >
-          <span className="icon">☀️</span>
-          <span className="label">라이트</span>
-          <span className="check">✓</span>
-        </MenuItem>
-
-        <MenuItem
-          isActive={currentTheme === 'dark'}
-          onClick={() => {
-            setTheme('dark');
-            setIsOpen(false);
-          }}
-        >
-          <span className="icon">🌙</span>
-          <span className="label">다크</span>
-          <span className="check">✓</span>
-        </MenuItem>
-
-        <MenuItem
-          isActive={currentTheme === 'system'}
-          onClick={() => {
-            setTheme('system');
-            setIsOpen(false);
-          }}
-        >
-          <span className="icon">💻</span>
-          <span className="label">시스템</span>
-          <span className="check">✓</span>
-        </MenuItem>
+        {options.map(({ value, label }) => {
+          const Icon = THEME_ICON[value];
+          return (
+            <MenuItem
+              key={value}
+              isActive={currentTheme === value}
+              onClick={() => {
+                setTheme(value);
+                setIsOpen(false);
+              }}
+            >
+              <span className="icon">
+                <Icon size={17} />
+              </span>
+              <span className="label">{label}</span>
+              <span className="check">
+                <IconCheck size={16} />
+              </span>
+            </MenuItem>
+          );
+        })}
       </DropdownMenu>
     </ToggleContainer>
   );

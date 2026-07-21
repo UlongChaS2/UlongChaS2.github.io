@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+import { IconList, IconClose } from './icons';
 
 // ============================================================
 // TableOfContents — Emotion 기반 (CSS var() 토큰 사용)
@@ -271,7 +272,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ html }) => {
   return (
     <TOCWrapper>
       <TOCToggleButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} aria-label="목차 토글">
-        {isOpen ? '✕' : '📑'}
+        {isOpen ? <IconClose size={20} /> : <IconList size={20} />}
       </TOCToggleButton>
 
       <Backdrop isOpen={isOpen} onClick={() => setIsOpen(false)} />
