@@ -129,9 +129,10 @@ export function Providers({ children }) {
 <h3>DB/API 직접 fetch</h3>
 <pre><code class="language-tsx">// "use client" 없음
 export default async function Page() {
-  const data = await fetch("http://internal-api/data", {
+  const res = await fetch("http://internal-api/data", {
     headers: { Authorization: `Bearer ${process.env.SECRET_KEY}` }
   });
+  const data = await res.json();
   return &#x3C;UI data={data} />;
 }
 </code></pre>
@@ -225,7 +226,8 @@ const { data } = useReport(reportId);
 <pre><code class="language-tsx">// app/result/[reportId]/page.tsx — Server Component
 export default async function ResultPage({ params }) {
   const { reportId } = await params;
-  const report = await fetch(`/api/v1/report/${reportId}`);
+  const res = await fetch(`/api/v1/report/${reportId}`);
+  const report = await res.json();
 
   if (report.status !== "completed") {
     return &#x3C;PollingUI reportId={reportId} />;  // 클라이언트로
