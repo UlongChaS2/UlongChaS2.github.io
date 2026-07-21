@@ -26,10 +26,10 @@ class Counter {
 }
 
 const c = new Counter()
-c.#count  // SyntaxError: 런타임에서 실제로 막힘
+c.#count  // SyntaxError: 파싱/컴파일 단계에서 막힘
 ```
 
-`#`은 JS 언어 스펙이 보장하는 진짜 은닉화다. 컴파일러와 런타임 모두 접근을 막는다.
+`#`은 JS 언어 스펙이 보장하는 진짜 은닉화다. 클래스 밖에서 `#count`를 참조하면 코드가 실행되기도 전에 파싱/컴파일 단계에서 SyntaxError로 막힌다.
 
 ### `_` prefix — 관례적 접근 제어
 

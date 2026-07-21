@@ -101,11 +101,12 @@ public class ServiceA {
 - 테스트 시 Mock이 늘어남
 
 ```
-// 테스트가 복잡해지는 예
-@Mock StatusRepository repo;
-@Mock EntityRepository entityRepo;
-@InjectMocks EntityStatusManager statusManager;  // 추가됨
-@InjectMocks ServiceA serviceA;  // statusManager 주입 필요
+// 테스트가 복잡해지는 예 — ServiceA 테스트
+@Mock EntityStatusManager statusManager;  // 협력 객체가 하나 더 늘어남
+@InjectMocks ServiceA serviceA;           // statusManager가 주입됨
+
+// ServiceA를 테스트하려면 statusManager.restoreStatus(...) 호출을
+// 매번 스텁/검증해줘야 한다 (공통 로직이 테스트 경계를 넘어옴)
 ```
 
 ---
