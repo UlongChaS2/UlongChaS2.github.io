@@ -1,0 +1,45 @@
+name: Build and Deploy
+
+# template(소스) 브랜치에 push하면 GitHub가 빌드해서 main(배포용)에 올린다.
+# 로컬에서 gh-pages를 돌릴 필요가 없고, 계정 인증에도 휘둘리지 않는다.
+on:
+  push:
+    branches: [template]
+  workflow_dispatch: # 필요하면 Actions 탭에서 수동 실행
+
+# GITHUB_TOKEN이 main 브랜치에 push할 수 있게 쓰기 권한을 준다.
+permissions:
+  contents: write
+
+# 배포가 겹쳐 돌지 않도록 최신 실행만 남긴다.
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to main
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: main
+          # gh-pages 액션 자체의 커밋 메시지
+          commit_message: "Deploy from ${{ github.sha }}"
