@@ -34,10 +34,12 @@
     "gatsby"
   ],
   "license": "0BSD",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "build": "gatsby build",
     "deploy": "gatsby build && gh-pages -d public -b main",
-    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",
