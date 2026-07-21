@@ -56,6 +56,18 @@ export const IconArrowRight: React.FC<IconProps> = ({ size = 16, strokeWidth = 2
   </svg>
 );
 
+export const IconMenu: React.FC<IconProps> = ({ size = 22, strokeWidth = 2, className }) => (
+  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
+    <path d="M4 7h16M4 12h16M4 17h16" />
+  </svg>
+);
+
+export const IconClose: React.FC<IconProps> = ({ size = 22, strokeWidth = 2, className }) => (
+  <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
+    <path d="M6 6l12 12M18 6L6 18" />
+  </svg>
+);
+
 export const IconSearch: React.FC<IconProps> = ({ size = 15, strokeWidth = 2.2, className }) => (
   <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
     <circle cx="11" cy="11" r="8" />

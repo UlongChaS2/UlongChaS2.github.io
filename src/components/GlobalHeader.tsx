@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { HeaderContainer, HeaderInner, Logo, Nav } from 'src/styles/HeaderStyles';
 import ThemeToggle from './ThemeToggle';
 import VisitorBadge from './VisitorCount';
-import { LogoMark } from './icons';
+import { LogoMark, IconMenu, IconClose } from './icons';
 
 // ============================================================
 // GlobalHeader — Daangn Blog Style
@@ -138,9 +138,9 @@ const Header: React.FC = () => {
           <ThemeToggle />
           <MobileMenuBtn
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            aria-label="메뉴 열기"
+            aria-label={isMobileOpen ? '메뉴 닫기' : '메뉴 열기'}
           >
-            {isMobileOpen ? '✕' : '☰'}
+            {isMobileOpen ? <IconClose /> : <IconMenu />}
           </MobileMenuBtn>
         </RightActions>
       </HeaderInner>
