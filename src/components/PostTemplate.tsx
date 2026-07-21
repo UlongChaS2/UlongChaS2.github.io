@@ -15,6 +15,8 @@ import {
   PostLayout,
   PostContentWrapper,
   PostContent,
+  PostTags,
+  PostTag,
   PostNavigation,
   NavLink,
 } from 'src/styles/PostStyles';
@@ -34,6 +36,7 @@ interface PostTemplateProps {
   date: string;
   timeToRead: number;
   html: string;
+  keywords?: (string | null)[] | null;
   featuredImage?: IGatsbyImageData | null;
   previous?: AdjacentPost | null;
   next?: AdjacentPost | null;
@@ -45,10 +48,12 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
   date,
   timeToRead,
   html,
+  keywords,
   featuredImage,
   previous,
   next,
 }) => {
+  const tags = (keywords ?? []).filter((k): k is string => typeof k === 'string' && k.trim().length > 0);
   const image = featuredImage ? getImage(featuredImage) : null;
 
   return (
@@ -65,6 +70,17 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
                 <span className="dot" />
                 <span>{timeToRead || 5}분이면 읽어요</span>
               </PostMeta>
+
+              {tags.length > 0 && (
+                <PostTags>
+                  {tags.map((tag) => (
+                    <PostTag key={tag} to={`/${category}/?tag=${encodeURIComponent(tag)}`}>
+                      <span className="hash">#</span>
+                      {tag}
+                    </PostTag>
+                  ))}
+                </PostTags>
+              )}
             </PostHeaderContent>
 
             {image && (

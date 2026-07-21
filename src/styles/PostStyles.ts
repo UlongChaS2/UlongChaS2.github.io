@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from 'gatsby';
 
 // ============================================================
 // Post Detail Styles — Blog Style
@@ -434,5 +435,40 @@ export const NavLink = styled.a`
   &.next {
     align-items: flex-end;
     text-align: right;
+  }
+`;
+
+/* 제목 아래 #태그 (글의 keywords). 클릭하면 해당 카테고리 목록의 그 태그로 이동한다. */
+export const PostTags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+`;
+
+export const PostTag = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 13px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-subtle);
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast);
+
+  .hash {
+    color: var(--color-text-tertiary);
+  }
+
+  &:hover {
+    background: var(--color-brand-subtle);
+    color: var(--color-brand-primary);
+    .hash {
+      color: var(--color-brand-primary);
+    }
   }
 `;

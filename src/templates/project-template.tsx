@@ -15,6 +15,7 @@ interface ProjectPostProps extends PageProps<any, ProjectPostContext> {
         title: string;
         date: string;
         category: string;
+        keywords?: (string | null)[] | null;
         featuredImage?: {
           childImageSharp: {
             gatsbyImageData: any;
@@ -37,6 +38,7 @@ const ProjectPost: React.FC<ProjectPostProps> = ({ data, pageContext }) => {
       date={post.frontmatter.date}
       timeToRead={post.timeToRead}
       html={post.html}
+      keywords={post.frontmatter.keywords}
       featuredImage={post.frontmatter.featuredImage?.childImageSharp?.gatsbyImageData}
       previous={pageContext.previous}
       next={pageContext.next}
@@ -51,6 +53,7 @@ export const query = graphql`
         title
         date(formatString: "YYYY년 MM월 DD일")
         category
+        keywords
         featuredImage {
           childImageSharp {
             gatsbyImageData(width: 1200, placeholder: BLURRED)
