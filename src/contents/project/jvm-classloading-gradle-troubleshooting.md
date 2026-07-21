@@ -118,7 +118,8 @@ Gradle 설정:
 dependencies {
     // 컴파일할 때만 사용, 런타임엔 불필요
     annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor 'io.github.openfeign.querydsl:querydsl-apt:jpa'
+    // 좌표는 group:artifact:version:classifier 순서 — jpa는 classifier라 version 뒤에 와야 한다
+    annotationProcessor 'io.github.openfeign.querydsl:querydsl-apt:<version>:jpa'
 }
 ```
 

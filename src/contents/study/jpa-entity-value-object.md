@@ -58,9 +58,6 @@ public class Post extends BaseEntity<PostId> {
         }
     }
 
-    @SuppressWarnings("unused")
-    protected Post() {}  // JPA용 빈 생성자
-
     @Builder
     private Post(String title, String author, String content) {
         this.id = PostId.create();
@@ -182,6 +179,7 @@ public void updateContent(String newContent) {
 값 자체가 의미인 객체. ID, 금액, 통화 등을 단순 `String`, `Long` 대신 별도 클래스로 만든다.
 
 ```java
+@Embeddable
 public class PostId extends ValueObject<PostId> {
     private UUID id;
 

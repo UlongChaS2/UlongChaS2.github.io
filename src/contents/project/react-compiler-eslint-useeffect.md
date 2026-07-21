@@ -5,7 +5,7 @@ category: 'project'
 keywords: ['compiler', 'useEffect', 'ESLint']
 ---
 
-> exhaustive-deps를 꺼둔 채 React Compiler를 도입하려다, 의존성 배열이 컴파일러의 신뢰 입력값이라는 걸 문서·코드·빌드 산출물까지 톺아보며 확인한 기록.
+> exhaustive-deps를 꺼둔 채 React Compiler를 도입하려다, 잘못된 의존성 배열이 (컴파일러와 무관하게) 런타임 버그의 원인이 된다는 걸 문서·코드·빌드 산출물까지 톺아보며 확인한 기록.
 
 <!--more-->
 
@@ -13,7 +13,7 @@ keywords: ['compiler', 'useEffect', 'ESLint']
 
 React 19.2 / React Compiler 1.0 소식 듣자마자, '바로 마이그레이션 해야지'하고 실무 프로젝트 코드베이스를 훑고, 커서 AI로 리스크 맵을 찍어봤다. 역시 예상대로 ref 패턴이랑 state 직접 덮어쓰기가 신경 쓰였는데, 충격이였던 것은 eslint.config에서 exhaustive-deps를 꺼둔 상태가 🔴 Critical로 찍힌 것.
 
-의존성 배열에 관한 eslint rule과 React Compiler이 상관관계가 궁금해 문서, 코드, 빌드 산출물까지 전부 톺아봤고, 결론적으로 React 19에는 exhaustive-deps가 단순 린트 에러가 아니라 컴파일러의 '신뢰도 입력값' 이라는 걸 체감했다.
+의존성 배열에 관한 eslint rule과 React Compiler이 상관관계가 궁금해 문서, 코드, 빌드 산출물까지 전부 톺아봤고, 결론적으로 React Compiler는 eslint 설정(룰 on/off)이나 useEffect 의존성 배열을 최적화 입력으로 읽지 않는다는 걸 확인했다. exhaustive-deps는 컴파일러의 입력이 아니라, useEffect의 런타임 정확성을 지키는 룰이라는 걸 체감했다.
 
 ## 프로젝트 위험도 요약
 
@@ -25,7 +25,7 @@ React 19.2 / React Compiler 1.0 소식 듣자마자, '바로 마이그레이션 
 | useEffect refetch 누락 | 🟡 Medium   | 3+ 파일     | 4    |
 | 인라인 객체 생성            | 🟢 Low      | 대부분 자동 처리 | 5    |
 
-exhaustive-deps은 의존성에 들어있는 state, props로 넘겨온값들을 의존성 배열에 넣어줘야하는 eslint 룰을 뜻하며 이건 react v19 부터 warn에서 error로 변경되었다. 다만 내 문제는 setter를 의존성 배열에 안넣어서 warning이 계속 보여 off로 끈 케이스고 setter는 안전이 보장되어있어 eslint가 자동적으로 warning을 넘긴다고 알고있었는데 계속 떠있었다.
+exhaustive-deps은 의존성에 들어있는 state, props로 넘겨온값들을 의존성 배열에 넣어줘야하는 eslint 룰을 뜻하며, 기본 severity는 React 19에서도 여전히 warn이다(팀에 따라 error로 올려 쓰기도 한다). 다만 내 문제는 setter를 의존성 배열에 안넣어서 warning이 계속 보여 off로 끈 케이스고 setter는 안전이 보장되어있어 eslint가 자동적으로 warning을 넘긴다고 알고있었는데 계속 떠있었다.
 
 주요 포인트는 eslint는 local setter의 안정성만 인정하고 **"외부에서 넘어온 함수(= props로 받은 함수)"는, useState의 setter인지 구분할 수 없어서 "일반 함수"로 간주** 하기 때문이다.
 
@@ -47,7 +47,7 @@ exhaustive-deps은 의존성에 들어있는 state, props로 넘겨온값들을 
 'react-hooks/exhaustive-deps': 'off'
 ```
 
-문제: React Compiler는 의존성 배열을 기반으로 메모이제이션을 자동화하는데, 의존성이 누락되면 오작동할 수 있다.
+문제: 의존성이 누락되면 useEffect가 stale 값을 참조하거나 필요한 재실행을 놓쳐 런타임 버그가 날 수 있다. (React Compiler가 이 deps 배열을 읽어서 최적화하는 건 아니지만, 잘못된 effect는 컴파일러와 무관하게 그대로 버그로 남는다.)
 
 발견된 케이스:
 
@@ -180,9 +180,9 @@ React.useEffect(() => {
 
 ## 핵심 전제
 
-- React 19 + Compiler는 **정적 분석 기반 자동 최적화**를 한다.
-- 최적화의 전제는 **의존성 그래프가 정확할 것**.
-- 이 그래프를 "문법적으로" 확보해주는 게 바로 **react-hooks/exhaustive-deps**다.
+- React 19 + Compiler는 **정적 분석 기반 자동 최적화**를 한다. 이때 컴파일러는 **코드 자체**를 분석할 뿐, eslint 설정이나 useEffect 의존성 배열을 입력으로 읽지 않는다.
+- 그래서 잘못된 deps는 컴파일러와 무관하게 **런타임 버그**로 남는다.
+- 그 deps 정확성을 "문법적으로" 잡아주는 게 바로 **react-hooks/exhaustive-deps**다.
 
 ---
 
@@ -209,17 +209,17 @@ React.useEffect(() => {
 
 내가 느낀 포인트 3개:
 
-1. **exhaustive-deps는 컴파일러의 의존성 그래프 입력**
+1. **exhaustive-deps는 useEffect의 런타임 정확성을 지키는 룰**
 
-   이걸 끄면 컴파일러는 "이 effect가 뭐에 반응해야 하는지"를 신뢰할 수 없어서 **최적화를 스킵**한다.
+   이걸 끄면 잘못된 deps가 그대로 남아 "이 effect가 뭐에 반응해야 하는지"가 어긋나고, stale 참조·재실행 누락 같은 버그로 이어진다. (컴파일러가 eslint 설정을 읽어서 최적화를 끄는 건 아니다.)
 
 2. **props로 받은 'setter 같은' 함수는 타입표시와 무관**
 
    타입은 런타임에 없으니 ESLint는 그걸 useState의 진짜 setter로 못 알아본다. 결국 **일반 함수 → deps 포함**.
 
-3. **경고 → 에러 승격(React 19 맥락)**
+3. **여전히 기본은 warn(React 19 기준)**
 
-   과거엔 warn이어도 넘어갔지만, 이제는 **런타임 일관성과 최적화 품질** 때문에 error로 엄격해진 셈.
+   기본 severity는 warn이라 무시하고 넘어가기 쉽지만, 팀에 따라 error로 올려 강제하기도 한다. 컴파일러 도입 전이라면 warn이라도 실제로 해결해두는 게 안전하다.
 
 ---
 
@@ -236,7 +236,7 @@ React.useEffect(() => {
 
 exhaustive-deps를 끄면?
 
-→ 3단계에서 **그래프 신뢰 불가 → 해당 훅/컴포넌트 최적화 스킵/보수적 처리 → 성능/일관성 리스크**.
+→ 3단계(컴파일러)는 영향받지 않는다. 컴파일러는 eslint 설정을 모른다. 대신 잘못된 deps가 그대로 남아 **런타임에서 stale 참조/재실행 누락** 같은 버그로 이어진다.
 
 ### useEffect 의존성 그래프 시각화
 
@@ -244,7 +244,7 @@ exhaustive-deps를 끄면?
 
 - userId, title, **props/ctx 함수(setHeaderInfo)** → deps에 포함
 - **로컬 setUser**는 안정적이므로 deps 불필요
-- 하나라도 빠지면 **컴파일러의 그래프가 깨짐**
+- 하나라도 빠지면 **effect가 오작동(stale 참조/재실행 누락)**
 
 ---
 
@@ -287,7 +287,7 @@ useEffect(() => { setHeaderInfo({ title }); }, []);
 
 ## 맺음말
 
-- React 19 + Compiler 이후, **의존성 배열은 컴파일러의 신뢰 근거**다.
+- React 19 + Compiler 시대에도, **의존성 배열은 컴파일러의 입력이 아니라 useEffect 런타임 정확성의 문제**다.
 - **로컬 useState setter만 예외**, 외부 함수(심지어 "setter 타입"이라도)는 deps 포함.
-- exhaustive-deps를 끄는 건 단순 경고 무시가 아니라 **최적화 파이프라인을 끊는 행위**.
+- exhaustive-deps를 끄는 건 컴파일러 최적화를 끊는 게 아니라, **런타임 버그를 조용히 방치하는 행위**에 가깝다.
 - 나도 이번에 Babel 산출물을 직접 보면서 "아, 이제 React는 정적 분석 가능한 DSL로 가고 있구나"를 체감했다.

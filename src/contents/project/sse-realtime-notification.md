@@ -60,19 +60,19 @@ es.onerror = () => {
 
 ## Vite에서 SSE Mock 설정
 
-개발 환경에서 백엔드 없이 SSE를 테스트하려면 `vite.config.ts`의 `server.middlewares`를 활용한다.
+개발 환경에서 백엔드 없이 SSE를 테스트하려면 커스텀 플러그인의 `configureServer` 훅에서 Vite 개발 서버 미들웨어(`server.middlewares`)에 핸들러를 등록한다.
 
 ```typescript
 // vite.config.ts
-import { defineConfig } from 'vite'
+import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 3000,
-    middlewares: [
-      (req, res, next) => {
+// SSE mock 미들웨어를 개발 서버에 붙이는 플러그인
+function sseMockPlugin(): Plugin {
+  return {
+    name: 'sse-mock',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
         if (req.url?.startsWith('/api/sse/subscribe')) {
           // SSE 헤더 설정
           res.writeHead(200, {
@@ -107,8 +107,15 @@ export default defineConfig({
         } else {
           next()
         }
-      },
-    ],
+      })
+    },
+  }
+}
+
+export default defineConfig({
+  plugins: [react(), sseMockPlugin()],
+  server: {
+    port: 3000,
   },
 })
 ```
