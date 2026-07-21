@@ -55,17 +55,7 @@ export const Logo = styled.div`
   }
 `;
 
-export const LogoMark = styled.span`
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  background: var(--color-brand-primary);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-`;
+/* 로고 마크는 icons.tsx의 LogoMark(SVG)가 배경까지 그린다. */
 
 export const Nav = styled.nav`
   display: flex;

@@ -25,14 +25,22 @@ const base = (size: number) => ({
 });
 
 /**
- * 파비콘과 같은 그림이다. 꺾쇠는 currentColor를 따르지만 커서만은
- * 노란색을 고정으로 쓴다 — 이 두 색 대비가 마크의 정체성이라
- * 부모 색에 딸려가면 그냥 꺾쇠가 되어버린다.
+ * 브랜드 로고 마크. favicon.svg와 완전히 같은 그림이라야 한다 —
+ * 파란 라운드 사각형 + 흰 꺾쇠(프롬프트) + 노란 커서 블록.
+ * 색은 마크의 정체성이라 테마에 딸려가지 않고 고정으로 둔다.
  */
-export const IconPrompt: React.FC<IconProps> = ({ size = 18, strokeWidth = 3, className }) => (
+export const LogoMark: React.FC<{ size?: number; className?: string }> = ({ size = 34, className }) => (
+  <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden focusable={false} className={className}>
+    <rect width="64" height="64" rx="20" fill="#3182F6" />
+    <path d="M21 24 30 32 21 40" fill="none" stroke="#FFFFFF" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+    <rect x="36" y="35" width="12" height="7" rx="3.5" fill="#FFD84D" />
+  </svg>
+);
+
+export const IconEye: React.FC<IconProps> = ({ size = 15, strokeWidth = 2, className }) => (
   <svg {...base(size)} strokeWidth={strokeWidth} className={className}>
-    <path d="M7 7.5l3.5 4.5L7 16.5" />
-    <rect x="13" y="13.5" width="4.5" height="2.8" rx="1.4" fill="#FFD84D" stroke="none" />
+    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" />
+    <circle cx="12" cy="12" r="3" />
   </svg>
 );
 

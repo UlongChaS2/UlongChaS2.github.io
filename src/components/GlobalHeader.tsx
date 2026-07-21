@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
-import { HeaderContainer, HeaderInner, Logo, LogoMark, Nav } from 'src/styles/HeaderStyles';
+import { HeaderContainer, HeaderInner, Logo, Nav } from 'src/styles/HeaderStyles';
 import ThemeToggle from './ThemeToggle';
-import { IconPrompt } from './icons';
+import VisitorBadge from './VisitorCount';
+import { LogoMark } from './icons';
 
 // ============================================================
 // GlobalHeader — Daangn Blog Style
@@ -113,9 +114,7 @@ const Header: React.FC = () => {
       <HeaderInner>
         <Logo>
           <Link to="/">
-            <LogoMark>
-              <IconPrompt />
-            </LogoMark>
+            <LogoMark size={34} />
             Dev.log
           </Link>
         </Logo>
@@ -135,6 +134,7 @@ const Header: React.FC = () => {
         </DesktopNav>
 
         <RightActions>
+          <VisitorBadge />
           <ThemeToggle />
           <MobileMenuBtn
             onClick={() => setIsMobileOpen(!isMobileOpen)}
