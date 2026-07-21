@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import { IconArrowRight } from './icons';
+import VisitorCount from './VisitorCount';
 
 // ============================================================
 // SiteFooter — 소개 CTA + 저작권을 한 밴드로 묶은 하단 영역
@@ -120,6 +121,7 @@ const SiteFooter: React.FC<SiteFooterProps> = ({ showCta = true }) => (
       )}
 
       <Meta divided={showCta}>
+        <VisitorCount />
         <span>© {new Date().getFullYear()} Dev.log · ulongchas2</span>
         <span className="sub">Built with Gatsby & ❤️</span>
       </Meta>
