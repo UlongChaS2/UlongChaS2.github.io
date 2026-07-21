@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Layout from 'src/components/GlobalLayout';
 import GlobalStyles from 'src/components/GlobalStyles';
-import AboutCTA from 'src/components/AboutCTA';
 import { IconChevronRight } from 'src/components/icons';
 import { pickAccent, postLabel } from 'src/styles/accents';
 import {
@@ -86,8 +85,6 @@ const PostListPage: React.FC<PostListPageProps> = ({ title, subtitle, posts, emp
           </EmptyState>
         )}
       </PageWrapper>
-
-      <AboutCTA />
     </Layout>
   </>
 );

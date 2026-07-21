@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import Layout from '../components/GlobalLayout';
 import GlobalStyles from '../components/GlobalStyles';
 import PostCard from '../components/PostCard';
-import AboutCTA from '../components/AboutCTA';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { pickAccent, postLabel } from 'src/styles/accents';
@@ -31,7 +30,8 @@ import {
 
 // ============================================================
 // index.tsx — 홈
-// 히어로 → Featured 포스트 → 최근 글 그리드 → 구독 배너
+// 히어로 → Featured 포스트 → 최근 글 그리드
+// (하단 소개 CTA·저작권은 Layout의 SiteFooter가 담당)
 // ============================================================
 
 const PageInner = styled.div`
@@ -199,8 +199,6 @@ const IndexPage = () => {
             ) : null}
           </Section>
         </PageInner>
-
-        <AboutCTA />
       </Layout>
     </>
   );

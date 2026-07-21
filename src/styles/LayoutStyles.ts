@@ -9,15 +9,4 @@ export const Container = styled.div`
   min-height: calc(100vh - 200px);
 `;
 
-export const Footer = styled.footer`
-  border-top: 1px solid var(--color-border-subtle);
-  padding: var(--space-10) var(--space-6);
-  text-align: center;
-  color: var(--color-text-tertiary);
-  font-size: var(--fs-body-sm);
-  line-height: var(--lh-relaxed);
-
-  @media (min-width: 768px) {
-    padding: var(--space-10) var(--space-8);
-  }
-`;
+/* 저작권·CTA는 SiteFooter로 옮겼다. 이 파일에는 셸 컨테이너만 남는다. */

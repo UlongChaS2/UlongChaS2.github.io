@@ -4,7 +4,7 @@ import { GatsbyImage, IGatsbyImageData, getImage } from 'gatsby-plugin-image';
 import Layout from 'src/components/GlobalLayout';
 import GlobalStyles from 'src/components/GlobalStyles';
 import TableOfContents from 'src/components/TableOfContents';
-import AboutCTA from 'src/components/AboutCTA';
+import Comments from 'src/components/Comments';
 import {
   PostContainer,
   PostHeader,
@@ -105,9 +105,9 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
 
             <TableOfContents html={html} />
           </PostLayout>
-        </PostContainer>
 
-        <AboutCTA />
+          <Comments />
+        </PostContainer>
       </Layout>
     </>
   );

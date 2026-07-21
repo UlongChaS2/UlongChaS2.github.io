@@ -259,7 +259,7 @@ const CONTACTS: Array<{ label: string; value: string; href: string; internal?: b
 const AboutPage = () => (
   <>
     <GlobalStyles />
-    <Layout>
+    <Layout hideCta>
       <Page>
         <Hero>
           <HeroCopy>
