@@ -17,9 +17,10 @@ import { useTheme } from 'src/contexts/ThemeContext';
 
 const REPO = 'UlongChaS2/UlongChaS2.github.io';
 const REPO_ID = 'MDEwOlJlcG9zaXRvcnkzNTYzMDkxNDQ=';
-// Discussions를 켜면 채운다. (giscus.app 또는 조회로 얻는 카테고리 ID)
-const CATEGORY = 'Comments';
-const CATEGORY_ID = '';
+// Announcements 카테고리 — 방문자가 최상위 토론을 못 만들고 giscus만
+// 페이지별로 생성하게 하는 giscus 권장 설정.
+const CATEGORY = 'Announcements';
+const CATEGORY_ID = 'DIC_kwDOFTzYmM4DBnUo';
 
 const GISCUS_ORIGIN = 'https://giscus.app';
 

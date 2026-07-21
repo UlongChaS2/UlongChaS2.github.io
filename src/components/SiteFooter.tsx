@@ -81,21 +81,21 @@ const Action = styled(Link)`
   }
 `;
 
-/** CTA와 저작권 사이 구분선. CTA가 없으면 위쪽 여백만 남긴다. */
+/*
+ * 저작권 줄. 구분선을 긋지 않는다 — 선이 있으면 CTA와 저작권이
+ * 두 개의 상자처럼 갈라져 보인다. 여백과 옅은 색으로만 가라앉힌다.
+ */
 const Meta = styled.div<{ divided: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  margin-top: ${(p) => (p.divided ? 'var(--space-10)' : '0')};
-  padding-top: ${(p) => (p.divided ? 'var(--space-8)' : '0')};
-  border-top: ${(p) => (p.divided ? '1px solid var(--color-border-default)' : 'none')};
+  gap: 2px;
+  margin-top: ${(p) => (p.divided ? 'var(--space-12)' : '0')};
   color: var(--color-text-tertiary);
-  font-size: var(--fs-body-sm);
+  font-size: var(--fs-caption);
   line-height: var(--lh-relaxed);
 
   .sub {
-    font-size: var(--fs-caption);
-    opacity: 0.7;
+    opacity: 0.6;
   }
 `;
 
@@ -109,8 +109,8 @@ const SiteFooter: React.FC<SiteFooterProps> = ({ showCta = true }) => (
       {showCta && (
         <Cta>
           <Copy>
-            <Title>천천히, 그렇지만 매주 하나씩</Title>
-            <Description>어떤 사람이 쓰는 글인지 궁금하다면.</Description>
+            <Title>차근차근, 하나씩 쌓아가는 중</Title>
+            <Description>무엇을 만들고, 무엇에 부딪혔는지.</Description>
           </Copy>
           <Action to="/about/">
             소개 보기
