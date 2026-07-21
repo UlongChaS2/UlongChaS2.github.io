@@ -17,11 +17,14 @@
 </blockquote>
 <!--more-->
 <h2>개요</h2>
-<p><strong>Concurrent Mode</strong>(동시성 모드)는 React 18에서 도입된 개념으로, <strong>UI의 응답성을 향상</strong>시키고, 여러 개의 업데이트를 보다 <strong>부드럽고 유연하게 처리</strong>하기 위한 새로운 렌더링 방식이다.</p>
-<p><strong>기존 React(Rendering 방식)와의 차이점</strong></p>
+<p><strong>Concurrent Mode</strong>(동시성 모드)는 React 16.x/17에서 실험적으로 존재하다가 React 18에서 <strong>Concurrent Features</strong>로 정식화된 개념으로, <strong>UI의 응답성을 향상</strong>시키고, 여러 개의 업데이트를 보다 <strong>부드럽고 유연하게 처리</strong>하기 위한 새로운 렌더링 방식이다.</p>
+<p><strong>기존 렌더링 방식과의 차이점</strong></p>
+<blockquote>
+<p>참고: Fiber 아키텍처는 이미 React 16에서 도입됐고, 동기 렌더링과 동시성 렌더링은 <strong>둘 다 Fiber 위에서 동작</strong>한다. 따라서 대비는 "Fiber 이전 vs Concurrent"가 아니라 "동기 렌더링 vs 동시성 렌더링"이다.</p>
+</blockquote>
 <ul>
-<li><strong>기존 React(Fiber 이전)</strong>: 렌더링이 <strong>단일 스레드</strong>(Synchronous, 동기식)로 진행됨 → 하나의 업데이트가 실행되면 그게 끝날 때까지 다른 작업을 못 함.</li>
-<li><strong>Concurrent Mode</strong>: React가 업데이트를 <strong>비동기적으로 처리</strong>(Asynchronous)할 수 있도록 개선 → 중간에 렌더링을 <strong>일시 중단</strong>(pausing)하고, <strong>우선순위</strong>(priority)가 높은 작업을 먼저 실행할 수 있음.</li>
+<li><strong>동기(legacy) 렌더링</strong>: 렌더링이 <strong>동기적</strong>(Synchronous)으로 진행됨 → 하나의 업데이트가 시작되면 그게 끝날 때까지 중단 없이 진행되어 다른 작업을 못 함.</li>
+<li><strong>동시성 렌더링(Concurrent)</strong>: React가 업데이트를 <strong>비동기적으로 처리</strong>(Asynchronous)할 수 있도록 개선 → 중간에 렌더링을 <strong>일시 중단</strong>(pausing)하고, <strong>우선순위</strong>(priority)가 높은 작업을 먼저 실행할 수 있음.</li>
 </ul>
 <hr>
 <h2>Concurrent Mode의 핵심 특징</h2>
@@ -35,8 +38,8 @@
 <li>사용자가 버튼을 클릭해서 페이지를 전환하면, 화면 전환을 <strong>최우선적으로 실행</strong>.</li>
 <li>이후 백그라운드에서 데이터가 로드되도록 함.</li>
 </ul>
-<h3>3. 유휴 시간 활용(Time-Slicing)</h3>
-<p>React 18에서는 브라우저가 <strong>유휴 시간</strong>(Idle Time)을 활용해서 작업을 조금씩 나눠 실행할 수 있음. 이를 <strong>Time-Slicing</strong>(시간 분할)이라고 함.</p>
+<h3>3. 작업 분할(Time-Slicing)</h3>
+<p>React는 <strong>자체 우선순위 스케줄러</strong>(브라우저의 <code>requestIdleCallback</code>이 아니라 <code>MessageChannel</code> 기반)를 사용해서, 우선순위에 따라 렌더링 작업을 조금씩 쪼개고 중간중간 브라우저에 제어권을 양보(yield)함. 이를 <strong>Time-Slicing</strong>(시간 분할)이라고 함.</p>
 <p>예제:</p>
 <ul>
 <li>예전에는 하나의 컴포넌트 렌더링이 오래 걸리면, 그동안 UI가 멈춘 것처럼 보였음.</li>
@@ -88,7 +91,7 @@ function SearchComponent() {
 </ul>
 <hr>
 <h3>2. <code>useDeferredValue()</code></h3>
-<p><code>useDeferredValue()</code>는 <strong>입력값을 지연(Defer)시켜서, 높은 우선순위 작업(예: 타이핑)을 방해하지 않도록 함</strong>.</p>
+<p><code>useDeferredValue()</code>는 <strong>어떤 값의 지연된 버전을 만들어서, 그 지연된 값으로 무거운 렌더링을 수행하게 함</strong>. 덕분에 높은 우선순위 작업(예: 타이핑)을 방해하지 않음.</p>
 <p><strong>예제:</strong> 사용자가 검색어를 입력할 때, 검색어를 즉시 반영하지만 결과는 지연됨.</p>
 <pre><code class="language-jsx">import { useState, useDeferredValue } from 'react';
 

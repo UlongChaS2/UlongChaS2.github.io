@@ -151,8 +151,8 @@ const DataGrid = () => {
 <p><code>position: relative</code> div를 그리드 바깥에 추가하면:</p>
 <ul>
 <li>브라우저 layout 트리에서 새로운 containing block이 생성됨</li>
-<li>DevExtreme의 ResizeObserver가 컨테이너 변화로 인식할 수 있음</li>
-<li><strong>editMode와 무관하게 항상 존재하는 overhead</strong></li>
+<li>다만 <code>position: relative</code> 자체가 자식의 ResizeObserver를 반복 발화시키지는 않는다. containing block을 만들 뿐이므로, 크기 변화가 없는데도 재계산이 상시 발생한다고 단정하기는 어렵다</li>
+<li>여기서 체감된 overhead의 실제 원인은 wrapper가 더한 DOM/레이아웃 계층 등 다른 요인일 가능성이 있다(추정)</li>
 </ul>
 <h4>2. Context 구독 — 불필요한 re-render</h4>
 <p><code>isTransitioning</code>을 Context에 넣고 Grid 컴포넌트에서 구독하게 했다.</p>
@@ -245,8 +245,8 @@ useEffect(() => {
 <tbody>
 <tr>
 <td><code>Box pos="relative"</code> wrapper</td>
-<td>ResizeObserver 재계산, grid repaint</td>
-<td>항상</td>
+<td>추가 DOM/레이아웃 계층으로 인한 overhead (추정)</td>
+<td>상시</td>
 </tr>
 <tr>
 <td><code>isTransitioning</code> 구독</td>
