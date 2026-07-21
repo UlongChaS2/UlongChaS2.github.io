@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Layout from 'src/components/GlobalLayout';
-import GlobalStyles from 'src/components/GlobalStyles';
 import { IconArrowRight } from 'src/components/icons';
 import { HeroChip } from 'src/styles/PageStyles';
 
@@ -165,9 +164,7 @@ const Fallback = styled.p`
 `;
 
 const ResumePage = () => (
-  <>
-    <GlobalStyles />
-    <Layout>
+  <Layout>
       <Page>
         <HeadRow>
           <Titles>
@@ -200,7 +197,6 @@ const ResumePage = () => (
         </MobileNotice>
       </Page>
     </Layout>
-  </>
 );
 
 export const Head = () => (

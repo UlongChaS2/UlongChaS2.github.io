@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Layout from 'src/components/GlobalLayout';
-import GlobalStyles from 'src/components/GlobalStyles';
 import { IconChevronRight } from 'src/components/icons';
 import { pickAccent, postLabel } from 'src/styles/accents';
 import {
@@ -46,9 +45,7 @@ interface PostListPageProps {
 }
 
 const PostListPage: React.FC<PostListPageProps> = ({ title, subtitle, posts, emptyMessage }) => (
-  <>
-    <GlobalStyles />
-    <Layout>
+  <Layout>
       <PageWrapper>
         <PageHeader>
           <PageTitle>{title}</PageTitle>
@@ -86,7 +83,6 @@ const PostListPage: React.FC<PostListPageProps> = ({ title, subtitle, posts, emp
         )}
       </PageWrapper>
     </Layout>
-  </>
 );
 
 export default PostListPage;

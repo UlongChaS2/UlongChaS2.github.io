@@ -7,6 +7,7 @@
 import * as React from 'react';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 import { ThemeProvider, useThemeTokens } from './src/contexts/ThemeContext';
+import GlobalStyles from './src/components/GlobalStyles';
 
 const EmotionWrapper = ({ children }) => {
   const tokens = useThemeTokens();
@@ -18,6 +19,16 @@ export const wrapRootElement = ({ element }) => {
     <ThemeProvider>
       <EmotionWrapper>{element}</EmotionWrapper>
     </ThemeProvider>
+  );
+};
+
+// GlobalStyles를 페이지 바깥에서 한 번만 렌더한다(브라우저와 동일).
+export const wrapPageElement = ({ element }) => {
+  return (
+    <>
+      <GlobalStyles />
+      {element}
+    </>
   );
 };
 

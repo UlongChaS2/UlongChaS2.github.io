@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Layout from '../components/GlobalLayout';
-import GlobalStyles from '../components/GlobalStyles';
 import PostCard from '../components/PostCard';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
@@ -112,9 +111,7 @@ const IndexPage = () => {
   };
 
   return (
-    <>
-      <GlobalStyles />
-      <Layout>
+    <Layout>
         <PageInner>
           <HomeHero>
             <HeroChip>오늘도 한 개 배웠어요</HeroChip>
@@ -200,7 +197,6 @@ const IndexPage = () => {
           </Section>
         </PageInner>
       </Layout>
-    </>
   );
 };
 

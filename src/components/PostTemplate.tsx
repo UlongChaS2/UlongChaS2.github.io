@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Link } from 'gatsby';
 import { GatsbyImage, IGatsbyImageData, getImage } from 'gatsby-plugin-image';
 import Layout from 'src/components/GlobalLayout';
-import GlobalStyles from 'src/components/GlobalStyles';
 import TableOfContents from 'src/components/TableOfContents';
 import Comments from 'src/components/Comments';
 import {
@@ -53,9 +52,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
   const image = featuredImage ? getImage(featuredImage) : null;
 
   return (
-    <>
-      <GlobalStyles />
-      <Layout>
+    <Layout>
         <PostContainer>
           <PostHeader>
             <PostHeaderContent>
@@ -109,7 +106,6 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
           <Comments />
         </PostContainer>
       </Layout>
-    </>
   );
 };
 

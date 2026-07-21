@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
 import Layout from '../components/GlobalLayout';
-import GlobalStyles from '../components/GlobalStyles';
 import styled from '@emotion/styled';
 
 // ============================================================
@@ -131,9 +130,7 @@ const Emoji = styled.div`
 `;
 
 const NotFoundPage = () => (
-  <>
-    <GlobalStyles />
-    <Layout>
+  <Layout>
       <NotFoundContainer>
         <Emoji>🔍</Emoji>
         <ErrorCode>404</ErrorCode>
@@ -148,7 +145,6 @@ const NotFoundPage = () => (
         </LinksContainer>
       </NotFoundContainer>
     </Layout>
-  </>
 );
 
 export const Head = () => (

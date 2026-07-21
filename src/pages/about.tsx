@@ -2,7 +2,6 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import Layout from 'src/components/GlobalLayout';
-import GlobalStyles from 'src/components/GlobalStyles';
 import { IconArrowRight } from 'src/components/icons';
 import { accentVars } from 'src/styles/accents';
 import { HeroChip, HeroHeadline, HeroHighlight, HeroLede } from 'src/styles/PageStyles';
@@ -257,9 +256,7 @@ const CONTACTS: Array<{ label: string; value: string; href: string; internal?: b
 ];
 
 const AboutPage = () => (
-  <>
-    <GlobalStyles />
-    <Layout hideCta>
+  <Layout hideCta>
       <Page>
         <Hero>
           <HeroCopy>
@@ -348,7 +345,6 @@ const AboutPage = () => (
         </Block>
       </Page>
     </Layout>
-  </>
 );
 
 export const Head = () => (
