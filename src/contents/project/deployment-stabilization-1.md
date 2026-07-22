@@ -1,6 +1,6 @@
 ---
 title: '운영 배포 안정화기 (1) — 삭제 후 재업로드에서 벗어나기'
-date: '2026-05-20'
+date: '2026-05-28'
 category: 'project'
 keywords: ['배포', '롤백', 'Infra']
 ---

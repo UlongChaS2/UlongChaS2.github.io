@@ -1,6 +1,6 @@
 ---
 title: '운영 배포 안정화기 (2) — CI/CD와 QA 파이프라인 붙이기'
-date: '2026-05-27'
+date: '2026-05-29'
 category: 'project'
 keywords: ['CI/CD', 'GitHub Actions', 'Infra']
 ---
