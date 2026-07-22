@@ -24,10 +24,10 @@ const Badge = styled.span`
   @media (min-width: 768px) {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 6px;
     /* 로딩→숫자 등장 시 폭이 안 변하도록 자리를 미리 확보 */
-    min-width: 68px;
+    min-width: 52px;
     padding: 7px 13px;
     border-radius: var(--radius-full);
     background: var(--color-bg-subtle);
@@ -37,7 +37,7 @@ const Badge = styled.span`
 
   .num {
     min-width: 18px;
-    text-align: left;
+    text-align: right;
     font-family: var(--font-mono);
     font-size: 13px;
     font-weight: var(--fw-semibold);
@@ -64,9 +64,10 @@ const VisitorCount: React.FC = () => {
       .then((d) => {
         if (cancelled) return;
         // count_unique = 순 방문자, count = 총 조회수. 방문자 우선.
-        const n = d?.count_unique ?? d?.count;
-        if (n) {
-          setVisitors(String(n));
+        // GoatCounter가 자리 구분자를 섞어 주는 경우가 있어 숫자만 추린 뒤 콤마를 다시 찍는다.
+        const digits = String(d?.count_unique ?? d?.count ?? '').replace(/\D/g, '');
+        if (digits) {
+          setVisitors(Number(digits).toLocaleString('ko-KR'));
           setState('ok');
         } else {
           setState('hide');
