@@ -14,8 +14,8 @@ import { IconEye } from './icons';
 // 배지에 min-width를 줘서 로딩 중에도 자리를 미리 잡아둔다.
 //
 // 헤더는 좁아 모바일에서는 로고·햄버거만 남기고 이 배지를 숨긴다.
-// 기간별(오늘/주간)은 인증 API가 필요해 정적 사이트에선 못 하므로
-// 전체 누적만 보여준다.
+// 배지에는 전체 누적을, 툴팁에는 오늘 수를 함께 보여준다.
+// 오늘 수는 공개 카운터의 ?start= 파라미터로 받는다 — 인증 불필요.
 // ============================================================
 
 const Badge = styled.span`
@@ -49,8 +49,22 @@ const Badge = styled.span`
 
 type State = 'loading' | 'ok' | 'hide';
 
+// count_unique = 순 방문자, count = 총 조회수. 방문자 우선.
+// GoatCounter가 자리 구분자를 섞어 주는 경우가 있어 숫자만 추린 뒤 콤마를 다시 찍는다.
+const parseCount = (d: { count_unique?: unknown; count?: unknown } | null): string => {
+  const digits = String(d?.count_unique ?? d?.count ?? '').replace(/\D/g, '');
+  return digits ? Number(digits).toLocaleString('ko-KR') : '';
+};
+
+const fetchCount = (query = ''): Promise<string> =>
+  fetch(`https://${GOATCOUNTER_CODE}.goatcounter.com/counter/TOTAL.json${query}`)
+    .then((r) => (r.ok ? r.json() : null))
+    .then(parseCount)
+    .catch(() => '');
+
 const VisitorCount: React.FC = () => {
   const [visitors, setVisitors] = React.useState('');
+  const [today, setToday] = React.useState('');
   const [state, setState] = React.useState<State>('loading');
 
   React.useEffect(() => {
@@ -59,24 +73,25 @@ const VisitorCount: React.FC = () => {
       return;
     }
     let cancelled = false;
-    fetch(`https://${GOATCOUNTER_CODE}.goatcounter.com/counter/TOTAL.json`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (cancelled) return;
-        // count_unique = 순 방문자, count = 총 조회수. 방문자 우선.
-        // GoatCounter가 자리 구분자를 섞어 주는 경우가 있어 숫자만 추린 뒤 콤마를 다시 찍는다.
-        const digits = String(d?.count_unique ?? d?.count ?? '').replace(/\D/g, '');
-        if (digits) {
-          setVisitors(Number(digits).toLocaleString('ko-KR'));
-          setState('ok');
-        } else {
-          setState('hide');
-        }
-      })
-      .catch(() => {
+
+    fetchCount().then((total) => {
+      if (cancelled) return;
+      if (total) {
+        setVisitors(total);
+        setState('ok');
+      } else {
         // 공개 카운터가 꺼져 있으면(403) 배지 자체를 숨긴다.
-        if (!cancelled) setState('hide');
-      });
+        setState('hide');
+      }
+    });
+
+    // 오늘 0시(로컬)부터의 수. 실패해도 툴팁에서만 빠지면 되니 조용히 무시.
+    const now = new Date();
+    const ymd = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    fetchCount(`?start=${ymd}`).then((n) => {
+      if (!cancelled) setToday(n);
+    });
+
     return () => {
       cancelled = true;
     };
@@ -87,7 +102,15 @@ const VisitorCount: React.FC = () => {
   if (state === 'hide') return null;
 
   return (
-    <Badge title={visitors ? `지금까지 ${visitors}명이 다녀갔어요` : undefined}>
+    <Badge
+      title={
+        visitors
+          ? today
+            ? `오늘 ${today}명 · 지금까지 ${visitors}명이 다녀갔어요`
+            : `지금까지 ${visitors}명이 다녀갔어요`
+          : undefined
+      }
+    >
       <IconEye size={15} />
       <span className="num">{visitors}</span>
     </Badge>
