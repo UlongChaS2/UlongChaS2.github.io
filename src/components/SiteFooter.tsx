@@ -76,8 +76,10 @@ const Action = styled(Link)`
   flex-shrink: 0;
   transition: background var(--transition-fast);
 
+  /* 전역 a:hover의 링크색이 이기지 못하도록 색을 다시 선언한다 */
   &:hover {
     background: var(--color-brand-hover);
+    color: var(--color-text-inverse);
   }
 `;
 

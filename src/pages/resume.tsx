@@ -83,8 +83,10 @@ const PrimaryAction = styled.a`
   text-decoration: none;
   transition: background var(--transition-fast);
 
+  /* 전역 a:hover의 링크색이 이기지 못하도록 색을 다시 선언한다 */
   &:hover {
     background: var(--color-brand-hover);
+    color: var(--color-text-inverse);
   }
 `;
 
@@ -103,6 +105,7 @@ const SecondaryAction = styled.a`
 
   &:hover {
     border-color: var(--color-border-strong);
+    color: var(--color-text-primary);
   }
 `;
 

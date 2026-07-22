@@ -82,6 +82,7 @@ const LinkButton = styled(Link)`
 
   &:hover {
     background: var(--color-brand-hover);
+    color: white;
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
