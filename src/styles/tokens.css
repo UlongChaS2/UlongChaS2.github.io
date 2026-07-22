@@ -141,6 +141,19 @@
   --color-bg-code-block: #191F28;
   --color-text-on-code:  #E5E8EB;
 
+  /* === Syntax Highlight (Prism) ===
+     코드 블록은 두 모드 모두 어두운 서피스라 토큰 색도 양쪽 다 밝은 계열이다.
+     One Dark 팔레트 기준, 라이트 쪽 배경(#191F28)이 다크(#101014)보다 밝으므로
+     여기서는 한 단계 밝게 잡아 대비를 맞춘다. 전부 배경 대비 4.5:1 이상. */
+  --color-code-keyword:     #CB8FE6;
+  --color-code-string:      #A5D18A;
+  --color-code-comment:     #8B95A1;
+  --color-code-function:    #7FC0F5;
+  --color-code-number:      #E0A96B;
+  --color-code-operator:    #68C6D2;
+  --color-code-punctuation: #BCC3CE;
+  --color-code-class:       #EDCB8C;
+
   /* Text */
   --color-text-primary:   #191F28;
   /* 긴 본문 전용 — secondary보다 진하게 잡아 18px 문단에서 대비를 확보한다 */
@@ -186,6 +199,16 @@
   --color-bg-code:    #26262C;
   --color-bg-code-block: #101014;
   --color-text-on-code:  #E5E8EB;
+
+  /* Syntax Highlight (Prism) — 배경이 더 어두우므로 One Dark 원본 채도를 그대로 쓴다 */
+  --color-code-keyword:     #C678DD;
+  --color-code-string:      #98C379;
+  --color-code-comment:     #7F8896;
+  --color-code-function:    #61AFEF;
+  --color-code-number:      #D19A66;
+  --color-code-operator:    #56B6C2;
+  --color-code-punctuation: #ABB2BF;
+  --color-code-class:       #E5C07B;
 
   /* Text */
   --color-text-primary:    #EDEDEF;

@@ -210,6 +210,111 @@ export const PostContent = styled.div`
     }
   }
 
+  /* ----------------------------------------------------------
+     구문 하이라이팅 (gatsby-remark-prismjs)
+     Prism 기본 테마 CSS는 import하지 않는다. 테마 색이 tokens.css 밖에
+     생기면 다크 모드에서 팔레트를 두 벌 관리해야 하기 때문이다.
+     .token.* 를 여기서 직접 토큰 변수에 매핑한다.
+     ---------------------------------------------------------- */
+  .gatsby-highlight {
+    position: relative;
+    margin-bottom: 32px;
+
+    /* 언어 라벨. 아래 pre의 padding-top이 라벨 자리를 비워둔다 */
+    &::before {
+      content: attr(data-language);
+      position: absolute;
+      top: var(--space-3);
+      /* pre의 좌우 패딩(26px)과 대략 맞춰 코드 본문 오른쪽 끝에 정렬한다 */
+      right: var(--space-6);
+      font-family: var(--font-mono);
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-medium);
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+      /* 코드 서피스 위의 보조 텍스트 색 — 라이트/다크 모두 대비 검증됨 */
+      color: var(--color-code-comment);
+      pointer-events: none;
+    }
+
+    /* 언어를 명시하지 않은 블록은 "TEXT"라는 의미 없는 라벨이 붙는다 */
+    &[data-language='text']::before {
+      content: none;
+    }
+
+    pre {
+      margin-bottom: 0;
+      padding-top: 40px;
+    }
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: var(--color-code-comment);
+    font-style: italic;
+  }
+
+  .token.punctuation {
+    color: var(--color-code-punctuation);
+  }
+
+  .token.property,
+  .token.tag,
+  .token.constant,
+  .token.symbol,
+  .token.deleted,
+  .token.boolean,
+  .token.number {
+    color: var(--color-code-number);
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.inserted,
+  .token.regex {
+    color: var(--color-code-string);
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .token.variable {
+    color: var(--color-code-operator);
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.keyword,
+  .token.important {
+    color: var(--color-code-keyword);
+  }
+
+  .token.function {
+    color: var(--color-code-function);
+  }
+
+  .token.class-name {
+    color: var(--color-code-class);
+  }
+
+  .token.namespace {
+    opacity: 0.7;
+  }
+
+  .token.important,
+  .token.bold {
+    font-weight: var(--fw-bold);
+  }
+
+  .token.italic {
+    font-style: italic;
+  }
+
   /* 인용문은 형광펜 콜아웃으로 쓴다 */
   blockquote {
     border: none;

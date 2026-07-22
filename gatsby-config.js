@@ -33,7 +33,21 @@ module.exports = {
       // 카드에 쓰이는 excerpt가 딱 그 요약문이 된다. 구분자가 없으면
       // excerpt는 본문을 평문으로 눌러서 헤딩("개요")까지 문장에 섞는다.
       resolve: `gatsby-transformer-remark`,
-      options: { excerpt_separator: `<!--more-->` },
+      options: {
+        excerpt_separator: `<!--more-->`,
+        // 코드 블록 구문 하이라이팅. Prism 기본 테마 CSS는 import하지 않고
+        // .token.* 색을 tokens.css 변수로 직접 매핑한다(PostStyles.ts).
+        plugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              // 인라인 코드(`foo`)는 기존 브랜드 뱃지 스타일을 그대로 쓴다.
+              // 켜두면 prism이 language-text 클래스를 덧붙여 스타일이 흔들린다.
+              noInlineHighlight: true,
+            },
+          },
+        ],
+      },
     },
     `gatsby-plugin-image`,
     {
