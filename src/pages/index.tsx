@@ -2,20 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Layout from '../components/GlobalLayout';
 import PostCard from '../components/PostCard';
+import FeaturedSlider, { SliderPost } from '../components/FeaturedSlider';
 import { graphql, useStaticQuery, Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { pickAccent, postLabel } from 'src/styles/accents';
 import {
-  FeaturedCard,
-  FeaturedImageWrapper,
-  FeaturedNoThumbnail,
-  FeaturedContent,
-  FeaturedBadge,
-  FeaturedLabel,
-  FeaturedTitle,
-  FeaturedExcerpt,
-  FeaturedMeta,
-  FeaturedLink,
   SectionTitle,
   PostGrid,
   Section,
@@ -29,9 +18,15 @@ import {
 
 // ============================================================
 // index.tsx — 홈
-// 히어로 → Featured 포스트 → 최근 글 그리드
+// 히어로 → Featured 슬라이더 → 스터디 최근 3 → 프로젝트 최근 3
 // (하단 소개 CTA·저작권은 Layout의 SiteFooter가 담당)
+// 디자인 원본: Paper "Home v2 — 슬라이드" 아트보드.
 // ============================================================
+
+/** 슬라이더에 태울 최근 글 수 */
+const FEATURED_COUNT = 5;
+/** 카테고리 섹션당 카드 수 */
+const SECTION_COUNT = 3;
 
 const PageInner = styled.div`
   max-width: 1200px;
@@ -69,14 +64,43 @@ const MoreLink = styled(Link)`
   }
 `;
 
-const MetaDot = styled.span`
-  color: var(--color-border-strong);
-`;
+/** 스터디/프로젝트 공용 최근 글 섹션 */
+const RecentSection: React.FC<{ title: string; to: string; posts: SliderPost[] }> = ({ title, to, posts }) => {
+  if (posts.length === 0) return null;
+  return (
+    <Section>
+      <SectionHeadRow>
+        <SectionTitle>
+          {title}
+          <SectionCount>최신글 {posts.length}</SectionCount>
+        </SectionTitle>
+        <MoreLink to={to}>전체 보기</MoreLink>
+      </SectionHeadRow>
+
+      <PostGrid>
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            title={post.frontmatter.title}
+            excerpt={post.excerpt}
+            date={post.frontmatter.date}
+            category={post.frontmatter.category}
+            slug={post.fields.slug}
+            keywords={post.frontmatter.keywords}
+            thumbVariant={post.frontmatter.thumbVariant}
+            readTime={post.timeToRead ? `${post.timeToRead}분` : undefined}
+            thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
+          />
+        ))}
+      </PostGrid>
+    </Section>
+  );
+};
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(sort: { frontmatter: { date: DESC } }, limit: 10) {
+      allMarkdownRemark(sort: { frontmatter: { date: DESC } }, limit: 20) {
         nodes {
           id
           frontmatter {
@@ -84,6 +108,7 @@ const IndexPage = () => {
             date(formatString: "YYYY년 MM월 DD일")
             category
             keywords
+            thumbVariant
             thumbnail {
               childImageSharp {
                 gatsbyImageData(width: 800, height: 500, placeholder: BLURRED)
@@ -96,107 +121,49 @@ const IndexPage = () => {
           }
           timeToRead
         }
-        totalCount
       }
     }
   `);
 
-  const posts = data.allMarkdownRemark.nodes;
-  const featuredPost = posts[0];
-  const restPosts = posts.slice(1);
-
-  const getFeaturedImage = (post: any) => {
-    const img = post?.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData;
-    return img ? getImage(img) : null;
-  };
+  const posts: SliderPost[] = data.allMarkdownRemark.nodes;
+  const featuredPosts = posts.slice(0, FEATURED_COUNT);
+  const studyPosts = posts.filter((p) => p.frontmatter.category === 'study').slice(0, SECTION_COUNT);
+  const projectPosts = posts.filter((p) => p.frontmatter.category === 'project').slice(0, SECTION_COUNT);
 
   return (
     <Layout>
-        <PageInner>
-          <HomeHero>
-            <HeroChip>오늘도 한 개 배웠어요</HeroChip>
-            <HeroHeadline>
-              배운 걸 잊지 않으려고
-              <br />
-              <HeroHighlight>기록해두는 곳</HeroHighlight>
-            </HeroHeadline>
-            <HeroLede>
-              React, TypeScript, 그리고 매일 부딪히는 문제들.
-              <br />
-              삽질한 과정까지 그대로 남겨둡니다.
-            </HeroLede>
-          </HomeHero>
+      <PageInner>
+        <HomeHero>
+          <HeroChip>오늘도 한 개 배웠어요</HeroChip>
+          <HeroHeadline>
+            배운 걸 잊지 않으려고
+            <br />
+            <HeroHighlight>기록해두는 곳</HeroHighlight>
+          </HeroHeadline>
+          <HeroLede>
+            React, TypeScript, 그리고 매일 부딪히는 문제들.
+            <br />
+            삽질한 과정까지 그대로 남겨둡니다.
+          </HeroLede>
+        </HomeHero>
 
-          {/* ── Featured Post ── */}
-          {featuredPost && (
-            <FeaturedLink to={`/${featuredPost.frontmatter.category}${featuredPost.fields.slug}`}>
-              <FeaturedCard style={pickAccent(featuredPost.fields.slug)}>
-                {getFeaturedImage(featuredPost) ? (
-                  <FeaturedImageWrapper>
-                    <GatsbyImage image={getFeaturedImage(featuredPost)!} alt={featuredPost.frontmatter.title} />
-                  </FeaturedImageWrapper>
-                ) : (
-                  <FeaturedNoThumbnail>
-                    {postLabel(featuredPost.frontmatter.keywords, featuredPost.frontmatter.category)}
-                  </FeaturedNoThumbnail>
-                )}
+        <FeaturedSlider posts={featuredPosts} />
 
-                <FeaturedContent>
-                  <FeaturedBadge>
-                    <FeaturedLabel>{featuredPost.frontmatter.category}</FeaturedLabel>
-                  </FeaturedBadge>
-                  <FeaturedTitle>{featuredPost.frontmatter.title}</FeaturedTitle>
-                  <FeaturedExcerpt>{featuredPost.excerpt}</FeaturedExcerpt>
-
-                  <FeaturedMeta>
-                    <time>{featuredPost.frontmatter.date}</time>
-                    <MetaDot>·</MetaDot>
-                    <span>{featuredPost.timeToRead || 5}분</span>
-                  </FeaturedMeta>
-                </FeaturedContent>
-              </FeaturedCard>
-            </FeaturedLink>
-          )}
-
-          {/* ── 최근 글 그리드 ── */}
-          <Section>
-            {restPosts.length > 0 ? (
-              <>
-                <SectionHeadRow>
-                  <SectionTitle>
-                    최근에 쓴 글
-                    <SectionCount>{data.allMarkdownRemark.totalCount}</SectionCount>
-                  </SectionTitle>
-                  <MoreLink to="/study/">전체 보기</MoreLink>
-                </SectionHeadRow>
-
-                <PostGrid>
-                  {restPosts.map((post: any) => (
-                    <PostCard
-                      key={post.id}
-                      title={post.frontmatter.title}
-                      excerpt={post.excerpt}
-                      date={post.frontmatter.date}
-                      category={post.frontmatter.category}
-                      slug={post.fields.slug}
-                      keywords={post.frontmatter.keywords}
-                      readTime={post.timeToRead ? `${post.timeToRead}분` : undefined}
-                      thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
-                    />
-                  ))}
-                </PostGrid>
-              </>
-            ) : posts.length === 0 ? (
-              <EmptyState>
-                <p>
-                  아직 작성된 글이 없어요.
-                  <br />첫 번째 글을 써보세요!
-                </p>
-              </EmptyState>
-            ) : null}
-          </Section>
-        </PageInner>
-      </Layout>
+        {posts.length === 0 ? (
+          <EmptyState>
+            <p>
+              아직 작성된 글이 없어요.
+              <br />첫 번째 글을 써보세요!
+            </p>
+          </EmptyState>
+        ) : (
+          <>
+            <RecentSection title="스터디" to="/study/" posts={studyPosts} />
+            <RecentSection title="프로젝트" to="/project/" posts={projectPosts} />
+          </>
+        )}
+      </PageInner>
+    </Layout>
   );
 };
 

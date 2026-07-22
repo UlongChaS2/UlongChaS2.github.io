@@ -88,49 +88,6 @@ export const FeaturedImageWrapper = styled.div`
   }
 `;
 
-export const FeaturedNoThumbnail = styled.div`
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--radius-2xl);
-  background: var(--card-accent-surface);
-  color: var(--card-accent-ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  font-family: var(--font-mono);
-  font-size: 44px;
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--ls-tight);
-
-  /* 좌하단 큰 원 + 우상단 형광색 사각형 — 히어로 카드에만 주는 장식 */
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-  }
-
-  &::before {
-    left: -40px;
-    bottom: -60px;
-    width: 180px;
-    height: 180px;
-    border-radius: var(--radius-full);
-    background: currentColor;
-    opacity: 0.16;
-  }
-
-  &::after {
-    right: 36px;
-    top: 36px;
-    width: 56px;
-    height: 56px;
-    border-radius: 18px;
-    background: var(--color-highlighter);
-  }
-`;
-
 export const FeaturedContent = styled.div`
   padding: var(--space-6) 0 0;
   display: flex;
