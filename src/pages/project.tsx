@@ -29,6 +29,7 @@ export const query = graphql`
           date(formatString: "YYYY년 MM월 DD일")
           category
           keywords
+          thumbVariant
         }
         excerpt(pruneLength: 140)
         fields {

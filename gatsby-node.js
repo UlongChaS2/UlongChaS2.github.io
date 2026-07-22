@@ -16,6 +16,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       date: Date @dateformat
       category: String
       keywords: [String]
+      thumbVariant: String
       thumbnail: File @fileByRelativePath
       featuredImage: File @fileByRelativePath
     }

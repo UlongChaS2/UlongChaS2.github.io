@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Layout from 'src/components/GlobalLayout';
+import styled from '@emotion/styled';
 import { IconChevronRight } from 'src/components/icons';
-import { pickAccent, postLabel } from 'src/styles/accents';
+import { ThumbMock } from 'src/components/PostThumbnail';
+import { pickAccent, pickVariant } from 'src/styles/accents';
 import {
   PageWrapper,
   PageHeader,
@@ -37,11 +39,22 @@ export interface ListPost {
     date: string;
     category: string;
     keywords?: (string | null)[] | null;
+    thumbVariant?: string | null;
   };
   excerpt: string;
   fields: { slug: string };
   timeToRead?: number | null;
 }
+
+/** 104px(모바일 72px) 슬롯에 170px 목업을 축소해서 넣는다 */
+const ScaledMock = styled.div`
+  transform: scale(0.55);
+  flex-shrink: 0;
+
+  @media (max-width: 639px) {
+    transform: scale(0.4);
+  }
+`;
 
 interface PostListPageProps {
   title: string;
@@ -115,7 +128,19 @@ const PostListPage: React.FC<PostListPageProps> = ({ title, subtitle, posts, emp
                 to={`/${post.frontmatter.category}${post.fields.slug}`}
                 style={pickAccent(post.fields.slug)}
               >
-                <RowThumb>{postLabel(post.frontmatter.keywords, post.frontmatter.category)}</RowThumb>
+                <RowThumb>
+                  <ScaledMock>
+                    <ThumbMock
+                      slug={post.fields.slug}
+                      variant={pickVariant(
+                        post.frontmatter.thumbVariant,
+                        post.frontmatter.keywords,
+                        post.frontmatter.title,
+                        post.fields.slug,
+                      )}
+                    />
+                  </ScaledMock>
+                </RowThumb>
                 <RowBody>
                   <RowTitle>{post.frontmatter.title}</RowTitle>
                   <RowExcerpt>{post.excerpt}</RowExcerpt>

@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import { pickAccent, postLabel } from 'src/styles/accents';
+import { pickAccent, pickVariant, postLabel } from 'src/styles/accents';
+import PostThumbnail from 'src/components/PostThumbnail';
 
 // ============================================================
 // PostCard
@@ -58,44 +59,6 @@ const ImageWrapper = styled.div`
   ${Card}:hover & img {
     transform: scale(1.04);
   }
-`;
-
-/**
- * 이미지가 없는 포스트의 대체 썸네일.
- * 배경/글자색은 accent 토큰을 CSS 변수로 주입받는다.
- */
-const KeywordThumb = styled.div`
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: var(--card-accent-surface);
-  color: var(--card-accent-ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-
-  /* 우측 상단 원형 도형 — 카드마다 같은 자리에 두어 리듬을 만든다 */
-  &::before {
-    content: '';
-    position: absolute;
-    right: -30px;
-    top: -30px;
-    width: 120px;
-    height: 120px;
-    border-radius: var(--radius-full);
-    background: currentColor;
-    opacity: 0.14;
-  }
-`;
-
-const KeywordText = styled.span`
-  position: relative;
-  font-family: var(--font-mono);
-  font-size: 26px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-tight);
 `;
 
 const CardContent = styled.div`
@@ -168,6 +131,7 @@ export interface PostCardProps {
   readTime?: string;
   keywords?: (string | null)[] | null;
   thumbnail?: IGatsbyImageData | null;
+  thumbVariant?: string | null;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -179,6 +143,7 @@ const PostCard: React.FC<PostCardProps> = ({
   readTime = '5분',
   keywords,
   thumbnail,
+  thumbVariant,
 }) => {
   const fullPath = `/${category}${slug}`;
   const thumbnailImage = thumbnail ? getImage(thumbnail) : null;
@@ -191,9 +156,11 @@ const PostCard: React.FC<PostCardProps> = ({
             <GatsbyImage image={thumbnailImage} alt={title} />
           </ImageWrapper>
         ) : (
-          <KeywordThumb>
-            <KeywordText>{postLabel(keywords, category)}</KeywordText>
-          </KeywordThumb>
+          <PostThumbnail
+            variant={pickVariant(thumbVariant, keywords, title, slug)}
+            label={postLabel(keywords, category)}
+            slug={slug}
+          />
         )}
 
         <CardContent>

@@ -3,6 +3,7 @@ title: '외부 데이터 동기화를 비동기 job으로 — 멱등, 실패 UX,
 date: '2026-07-15'
 category: 'project'
 keywords: ['비동기 job', 'SSE', 'FE']
+thumbVariant: 'pipeline'
 ---
 
 > 느린 외부 연동을 "동기 요청/응답"에서 "식별 가능한 비동기 job(즉시 반환 + SSE 진행 관측 + 폴링 폴백 + timeout)"으로 바꾸고, 연타 방어(멱등)·명확한 실패 UX·다중 소스 일반화까지 끌고 간 실전 기록.

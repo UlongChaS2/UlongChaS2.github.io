@@ -14,8 +14,18 @@ title: '포스트 제목'
 date: '2025-01-15'
 category: 'study'          # 'study' 또는 'project'
 keywords: ['zod', 'CI']    # 선택. 첫 항목이 카드 썸네일 라벨이 된다
+thumbnail: './images/slug.png'   # 선택. 실제 이미지를 쓸 때만
+thumbVariant: 'pipeline'   # 선택. 일러스트 썸네일 변형 강제 지정
 ---
 ```
+
+`thumbnail`이 없으면 일러스트 썸네일(`PostThumbnail`)이 나온다. 우선순위:
+
+1. **글 전용 일러스트** — `src/components/thumbs/`의 슬러그 레지스트리. **새 글을 쓰면 여기에
+   그 글만의 그림을 하나 만들어 등록하는 것까지가 글쓰기 워크플로다** (studyThumbs/projectThumbs에
+   컴포넌트 추가 → index.ts에 슬러그 등록). 그림은 primitives.tsx 조각으로만 조립한다.
+2. 등록 전 폴백 — 변형 프리셋 6종. keywords·제목에서 추론하고(`accents.ts`의 `pickVariant`),
+   어긋나면 `thumbVariant`로 못 박는다: `browser` | `code-check` | `warning-list` | `table` | `pipeline` | `theme-split`
 
 - URL 패턴: `/study/{slug}`, `/project/{slug}`
 - 슬러그는 파일명 기반으로 자동 생성 (`gatsby-node.js`)
