@@ -11,10 +11,12 @@ import { useStaticQuery, graphql } from 'gatsby';
 interface SeoProps {
   title: string;
   description?: string;
+  pathname?: string;
+  type?: 'website' | 'article';
   children?: React.ReactNode;
 }
 
-function Seo({ title, description, children }: SeoProps) {
+function Seo({ title, description, pathname = '/', type = 'website', children }: SeoProps) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -22,6 +24,7 @@ function Seo({ title, description, children }: SeoProps) {
           title
           description
           author
+          siteUrl
         }
       }
     }
@@ -29,17 +32,25 @@ function Seo({ title, description, children }: SeoProps) {
 
   const metaDescription = description || site.siteMetadata.description;
   const defaultTitle = site.siteMetadata?.title;
+  const pageTitle = defaultTitle && title !== defaultTitle ? `${title} | ${defaultTitle}` : title;
+  const siteUrl = site.siteMetadata?.siteUrl?.replace(/\/$/, '') || '';
+  const canonicalPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
   return (
     <>
-      <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
+      <html lang="ko" />
+      <title>{pageTitle}</title>
       <meta name="description" content={metaDescription} />
-      <meta property="og:title" content={title} />
+      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:site_name" content={defaultTitle || title} />
+      <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={type} />
+      <meta property="og:url" content={canonicalUrl} />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:creator" content={site.siteMetadata?.author || ``} />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={metaDescription} />
       {children}
     </>

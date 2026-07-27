@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { graphql, PageProps } from 'gatsby';
 import PostTemplate, { AdjacentPost } from 'src/components/PostTemplate';
+import Seo from 'src/components/seo';
 
 interface ProjectPostContext {
   slug: string;
@@ -22,8 +23,12 @@ interface ProjectPostProps extends PageProps<any, ProjectPostContext> {
           };
         };
       };
+      excerpt: string;
       html: string;
       timeToRead: number;
+      fields: {
+        slug: string;
+      };
     };
   };
 }
@@ -60,17 +65,23 @@ export const query = graphql`
           }
         }
       }
+      excerpt(pruneLength: 150)
       html
       timeToRead
+      fields {
+        slug
+      }
     }
   }
 `;
 
 export const Head = ({ data }: ProjectPostProps) => (
-  <>
-    <title>{data.markdownRemark.frontmatter.title} | UlongChaS2.log</title>
-    <meta name="description" content={data.markdownRemark.frontmatter.title} />
-  </>
+  <Seo
+    title={data.markdownRemark.frontmatter.title}
+    description={data.markdownRemark.excerpt}
+    pathname={`/project${data.markdownRemark.fields.slug}`}
+    type="article"
+  />
 );
 
 export default ProjectPost;

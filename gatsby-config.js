@@ -87,5 +87,11 @@ module.exports = {
         icon: `src/images/icon.png`,
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [`/page-2/`, `/thumbs/`, `/using-ssr/`, `/using-typescript/`],
+      },
+    },
   ],
 };

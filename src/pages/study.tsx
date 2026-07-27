@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import PostListPage, { ListPost } from 'src/components/PostListPage';
+import Seo from 'src/components/seo';
 
 interface StudyPageProps {
   data: {
@@ -43,11 +44,6 @@ export const query = graphql`
   }
 `;
 
-export const Head = () => (
-  <>
-    <title>스터디 | UlongChaS2.log</title>
-    <meta name="description" content="개발 학습 내용을 정리한 포스트" />
-  </>
-);
+export const Head = () => <Seo title="스터디" description="개발 학습 내용을 내 말로 다시 정리한 포스트" pathname="/study/" />;
 
 export default StudyPage;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import PostListPage, { ListPost } from 'src/components/PostListPage';
+import Seo from 'src/components/seo';
 
 interface ProjectPageProps {
   data: {
@@ -41,11 +42,6 @@ export const query = graphql`
   }
 `;
 
-export const Head = () => (
-  <>
-    <title>프로젝트 | UlongChaS2.log</title>
-    <meta name="description" content="진행한 프로젝트들을 정리한 포스트" />
-  </>
-);
+export const Head = () => <Seo title="프로젝트" description="직접 만든 프로젝트의 과정과 결과를 정리한 포스트" pathname="/project/" />;
 
 export default ProjectPage;

@@ -15,6 +15,7 @@ import {
   HeroHighlight,
   HeroLede,
 } from 'src/styles/PageStyles';
+import Seo from 'src/components/seo';
 
 // ============================================================
 // index.tsx — 홈
@@ -171,11 +172,6 @@ const IndexPage = () => {
   );
 };
 
-export const Head = () => (
-  <>
-    <title>UlongChaS2.log</title>
-    <meta name="description" content="개발 공부와 프로젝트를 기록하는 블로그" />
-  </>
-);
+export const Head = () => <Seo title="UlongChaS2.log" description="개발 공부와 프로젝트를 기록하는 블로그" />;
 
 export default IndexPage;

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import Layout from 'src/components/GlobalLayout';
+import Seo from 'src/components/seo';
 import { IconArrowRight } from 'src/components/icons';
 import { accentVars } from 'src/styles/accents';
 import { HeroChip, HeroHeadline, HeroHighlight, HeroLede } from 'src/styles/PageStyles';
@@ -347,11 +348,6 @@ const AboutPage = () => (
     </Layout>
 );
 
-export const Head = () => (
-  <>
-    <title>소개 | UlongChaS2.log</title>
-    <meta name="description" content="블로그를 쓰는 사람과 글 쓰는 원칙" />
-  </>
-);
+export const Head = () => <Seo title="소개" description="블로그를 쓰는 사람과 글 쓰는 원칙" pathname="/about/" />;
 
 export default AboutPage;
