@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /page-2/
+Disallow: /thumbs/
+Disallow: /using-ssr/
+Disallow: /using-typescript/
+
+Sitemap: https://ulongchas2.github.io/sitemap-index.xml
