@@ -10,11 +10,13 @@ interface StudyPageProps {
   };
 }
 
+const visibleStudySlugs = new Set(['/binary-search-recursion-vs-while/']);
+
 const StudyPage: React.FC<StudyPageProps> = ({ data }) => (
   <PostListPage
     title="스터디"
     subtitle="새로 배운 개념을 내 말로 다시 써봤습니다."
-    posts={data.allMarkdownRemark.nodes}
+    posts={data.allMarkdownRemark.nodes.filter((post) => visibleStudySlugs.has(post.fields.slug))}
     emptyMessage="아직 스터디 포스트가 없습니다."
   />
 );

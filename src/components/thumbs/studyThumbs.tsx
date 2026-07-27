@@ -59,6 +59,55 @@ export const BackendSearchBatchDebugging: React.FC = () => (
   </Surface>
 );
 
+const BinaryGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(8, 16px);
+  gap: 5px;
+  align-self: center;
+`;
+
+const BinaryCell = styled.span<{ active?: boolean; faded?: boolean }>`
+  height: 16px;
+  border-radius: 4px;
+  background: ${({ active, faded }) =>
+    active
+      ? 'var(--card-accent-ink)'
+      : faded
+        ? 'color-mix(in srgb, var(--color-border-default) 55%, transparent)'
+        : 'color-mix(in srgb, var(--card-accent-ink) 24%, transparent)'};
+  outline: ${({ active }) => (active ? '2px solid color-mix(in srgb, var(--card-accent-ink) 24%, transparent)' : 'none')};
+  outline-offset: 2px;
+`;
+
+/** 이진 탐색 — 가운데 pivot을 기준으로 절반을 버리며 찾는다 */
+export const BinarySearchRecursionVsWhile: React.FC = () => (
+  <Surface>
+    <VStack gap={10} pad="13px 14px">
+      <HStack gap={8} style={{ justifyContent: 'center' }}>
+        <Chip>
+          <Mono size={8}>left</Mono>
+        </Chip>
+        <Bar w={58} tone="soft" />
+        <Chip filled>
+          <Mono size={8} style={{ color: 'inherit' }}>
+            mid
+          </Mono>
+        </Chip>
+        <Bar w={40} tone="accent" />
+      </HStack>
+      <BinaryGrid>
+        {Array.from({ length: 8 }, (_, index) => (
+          <BinaryCell key={index} faded={index < 4} active={index === 6} />
+        ))}
+      </BinaryGrid>
+      <HStack gap={6} style={{ justifyContent: 'center', color: 'var(--card-accent-ink)' }}>
+        <ArrowRightSm size={11} />
+        <Bar w={82} tone="accent" />
+      </HStack>
+    </VStack>
+  </Surface>
+);
+
 /** 공통 로직 추출 — 두 모듈에서 공통 블록을 위로 뽑아낸다 */
 const LiftedBlock = styled.div`
   align-self: center;

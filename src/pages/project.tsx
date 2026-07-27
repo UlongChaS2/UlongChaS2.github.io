@@ -10,11 +10,11 @@ interface ProjectPageProps {
   };
 }
 
-const ProjectPage: React.FC<ProjectPageProps> = ({ data }) => (
+const ProjectPage: React.FC<ProjectPageProps> = () => (
   <PostListPage
     title="프로젝트"
     subtitle="직접 만든 것들의 과정과 결과를 남깁니다."
-    posts={data.allMarkdownRemark.nodes}
+    posts={[]}
     emptyMessage="아직 프로젝트 포스트가 없습니다."
   />
 );

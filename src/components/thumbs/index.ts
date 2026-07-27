@@ -13,6 +13,7 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
   // --- study ---
   'array-from-without-new': study.ArrayFromWithoutNew,
   'backend-search-batch-debugging': study.BackendSearchBatchDebugging,
+  'binary-search-recursion-vs-while': study.BinarySearchRecursionVsWhile,
   'extracting-common-logic': study.ExtractingCommonLogic,
   'file-transfer-protocols': study.FileTransferProtocols,
   'idempotency-key-uuid': study.IdempotencyKeyUuid,

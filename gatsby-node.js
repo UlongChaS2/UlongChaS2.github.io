@@ -1,6 +1,9 @@
 const { createFilePath } = require(`gatsby-source-filesystem`); // 슬러그 생성 함수
 const path = require('path');
 
+// 직접 작성한 글만 임시로 노출한다.
+const visiblePostSlugs = new Set(['/binary-search-recursion-vs-while/']);
+
 /**
  * frontmatter 스키마를 명시한다.
  * thumbnail / keywords는 선택 필드라서, 아무 글도 쓰지 않으면
@@ -72,7 +75,7 @@ exports.createPages = async ({ actions, graphql }) => {
     }
   `);
 
-  const nodes = result.data.allMarkdownRemark.nodes;
+  const nodes = result.data.allMarkdownRemark.nodes.filter((node) => visiblePostSlugs.has(node.fields.slug));
   const currentYear = new Date().getFullYear();
 
   // 이전/다음 글은 같은 카테고리 안에서만 이어준다.
