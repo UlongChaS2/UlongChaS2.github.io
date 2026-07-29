@@ -29,7 +29,7 @@ const FEATURED_COUNT = 5;
 /** 카테고리 섹션당 카드 수 */
 const SECTION_COUNT = 3;
 /** 직접 작성한 글만 임시로 노출한다. */
-const visiblePostSlugs = new Set(['/binary-search-recursion-vs-while/']);
+const visiblePostSlugs = new Set(['/linked-list-kth-node-from-last/', '/binary-search-recursion-vs-while/']);
 
 const PageInner = styled.div`
   max-width: 1200px;

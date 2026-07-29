@@ -4,9 +4,9 @@ import { GOATCOUNTER_CODE } from 'src/config/analytics';
 import { IconEye } from './icons';
 
 // ============================================================
-// VisitorCount — 헤더 우측의 전체 방문자 배지.
+// VisitorCount — 헤더 우측의 방문자 배지.
 //
-// GoatCounter 공개 카운터(counter/TOTAL.json)로 누적 순 방문자 수를
+// GoatCounter 공개 카운터(counter/TOTAL.json)로 오늘/이번 달 순 방문자 수를
 // 실시간으로 읽는다. 서버가 필요 없다.
 //
 // 페이지를 옮길 때마다 헤더가 다시 마운트되어 매번 새로 fetch한다.
@@ -14,8 +14,7 @@ import { IconEye } from './icons';
 // 배지에 min-width를 줘서 로딩 중에도 자리를 미리 잡아둔다.
 //
 // 헤더는 좁아 모바일에서는 로고·햄버거만 남기고 이 배지를 숨긴다.
-// 배지에는 전체 누적을, 툴팁에는 오늘 수를 함께 보여준다.
-// 오늘 수는 공개 카운터의 ?start= 파라미터로 받는다 — 인증 불필요.
+// 오늘/이번 달 수는 공개 카운터의 ?start= 파라미터로 받는다 — 인증 불필요.
 // ============================================================
 
 const Badge = styled.span`
@@ -27,7 +26,7 @@ const Badge = styled.span`
     justify-content: space-between;
     gap: 6px;
     /* 로딩→숫자 등장 시 폭이 안 변하도록 자리를 미리 확보 */
-    min-width: 52px;
+    min-width: 118px;
     padding: 7px 13px;
     border-radius: var(--radius-full);
     background: var(--color-bg-subtle);
@@ -36,14 +35,27 @@ const Badge = styled.span`
   }
 
   .num {
-    min-width: 18px;
-    text-align: right;
+    min-width: 0;
+    text-align: left;
     font-family: var(--font-mono);
     font-size: 13px;
     font-weight: var(--fw-semibold);
     letter-spacing: -0.01em;
     color: var(--color-text-secondary);
     font-variant-numeric: tabular-nums;
+  }
+
+  .label {
+    font-family: var(--font-base);
+    font-size: 12px;
+    font-weight: var(--fw-semibold);
+    color: var(--color-text-tertiary);
+  }
+
+  .divider {
+    width: 1px;
+    height: 12px;
+    background: var(--color-border-default);
   }
 `;
 
@@ -63,7 +75,7 @@ const fetchCount = (query = ''): Promise<string> =>
     .catch(() => '');
 
 const VisitorCount: React.FC = () => {
-  const [visitors, setVisitors] = React.useState('');
+  const [month, setMonth] = React.useState('');
   const [today, setToday] = React.useState('');
   const [state, setState] = React.useState<State>('loading');
 
@@ -74,10 +86,14 @@ const VisitorCount: React.FC = () => {
     }
     let cancelled = false;
 
-    fetchCount().then((total) => {
+    const now = new Date();
+    const ymd = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const monthStart = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
+
+    fetchCount(`?start=${monthStart}`).then((monthly) => {
       if (cancelled) return;
-      if (total) {
-        setVisitors(total);
+      if (monthly) {
+        setMonth(monthly);
         setState('ok');
       } else {
         // 공개 카운터가 꺼져 있으면(403) 배지 자체를 숨긴다.
@@ -86,8 +102,6 @@ const VisitorCount: React.FC = () => {
     });
 
     // 오늘 0시(로컬)부터의 수. 실패해도 툴팁에서만 빠지면 되니 조용히 무시.
-    const now = new Date();
-    const ymd = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     fetchCount(`?start=${ymd}`).then((n) => {
       if (!cancelled) setToday(n);
     });
@@ -102,17 +116,17 @@ const VisitorCount: React.FC = () => {
   if (state === 'hide') return null;
 
   return (
-    <Badge
-      title={
-        visitors
-          ? today
-            ? `오늘 ${today}명 · 지금까지 ${visitors}명이 다녀갔어요`
-            : `지금까지 ${visitors}명이 다녀갔어요`
-          : undefined
-      }
-    >
+    <Badge>
       <IconEye size={15} />
-      <span className="num">{visitors}</span>
+      <span>
+        <span className="label">오늘 </span>
+        <span className="num">{today || '-'}</span>
+      </span>
+      <span className="divider" />
+      <span>
+        <span className="label">이번달 </span>
+        <span className="num">{month}</span>
+      </span>
     </Badge>
   );
 };

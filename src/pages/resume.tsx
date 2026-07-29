@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Layout from 'src/components/GlobalLayout';
-import { IconArrowRight } from 'src/components/icons';
 import { HeroChip } from 'src/styles/PageStyles';
 
 // ============================================================
@@ -10,9 +9,6 @@ import { HeroChip } from 'src/styles/PageStyles';
 // 데스크톱은 내장 뷰어로 바로 보여주고,
 // 모바일은 브라우저 PDF 임베드가 대부분 깨져서 열기/받기 버튼만 준다.
 // ============================================================
-
-const RESUME_PATH = '/resume.pdf';
-const UPDATED_AT = '2026년 7월';
 
 const Page = styled.main`
   max-width: 1200px;
@@ -171,33 +167,11 @@ const ResumePage = () => (
       <Page>
         <HeadRow>
           <Titles>
-            <HeroChip>{UPDATED_AT} 기준</HeroChip>
+            <HeroChip>잠시 닫아두었습니다</HeroChip>
             <Title>이력서</Title>
-            <Updated>화면에서 바로 보거나, 파일로 받아서 볼 수 있어요.</Updated>
+            <Updated>현재 이력서는 공개하지 않고 있습니다.</Updated>
           </Titles>
-
-          <Actions>
-            <PrimaryAction href={RESUME_PATH} download>
-              다운로드
-              <IconArrowRight />
-            </PrimaryAction>
-            <SecondaryAction href={RESUME_PATH} target="_blank" rel="noopener noreferrer">
-              새 탭에서 열기
-            </SecondaryAction>
-          </Actions>
         </HeadRow>
-
-        <Viewer>
-          <object data={RESUME_PATH} type="application/pdf" aria-label="이력서 미리보기">
-            <Fallback>
-              브라우저가 PDF 미리보기를 지원하지 않습니다. <a href={RESUME_PATH}>이력서 내려받기</a>
-            </Fallback>
-          </object>
-        </Viewer>
-
-        <MobileNotice>
-          <p>모바일에서는 미리보기가 제대로 뜨지 않는 경우가 많아, 위의 버튼으로 열거나 받아주세요.</p>
-        </MobileNotice>
       </Page>
     </Layout>
 );

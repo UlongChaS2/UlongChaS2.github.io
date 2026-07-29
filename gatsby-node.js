@@ -2,7 +2,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`); // 슬러그 생
 const path = require('path');
 
 // 직접 작성한 글만 임시로 노출한다.
-const visiblePostSlugs = new Set(['/binary-search-recursion-vs-while/']);
+const visiblePostSlugs = new Set(['/linked-list-kth-node-from-last/', '/binary-search-recursion-vs-while/']);
 
 /**
  * frontmatter 스키마를 명시한다.

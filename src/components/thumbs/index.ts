@@ -18,6 +18,7 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
   'file-transfer-protocols': study.FileTransferProtocols,
   'idempotency-key-uuid': study.IdempotencyKeyUuid,
   'jpa-entity-value-object': study.JpaEntityValueObject,
+  'linked-list-kth-node-from-last': study.LinkedListKthNodeFromLast,
   'minimum-deployment-qa-pipeline': study.MinimumDeploymentQaPipeline,
   'nextjs-intro-for-react-devs': study.NextjsIntroForReactDevs,
   'react-concurrent-mode': study.ReactConcurrentMode,

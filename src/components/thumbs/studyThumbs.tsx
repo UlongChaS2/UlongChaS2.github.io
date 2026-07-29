@@ -204,6 +204,77 @@ export const IdempotencyKeyUuid: React.FC = () => (
   </Surface>
 );
 
+/** Linked List 뒤에서 k번째 노드 — slow/fast 포인터 간격 유지 */
+export const LinkedListKthNodeFromLast: React.FC = () => (
+  <Surface>
+    <svg width="170" height="92" viewBox="0 0 170 92" fill="none" aria-hidden>
+      <defs>
+        <marker id="linked-list-arrow" markerWidth="5" markerHeight="5" refX="4.4" refY="2.5" orient="auto" markerUnits="strokeWidth">
+          <path d="M0 0L5 2.5L0 5Z" fill="var(--card-accent-ink)" />
+        </marker>
+      </defs>
+      <g color="var(--card-accent-ink)">
+        <path
+          d="M50 35H65"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          opacity="0.7"
+          markerEnd="url(#linked-list-arrow)"
+        />
+        <path
+          d="M102 35H119"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          opacity="0.7"
+          markerEnd="url(#linked-list-arrow)"
+        />
+      </g>
+
+      {[34, 84, 134].map((cx, index) => (
+        <g key={cx}>
+          <circle
+            cx={cx}
+            cy="35"
+            r="15"
+            fill={index === 1 ? 'var(--card-accent-ink)' : 'var(--card-accent-surface)'}
+            stroke="var(--card-accent-ink)"
+            strokeWidth="1.5"
+          />
+          <text
+            x={cx}
+            y="39"
+            textAnchor="middle"
+            fontFamily="var(--font-mono)"
+            fontSize="11"
+            fontWeight="700"
+            fill={index === 1 ? 'var(--color-bg-card)' : 'var(--card-accent-ink)'}
+          >
+            {[6, 7, 8][index]}
+          </text>
+        </g>
+      ))}
+
+      <g fontFamily="var(--font-mono)" fontSize="9" fontWeight="700">
+        <path d="M84 54V64" stroke="var(--card-accent-ink)" strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M80 60L84 64L88 60" stroke="var(--card-accent-ink)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="64" y="67" width="40" height="14" rx="7" fill="var(--card-accent-surface)" />
+        <text x="84" y="77" textAnchor="middle" fill="var(--card-accent-ink)">
+          slow
+        </text>
+
+        <path d="M134 54V64" stroke="var(--color-border-strong)" strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M130 60L134 64L138 60" stroke="var(--color-border-strong)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="115" y="67" width="38" height="14" rx="7" fill="var(--color-bg-subtle)" />
+        <text x="134" y="77" textAnchor="middle" fill="var(--color-text-tertiary)">
+          fast
+        </text>
+      </g>
+    </svg>
+  </Surface>
+);
+
 /** JPA 엔티티 vs Value Object — ID 있는 카드와 없는 카드 */
 export const JpaEntityValueObject: React.FC = () => (
   <Surface>

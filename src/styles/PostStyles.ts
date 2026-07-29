@@ -159,6 +159,7 @@ export const PostContent = styled.div`
   h4 { font-size: 20px; }
 
   p {
+    max-width: 100%;
     margin-bottom: 32px;
     color: var(--color-text-body);
     font-size: 18px;
@@ -318,8 +319,8 @@ export const PostContent = styled.div`
   /* 인용문은 형광펜 콜아웃으로 쓴다 */
   blockquote {
     border: none;
-    padding: 22px 24px;
-    margin: 40px 0;
+    padding: 18px 22px;
+    margin: 24px 0;
     background: var(--color-highlighter-subtle);
     border-radius: 16px;
     color: var(--color-text-body);

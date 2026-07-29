@@ -11,7 +11,7 @@ interface StudyPageProps {
   };
 }
 
-const visibleStudySlugs = new Set(['/binary-search-recursion-vs-while/']);
+const visibleStudySlugs = new Set(['/linked-list-kth-node-from-last/', '/binary-search-recursion-vs-while/']);
 
 const StudyPage: React.FC<StudyPageProps> = ({ data }) => (
   <PostListPage

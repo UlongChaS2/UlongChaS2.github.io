@@ -243,9 +243,13 @@ const SKILLS: Array<{ name: string; accent: Parameters<typeof accentVars>[0] }> 
   { name: 'TypeScript', accent: 'blue' },
   { name: 'React', accent: 'blue' },
   { name: 'Next.js', accent: 'mint' },
+  { name: 'Tailwind CSS', accent: 'mint' },
   { name: 'Gatsby', accent: 'mint' },
   { name: 'Emotion', accent: 'pink' },
   { name: 'TanStack Query', accent: 'pink' },
+  { name: 'TDD', accent: 'yellow' },
+  { name: 'Backend', accent: 'blue' },
+  { name: 'CS', accent: 'yellow' },
   { name: 'Vite', accent: 'yellow' },
   { name: 'Playwright', accent: 'yellow' },
 ];
@@ -253,7 +257,6 @@ const SKILLS: Array<{ name: string; accent: Parameters<typeof accentVars>[0] }> 
 const CONTACTS: Array<{ label: string; value: string; href: string; internal?: boolean }> = [
   { label: 'GitHub', value: 'github.com/UlongChaS2', href: 'https://github.com/UlongChaS2' },
   { label: 'Email', value: 'jyujung2@gmail.com', href: 'mailto:jyujung2@gmail.com' },
-  { label: 'Resume', value: '이력서 보기', href: '/resume/', internal: true },
 ];
 
 const AboutPage = () => (
@@ -263,14 +266,14 @@ const AboutPage = () => (
           <HeroCopy>
             <HeroChip>지금은 프론트엔드</HeroChip>
             <HeroHeadline>
-              코드를 짜고,
+              속도에 휩쓸리지 않고,
               <br />
-              <HeroHighlight>배운 걸 적습니다</HeroHighlight>
+              <HeroHighlight>내 것을 만듭니다</HeroHighlight>
             </HeroHeadline>
             <HeroLede>
-              화면을 만드는 일을 합니다.
+              프론트엔드 개발을 하고 있습니다.
               <br />
-              잘 안 됐던 것도 되도록 그대로 적어두려고 합니다.
+              AI를 쓰더라도 제가 이해한 것만 제 언어로 남기려고 합니다.
             </HeroLede>
           </HeroCopy>
 
@@ -282,12 +285,16 @@ const AboutPage = () => (
         <Block>
           <BlockTitle>이 블로그를 쓰는 이유</BlockTitle>
           <Prose>
-            같은 문제를 두 번째 만났을 때 처음처럼 헤매는 게 싫었습니다. 그래서 해결한 방법만이 아니라, 왜 그렇게 했는지와
-            중간에 틀렸던 판단까지 같이 남깁니다.
+            AI 덕분에 만드는 속도는 빨라졌지만, 그 속도를 그냥 방관하고 싶지는 않았습니다. 결국 제 것으로 남는 건 제가
+            이해하고, 설명하고, 다시 고쳐본 것들이라고 생각했습니다.
           </Prose>
           <Prose>
-            정리된 결론만 있는 글은 나중의 저에게 별로 도움이 안 되더군요. 막혔던 지점이 적혀 있어야 다시 읽을 때 쓸모가
-            있었습니다.
+            그래서 이 블로그는 빠르게 만든 결과물을 자랑하는 곳이라기보다, 제가 익힌 것을 제 말로 다시 확인하는 공간입니다.
+            틀린 부분이 있으면 다시 수정하고, 그 과정도 피드백으로 남기려고 합니다.
+          </Prose>
+          <Prose>
+            요즘은 프론트엔드 기술을 계속 다루면서도 백엔드 업무를 함께 보고 있습니다. AI와 함께 성장하려면 기초체력이 더
+            중요하다고 느껴서, CS와 기본 지식도 다시 공부하고 있습니다.
           </Prose>
         </Block>
 
@@ -296,20 +303,20 @@ const AboutPage = () => (
           <PrincipleList>
             <Principle>
               <div>
-                <h3>재현되는 것만 적는다</h3>
-                <p>직접 돌려보고 결과를 확인한 것만 씁니다. 확인 못 한 부분은 모른다고 적어둡니다.</p>
+                <h3>익힌 것만 적는다</h3>
+                <p>AI가 알려준 내용이라도 제가 이해하고 설명할 수 있는 것만 글로 남깁니다.</p>
               </div>
             </Principle>
             <Principle>
               <div>
-                <h3>숫자로 말한다</h3>
-                <p>빨라졌다는 말 대신 몇 번에서 몇 번으로 줄었는지 적습니다. 측정 방법도 같이 남깁니다.</p>
+                <h3>틀린 것은 다시 고친다</h3>
+                <p>나중에 잘못 안 게 드러나면 그냥 넘기지 않고 수정합니다. 틀렸던 이유도 가능하면 같이 남깁니다.</p>
               </div>
             </Principle>
             <Principle>
               <div>
-                <h3>틀린 글은 고쳐 쓴다</h3>
-                <p>나중에 잘못 안 게 드러나면 지우지 않고 무엇이 틀렸는지 덧붙입니다.</p>
+                <h3>기본기를 같이 쌓는다</h3>
+                <p>프론트엔드 구현만 보지 않고, 백엔드 흐름과 CS 기본 지식까지 같이 공부하려고 합니다.</p>
               </div>
             </Principle>
           </PrincipleList>
