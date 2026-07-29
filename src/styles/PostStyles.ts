@@ -366,6 +366,16 @@ export const PostContent = styled.div`
     vertical-align: bottom;
   }
 
+  th[align='right'],
+  td[align='right'] {
+    text-align: right;
+  }
+
+  th[align='center'],
+  td[align='center'] {
+    text-align: center;
+  }
+
   tbody td {
     padding: 16px;
     border-bottom: 1px solid var(--color-border-subtle);
