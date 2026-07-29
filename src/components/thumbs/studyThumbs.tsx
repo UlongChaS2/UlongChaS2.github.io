@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { IconCheck, IconClose, IconSearch, IconEye } from 'src/components/icons';
+import programmersLogoDark from 'src/images/programmers-logo-dark.png';
 import {
   Surface,
   Bar,
@@ -105,6 +106,54 @@ export const BinarySearchRecursionVsWhile: React.FC = () => (
         <Bar w={82} tone="accent" />
       </HStack>
     </VStack>
+  </Surface>
+);
+
+/** 타겟 넘버 DFS — + / - 선택이 두 갈래로 뻗는 재귀 탐색 트리 */
+export const ProgrammersTargetNumberDfs: React.FC = () => (
+  <Surface>
+    <svg width="170" height="92" viewBox="0 0 170 92" fill="none" aria-hidden>
+      <image href={programmersLogoDark} x="14" y="0" width="142" height="34" preserveAspectRatio="xMidYMid meet" />
+
+      <g stroke="#93A0AF" strokeWidth="1.4" strokeLinecap="round">
+        <path d="M85 59L52 65" />
+        <path d="M85 59L118 65" />
+        <path d="M52 79L35 85" />
+        <path d="M52 79L69 85" />
+        <path d="M118 79L101 85" />
+        <path d="M118 79L135 85" />
+      </g>
+
+      <g fontFamily="var(--font-mono)" fontSize="8" fontWeight="700" textAnchor="middle">
+        <circle cx="85" cy="53" r="8" fill="#202B3D" />
+        <text x="85" y="56" fill="#fff">
+          0
+        </text>
+
+        {[
+          { x: 52, label: '+1' },
+          { x: 118, label: '-1' },
+        ].map(({ x, label }) => (
+          <g key={x}>
+            <rect x={x - 11} y="65" width="22" height="14" rx="7" fill="#fff" stroke="#202B3D" />
+            <text x={x} y="75" fill="#202B3D">
+              {label}
+            </text>
+          </g>
+        ))}
+
+        {[
+          { x: 35, label: '+3' },
+          { x: 69, label: '-1' },
+          { x: 101, label: '+1' },
+          { x: 135, label: '-3' },
+        ].map(({ x, label }) => (
+          <text key={x} x={x} y="91" fill="#202B3D">
+            {label}
+          </text>
+        ))}
+      </g>
+    </svg>
   </Surface>
 );
 
@@ -265,7 +314,13 @@ export const LinkedListKthNodeFromLast: React.FC = () => (
         </text>
 
         <path d="M134 54V64" stroke="var(--color-border-strong)" strokeWidth="1.6" strokeLinecap="round" />
-        <path d="M130 60L134 64L138 60" stroke="var(--color-border-strong)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M130 60L134 64L138 60"
+          stroke="var(--color-border-strong)"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
         <rect x="115" y="67" width="38" height="14" rx="7" fill="var(--color-bg-subtle)" />
         <text x="134" y="77" textAnchor="middle" fill="var(--color-text-tertiary)">
           fast

@@ -2,7 +2,11 @@ const { createFilePath } = require(`gatsby-source-filesystem`); // 슬러그 생
 const path = require('path');
 
 // 직접 작성한 글만 임시로 노출한다.
-const visiblePostSlugs = new Set(['/linked-list-kth-node-from-last/', '/binary-search-recursion-vs-while/']);
+const visiblePostSlugs = new Set([
+  '/linked-list-kth-node-from-last/',
+  '/binary-search-recursion-vs-while/',
+  '/programmers-target-number-dfs/',
+]);
 
 /**
  * frontmatter 스키마를 명시한다.
@@ -100,8 +104,7 @@ exports.createPages = async ({ actions, graphql }) => {
       const newer = categoryNodes[index - 1];
       const older = categoryNodes[index + 1];
 
-      const toLink = (target) =>
-        target ? { title: target.frontmatter.title, path: `/${category}${target.fields.slug}` } : null;
+      const toLink = (target) => (target ? { title: target.frontmatter.title, path: `/${category}${target.fields.slug}` } : null);
 
       createPage({
         path: `/${category}${node.fields.slug}`,

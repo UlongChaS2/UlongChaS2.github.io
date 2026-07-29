@@ -29,7 +29,11 @@ const FEATURED_COUNT = 5;
 /** 카테고리 섹션당 카드 수 */
 const SECTION_COUNT = 3;
 /** 직접 작성한 글만 임시로 노출한다. */
-const visiblePostSlugs = new Set(['/linked-list-kth-node-from-last/', '/binary-search-recursion-vs-while/']);
+const visiblePostSlugs = new Set([
+  '/linked-list-kth-node-from-last/',
+  '/binary-search-recursion-vs-while/',
+  '/programmers-target-number-dfs/',
+]);
 
 const PageInner = styled.div`
   max-width: 1200px;
@@ -128,9 +132,7 @@ const IndexPage = () => {
     }
   `);
 
-  const posts: SliderPost[] = data.allMarkdownRemark.nodes.filter((post: SliderPost) =>
-    visiblePostSlugs.has(post.fields.slug),
-  );
+  const posts: SliderPost[] = data.allMarkdownRemark.nodes.filter((post: SliderPost) => visiblePostSlugs.has(post.fields.slug));
   const featuredPosts = posts.slice(0, FEATURED_COUNT);
   const studyPosts = posts.filter((p) => p.frontmatter.category === 'study').slice(0, SECTION_COUNT);
   const projectPosts = posts.filter((p) => p.frontmatter.category === 'project').slice(0, SECTION_COUNT);

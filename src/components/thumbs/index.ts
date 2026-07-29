@@ -21,6 +21,7 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
   'linked-list-kth-node-from-last': study.LinkedListKthNodeFromLast,
   'minimum-deployment-qa-pipeline': study.MinimumDeploymentQaPipeline,
   'nextjs-intro-for-react-devs': study.NextjsIntroForReactDevs,
+  'programmers-target-number-dfs': study.ProgrammersTargetNumberDfs,
   'react-concurrent-mode': study.ReactConcurrentMode,
   'react-memo-comparator-vs-usememo': study.ReactMemoComparatorVsUsememo,
   'reading-spring-backend-code-flow': study.ReadingSpringBackendCodeFlow,
@@ -49,5 +50,4 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
 };
 
 /** fields.slug('/foo/')를 레지스트리 키('foo')로 정규화 */
-export const thumbForSlug = (slug: string): React.FC | null =>
-  THUMB_REGISTRY[slug.replace(/^\/+|\/+$/g, '')] ?? null;
+export const thumbForSlug = (slug: string): React.FC | null => THUMB_REGISTRY[slug.replace(/^\/+|\/+$/g, '')] ?? null;
