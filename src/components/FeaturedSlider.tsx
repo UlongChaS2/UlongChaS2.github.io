@@ -181,8 +181,6 @@ const FeaturedSlider: React.FC<{ posts: SliderPost[] }> = ({ posts }) => {
                       <FeaturedExcerpt>{post.excerpt}</FeaturedExcerpt>
                       <FeaturedMeta>
                         <time>{post.frontmatter.date}</time>
-                        <span>·</span>
-                        <span>{post.timeToRead || 5}분</span>
                       </FeaturedMeta>
                     </FeaturedContent>
                   </FeaturedCard>

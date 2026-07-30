@@ -2,19 +2,19 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import { IconArrowRight } from './icons';
+import VisitorCount from './VisitorCount';
 
 // ============================================================
-// SiteFooter — 소개 CTA + 저작권을 한 밴드로 묶은 하단 영역
+// SiteFooter — 짧은 문구와 저작권을 한 줄로 정리한 하단 메타
 // Layout이 모든 페이지 끝에 한 번 렌더한다.
-// about 페이지처럼 CTA가 무의미한 곳은 showCta={false}로 저작권만 남긴다.
 // ============================================================
 
 const Band = styled.footer`
   background: var(--color-bg-subtle);
-  padding: var(--space-12) var(--space-6) var(--space-8);
+  padding: var(--space-6) var(--space-6);
 
   @media (min-width: 768px) {
-    padding: var(--space-16) var(--space-8) var(--space-10);
+    padding: var(--space-8) var(--space-8);
   }
 `;
 
@@ -23,108 +23,84 @@ const Inner = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  gap: var(--space-3);
 `;
 
-const Cta = styled.div`
+const FooterTop = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--space-6);
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  @media (max-width: 640px) {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-4);
   }
 `;
 
-const Copy = styled.div`
+const MetaLine = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-`;
-
-const Title = styled.p`
-  font-size: 22px;
-  font-weight: var(--fw-extrabold);
-  letter-spacing: var(--ls-tighter);
-  color: var(--color-text-primary);
-  margin: 0;
-  word-break: keep-all;
-`;
-
-const Description = styled.p`
-  font-size: var(--fs-body-md);
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  font-size: var(--fs-caption);
   line-height: var(--lh-relaxed);
+  color: var(--color-text-tertiary);
+`;
+
+const Tagline = styled.span`
+  font-weight: var(--fw-semibold);
   color: var(--color-text-secondary);
-  margin: 0;
-  word-break: keep-all;
+`;
+
+const Divider = styled.span`
+  width: 1px;
+  height: 12px;
+  background: var(--color-border-default);
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Action = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 14px var(--space-6);
-  border-radius: 14px;
+  padding: 9px var(--space-4);
+  border-radius: 10px;
   background: var(--color-brand-primary);
   color: var(--color-text-inverse);
-  font-size: var(--fs-body-md);
+  font-size: var(--fs-body-sm);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-tight);
   text-decoration: none;
   flex-shrink: 0;
   transition: background var(--transition-fast);
 
-  /* 전역 a:hover의 링크색이 이기지 못하도록 색을 다시 선언한다 */
   &:hover {
     background: var(--color-brand-hover);
     color: var(--color-text-inverse);
   }
 `;
 
-/*
- * 저작권 줄. 구분선을 긋지 않는다 — 선이 있으면 CTA와 저작권이
- * 두 개의 상자처럼 갈라져 보인다. 여백과 옅은 색으로만 가라앉힌다.
- */
-const Meta = styled.div<{ divided: boolean }>`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-top: ${(p) => (p.divided ? 'var(--space-12)' : '0')};
-  color: var(--color-text-tertiary);
-  font-size: var(--fs-caption);
-  line-height: var(--lh-relaxed);
-
-  .sub {
-    opacity: 0.6;
-  }
-`;
-
-interface SiteFooterProps {
-  showCta?: boolean;
-}
-
-const SiteFooter: React.FC<SiteFooterProps> = ({ showCta = true }) => (
+const SiteFooter: React.FC = () => (
   <Band>
     <Inner>
-      {showCta && (
-        <Cta>
-          <Copy>
-            <Title>차근차근, 하나씩 쌓아가는 중</Title>
-            <Description>무엇을 만들고, 무엇에 부딪혔는지.</Description>
-          </Copy>
-          <Action to="/about/">
-            소개 보기
-            <IconArrowRight />
-          </Action>
-        </Cta>
-      )}
-
-      <Meta divided={showCta}>
-        <span>© {new Date().getFullYear()} UlongChaS2.log · ulongchas2</span>
-        <span className="sub">Built with Gatsby & ❤️</span>
-      </Meta>
+      <FooterTop>
+        <MetaLine>
+          <Tagline>차근차근, 하나씩 쌓아가는 중</Tagline>
+          <Divider />
+          <span>© {new Date().getFullYear()} UlongChaS2.log · ulongchas2</span>
+        </MetaLine>
+        <Action to="/about/">
+          소개 보기
+          <IconArrowRight size={15} />
+        </Action>
+      </FooterTop>
+      <VisitorCount />
     </Inner>
   </Band>
 );

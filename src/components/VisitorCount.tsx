@@ -4,57 +4,49 @@ import { GOATCOUNTER_CODE } from 'src/config/analytics';
 import { IconEye } from './icons';
 
 // ============================================================
-// VisitorCount — 헤더 우측의 방문자 배지.
+// VisitorCount — 푸터에 작게 두는 방문자 메타.
 //
 // GoatCounter 공개 카운터(counter/TOTAL.json)로 오늘/이번 달 순 방문자 수를
 // 실시간으로 읽는다. 서버가 필요 없다.
 //
 // 페이지를 옮길 때마다 헤더가 다시 마운트되어 매번 새로 fetch한다.
-// 숫자가 뒤늦게 채워지며 배지 폭이 늘어나면 헤더가 덜컹인다. 그래서
-// 배지에 min-width를 줘서 로딩 중에도 자리를 미리 잡아둔다.
+// 숫자가 뒤늦게 채워지며 폭이 늘어나지 않게 숫자 영역에 min-width를 둔다.
 //
-// 헤더는 좁아 모바일에서는 로고·햄버거만 남기고 이 배지를 숨긴다.
 // 오늘/이번 달 수는 공개 카운터의 ?start= 파라미터로 받는다 — 인증 불필요.
 // ============================================================
 
 const Badge = styled.span`
-  display: none;
-
-  @media (min-width: 768px) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-    /* 로딩→숫자 등장 시 폭이 안 변하도록 자리를 미리 확보 */
-    min-width: 118px;
-    padding: 7px 13px;
-    border-radius: var(--radius-full);
-    background: var(--color-bg-subtle);
-    color: var(--color-text-tertiary);
-    flex-shrink: 0;
-  }
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  width: fit-content;
+  margin-top: 2px;
+  color: var(--color-text-tertiary);
+  opacity: 0.48;
 
   .num {
-    min-width: 0;
-    text-align: left;
+    display: inline-block;
+    min-width: 3ch;
+    text-align: right;
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 11px;
     font-weight: var(--fw-semibold);
     letter-spacing: -0.01em;
-    color: var(--color-text-secondary);
+    color: var(--color-text-tertiary);
     font-variant-numeric: tabular-nums;
   }
 
   .label {
     font-family: var(--font-base);
-    font-size: 12px;
-    font-weight: var(--fw-semibold);
+    font-size: 10px;
+    font-weight: var(--fw-medium);
     color: var(--color-text-tertiary);
   }
 
   .divider {
     width: 1px;
-    height: 12px;
+    height: 9px;
     background: var(--color-border-default);
   }
 `;
@@ -117,7 +109,7 @@ const VisitorCount: React.FC = () => {
 
   return (
     <Badge>
-      <IconEye size={15} />
+      <IconEye size={12} />
       <span>
         <span className="label">오늘 </span>
         <span className="num">{today || '-'}</span>
@@ -125,7 +117,7 @@ const VisitorCount: React.FC = () => {
       <span className="divider" />
       <span>
         <span className="label">이번달 </span>
-        <span className="num">{month}</span>
+        <span className="num">{month || '-'}</span>
       </span>
     </Badge>
   );

@@ -67,8 +67,6 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
                 <span className="author">정유정</span>
                 <span className="dot" />
                 <time>{date}</time>
-                <span className="dot" />
-                <span>{timeToRead || 5}분이면 읽어요</span>
               </PostMeta>
 
               {tags.length > 0 && (

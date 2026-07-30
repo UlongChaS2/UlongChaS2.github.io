@@ -144,9 +144,7 @@ const PostListPage: React.FC<PostListPageProps> = ({ title, subtitle, posts, emp
                 <RowBody>
                   <RowTitle>{post.frontmatter.title}</RowTitle>
                   <RowExcerpt>{post.excerpt}</RowExcerpt>
-                  <RowMeta>
-                    {post.frontmatter.date} · {post.timeToRead || 5}분
-                  </RowMeta>
+                  <RowMeta>{post.frontmatter.date}</RowMeta>
                 </RowBody>
                 <RowAction>
                   <IconChevronRight size={15} />

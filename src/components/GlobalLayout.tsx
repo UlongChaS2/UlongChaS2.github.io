@@ -9,17 +9,15 @@ import SiteFooter from './SiteFooter';
 
 interface LayoutProps {
   children: ReactNode;
-  /** 소개 페이지처럼 CTA가 무의미한 곳은 저작권만 남긴다. */
-  hideCta?: boolean;
 }
 
-const Layout = ({ children, hideCta = false }: LayoutProps) => (
+const Layout = ({ children }: LayoutProps) => (
   <>
     <Header />
     <Container>
       <main>{children}</main>
     </Container>
-    <SiteFooter showCta={!hideCta} />
+    <SiteFooter />
   </>
 );
 

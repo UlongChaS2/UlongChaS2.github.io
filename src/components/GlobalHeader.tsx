@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import { HeaderContainer, HeaderInner, Logo, Nav } from 'src/styles/HeaderStyles';
 import ThemeToggle from './ThemeToggle';
-import VisitorBadge from './VisitorCount';
 import { LogoMark, IconMenu, IconClose } from './icons';
 
 // ============================================================
@@ -134,7 +133,6 @@ const Header: React.FC = () => {
         </DesktopNav>
 
         <RightActions>
-          <VisitorBadge />
           <ThemeToggle />
           <MobileMenuBtn
             onClick={() => setIsMobileOpen(!isMobileOpen)}

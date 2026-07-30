@@ -116,17 +116,17 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
       <image href={programmersLogoDark} x="14" y="0" width="142" height="34" preserveAspectRatio="xMidYMid meet" />
 
       <g stroke="#93A0AF" strokeWidth="1.4" strokeLinecap="round">
-        <path d="M85 59L52 65" />
-        <path d="M85 59L118 65" />
-        <path d="M52 79L35 85" />
-        <path d="M52 79L69 85" />
-        <path d="M118 79L101 85" />
-        <path d="M118 79L135 85" />
+        <path d="M85 40L52 62" />
+        <path d="M85 40L118 62" />
+        <path d="M52 62L27 79.5" />
+        <path d="M52 62L71 79.5" />
+        <path d="M118 62L99 79.5" />
+        <path d="M118 62L143 79.5" />
       </g>
 
       <g fontFamily="var(--font-mono)" fontSize="8" fontWeight="700" textAnchor="middle">
-        <circle cx="85" cy="53" r="8" fill="#202B3D" />
-        <text x="85" y="56" fill="#fff">
+        <circle cx="85" cy="40" r="8" fill="#202B3D" />
+        <text x="85" y="43" fill="#fff">
           0
         </text>
 
@@ -135,22 +135,25 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
           { x: 118, label: '-1' },
         ].map(({ x, label }) => (
           <g key={x}>
-            <rect x={x - 11} y="65" width="22" height="14" rx="7" fill="#fff" stroke="#202B3D" />
-            <text x={x} y="75" fill="#202B3D">
+            <rect x={x - 11} y="55" width="22" height="14" rx="7" fill="#fff" stroke="#202B3D" />
+            <text x={x} y="65" fill="#202B3D">
               {label}
             </text>
           </g>
         ))}
 
         {[
-          { x: 35, label: '+3' },
-          { x: 69, label: '-1' },
-          { x: 101, label: '+1' },
-          { x: 135, label: '-3' },
+          { x: 27, label: '+3' },
+          { x: 71, label: '-1' },
+          { x: 99, label: '+1' },
+          { x: 143, label: '-3' },
         ].map(({ x, label }) => (
-          <text key={x} x={x} y="91" fill="#202B3D">
-            {label}
-          </text>
+          <g key={x}>
+            <rect x={x - 11} y="74" width="22" height="11" rx="5.5" fill="#fff" stroke="#202B3D" />
+            <text x={x} y="82" fill="#202B3D">
+              {label}
+            </text>
+          </g>
         ))}
       </g>
     </svg>

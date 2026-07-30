@@ -171,6 +171,32 @@ const Principle = styled.li`
   }
 `;
 
+const SkillGroups = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  max-width: 820px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+`;
+
+const SkillGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+`;
+
+const SkillGroupTitle = styled.h3`
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin: 0;
+`;
+
 const SkillRow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -239,19 +265,47 @@ const ContactArrow = styled.span`
   transition: background var(--transition-fast), color var(--transition-fast);
 `;
 
-const SKILLS: Array<{ name: string; accent: Parameters<typeof accentVars>[0] }> = [
-  { name: 'TypeScript', accent: 'blue' },
-  { name: 'React', accent: 'blue' },
-  { name: 'Next.js', accent: 'mint' },
-  { name: 'Tailwind CSS', accent: 'mint' },
-  { name: 'Gatsby', accent: 'mint' },
-  { name: 'Emotion', accent: 'pink' },
-  { name: 'TanStack Query', accent: 'pink' },
-  { name: 'TDD', accent: 'yellow' },
-  { name: 'Backend', accent: 'blue' },
-  { name: 'CS', accent: 'yellow' },
-  { name: 'Vite', accent: 'yellow' },
-  { name: 'Playwright', accent: 'yellow' },
+const SKILL_GROUPS: Array<{
+  title: string;
+  items: Array<{ name: string; accent: Parameters<typeof accentVars>[0] }>;
+}> = [
+  {
+    title: 'FE',
+    items: [
+      { name: 'TypeScript', accent: 'blue' },
+      { name: 'React', accent: 'blue' },
+      { name: 'Next.js', accent: 'mint' },
+      { name: 'Tailwind CSS', accent: 'mint' },
+      { name: 'Gatsby', accent: 'mint' },
+      { name: 'Emotion', accent: 'pink' },
+      { name: 'TanStack Query', accent: 'pink' },
+      { name: 'Vite', accent: 'yellow' },
+    ],
+  },
+  {
+    title: 'BE',
+    items: [
+      { name: 'Spring Boot', accent: 'blue' },
+      { name: 'JPA', accent: 'mint' },
+      { name: 'QueryDSL', accent: 'pink' },
+    ],
+  },
+  {
+    title: 'Infra',
+    items: [
+      { name: 'GitHub Pages', accent: 'blue' },
+      { name: '배포 흐름', accent: 'yellow' },
+    ],
+  },
+  {
+    title: 'Algorithm / CS',
+    items: [
+      { name: 'Algorithm', accent: 'yellow' },
+      { name: 'CS', accent: 'blue' },
+      { name: 'TDD', accent: 'yellow' },
+      { name: 'Playwright', accent: 'yellow' },
+    ],
+  },
 ];
 
 const CONTACTS: Array<{ label: string; value: string; href: string; internal?: boolean }> = [
@@ -260,7 +314,7 @@ const CONTACTS: Array<{ label: string; value: string; href: string; internal?: b
 ];
 
 const AboutPage = () => (
-  <Layout hideCta>
+  <Layout>
       <Page>
         <Hero>
           <HeroCopy>
@@ -268,7 +322,7 @@ const AboutPage = () => (
             <HeroHeadline>
               속도에 휩쓸리지 않고,
               <br />
-              <HeroHighlight>내 것을 만듭니다</HeroHighlight>
+              <HeroHighlight>제 것으로 만듭니다</HeroHighlight>
             </HeroHeadline>
             <HeroLede>
               프론트엔드 개발을 하고 있습니다.
@@ -324,13 +378,20 @@ const AboutPage = () => (
 
         <Block>
           <BlockTitle>요즘 쓰는 것들</BlockTitle>
-          <SkillRow>
-            {SKILLS.map((skill) => (
-              <SkillChip key={skill.name} style={accentVars(skill.accent)}>
-                {skill.name}
-              </SkillChip>
+          <SkillGroups>
+            {SKILL_GROUPS.map((group) => (
+              <SkillGroup key={group.title}>
+                <SkillGroupTitle>{group.title}</SkillGroupTitle>
+                <SkillRow>
+                  {group.items.map((skill) => (
+                    <SkillChip key={skill.name} style={accentVars(skill.accent)}>
+                      {skill.name}
+                    </SkillChip>
+                  ))}
+                </SkillRow>
+              </SkillGroup>
             ))}
-          </SkillRow>
+          </SkillGroups>
         </Block>
 
         <Block>

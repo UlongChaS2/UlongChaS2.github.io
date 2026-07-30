@@ -95,7 +95,6 @@ const RecentSection: React.FC<{ title: string; to: string; posts: SliderPost[] }
             slug={post.fields.slug}
             keywords={post.frontmatter.keywords}
             thumbVariant={post.frontmatter.thumbVariant}
-            readTime={post.timeToRead ? `${post.timeToRead}분` : undefined}
             thumbnail={post.frontmatter.thumbnail?.childImageSharp?.gatsbyImageData}
           />
         ))}

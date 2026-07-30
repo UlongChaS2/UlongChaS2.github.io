@@ -128,7 +128,6 @@ export interface PostCardProps {
   date: string;
   category: string;
   slug: string;
-  readTime?: string;
   keywords?: (string | null)[] | null;
   thumbnail?: IGatsbyImageData | null;
   thumbVariant?: string | null;
@@ -140,7 +139,6 @@ const PostCard: React.FC<PostCardProps> = ({
   date,
   category,
   slug,
-  readTime = '5분',
   keywords,
   thumbnail,
   thumbVariant,
@@ -170,8 +168,6 @@ const PostCard: React.FC<PostCardProps> = ({
 
           <Meta>
             <time>{date}</time>
-            <span>·</span>
-            <span>{readTime}</span>
           </Meta>
         </CardContent>
       </CardLink>
