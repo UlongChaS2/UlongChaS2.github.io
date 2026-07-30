@@ -8,7 +8,6 @@ import type { CSSProperties } from 'react';
 // ============================================================
 
 const ACCENTS = ['mint', 'pink', 'yellow', 'blue'] as const;
-const PROGRAMMERS_SLUG = 'programmers-target-number-dfs';
 
 export type AccentName = (typeof ACCENTS)[number];
 
@@ -38,17 +37,8 @@ const stableHash = (seed: string): number => {
   return hash;
 };
 
-/** 문자열 → 안정적인 accent. 프로그래머스 글은 공식 로고 색상을 유지한다. */
+/** 문자열 → 안정적인 accent. */
 export const pickAccent = (seed: string): CSSProperties => {
-  const slug = seed.replace(/^\/+|\/+$/g, '');
-
-  if (slug === PROGRAMMERS_SLUG) {
-    return {
-      '--card-accent-surface': '#f4f6f8',
-      '--card-accent-ink': '#202b3d',
-    } as CSSProperties;
-  }
-
   return accentVars(ACCENTS[stableHash(seed) % ACCENTS.length]);
 };
 

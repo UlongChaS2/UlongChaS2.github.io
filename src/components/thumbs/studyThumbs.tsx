@@ -113,9 +113,17 @@ export const BinarySearchRecursionVsWhile: React.FC = () => (
 export const ProgrammersTargetNumberDfs: React.FC = () => (
   <Surface>
     <svg width="170" height="92" viewBox="0 0 170 92" fill="none" aria-hidden>
-      <image href={programmersLogoDark} x="14" y="0" width="142" height="34" preserveAspectRatio="xMidYMid meet" />
+      <image
+        href={programmersLogoDark}
+        x="14"
+        y="0"
+        width="142"
+        height="34"
+        preserveAspectRatio="xMidYMid meet"
+        style={{ filter: 'var(--image-filter-programmers-logo)' }}
+      />
 
-      <g stroke="#93A0AF" strokeWidth="1.4" strokeLinecap="round">
+      <g stroke="var(--color-border-strong)" strokeWidth="1.4" strokeLinecap="round">
         <path d="M85 40L52 62" />
         <path d="M85 40L118 62" />
         <path d="M52 62L27 79.5" />
@@ -125,8 +133,8 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
       </g>
 
       <g fontFamily="var(--font-mono)" fontSize="8" fontWeight="700" textAnchor="middle">
-        <circle cx="85" cy="40" r="8" fill="#202B3D" />
-        <text x="85" y="43" fill="#fff">
+        <circle cx="85" cy="40" r="8" fill="var(--color-text-primary)" />
+        <text x="85" y="43" fill="var(--color-bg-card)">
           0
         </text>
 
@@ -135,8 +143,8 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
           { x: 118, label: '-1' },
         ].map(({ x, label }) => (
           <g key={x}>
-            <rect x={x - 11} y="55" width="22" height="14" rx="7" fill="#fff" stroke="#202B3D" />
-            <text x={x} y="65" fill="#202B3D">
+            <rect x={x - 11} y="55" width="22" height="14" rx="7" fill="var(--color-bg-card)" stroke="var(--color-text-primary)" />
+            <text x={x} y="65" fill="var(--color-text-primary)">
               {label}
             </text>
           </g>
@@ -149,8 +157,8 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
           { x: 143, label: '-3' },
         ].map(({ x, label }) => (
           <g key={x}>
-            <rect x={x - 11} y="74" width="22" height="11" rx="5.5" fill="#fff" stroke="#202B3D" />
-            <text x={x} y="82" fill="#202B3D">
+            <rect x={x - 11} y="74" width="22" height="11" rx="5.5" fill="var(--color-bg-card)" stroke="var(--color-text-primary)" />
+            <text x={x} y="82" fill="var(--color-text-primary)">
               {label}
             </text>
           </g>
