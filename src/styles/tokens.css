@@ -125,7 +125,8 @@
   /* 형광펜 하이라이트 (히어로 밑줄, 콜아웃 배경) */
   --color-highlighter:        #FFD84D;
   --color-highlighter-subtle: #FFF9E6;
-  --image-filter-programmers-logo: none;
+  --color-programmers-surface: #202B3D;
+  --color-programmers-ink:     #6BA6FF;
 }
 
 /* ----------------------------------------------------------
@@ -247,7 +248,8 @@
 
   --color-highlighter:        #C9A21A;
   --color-highlighter-subtle: #2A2312;
-  --image-filter-programmers-logo: brightness(0) invert(1) opacity(0.9);
+  --color-programmers-surface: #202B3D;
+  --color-programmers-ink:     #6BA6FF;
 
   /* Shadows (Dark — higher opacity for visibility) */
   --shadow-xs:         0 1px 2px rgba(0, 0, 0, 0.16);

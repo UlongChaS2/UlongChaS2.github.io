@@ -80,6 +80,38 @@ const BinaryCell = styled.span<{ active?: boolean; faded?: boolean }>`
   outline-offset: 2px;
 `;
 
+const ProgrammersThumbWrap = styled.div`
+  position: relative;
+  width: 170px;
+  height: 92px;
+`;
+
+const ProgrammersLogoPanel = styled.div`
+  position: absolute;
+  left: 29px;
+  top: 8px;
+  width: 112px;
+  height: 22px;
+  border-radius: 8px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+
+  img {
+    width: 103px;
+    height: auto;
+    display: block;
+  }
+`;
+
+const ProgrammersTreeSurface = styled(Surface)`
+  position: absolute;
+  inset: 0;
+  height: 92px;
+`;
+
 /** 이진 탐색 — 가운데 pivot을 기준으로 절반을 버리며 찾는다 */
 export const BinarySearchRecursionVsWhile: React.FC = () => (
   <Surface>
@@ -111,61 +143,56 @@ export const BinarySearchRecursionVsWhile: React.FC = () => (
 
 /** 타겟 넘버 DFS — + / - 선택이 두 갈래로 뻗는 재귀 탐색 트리 */
 export const ProgrammersTargetNumberDfs: React.FC = () => (
-  <Surface>
-    <svg width="170" height="92" viewBox="0 0 170 92" fill="none" aria-hidden>
-      <image
-        href={programmersLogoDark}
-        x="14"
-        y="0"
-        width="142"
-        height="34"
-        preserveAspectRatio="xMidYMid meet"
-        style={{ filter: 'var(--image-filter-programmers-logo)' }}
-      />
+  <ProgrammersThumbWrap>
+    <ProgrammersLogoPanel>
+      <img src={programmersLogoDark} alt="" />
+    </ProgrammersLogoPanel>
+    <ProgrammersTreeSurface>
+      <svg width="170" height="92" viewBox="0 0 170 92" fill="none" aria-hidden>
+        <g stroke="var(--color-border-strong)" strokeWidth="1.4" strokeLinecap="round">
+          <path d="M85 42L55 60" />
+          <path d="M85 42L115 60" />
+          <path d="M55 60L40 76" />
+          <path d="M55 60L70 76" />
+          <path d="M115 60L100 76" />
+          <path d="M115 60L130 76" />
+        </g>
 
-      <g stroke="var(--color-border-strong)" strokeWidth="1.4" strokeLinecap="round">
-        <path d="M85 40L52 62" />
-        <path d="M85 40L118 62" />
-        <path d="M52 62L27 79.5" />
-        <path d="M52 62L71 79.5" />
-        <path d="M118 62L99 79.5" />
-        <path d="M118 62L143 79.5" />
-      </g>
+        <g fontFamily="var(--font-mono)" fontSize="8" fontWeight="700" textAnchor="middle">
+          <circle cx="85" cy="42" r="8" fill="var(--color-text-primary)" />
+          <text x="85" y="45" fill="var(--color-bg-card)">
+            0
+          </text>
 
-      <g fontFamily="var(--font-mono)" fontSize="8" fontWeight="700" textAnchor="middle">
-        <circle cx="85" cy="40" r="8" fill="var(--color-text-primary)" />
-        <text x="85" y="43" fill="var(--color-bg-card)">
-          0
-        </text>
+          {[
+            { x: 55, label: '+1' },
+            { x: 115, label: '-1' },
+          ].map(({ x, label }) => (
+            <g key={x}>
+              <rect x={x - 12} y="53" width="24" height="14" rx="7" fill="var(--color-bg-card)" stroke="var(--color-text-primary)" />
+              <text x={x} y="63" fill="var(--color-text-primary)">
+                {label}
+              </text>
+            </g>
+          ))}
 
-        {[
-          { x: 52, label: '+1' },
-          { x: 118, label: '-1' },
-        ].map(({ x, label }) => (
-          <g key={x}>
-            <rect x={x - 11} y="55" width="22" height="14" rx="7" fill="var(--color-bg-card)" stroke="var(--color-text-primary)" />
-            <text x={x} y="65" fill="var(--color-text-primary)">
-              {label}
-            </text>
-          </g>
-        ))}
-
-        {[
-          { x: 27, label: '+3' },
-          { x: 71, label: '-1' },
-          { x: 99, label: '+1' },
-          { x: 143, label: '-3' },
-        ].map(({ x, label }) => (
-          <g key={x}>
-            <rect x={x - 11} y="74" width="22" height="11" rx="5.5" fill="var(--color-bg-card)" stroke="var(--color-text-primary)" />
-            <text x={x} y="82" fill="var(--color-text-primary)">
-              {label}
-            </text>
-          </g>
-        ))}
-      </g>
-    </svg>
-  </Surface>
+          {[
+            { x: 40, label: '+3' },
+            { x: 70, label: '-1' },
+            { x: 100, label: '+1' },
+            { x: 130, label: '-3' },
+          ].map(({ x, label }) => (
+            <g key={x}>
+              <rect x={x - 11} y="73" width="22" height="11" rx="5.5" fill="var(--color-bg-card)" stroke="var(--color-text-primary)" />
+              <text x={x} y="81" fill="var(--color-text-primary)">
+                {label}
+              </text>
+            </g>
+          ))}
+        </g>
+      </svg>
+    </ProgrammersTreeSurface>
+  </ProgrammersThumbWrap>
 );
 
 /** 공통 로직 추출 — 두 모듈에서 공통 블록을 위로 뽑아낸다 */
