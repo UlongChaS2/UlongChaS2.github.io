@@ -488,6 +488,46 @@ export const ReadingSpringBackendCodeFlow: React.FC = () => (
   </Surface>
 );
 
+/** 정렬 비교 — 현재 값이 들려서 왼쪽 정렬 영역으로 끼어드는 순간 */
+const SortRow = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  align-self: center;
+`;
+
+const SortCol = styled.span<{ h: number; tone?: 'accent' | 'soft' | 'muted' }>`
+  width: 15px;
+  height: ${({ h }) => h}px;
+  border-radius: 4px;
+  background: ${({ tone = 'muted' }) =>
+    tone === 'accent'
+      ? 'var(--card-accent-ink)'
+      : tone === 'soft'
+        ? 'color-mix(in srgb, var(--card-accent-ink) 30%, transparent)'
+        : 'var(--color-border-default)'};
+`;
+
+export const SortingAlgorithmComparison: React.FC = () => (
+  <Surface>
+    <VStack gap={9} pad="12px 14px">
+      <HStack gap={6} style={{ alignSelf: 'center', color: 'var(--card-accent-ink)' }}>
+        <span style={{ transform: 'scaleX(-1)', display: 'inline-flex' }}>
+          <ArrowRightSm size={10} />
+        </span>
+        <Bar w={64} tone="soft" />
+      </HStack>
+      <SortRow>
+        <SortCol h={12} tone="soft" />
+        <SortCol h={22} tone="soft" />
+        <SortCol h={26} tone="soft" />
+        <SortCol h={18} tone="accent" style={{ transform: 'translateY(-8px)' }} />
+        <SortCol h={38} />
+      </SortRow>
+    </VStack>
+  </Surface>
+);
+
 /** Spring Boot 아키텍처 기초 — 계층 슬래브 3단 */
 const Slab = styled.div<{ tone?: 'accent' | 'soft' | 'muted' }>`
   height: 14px;

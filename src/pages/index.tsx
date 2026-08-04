@@ -33,6 +33,7 @@ const visiblePostSlugs = new Set([
   '/linked-list-kth-node-from-last/',
   '/binary-search-recursion-vs-while/',
   '/programmers-target-number-dfs/',
+  '/sorting-algorithm-comparison/',
 ]);
 
 const PageInner = styled.div`

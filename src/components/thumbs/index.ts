@@ -25,6 +25,7 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
   'react-concurrent-mode': study.ReactConcurrentMode,
   'react-memo-comparator-vs-usememo': study.ReactMemoComparatorVsUsememo,
   'reading-spring-backend-code-flow': study.ReadingSpringBackendCodeFlow,
+  'sorting-algorithm-comparison': study.SortingAlgorithmComparison,
   'spring-boot-architecture-basics': study.SpringBootArchitectureBasics,
   'spring-boot-backend-structure': study.SpringBootBackendStructure,
   'underscore-prefix-convention': study.UnderscorePrefixConvention,
