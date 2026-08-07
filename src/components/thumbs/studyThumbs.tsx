@@ -616,3 +616,94 @@ export const WebAccessibilityA11y: React.FC = () => (
     </VStack>
   </Surface>
 );
+
+/** 이벤트 전파 — 캡처는 모든 이벤트가 지나고, scroll은 버블 단계가 없다 */
+export const EventPropagationCaptureBubble: React.FC = () => (
+  <Surface>
+    <VStack gap={8} pad="12px 14px">
+      <HStack>
+        <Mono size={11}>↓</Mono>
+        <Bar w={92} tone="soft" />
+        <Mono size={8} tone="muted">capture</Mono>
+      </HStack>
+      <HStack>
+        <Chip filled>
+          <Mono size={8}>target</Mono>
+        </Chip>
+        <Bar w={66} tone="accent" />
+      </HStack>
+      <HStack>
+        <Mono size={11} tone="muted">↑</Mono>
+        <Bar w={92} />
+        <Badge>
+          <IconClose size={8} strokeWidth={3} />
+        </Badge>
+      </HStack>
+    </VStack>
+  </Surface>
+);
+
+/** rAF 스로틀 — 고빈도 이벤트 점들 중 프레임당 마지막 하나만 처리 */
+const EventDot = styled.span<{ active?: boolean }>`
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  background: ${({ active }) =>
+    active ? 'var(--card-accent-ink)' : 'color-mix(in srgb, var(--card-accent-ink) 24%, transparent)'};
+`;
+
+export const RafThrottleHighFrequencyEvents: React.FC = () => (
+  <Surface>
+    <VStack gap={9} pad="13px 14px">
+      <HStack gap={5}>
+        <EventDot />
+        <EventDot />
+        <EventDot />
+        <EventDot />
+        <EventDot />
+        <EventDot active />
+      </HStack>
+      <HStack gap={6}>
+        <StepLine done w={28} />
+        <Chip filled>
+          <Mono size={8}>rAF</Mono>
+        </Chip>
+        <StepLine w={28} />
+      </HStack>
+      <HStack>
+        <Bar w={80} tone="accent" />
+        <Mono size={8} tone="muted">1/frame</Mono>
+      </HStack>
+    </VStack>
+  </Surface>
+);
+
+/** 스택·큐·해시 — 해시 슬롯 하나에 체인이 매달린 그림 */
+export const StackQueueHashFromScratch: React.FC = () => (
+  <Surface>
+    <VStack gap={9} pad="13px 14px">
+      <HStack gap={6}>
+        <Chip>
+          <Mono size={8}>LIFO</Mono>
+        </Chip>
+        <Chip>
+          <Mono size={8}>FIFO</Mono>
+        </Chip>
+        <Chip filled>
+          <Mono size={8}>hash</Mono>
+        </Chip>
+      </HStack>
+      <BinaryGrid>
+        {Array.from({ length: 8 }, (_, index) => (
+          <BinaryCell key={index} active={index === 3} />
+        ))}
+      </BinaryGrid>
+      <HStack gap={6} style={{ color: 'var(--card-accent-ink)' }}>
+        <Bar w={44} tone="accent" />
+        <ArrowRightSm size={11} />
+        <Bar w={44} tone="soft" />
+      </HStack>
+    </VStack>
+  </Surface>
+);

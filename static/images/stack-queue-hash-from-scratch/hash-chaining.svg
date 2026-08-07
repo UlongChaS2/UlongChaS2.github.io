@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="360" viewBox="0 0 520 360">
+<style>text{font-family:Arial,Helvetica,sans-serif}.mono{font-family:Menlo,Consolas,monospace}</style>
+<rect width="520" height="360" rx="28" fill="#F8FAFC"/>
+<rect x="18" y="18" width="484" height="324" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
+<text x="34" y="52" font-size="22" font-weight="800" fill="#1F2937">해시 충돌과 체이닝</text>
+<text x="34" y="76" font-size="13" font-weight="700" fill="#64748B">서로 다른 키가 같은 인덱스로 계산되면, 그 슬롯에 (키, 값) 쌍을 이어 매답니다</text>
+
+<!-- two keys entering hash fn -->
+<g class="mono" font-size="12.5" font-weight="700" text-anchor="middle">
+  <rect x="40" y="102" width="88" height="30" rx="9" fill="#FEF3C7" stroke="#F59E0B"/>
+  <text x="84" y="122" fill="#B45309">"apple"</text>
+  <rect x="40" y="150" width="88" height="30" rx="9" fill="#D1FAE5" stroke="#10B981"/>
+  <text x="84" y="170" fill="#047857">"grape"</text>
+</g>
+<g stroke="#94A3B8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M132 117 C 158 117, 158 132, 176 138"/>
+  <path d="M132 165 C 158 165, 158 150, 176 144"/>
+</g>
+<rect x="180" y="122" width="126" height="38" rx="10" fill="#EFF6FF" stroke="#3B82F6"/>
+<text x="243" y="146" text-anchor="middle" class="mono" font-size="12.5" font-weight="800" fill="#1D4ED8">hash(key) % 8</text>
+<g stroke="#3B82F6" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M306 141 L344 141 M336 135 L344 141 L336 147"/>
+</g>
+<text x="326" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#3B82F6">둘 다 3!</text>
+
+<!-- slot array (vertical, right) -->
+<g class="mono" font-size="11.5" font-weight="700">
+  <g text-anchor="middle" fill="#94A3B8">
+    <text x="366" y="106">idx</text>
+  </g>
+  <rect x="350" y="94" width="34" height="200" rx="9" fill="none"/>
+</g>
+<g text-anchor="middle" class="mono" font-size="11.5" font-weight="700">
+  <rect x="350" y="112" width="34" height="26" rx="7" fill="#F1F5F9" stroke="#CBD5E1"/><text x="367" y="129" fill="#94A3B8">2</text>
+  <rect x="350" y="142" width="34" height="26" rx="7" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/><text x="367" y="159" fill="#1D4ED8">3</text>
+  <rect x="350" y="172" width="34" height="26" rx="7" fill="#F1F5F9" stroke="#CBD5E1"/><text x="367" y="189" fill="#94A3B8">4</text>
+  <rect x="350" y="202" width="34" height="26" rx="7" fill="#F1F5F9" stroke="#CBD5E1"/><text x="367" y="219" fill="#94A3B8">5</text>
+</g>
+
+<!-- chain hanging off slot 3 -->
+<g stroke="#3B82F6" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M384 155 L400 155 M394 149 L400 155 L394 161"/>
+</g>
+<g class="mono" font-size="11.5" font-weight="700" text-anchor="middle">
+  <rect x="402" y="141" width="86" height="28" rx="9" fill="#FEF3C7" stroke="#F59E0B"/>
+  <text x="445" y="159" fill="#B45309">["apple", 3]</text>
+</g>
+<g stroke="#94A3B8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M445 169 L445 186 M439 179 L445 186 L451 179"/>
+</g>
+<g class="mono" font-size="11.5" font-weight="700" text-anchor="middle">
+  <rect x="402" y="188" width="86" height="28" rx="9" fill="#D1FAE5" stroke="#10B981"/>
+  <text x="445" y="206" fill="#047857">["grape", 7]</text>
+</g>
+
+<text x="34" y="264" font-size="12.5" font-weight="700" fill="#64748B">값만 저장하면 뒤에 온 키가 앞의 값을 덮습니다 (충돌 버그).</text>
+<text x="34" y="284" font-size="12.5" font-weight="700" fill="#64748B">키까지 함께 저장해야 꺼낼 때 체인 안에서 내 키를 대조해 찾을 수 있습니다.</text>
+<text x="34" y="318" font-size="12" font-weight="700" fill="#94A3B8">한 슬롯에 쏠리면 체인 순회가 길어지므로, 실제 구현은 차면 슬롯을 늘려 재배치합니다</text>
+</svg>
