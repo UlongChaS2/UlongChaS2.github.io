@@ -441,8 +441,9 @@ export const PostContent = styled.div`
     }
   }
 
+  /* 본문 폭에 꽉 채운다 — 흐름 SVG 애니메이션이 벡터라 확대 손실 없음 */
   img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 16px;
     margin: 48px 0;
