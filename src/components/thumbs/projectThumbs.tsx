@@ -478,3 +478,41 @@ export const SseRealtimeNotification: React.FC = () => (
     </HStack>
   </Surface>
 );
+
+/** Shift 드래그 다중 선택 — 드래그 밴드가 지나는 행이 한 번에 체크된다 */
+const DragBand = styled.div`
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 36px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--card-accent-ink) 12%, transparent);
+  border: 1px dashed var(--card-accent-ink);
+  pointer-events: none;
+`;
+
+export const ShiftDragMultiSelect: React.FC = () => (
+  <Surface>
+    <VStack gap={7} pad="12px 14px">
+      <HStack>
+        <Badge style={{ borderStyle: 'dashed' }} />
+        <Bar w={96} />
+      </HStack>
+      <HStack>
+        <Badge filled>
+          <IconCheck size={9} strokeWidth={3} />
+        </Badge>
+        <Bar w={112} tone="accent" />
+      </HStack>
+      <HStack>
+        <Badge filled>
+          <IconCheck size={9} strokeWidth={3} />
+        </Badge>
+        <Bar w={84} tone="accent" />
+        <Mono size={8}>⇧drag</Mono>
+      </HStack>
+    </VStack>
+    <DragBand />
+  </Surface>
+);

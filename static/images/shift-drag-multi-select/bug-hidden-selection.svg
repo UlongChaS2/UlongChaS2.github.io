@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="380" viewBox="0 0 520 380">
+<style>text{font-family:Arial,Helvetica,sans-serif}</style>
+<rect width="520" height="380" rx="28" fill="#F8FAFC"/>
+<rect x="18" y="18" width="484" height="344" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
+<text x="34" y="52" font-size="22" font-weight="800" fill="#1F2937">버그 — 보이지 않는 행이 선택된다</text>
+<text x="34" y="76" font-size="13" font-weight="700" fill="#64748B">접힌 그룹 A의 행들이 height: 0 지점에 유령처럼 겹쳐 있고, 드래그 좌표와 교차합니다</text>
+
+<!-- left panel: what user sees -->
+<text x="60" y="108" font-size="13" font-weight="800" fill="#475569">화면에 보이는 것</text>
+<rect x="60" y="118" width="180" height="210" rx="12" fill="#F8FAFC" stroke="#CBD5E1"/>
+<g font-size="11.5" font-weight="700">
+  <rect x="72" y="130" width="156" height="24" rx="7" fill="#E2E8F0"/>
+  <text x="82" y="146" fill="#475569">▸ 그룹 A (접힘)</text>
+  <rect x="72" y="162" width="156" height="24" rx="7" fill="#E2E8F0"/>
+  <text x="82" y="178" fill="#475569">▾ 그룹 B</text>
+  <!-- group B rows, one being dragged -->
+  <rect x="72" y="194" width="156" height="24" rx="7" fill="#DBEAFE" stroke="#3B82F6"/>
+  <text x="94" y="210" fill="#1D4ED8">✓ 항목 B-1</text>
+  <rect x="72" y="226" width="156" height="24" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="94" y="242" fill="#64748B">항목 B-2</text>
+  <rect x="72" y="258" width="156" height="24" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="94" y="274" fill="#64748B">항목 B-3</text>
+</g>
+<!-- drag band on left -->
+<rect x="66" y="196" width="168" height="20" rx="6" fill="#3B82F6" opacity="0.14"/>
+<text x="150" y="316" text-anchor="middle" font-size="11.5" font-weight="700" fill="#64748B">드래그는 B-1 하나였는데…</text>
+
+<!-- arrow between panels -->
+<g stroke="#94A3B8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M252 222 L268 222 M262 216 L268 222 L262 228"/>
+</g>
+
+<!-- right panel: coordinate space reality -->
+<text x="280" y="108" font-size="13" font-weight="800" fill="#B91C1C">좌표 공간의 실제</text>
+<rect x="280" y="118" width="180" height="210" rx="12" fill="#FFF7F7" stroke="#FCA5A5"/>
+<g font-size="11.5" font-weight="700">
+  <!-- ghost rows of collapsed group A: crushed at y of header, dashed red -->
+  <rect x="292" y="130" width="156" height="24" rx="7" fill="#E2E8F0"/>
+  <text x="302" y="146" fill="#475569">▸ 그룹 A (h: 0)</text>
+  <g>
+    <rect x="292" y="158" width="156" height="20" rx="6" fill="none" stroke="#EF4444" stroke-dasharray="5 4"/>
+    <text x="314" y="172" fill="#B91C1C">✓ 유령 A-1</text>
+    <rect x="292" y="182" width="156" height="20" rx="6" fill="none" stroke="#EF4444" stroke-dasharray="5 4"/>
+    <text x="314" y="196" fill="#B91C1C">✓ 유령 A-2</text>
+  </g>
+  <!-- real group B rows shifted down, overlapping band -->
+  <rect x="292" y="206" width="156" height="24" rx="7" fill="#DBEAFE" stroke="#3B82F6"/>
+  <text x="314" y="222" fill="#1D4ED8">✓ 항목 B-1</text>
+  <rect x="292" y="238" width="156" height="24" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="314" y="254" fill="#64748B">항목 B-2</text>
+</g>
+<!-- drag band crossing ghosts + B-1 -->
+<rect x="286" y="160" width="168" height="66" rx="6" fill="#EF4444" opacity="0.10"/>
+<text x="370" y="316" text-anchor="middle" font-size="11.5" font-weight="700" fill="#B91C1C">getBoundingClientRect는 잘린 행도 원래 크기를 말한다</text>
+
+<text x="260" y="348" text-anchor="middle" font-size="12" font-weight="700" fill="#94A3B8">overflow: hidden은 그리기만 자를 뿐 — 기하 정보는 남아 드래그 구간과 교차합니다</text>
+</svg>
