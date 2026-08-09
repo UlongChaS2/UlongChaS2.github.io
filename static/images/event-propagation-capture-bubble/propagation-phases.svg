@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="520" height="400" viewBox="0 0 520 400">
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="418" viewBox="0 0 520 418">
 <style>text{font-family:Arial,Helvetica,sans-serif}</style>
-<rect width="520" height="400" rx="28" fill="#F8FAFC"/>
-<rect x="18" y="18" width="484" height="364" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
+<rect width="520" height="418" rx="28" fill="#F8FAFC"/>
+<rect x="18" y="18" width="484" height="382" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
 <text x="34" y="52" font-size="22" font-weight="800" fill="#1F2937">이벤트 전파 3단계</text>
 <text x="34" y="76" font-size="13" font-weight="700" fill="#64748B">모든 이벤트는 캡처를 지나고, 버블은 bubbles: true일 때만 올라옵니다</text>
 
@@ -19,10 +19,10 @@
   <text x="260" y="320" fill="#FFFFFF">button (target)</text>
 </g>
 
-<!-- capture path: down, left side -->
-<g stroke="#F59E0B" stroke-width="3" fill="none" stroke-linecap="round">
-  <path d="M150 113 C 110 160, 110 250, 150 308"/>
-  <path d="M141 296 L150 308 L135 310" stroke-linejoin="round"/>
+<!-- capture path: down, left side, ends pointing straight down -->
+<g stroke="#F59E0B" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M148 113 C 106 160, 106 248, 148 298"/>
+  <path d="M140 289 L148 300 L156 289"/>
 </g>
 <g transform="translate(64 176)">
   <rect width="76" height="44" rx="10" fill="#FEF3C7" stroke="#F59E0B"/>
@@ -36,16 +36,17 @@
   <text x="41" y="20" text-anchor="middle" font-size="12" font-weight="800" fill="#1D4ED8">2. 타깃</text>
 </g>
 
-<!-- bubble path: up, right side -->
-<g stroke="#10B981" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="7 6">
-  <path d="M370 308 C 410 250, 410 160, 370 113"/>
+<!-- bubble path: up, right side, ends pointing straight up -->
+<g stroke="#10B981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M436 296 C 462 248, 462 160, 438 118" stroke-dasharray="7 6"/>
+  <path d="M430 129 L438 116 L446 129"/>
 </g>
-<path d="M379 125 L370 113 L385 111" stroke="#10B981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<g transform="translate(382 176)">
+<g transform="translate(400 176)">
   <rect width="76" height="44" rx="10" fill="#D1FAE5" stroke="#10B981"/>
   <text x="38" y="19" text-anchor="middle" font-size="12" font-weight="800" fill="#047857">3. 버블</text>
   <text x="38" y="35" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">올라감 ↑</text>
 </g>
 
-<text x="260" y="364" text-anchor="middle" font-size="12.5" font-weight="700" fill="#64748B">scroll처럼 bubbles: false인 이벤트는 3번(점선)이 없습니다 — 캡처(1)로만 상위에서 잡을 수 있습니다</text>
+<text x="260" y="362" text-anchor="middle" font-size="13" font-weight="700" fill="#64748B">scroll처럼 bubbles: false인 이벤트는 3번(점선)이 없습니다</text>
+<text x="260" y="382" text-anchor="middle" font-size="13" font-weight="700" fill="#64748B">캡처(1)로만 상위에서 잡을 수 있습니다</text>
 </svg>
