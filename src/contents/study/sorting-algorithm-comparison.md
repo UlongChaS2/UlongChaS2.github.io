@@ -35,11 +35,13 @@ keywords: ['Algorithm', 'Python', 'Bubble Sort', 'Selection Sort', 'Insertion So
 같은 배열을 기준으로 보면 세 정렬의 차이가 더 잘 보입니다.
 Bubble Sort는 큰 값이 오른쪽으로 밀려나고, Selection Sort는 최솟값을 끝까지 찾은 뒤 한 번 교환하고, Insertion Sort는 현재 값을 왼쪽의 정렬된 영역에 끼워 넣습니다.
 
-![Bubble Sort 흐름](/images/sorting-algorithm-comparison/bubble-sort-flow.svg)
+<div class="flow-row">
+  <img src="/images/sorting-algorithm-comparison/bubble-sort-flow.svg" alt="Bubble Sort 흐름" />
+  <img src="/images/sorting-algorithm-comparison/selection-sort-flow.svg" alt="Selection Sort 흐름" />
+  <img src="/images/sorting-algorithm-comparison/insertion-sort-flow.svg" alt="Insertion Sort 흐름" />
+</div>
 
-![Selection Sort 흐름](/images/sorting-algorithm-comparison/selection-sort-flow.svg)
-
-![Insertion Sort 흐름](/images/sorting-algorithm-comparison/insertion-sort-flow.svg)
+_노란색은 비교 중인 값, 파란색은 자리가 확정된 값입니다._
 
 ## Bubble Sort
 

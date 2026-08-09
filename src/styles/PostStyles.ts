@@ -449,6 +449,31 @@ export const PostContent = styled.div`
     margin: 48px 0;
   }
 
+  /* 흐름 SVG를 나란히 — 좁은 화면에서는 세로로 풀어준다 */
+  .flow-row {
+    display: flex;
+    gap: 12px;
+    margin: 48px 0 8px;
+
+    img {
+      flex: 1 1 0;
+      min-width: 0;
+      margin: 0;
+    }
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+    }
+  }
+
+  .flow-row + p em {
+    display: block;
+    text-align: center;
+    font-style: normal;
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+  }
+
   hr {
     border: none;
     border-top: 1px solid var(--color-border-subtle);
