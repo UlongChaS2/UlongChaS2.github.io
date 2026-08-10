@@ -1,7 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="520" height="400" viewBox="0 0 520 400">
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="418" viewBox="0 0 520 418">
 <style>text{font-family:Arial,Helvetica,sans-serif}</style>
-<rect width="520" height="400" rx="28" fill="#F8FAFC"/>
-<rect x="18" y="18" width="484" height="364" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
+<defs>
+  <marker id="ah-o" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0 0.6 L9.4 5 L0 9.4 Z" fill="#F59E0B"/>
+  </marker>
+  <marker id="ah-g" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0 0.6 L9.4 5 L0 9.4 Z" fill="#10B981"/>
+  </marker>
+</defs>
+<rect width="520" height="418" rx="28" fill="#F8FAFC"/>
+<rect x="18" y="18" width="484" height="382" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
 <text x="34" y="52" font-size="22" font-weight="800" fill="#1F2937">이벤트 전파 3단계</text>
 <text x="34" y="76" font-size="13" font-weight="700" fill="#64748B">모든 이벤트는 캡처를 지나고, 버블은 bubbles: true일 때만 올라옵니다</text>
 
@@ -19,11 +27,8 @@
   <text x="260" y="320" fill="#FFFFFF">button (target)</text>
 </g>
 
-<!-- capture path: down, left side -->
-<g stroke="#F59E0B" stroke-width="3" fill="none" stroke-linecap="round">
-  <path d="M150 113 C 110 160, 110 250, 150 308"/>
-  <path d="M141 296 L150 308 L135 310" stroke-linejoin="round"/>
-</g>
+<!-- capture: curved down the left side, arrowhead auto-oriented -->
+<path d="M150 112 Q 88 205, 150 298" fill="none" stroke="#F59E0B" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ah-o)"/>
 <g transform="translate(64 176)">
   <rect width="76" height="44" rx="10" fill="#FEF3C7" stroke="#F59E0B"/>
   <text x="38" y="19" text-anchor="middle" font-size="12" font-weight="800" fill="#B45309">1. 캡처</text>
@@ -36,16 +41,14 @@
   <text x="41" y="20" text-anchor="middle" font-size="12" font-weight="800" fill="#1D4ED8">2. 타깃</text>
 </g>
 
-<!-- bubble path: up, right side -->
-<g stroke="#10B981" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="7 6">
-  <path d="M370 308 C 410 250, 410 160, 370 113"/>
-</g>
-<path d="M379 125 L370 113 L385 111" stroke="#10B981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<g transform="translate(382 176)">
+<!-- bubble: curved up the right side, dashed, arrowhead auto-oriented -->
+<path d="M370 298 Q 432 205, 370 112" fill="none" stroke="#10B981" stroke-width="3.5" stroke-dasharray="8 7" stroke-linecap="round" marker-end="url(#ah-g)"/>
+<g transform="translate(400 176)">
   <rect width="76" height="44" rx="10" fill="#D1FAE5" stroke="#10B981"/>
   <text x="38" y="19" text-anchor="middle" font-size="12" font-weight="800" fill="#047857">3. 버블</text>
   <text x="38" y="35" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">올라감 ↑</text>
 </g>
 
-<text x="260" y="364" text-anchor="middle" font-size="12.5" font-weight="700" fill="#64748B">scroll처럼 bubbles: false인 이벤트는 3번(점선)이 없습니다 — 캡처(1)로만 상위에서 잡을 수 있습니다</text>
+<text x="260" y="362" text-anchor="middle" font-size="13" font-weight="700" fill="#64748B">scroll처럼 bubbles: false인 이벤트는 3번(점선)이 없습니다</text>
+<text x="260" y="382" text-anchor="middle" font-size="13" font-weight="700" fill="#64748B">캡처(1)로만 상위에서 잡을 수 있습니다</text>
 </svg>
