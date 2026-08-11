@@ -29,6 +29,9 @@ thumbVariant: 'pipeline'   # 선택. 일러스트 썸네일 변형 강제 지정
 
 - URL 패턴: `/study/{slug}`, `/project/{slug}`
 - 슬러그는 파일명 기반으로 자동 생성 (`gatsby-node.js`)
+- **md를 넣어도 페이지가 안 생기면 허용 목록 누락이다.** 발행하려면 슬러그를 세 곳의
+  `visiblePostSlugs`/`visibleStudySlugs`에 추가해야 한다: `gatsby-node.js`(페이지 생성),
+  `src/pages/index.tsx`(홈 목록), `src/pages/study.tsx`(스터디 목록). project 목록은 필터 없음
 - 1년 이상 된 포스트는 DSG(Deferred Static Generation)로 처리
 - 이전/다음 글은 같은 카테고리 안에서만 이어진다
 - `keywords`가 없으면 카테고리 이름이 썸네일 라벨로 쓰인다
