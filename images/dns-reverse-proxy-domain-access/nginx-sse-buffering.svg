@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 700" font-family="Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#F04452"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0EA678"/>
+    </marker>
+    <marker id="arrGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6B7684"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="700" fill="#FFFFFF"/>
+  <text x="40" y="42" font-size="21" font-weight="800" fill="#191F28">nginx 기본값은 왜 SSE(실시간 알림)를 죽이나</text>
+
+  <!-- ═══════════ Panel A : 기본 설정 ═══════════ -->
+  <rect x="30" y="64" width="880" height="290" rx="16" fill="#FDF3F4"/>
+  <text x="52" y="98" font-size="16" font-weight="800" fill="#F04452">① nginx 기본 설정 — 알림이 창고에 갇히고, 연결은 잘린다</text>
+
+  <!-- 앱 -->
+  <rect x="52" y="120" width="160" height="64" rx="12" fill="#FFFFFF" stroke="#6B7684" stroke-width="1.5"/>
+  <text x="132" y="147" font-size="14" font-weight="700" fill="#191F28" text-anchor="middle">앱 (8080)</text>
+  <text x="132" y="167" font-size="11.5" fill="#6B7684" text-anchor="middle">알림을 찔끔찔끔 전송</text>
+
+  <!-- 앱 → nginx 알림 조각들 -->
+  <line x1="212" y1="152" x2="342" y2="152" stroke="#6B7684" stroke-width="1.5" marker-end="url(#arrGray)"/>
+  <circle cx="245" cy="152" r="5" fill="#3182F6"/>
+  <circle cx="272" cy="152" r="5" fill="#3182F6"/>
+  <circle cx="299" cy="152" r="5" fill="#3182F6"/>
+
+  <!-- nginx 버퍼 창고 -->
+  <rect x="350" y="112" width="230" height="110" rx="12" fill="#FFFFFF" stroke="#F04452" stroke-width="2"/>
+  <text x="465" y="136" font-size="14" font-weight="700" fill="#191F28" text-anchor="middle">nginx (버퍼 창고)</text>
+  <circle cx="415" cy="162" r="6" fill="#3182F6"/>
+  <circle cx="443" cy="162" r="6" fill="#3182F6"/>
+  <circle cx="471" cy="162" r="6" fill="#3182F6"/>
+  <circle cx="499" cy="162" r="6" fill="#3182F6"/>
+  <circle cx="429" cy="186" r="6" fill="#3182F6"/>
+  <circle cx="457" cy="186" r="6" fill="#3182F6"/>
+  <circle cx="485" cy="186" r="6" fill="#3182F6"/>
+  <text x="465" y="212" font-size="11.5" fill="#F04452" text-anchor="middle" font-weight="600">"다 모이면 한꺼번에 보내야지" — 계속 쌓기만 함</text>
+
+  <!-- nginx → 브라우저 : 막힘 -->
+  <line x1="580" y1="152" x2="700" y2="152" stroke="#F04452" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="640" y="141" font-size="15" font-weight="800" fill="#F04452" text-anchor="middle">✕</text>
+  <text x="640" y="176" font-size="11" fill="#F04452" text-anchor="middle">전달 안 됨</text>
+
+  <!-- 브라우저 -->
+  <rect x="706" y="120" width="180" height="64" rx="12" fill="#FFFFFF" stroke="#6B7684" stroke-width="1.5"/>
+  <text x="796" y="147" font-size="14" font-weight="700" fill="#191F28" text-anchor="middle">브라우저</text>
+  <text x="796" y="167" font-size="11.5" fill="#6B7684" text-anchor="middle">알림 기다리는 중…</text>
+
+  <!-- 타임아웃 -->
+  <line x1="52" y1="262" x2="700" y2="262" stroke="#6B7684" stroke-width="1.5"/>
+  <line x1="700" y1="262" x2="886" y2="262" stroke="#F04452" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="52" y="252" font-size="11.5" fill="#6B7684">연결 시간 →</text>
+  <text x="700" y="252" font-size="12" fill="#F04452" font-weight="700" text-anchor="middle">60초 ✂ 연결 강제 종료</text>
+  <text x="376" y="282" font-size="11.5" fill="#6B7684" text-anchor="middle">브라우저에 아무것도 안 흘러가니 "조용한 연결"로 판정 (read timeout 기본 60초)</text>
+
+  <text x="52" y="330" font-size="13" font-weight="700" fill="#B03A44">증상: 화면도 뜨고 로그인도 되는데, 검색 완료 알림만 조용히 실종 — 에러 로그도 없음</text>
+
+  <!-- ═══════════ Panel B : SSE 예외 설정 ═══════════ -->
+  <rect x="30" y="380" width="880" height="240" rx="16" fill="#EFF9F5"/>
+  <text x="52" y="414" font-size="16" font-weight="800" fill="#0EA678">② location /sse 예외 설정 — 모으지 않고, 끊지 않는다</text>
+
+  <!-- 앱 -->
+  <rect x="52" y="440" width="160" height="64" rx="12" fill="#FFFFFF" stroke="#6B7684" stroke-width="1.5"/>
+  <text x="132" y="467" font-size="14" font-weight="700" fill="#191F28" text-anchor="middle">앱 (8080)</text>
+  <text x="132" y="487" font-size="11.5" fill="#6B7684" text-anchor="middle">알림을 찔끔찔끔 전송</text>
+
+  <!-- nginx 통과 터널 -->
+  <rect x="350" y="440" width="230" height="64" rx="12" fill="#FFFFFF" stroke="#0EA678" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="465" y="464" font-size="14" font-weight="700" fill="#191F28" text-anchor="middle">nginx (통로만 제공)</text>
+  <text x="465" y="486" font-size="11.5" fill="#0EA678" text-anchor="middle" font-weight="600">쌓지 않고 그대로 통과</text>
+
+  <!-- 관통 화살표 + 조각들 -->
+  <line x1="212" y1="472" x2="350" y2="472" stroke="#0EA678" stroke-width="1.5"/>
+  <line x1="580" y1="472" x2="700" y2="472" stroke="#0EA678" stroke-width="1.5" marker-end="url(#arrGreen)"/>
+  <circle cx="248" cy="472" r="5" fill="#3182F6"/>
+  <circle cx="296" cy="472" r="5" fill="#3182F6"/>
+  <circle cx="612" cy="472" r="5" fill="#3182F6"/>
+  <circle cx="656" cy="472" r="5" fill="#3182F6"/>
+
+  <!-- 브라우저 -->
+  <rect x="706" y="440" width="180" height="64" rx="12" fill="#FFFFFF" stroke="#0EA678" stroke-width="2"/>
+  <text x="796" y="467" font-size="14" font-weight="700" fill="#191F28" text-anchor="middle">브라우저</text>
+  <text x="796" y="487" font-size="12" fill="#0EA678" text-anchor="middle" font-weight="700">알림 실시간 도착 ✓</text>
+
+  <!-- 설정 라벨 -->
+  <text x="132" y="545" font-size="12.5" fill="#0EA678" font-weight="700">proxy_buffering off</text>
+  <text x="132" y="563" font-size="11.5" fill="#6B7684">→ 창고 폐쇄, 조각 오는 즉시 전달</text>
+  <text x="480" y="545" font-size="12.5" fill="#0EA678" font-weight="700">proxy_read_timeout 24h</text>
+  <text x="480" y="563" font-size="11.5" fill="#6B7684">→ 오래 조용해도 연결 유지</text>
+
+  <text x="52" y="600" font-size="12" font-family="ui-monospace, Menlo, monospace" fill="#191F28">location /sse {  proxy_buffering off;  proxy_cache off;  proxy_read_timeout 24h;  }</text>
+
+  <!-- 결론 -->
+  <text x="40" y="662" font-size="13.5" font-weight="700" fill="#191F28">한 줄 요약: SSE는 "계속 열린 가는 물줄기"인데, nginx 기본값은 "물을 모아서 한 번에 + 안 흐르면 밸브 잠금" — 그래서 /sse 경로만 예외를 둔다.</text>
+</svg>
