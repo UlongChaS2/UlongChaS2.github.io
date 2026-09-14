@@ -14,7 +14,6 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
   'array-from-without-new': study.ArrayFromWithoutNew,
   'backend-search-batch-debugging': study.BackendSearchBatchDebugging,
   'binary-search-recursion-vs-while': study.BinarySearchRecursionVsWhile,
-  'dns-reverse-proxy-domain-access': study.DnsReverseProxyDomainAccess,
   'event-propagation-capture-bubble': study.EventPropagationCaptureBubble,
   'extracting-common-logic': study.ExtractingCommonLogic,
   'file-transfer-protocols': study.FileTransferProtocols,
@@ -36,6 +35,7 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
   'web-accessibility-a11y': study.WebAccessibilityA11y,
   // --- project ---
   'async-sync-job': project.AsyncSyncJob,
+  'dns-reverse-proxy-domain-access': project.DnsReverseProxyDomainAccess,
   'css-grid-responsive-stats-cards': project.CssGridResponsiveStatsCards,
   'datagrid-context-useref-optimization': project.DatagridContextUserefOptimization,
   'deployment-stabilization-1': project.DeploymentStabilization1,
