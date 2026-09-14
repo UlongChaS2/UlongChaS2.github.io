@@ -707,3 +707,27 @@ export const StackQueueHashFromScratch: React.FC = () => (
     </VStack>
   </Surface>
 );
+
+/** DNS와 리버스 프록시 — 포트 없는 요청을 80에서 받아 8080으로 잇는다 */
+export const DnsReverseProxyDomainAccess: React.FC = () => (
+  <Surface>
+    <HStack gap={9} style={{ padding: '14px', color: 'var(--card-accent-ink)' }}>
+      <Chip>
+        <Mono size={8}>:80</Mono>
+      </Chip>
+      <ArrowRightSm size={11} />
+      <ServerBox>
+        <Mono size={8}>nginx</Mono>
+        <Bar w={30} tone="accent" />
+      </ServerBox>
+      <ArrowRightSm size={11} />
+      <ServerBox>
+        <Mono size={8}>app</Mono>
+        <Bar w={30} tone="soft" />
+      </ServerBox>
+      <Chip filled>
+        <Mono size={8}>:8080</Mono>
+      </Chip>
+    </HStack>
+  </Surface>
+);

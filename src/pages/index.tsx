@@ -38,6 +38,7 @@ const visiblePostSlugs = new Set([
   '/raf-throttle-high-frequency-events/',
   '/stack-queue-hash-from-scratch/',
   '/shift-drag-multi-select/',
+  '/dns-reverse-proxy-domain-access/',
 ]);
 
 const PageInner = styled.div`

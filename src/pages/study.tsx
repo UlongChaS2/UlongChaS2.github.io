@@ -19,6 +19,7 @@ const visibleStudySlugs = new Set([
   '/event-propagation-capture-bubble/',
   '/raf-throttle-high-frequency-events/',
   '/stack-queue-hash-from-scratch/',
+  '/dns-reverse-proxy-domain-access/',
 ]);
 
 const StudyPage: React.FC<StudyPageProps> = ({ data }) => (
