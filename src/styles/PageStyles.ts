@@ -316,7 +316,8 @@ export const HeroLede = styled.p`
   font-weight: var(--fw-normal);
   line-height: var(--lh-loose);
   color: var(--color-text-secondary);
-  max-width: 520px;
+  width: max-content;
+  max-width: 100%;
   margin: var(--space-5) 0 0;
   word-break: keep-all;
 
