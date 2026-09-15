@@ -146,14 +146,14 @@ const IndexPage = () => {
     <Layout>
       <PageInner>
         <HomeHero>
-          <HeroChip>프론트에 뿌리를 둔 잡식 개발자</HeroChip>
+          <HeroChip>오늘도 한 개 배웠어요</HeroChip>
           <HeroHeadline>
-            화면 안쪽부터 서버 바깥까지,
+            배운 걸 잊지 않으려고
             <br />
-            <HeroHighlight>직접 부딪힌 기록</HeroHighlight>
+            <HeroHighlight>기록해두는 곳</HeroHighlight>
           </HeroHeadline>
           <HeroLede>
-            React·TypeScript를 기반에 두고, 인프라·배포·운영까지 AI를 지렛대 삼아 파고듭니다.
+            React, TypeScript, 그리고 매일 부딪히는 문제들.
             <br />
             삽질한 과정까지 그대로 남겨둡니다.
           </HeroLede>
