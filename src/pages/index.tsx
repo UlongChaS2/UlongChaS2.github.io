@@ -146,16 +146,16 @@ const IndexPage = () => {
     <Layout>
       <PageInner>
         <HomeHero>
-          <HeroChip>오늘도 한 개 배웠어요</HeroChip>
+          <HeroChip>FRONTEND, AND BEYOND</HeroChip>
           <HeroHeadline>
-            배운 걸 잊지 않으려고
+            프론트엔드에서 시작해
             <br />
-            <HeroHighlight>기록해두는 곳</HeroHighlight>
+            <HeroHighlight>시스템 전체를 봅니다</HeroHighlight>
           </HeroHeadline>
           <HeroLede>
-            React, TypeScript, 그리고 매일 부딪히는 문제들.
+            화면을 구현하는 데서 멈추지 않고 백엔드와 인프라까지 문제의 흐름을 추적합니다.
             <br />
-            삽질한 과정까지 그대로 남겨둡니다.
+            AI를 도구로 활용하며 해결한 과정과 기술적 판단을 기록합니다.
           </HeroLede>
         </HomeHero>
 
