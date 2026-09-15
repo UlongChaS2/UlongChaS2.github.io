@@ -148,9 +148,9 @@ const IndexPage = () => {
         <HomeHero>
           <HeroChip>FRONTEND, AND BEYOND</HeroChip>
           <HeroHeadline>
-            프론트엔드에서 시작해
+            프론트엔드 개발자,
             <br />
-            <HeroHighlight>시스템 전체를 봅니다</HeroHighlight>
+            <HeroHighlight>화면 너머 시스템까지 봅니다</HeroHighlight>
           </HeroHeadline>
           <HeroLede>
             화면을 구현하는 데서 멈추지 않고 백엔드와 인프라까지 문제의 흐름을 추적합니다.
