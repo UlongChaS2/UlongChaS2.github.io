@@ -11,11 +11,16 @@ interface ProjectPageProps {
   };
 }
 
-const ProjectPage: React.FC<ProjectPageProps> = () => (
+const visibleProjectSlugs = new Set([
+  '/shift-drag-multi-select/',
+  '/dns-reverse-proxy-domain-access/',
+]);
+
+const ProjectPage: React.FC<ProjectPageProps> = ({ data }) => (
   <PostListPage
     title="프로젝트"
     subtitle="직접 만든 것들의 과정과 결과를 남깁니다."
-    posts={[]}
+    posts={data.allMarkdownRemark.nodes.filter((post) => visibleProjectSlugs.has(post.fields.slug))}
     emptyMessage="아직 프로젝트 포스트가 없습니다."
   />
 );
