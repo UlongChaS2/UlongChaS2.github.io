@@ -29,6 +29,7 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
   'react-memo-comparator-vs-usememo': study.ReactMemoComparatorVsUsememo,
   'reading-spring-backend-code-flow': study.ReadingSpringBackendCodeFlow,
   'sorting-algorithm-comparison': study.SortingAlgorithmComparison,
+  'time-complexity-from-constraints': study.TimeComplexityFromConstraints,
   'spring-boot-architecture-basics': study.SpringBootArchitectureBasics,
   'spring-boot-backend-structure': study.SpringBootBackendStructure,
   'stack-queue-hash-from-scratch': study.StackQueueHashFromScratch,

@@ -528,6 +528,56 @@ export const SortingAlgorithmComparison: React.FC = () => (
   </Surface>
 );
 
+/** 시간 복잡도 - 약수 짝이 √n에서 접히는 모양. 왼쪽만 확인하면 오른쪽은 따라온다 */
+const DivisorPair = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--fw-bold);
+  color: var(--color-text-tertiary);
+`;
+
+const FoldLine = styled.span`
+  align-self: stretch;
+  width: 2px;
+  background: var(--card-accent-ink);
+  border-radius: 1px;
+`;
+
+export const TimeComplexityFromConstraints: React.FC = () => (
+  <Surface>
+    <HStack gap={8} style={{ padding: '12px 14px', justifyContent: 'center' }}>
+      <VStack gap={5} pad="0" style={{ alignItems: 'flex-end' }}>
+        {[
+          [1, 36],
+          [2, 18],
+          [3, 12],
+        ].map(([small, big]) => (
+          <DivisorPair key={small}>
+            <Mono size={9}>{small}</Mono>
+            <Bar w={14} tone="accent" />
+            <Mono size={9} tone="muted">
+              {big}
+            </Mono>
+          </DivisorPair>
+        ))}
+      </VStack>
+      <FoldLine />
+      <VStack gap={6} pad="0">
+        <Chip filled>
+          <Mono size={8} style={{ color: 'inherit' }}>
+            √n
+          </Mono>
+        </Chip>
+        <Bar w={30} tone="soft" />
+        <Bar w={22} />
+      </VStack>
+    </HStack>
+  </Surface>
+);
+
 /** Spring Boot 아키텍처 기초 — 계층 슬래브 3단 */
 const Slab = styled.div<{ tone?: 'accent' | 'soft' | 'muted' }>`
   height: 14px;
