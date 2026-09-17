@@ -81,8 +81,8 @@ const TOCList = styled.ul`
   min-height: 0;
   overflow-y: auto;
 
-  /* 스크롤바가 항목 글자에 닿지 않도록 오른쪽에 자리를 비워둔다 */
-  padding: 0 var(--space-2) 0 0;
+  /* 스크롤바 자리는 scrollbar-gutter가 비워준다. padding을 또 주면 여백이 겹친다 */
+  padding: 0;
   scrollbar-gutter: stable;
 
   &::-webkit-scrollbar {
