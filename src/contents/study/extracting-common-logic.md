@@ -1,5 +1,5 @@
 ---
-title: '공통 로직 추출 — 언제 하고 언제 하지 말아야 하나'
+title: '공통 로직 추출 - 언제 하고 언제 하지 말아야 하나'
 date: '2026-03-26'
 category: 'study'
 keywords: ['리팩터링', '설계', 'BE']
@@ -92,16 +92,16 @@ public class ServiceA {
 ```
 
 **장점:**
-- Repository 호출 포함 로직 **완전 통합** — 쿼리 조건이 바뀌어도 한 곳만 수정
+- Repository 호출 포함 로직 **완전 통합** - 쿼리 조건이 바뀌어도 한 곳만 수정
 - 변경 시 실수 방지 (한 쪽만 수정하고 다른 쪽 까먹는 사고 예방)
 
 **단점:**
-- 역할이 모호해짐 — "이 클래스는 서비스야? Repository 래퍼야?"
-- **레이어 경계가 흐려짐** — Service가 또 다른 Service를 주입받으면 계층 구조가 복잡해짐
+- 역할이 모호해짐 - "이 클래스는 서비스야? Repository 래퍼야?"
+- **레이어 경계가 흐려짐** - Service가 또 다른 Service를 주입받으면 계층 구조가 복잡해짐
 - 테스트 시 Mock이 늘어남
 
 ```
-// 테스트가 복잡해지는 예 — ServiceA 테스트
+// 테스트가 복잡해지는 예 - ServiceA 테스트
 @Mock EntityStatusManager statusManager;  // 협력 객체가 하나 더 늘어남
 @InjectMocks ServiceA serviceA;           // statusManager가 주입됨
 
@@ -137,7 +137,7 @@ assertThat(entity.getStatus()).isEqualTo(Status.IDLE);
 ```
 
 **단점:**
-- **Repository 호출은 여전히 두 곳에 중복** — 진짜 중복 제거가 아님
+- **Repository 호출은 여전히 두 곳에 중복** - 진짜 중복 제거가 아님
 - 쿼리 조건이 바뀌면 두 군데 다 수정해야 함
 - 메서드 시그니처가 특정 케이스에 묶여 재사용성이 낮음
 - 이 프로젝트가 Anemic Domain Model이면 스타일 일관성이 깨짐
@@ -147,7 +147,7 @@ assertThat(entity.getStatus()).isEqualTo(Status.IDLE);
 ### 옵션 3: 그냥 두기 + 주석
 
 ```java
-// NOTE: ServiceB와 동일한 롤백 로직 — 변경 시 양쪽 함께 수정
+// NOTE: ServiceB와 동일한 롤백 로직 - 변경 시 양쪽 함께 수정
 boolean hasActive = repo.existsByIdAndStatus(id, Status.ACTIVE);
 entity.changeStatus(hasActive ? Status.RUNNING : Status.IDLE);
 entityRepo.save(entity);
@@ -210,8 +210,8 @@ entityRepo.save(entity);
 
 ## 관련 개념
 
-- Spring DI (의존성 주입) — @Autowired, Constructor Injection
-- DDD (Domain-Driven Design) — Anemic vs Rich Domain Model
-- Premature Abstraction — 성급한 추상화의 위험
-- Rule of Three — 코드 중복 추출 기준
-- Layered Architecture — Controller / Service / Repository 계층 분리
+- Spring DI (의존성 주입) - @Autowired, Constructor Injection
+- DDD (Domain-Driven Design) - Anemic vs Rich Domain Model
+- Premature Abstraction - 성급한 추상화의 위험
+- Rule of Three - 코드 중복 추출 기준
+- Layered Architecture - Controller / Service / Repository 계층 분리

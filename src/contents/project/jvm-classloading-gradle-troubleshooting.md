@@ -118,7 +118,7 @@ Gradle 설정:
 dependencies {
     // 컴파일할 때만 사용, 런타임엔 불필요
     annotationProcessor 'org.projectlombok:lombok'
-    // 좌표는 group:artifact:version:classifier 순서 — jpa는 classifier라 version 뒤에 와야 한다
+    // 좌표는 group:artifact:version:classifier 순서 - jpa는 classifier라 version 뒤에 와야 한다
     annotationProcessor 'io.github.openfeign.querydsl:querydsl-apt:<version>:jpa'
 }
 ```
@@ -332,8 +332,8 @@ Q클래스나 Builder 클래스?
 ## 핵심 요약
 
 - `ClassNotFoundException` = Classpath에 없음 / `NoClassDefFoundError` = 있다가 없어짐
-- `compileJava.dependsOn clean`은 안티패턴 — APT 불안정 유발
-- Q클래스, Builder 클래스는 APT가 생성 — `clean` 후 재생성 필요
+- `compileJava.dependsOn clean`은 안티패턴 - APT 불안정 유발
+- Q클래스, Builder 클래스는 APT가 생성 - `clean` 후 재생성 필요
 - 멀티모듈에서 클래스 못 찾으면 `./gradlew clean build`가 1순위 해결책
 - `clean`은 자동화하지 말고 필요할 때 명시적으로
 

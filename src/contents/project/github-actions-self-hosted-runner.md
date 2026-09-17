@@ -1,5 +1,5 @@
 ---
-title: 'GitHub Actions Self-hosted Runner 운영 — 실행 계정 분리'
+title: 'GitHub Actions Self-hosted Runner 운영하기'
 date: '2026-05-27'
 category: 'project'
 keywords: ['runner', 'GitHub Actions', 'Infra']

@@ -1,5 +1,5 @@
 ---
-title: 'Spring Boot 아키텍처 기초 — 계층 구조와 핵심 개념'
+title: 'Spring Boot 아키텍처 기초 - 계층 구조와 핵심 개념'
 date: '2026-03-31'
 category: 'study'
 keywords: ['아키텍처', 'Spring Boot', 'BE']
@@ -30,14 +30,14 @@ Spring Boot 백엔드는 역할별로 계층을 분리한다. 이 구조를 클�
 ### 2. 인터페이스와 구현체
 
 ```java
-// 인터페이스 — "뭘 할 수 있는지" 선언만
+// 인터페이스 - "뭘 할 수 있는지" 선언만
 public interface ItemRepository {
     Optional<Item> findById(Long id);
     PagedResult<Item> search(SearchCriteria criteria);
     Item save(Item item);
 }
 
-// 구현체 — "어떻게 하는지" 실제 코드
+// 구현체 - "어떻게 하는지" 실제 코드
 @Repository
 public class ItemRepositoryImpl implements ItemRepository {
     @Override
@@ -290,8 +290,8 @@ public class BoardPostRepositoryImpl implements BoardPostRepository {
 
 ## 관련 개념
 
-- QueryDSL — 타입 안전한 동적 쿼리 작성 라이브러리
-- MapStruct — 계층 간 DTO ↔ Entity 자동 변환
-- Spring Container / Bean — @Service, @Repository를 인스턴스화하고 관리
-- JPA Auditing — createdAt, updatedAt 자동 관리
-- 클린 아키텍처 — 계층 분리로 의존성 방향 제어
+- QueryDSL - 타입 안전한 동적 쿼리 작성 라이브러리
+- MapStruct - 계층 간 DTO ↔ Entity 자동 변환
+- Spring Container / Bean - @Service, @Repository를 인스턴스화하고 관리
+- JPA Auditing - createdAt, updatedAt 자동 관리
+- 클린 아키텍처 - 계층 분리로 의존성 방향 제어

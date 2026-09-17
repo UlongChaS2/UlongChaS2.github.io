@@ -1,5 +1,5 @@
 ---
-title: '파일 전송 프로토콜 정리 — FTP, SFTP, SCP, RDP'
+title: '파일 전송 프로토콜 정리 - FTP, SFTP, SCP, RDP'
 date: '2026-03-12'
 category: 'study'
 keywords: ['FTP', 'SFTP', 'BE']
@@ -17,7 +17,7 @@ keywords: ['FTP', 'SFTP', 'BE']
 
 ---
 
-## FTP (File Transfer Protocol) — 1971년
+## FTP (File Transfer Protocol) - 1971년
 
 파일 전송 전용 프로토콜. 인터넷 초창기부터 있던 방식.
 
@@ -39,7 +39,7 @@ keywords: ['FTP', 'SFTP', 'BE']
 └─────────────┴─────────────┘
 ```
 
-**요즘은 거의 안 씀** — 암호화가 없어서 보안 취약.
+**요즘은 거의 안 씀** - 암호화가 없어서 보안 취약.
 
 ---
 

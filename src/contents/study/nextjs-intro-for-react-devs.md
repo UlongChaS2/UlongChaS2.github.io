@@ -1,5 +1,5 @@
 ---
-title: 'Next.js 입문 — React 개발자를 위한 핵심 개념'
+title: 'Next.js 입문 - React 개발자를 위한 핵심 개념'
 date: '2026-03-12'
 category: 'study'
 keywords: ['Next.js', 'React', 'FE']
@@ -33,7 +33,7 @@ React 개발자가 새 Next.js 프로젝트에 투입될 때 파악해야 할 �
 
 ---
 
-## 2. App Router — 파일 위치 = URL
+## 2. App Router - 파일 위치 = URL
 
 ```
 app/
@@ -76,7 +76,7 @@ children 감싸는 layout    → ❌
 
 ### Provider 격리 패턴
 ```tsx
-// layout.tsx (서버) — "use client" 없음
+// layout.tsx (서버) - "use client" 없음
 export default function RootLayout({ children }) {
   return (
     <html>
@@ -115,9 +115,9 @@ export default async function Page() {
 ```
 → `useEffect + fetch` 조합 자체가 없어짐. API 키 브라우저에 노출 안 됨.
 
-### 실무 패턴 — 서버에서 fetch, 클라이언트에 props로 전달
+### 실무 패턴 - 서버에서 fetch, 클라이언트에 props로 전달
 ```tsx
-// page.tsx (서버) — 데이터 fetch
+// page.tsx (서버) - 데이터 fetch
 export default async function Page() {
   const data = await fetchData();
   return <InteractiveUI data={data} />;  // props로 넘김
@@ -138,15 +138,15 @@ export function InteractiveUI({ data }) {
 **내용 표시 → Server Component, 액션 → Client Component**
 
 ```
-result-content.tsx  (Server)  — 데이터 표시만
+result-content.tsx  (Server)  - 데이터 표시만
 ├── 텍스트, 날짜, 요약
 ├── <SummaryCard />
 ├── <ScoreBar />
-└── <ResultActions />  (Client)  — 버튼 클릭만 담당
+└── <ResultActions />  (Client)  - 버튼 클릭만 담당
 ```
 
 ```tsx
-// result-actions.tsx — Client Component
+// result-actions.tsx - Client Component
 "use client";
 export function ResultActions() {
   const router = useRouter();
@@ -158,7 +158,7 @@ export function ResultActions() {
   );
 }
 
-// result-content.tsx — Server Component ("use client" 없음)
+// result-content.tsx - Server Component ("use client" 없음)
 import { ResultActions } from "./result-actions";
 export function ResultContent({ report }) {
   return (
@@ -206,7 +206,7 @@ const { data } = useReport(reportId);
 ```
 
 ```tsx
-// app/result/[reportId]/page.tsx — Server Component
+// app/result/[reportId]/page.tsx - Server Component
 export default async function ResultPage({ params }) {
   const { reportId } = await params;
   const res = await fetch(`/api/v1/report/${reportId}`);

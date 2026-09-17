@@ -5,7 +5,7 @@ category: 'study'
 keywords: ['memo', 'React', 'FE']
 ---
 
-> 커스텀 comparator는 대부분 부모가 참조를 안정화하지 않아서 생긴다 — 부모를 고치는 게 더 낫다.
+> 커스텀 comparator는 대부분 부모가 참조를 안정화하지 않아서 생긴다 - 부모를 고치는 게 더 낫다.
 
 <!--more-->
 
@@ -90,7 +90,7 @@ return (
 ```
 
 ```tsx
-// 자식 — 커스텀 comparator로 보완
+// 자식 - 커스텀 comparator로 보완
 const ItemGrid = memo((props) => { ... }, (prev, next) => {
   return (
     prev.itemInfo?.title === next.itemInfo?.title &&
@@ -104,7 +104,7 @@ const ItemGrid = memo((props) => { ... }, (prev, next) => {
 ### 변경 후
 
 ```tsx
-// 부모 — 자식이 쓰는 필드만 추려서 안정화
+// 부모 - 자식이 쓰는 필드만 추려서 안정화
 const itemInfo = form.values
 
 const stableItemInfo = useMemo(
@@ -125,7 +125,7 @@ return (
 ```
 
 ```tsx
-// 자식 — 커스텀 comparator 불필요
+// 자식 - 커스텀 comparator 불필요
 const ItemGrid = memo((props) => { ... })
 ```
 
@@ -156,7 +156,7 @@ useMemo(() => ({ title: itemInfo.title }), [itemInfo.title])
 
 ## 관련 개념
 
-- `useCallback` — 함수 참조 안정화 (객체는 useMemo, 함수는 useCallback)
-- `React.memo` — 함수형 컴포넌트의 props 얕은 비교 최적화
-- `useMemo` — 값 메모이제이션, deps가 바뀔 때만 재계산
-- Mantine `form.values` — 폼 필드 변경 시 항상 새 객체 참조 생성 (React state이므로)
+- `useCallback` - 함수 참조 안정화 (객체는 useMemo, 함수는 useCallback)
+- `React.memo` - 함수형 컴포넌트의 props 얕은 비교 최적화
+- `useMemo` - 값 메모이제이션, deps가 바뀔 때만 재계산
+- Mantine `form.values` - 폼 필드 변경 시 항상 새 객체 참조 생성 (React state이므로)

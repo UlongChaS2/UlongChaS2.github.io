@@ -1,5 +1,5 @@
 ---
-title: '웹 접근성(a11y) — 왜 해야 하고 어떻게 하는가'
+title: '웹 접근성(a11y) - 왜 해야 하고 어떻게 하는가'
 date: '2026-04-24'
 category: 'study'
 keywords: ['a11y', '접근성', 'ARIA']
@@ -74,7 +74,7 @@ React/JSX에서는 `htmlFor`을 사용한다:
 **`aria-hidden="true"`** 속성 하나로 해결된다:
 
 ```tsx
-{/* 배경 장식 원형 — 스크린리더에게 보이지 않아야 함 */}
+{/* 배경 장식 원형 - 스크린리더에게 보이지 않아야 함 */}
 <div
   aria-hidden="true"
   className="absolute rounded-full pointer-events-none"
@@ -129,7 +129,7 @@ React/JSX에서는 `htmlFor`을 사용한다:
 >
   {isLoading ? (
     <>
-      {/* 스피너는 장식 — 숨김 */}
+      {/* 스피너는 장식 - 숨김 */}
       <div aria-hidden="true" className="animate-spin rounded-full w-4 h-4 border-2 border-white" />
       <span>로그인 중...</span>
     </>
@@ -149,17 +149,17 @@ React/JSX에서는 `htmlFor`을 사용한다:
 
 로그인 페이지 예시:
 ```
-h1: (브랜드 메인 슬로건 — 페이지 전체의 대표 제목)
+h1: (브랜드 메인 슬로건 - 페이지 전체의 대표 제목)
   h2: 로그인 (폼 섹션의 제목)
 ```
 
 ```tsx
-{/* 왼쪽 패널 — 브랜드 슬로건 */}
+{/* 왼쪽 패널 - 브랜드 슬로건 */}
 <h1 style={{ fontSize: 64, fontWeight: 800, margin: 0, marginBottom: 20 }}>
   모두를 위한{'\n'}웹을 만듭니다
 </h1>
 
-{/* 오른쪽 패널 — 로그인 폼 제목 */}
+{/* 오른쪽 패널 - 로그인 폼 제목 */}
 <h2 style={{ fontSize: 28, fontWeight: 800, margin: 0 }}>
   로그인
 </h2>
@@ -167,12 +167,12 @@ h1: (브랜드 메인 슬로건 — 페이지 전체의 대표 제목)
 
 ---
 
-### 7. Enter 키로 폼 submit — 키보드 접근성
+### 7. Enter 키로 폼 submit - 키보드 접근성
 
 키보드만 사용하는 사람은 Tab으로 포커스를 이동하고 Enter로 제출한다. `<form>` 태그가 입력 필드를 **모두 감싸야** Enter를 누를 때 submit이 트리거된다.
 
 ```tsx
-{/* ❌ form이 버튼만 감싸는 경우 — 입력 중 Enter가 동작 안 함 */}
+{/* ❌ form이 버튼만 감싸는 경우 - 입력 중 Enter가 동작 안 함 */}
 <input type="text" {...form.getInputProps('username')} />
 <input type="password" {...form.getInputProps('password')} />
 <form onSubmit={handleSubmit}>
@@ -189,7 +189,7 @@ h1: (브랜드 메인 슬로건 — 페이지 전체의 대표 제목)
 
 ---
 
-## 실전 체크리스트 — 적용한 것들 요약
+## 실전 체크리스트 - 적용한 것들 요약
 
 | 항목 | 변경 전 | 변경 후 | 이유 |
 |------|---------|---------|------|
@@ -250,10 +250,10 @@ h1: (브랜드 메인 슬로건 — 페이지 전체의 대표 제목)
 ---
 
 ## 관련 개념
-- **WCAG 2.1** — 웹 접근성 국제 표준 (A / AA / AAA 등급)
-- **KWCAG** — 한국형 웹 콘텐츠 접근성 지침
-- **ARIA (Accessible Rich Internet Applications)** — 동적 컨텐츠에 시맨틱을 부여하는 HTML 속성 모음
-- **시맨틱 HTML** — 의미를 가진 HTML 태그 사용 (`<main>`, `<nav>`, `<section>`, `<article>` 등)
-- **포커스 관리** — 모달 열릴 때 포커스 이동, 닫힐 때 원래 위치로 복귀
-- **컬러 대비(Color Contrast)** — WCAG AA 기준 텍스트 대비율 4.5:1 이상
-- **Skip Navigation** — "본문 바로가기" 링크, 스크린리더/키보드 사용자가 반복 탐색 구간을 건너뜀
+- **WCAG 2.1** - 웹 접근성 국제 표준 (A / AA / AAA 등급)
+- **KWCAG** - 한국형 웹 콘텐츠 접근성 지침
+- **ARIA (Accessible Rich Internet Applications)** - 동적 컨텐츠에 시맨틱을 부여하는 HTML 속성 모음
+- **시맨틱 HTML** - 의미를 가진 HTML 태그 사용 (`<main>`, `<nav>`, `<section>`, `<article>` 등)
+- **포커스 관리** - 모달 열릴 때 포커스 이동, 닫힐 때 원래 위치로 복귀
+- **컬러 대비(Color Contrast)** - WCAG AA 기준 텍스트 대비율 4.5:1 이상
+- **Skip Navigation** - "본문 바로가기" 링크, 스크린리더/키보드 사용자가 반복 탐색 구간을 건너뜀

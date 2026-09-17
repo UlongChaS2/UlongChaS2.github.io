@@ -15,7 +15,7 @@ JavaScript/TypeScript에서 진짜 은닉화(외부에서 물리적으로 접근
 
 ## 핵심 개념
 
-### 진짜 은닉화 — 클래스 `#` private
+### 진짜 은닉화 - 클래스 `#` private
 
 ```typescript
 class Counter {
@@ -31,11 +31,11 @@ c.#count  // SyntaxError: 파싱/컴파일 단계에서 막힘
 
 `#`은 JS 언어 스펙이 보장하는 진짜 은닉화다. 클래스 밖에서 `#count`를 참조하면 코드가 실행되기도 전에 파싱/컴파일 단계에서 SyntaxError로 막힌다.
 
-### `_` prefix — 관례적 접근 제어
+### `_` prefix - 관례적 접근 제어
 
 ```typescript
 // _createHook.ts
-// 누구든 import할 수 있다 — 언어가 막지 않는다
+// 누구든 import할 수 있다 - 언어가 막지 않는다
 // 하지만 "_"를 보고 "직접 쓰면 안 되는구나"를 알 수 있다
 export function createHook() { ... }
 ```
@@ -79,7 +79,7 @@ export function createHook() { ... }
 ## 코드 예시
 
 ```typescript
-// _createMessageHook.ts (내부 팩토리 — 직접 import 금지)
+// _createMessageHook.ts (내부 팩토리 - 직접 import 금지)
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -96,7 +96,7 @@ export function createMessageHook(namespace: string) {
 ```
 
 ```typescript
-// useNotificationMessage.ts (공개 훅 — index.ts에서 export)
+// useNotificationMessage.ts (공개 훅 - index.ts에서 export)
 import { createMessageHook } from './_createMessageHook'
 
 export default createMessageHook('notification')
@@ -110,13 +110,13 @@ export { default as useNotificationMessage } from './useNotificationMessage'
 
 ## 주의사항 / 자주 하는 실수
 
-- `_` prefix는 관례일 뿐 — ESLint나 TypeScript가 막아주지 않는다. 팀 컨벤션에 명시해야 효과 있음
+- `_` prefix는 관례일 뿐 - ESLint나 TypeScript가 막아주지 않는다. 팀 컨벤션에 명시해야 효과 있음
 - `index.ts`에 실수로 `_` 파일을 export하면 관례가 무너진다
-- `_` 파일을 너무 많이 만들면 오히려 디렉토리가 복잡해진다 — 진짜 내부 구현에만 쓸 것
+- `_` 파일을 너무 많이 만들면 오히려 디렉토리가 복잡해진다 - 진짜 내부 구현에만 쓸 것
 
 ## 관련 개념
 
-- JS `#` private field — 클래스 멤버 수준의 진짜 은닉화
-- FSD(Feature-Sliced Design)의 public API 원칙 — `index.ts`만 외부 진입점
-- 팩토리 패턴 — 동일한 구조를 파라미터만 다르게 여러 개 생성
-- 캡슐화 — 구현 세부사항을 숨기고 인터페이스만 노출
+- JS `#` private field - 클래스 멤버 수준의 진짜 은닉화
+- FSD(Feature-Sliced Design)의 public API 원칙 - `index.ts`만 외부 진입점
+- 팩토리 패턴 - 동일한 구조를 파라미터만 다르게 여러 개 생성
+- 캡슐화 - 구현 세부사항을 숨기고 인터페이스만 노출

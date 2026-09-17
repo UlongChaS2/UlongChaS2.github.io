@@ -1,5 +1,5 @@
 ---
-title: '데이터 그리드 최적화 — Context API와 useRef, 그리고 wrapper가 만든 성능 저하'
+title: '데이터 그리드 최적화 - Context와 useRef'
 date: '2026-03-04'
 category: 'project'
 keywords: ['useRef', 'Context', '렌더링']
@@ -148,7 +148,7 @@ const DataGrid = () => {
 
 ### 원인 분석
 
-#### 1. `Box pos="relative"` — ResizeObserver 재계산
+#### 1. `Box pos="relative"` - ResizeObserver 재계산
 
 DevExtreme DataGrid는 내부적으로 **ResizeObserver**를 사용해 컨테이너 크기 변화를 감지한다. 크기가 바뀌면 컬럼 너비를 재계산하고 grid를 repaint한다.
 
@@ -157,7 +157,7 @@ DevExtreme DataGrid는 내부적으로 **ResizeObserver**를 사용해 컨테이
 - 다만 `position: relative` 자체가 자식의 ResizeObserver를 반복 발화시키지는 않는다. containing block을 만들 뿐이므로, 크기 변화가 없는데도 재계산이 상시 발생한다고 단정하기는 어렵다
 - 여기서 체감된 overhead의 실제 원인은 wrapper가 더한 DOM/레이아웃 계층 등 다른 요인일 가능성이 있다(추정)
 
-#### 2. Context 구독 — 불필요한 re-render
+#### 2. Context 구독 - 불필요한 re-render
 
 `isTransitioning`을 Context에 넣고 Grid 컴포넌트에서 구독하게 했다.
 
@@ -174,7 +174,7 @@ const { editMode, isTransitioning, gridRef } = useGridEditContext()
 
 **편집 모드 전환 1회에 Grid가 2번 추가로 re-render.**
 
-#### 3. React StrictMode 이중 실행 — 페이지 로드 시 spurious 트리거
+#### 3. React StrictMode 이중 실행 - 페이지 로드 시 spurious 트리거
 
 `useRef`로 첫 번째 effect 실행을 skip하는 패턴을 사용했다.
 
@@ -195,7 +195,7 @@ useEffect(() => {
 | 실행 순서 | ref 값 | 동작 |
 |---|---|---|
 | 첫 번째 mount | `true` | `false`로 변경 후 early return ✓ |
-| StrictMode unmount | — | — |
+| StrictMode unmount | - | - |
 | 두 번째 mount | `false` (유지됨!) | `setIsTransitioning(true)` 실행 ❌ |
 
 → 페이지를 처음 열었을 때부터 Loading overlay가 한 번 뜨고, 레이아웃이 불필요하게 재적용된다.

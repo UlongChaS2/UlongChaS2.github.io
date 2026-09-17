@@ -186,7 +186,7 @@ React.useEffect(() => {
 
 ---
 
-## What — useEffect 의존성 배열, 정확히 뭘 넣나
+## What - useEffect 의존성 배열, 정확히 뭘 넣나
 
 > "**effect 내부에서 참조하는 모든 가변 외부 값**"을 넣는다. (렌더마다 바뀔 수 있는 것)
 
@@ -205,7 +205,7 @@ React.useEffect(() => {
 
 ---
 
-## Why — 왜 이제 더 빡세졌나 (React Compiler 연결고리)
+## Why - 왜 이제 더 빡세졌나 (React Compiler 연결고리)
 
 내가 느낀 포인트 3개:
 
@@ -223,7 +223,7 @@ React.useEffect(() => {
 
 ---
 
-## How — 내가 Babel/빌드 산출물 보며 이해한 동작
+## How - 내가 Babel/빌드 산출물 보며 이해한 동작
 
 ### 빌드 파이프라인 한 장 요약
 
@@ -248,7 +248,7 @@ exhaustive-deps를 끄면?
 
 ---
 
-## ex — 내가 실제로 정리한 패턴
+## ex - 내가 실제로 정리한 패턴
 
 ### 1) props로 받은 setter-like 함수는 deps에 넣고, 부모에서 안정화
 

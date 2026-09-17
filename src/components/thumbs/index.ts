@@ -11,6 +11,7 @@ import * as project from './projectThumbs';
 
 export const THUMB_REGISTRY: Record<string, React.FC> = {
   // --- study ---
+  'aho-corasick-multi-keyword-matching': study.AhoCorasickMultiKeywordMatching,
   'array-from-without-new': study.ArrayFromWithoutNew,
   'backend-search-batch-debugging': study.BackendSearchBatchDebugging,
   'binary-search-recursion-vs-while': study.BinarySearchRecursionVsWhile,

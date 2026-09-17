@@ -1,5 +1,5 @@
 ---
-title: '배포 후 502 에러 진단하기 — Flyway 마이그레이션 누락'
+title: '배포 후 502 에러 진단하기 - Flyway 마이그레이션 누락'
 date: '2026-05-07'
 category: 'project'
 keywords: ['502', 'Flyway', 'Infra']

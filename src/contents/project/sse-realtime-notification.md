@@ -296,7 +296,7 @@ retryCount++
 ---
 
 ## 관련 개념
-- WebSocket — 양방향이 필요한 경우 대안
-- Long Polling — SSE 이전의 실시간 구현 방식
-- React Query + Optimistic Update — 그리드 즉시 반영 패턴
-- Vite `server.middlewares` — 개발 환경 mock API 구성
+- WebSocket - 양방향이 필요한 경우 대안
+- Long Polling - SSE 이전의 실시간 구현 방식
+- React Query + Optimistic Update - 그리드 즉시 반영 패턴
+- Vite `server.middlewares` - 개발 환경 mock API 구성

@@ -125,7 +125,7 @@ Migration checksum mismatch for migration version 15
 
 ## 주의사항 / 자주 하는 실수
 - 이미 실행된 마이그레이션 파일 내용 수정 금지 (체크섬 불일치)
-- 공용 DB에 직접 SQL 실행 후 파일 커밋 누락 — 위 V15 문제의 원인
+- 공용 DB에 직접 SQL 실행 후 파일 커밋 누락 - 위 V15 문제의 원인
 - `flywayRepair`로 체크섬 바꾸면 나중에 원본 파일 받을 때 또 꼬임
 
 ## 관련 명령어

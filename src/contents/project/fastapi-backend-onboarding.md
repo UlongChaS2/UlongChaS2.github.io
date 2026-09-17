@@ -15,9 +15,9 @@ keywords: ['FastAPI', 'Python', 'BE']
 be/
 ├── main.py              # 앱 생성 + 미들웨어 + 라우터 연결 (설정 파일)
 ├── app/
-│   ├── core/            # 인프라 — 환경변수, DB 연결, JWT
+│   ├── core/            # 인프라 - 환경변수, DB 연결, JWT
 │   ├── domain/          # 순수 계산 함수 (외부 의존성 없음)
-│   ├── entities/        # ORM — DB 테이블 매핑
+│   ├── entities/        # ORM - DB 테이블 매핑
 │   ├── repositories/    # DB CRUD 함수
 │   ├── schemas/         # 요청/응답 타입 정의 (Pydantic)
 │   ├── services/        # 비즈니스 로직
@@ -53,13 +53,13 @@ FastAPI  → Python 기반 API 프레임워크
 ```
 
 핵심 기능 3가지:
-1. **라우팅** — URL과 함수 연결
-2. **자동 타입 검증** — Pydantic 스키마로 요청/응답 자동 검증
-3. **의존성 주입(Depends)** — DB 세션, 인증 등을 함수에 자동으로 주입
+1. **라우팅** - URL과 함수 연결
+2. **자동 타입 검증** - Pydantic 스키마로 요청/응답 자동 검증
+3. **의존성 주입(Depends)** - DB 세션, 인증 등을 함수에 자동으로 주입
 
 ---
 
-## main.py — 앱 세팅 위치
+## main.py - 앱 세팅 위치
 
 ```python
 # 1. 앱 생성 (next.config.js + _app.tsx 역할)
@@ -88,7 +88,7 @@ main.py prefix "/api/v1"
 
 ---
 
-## app/core/config.py — 환경변수 관리
+## app/core/config.py - 환경변수 관리
 
 ```python
 # process.env.XXX 와 동일하지만 타입 강제 + 서버 시작 시 검증
@@ -106,7 +106,7 @@ settings.CORS_ORIGINS  # ["http://localhost:3000"]
 
 ---
 
-## app/core/security.py — JWT 인증
+## app/core/security.py - JWT 인증
 
 ### 토큰 종류
 - Access Token: **30분** 만료
@@ -131,8 +131,8 @@ FE가 API 요청
 
 ### Depends 두 종류
 ```python
-Depends(get_current_user_id)   # 인증 필수 — 토큰 없으면 401
-Depends(get_optional_user_id)  # 인증 선택 — 토큰 없으면 None 반환
+Depends(get_current_user_id)   # 인증 필수 - 토큰 없으면 401
+Depends(get_optional_user_id)  # 인증 선택 - 토큰 없으면 None 반환
 ```
 
 ### UTC 사용 이유
@@ -182,11 +182,11 @@ async function getCurrentUserId(): Promise<string> {
 ### `__init__.py`
 - 폴더를 Python 패키지로 인식시키는 파일
 - 내용은 보통 비어있음
-- **삭제하면 안 됨** — Pyright/pytest/alembic 등이 오작동할 수 있음
+- **삭제하면 안 됨** - Pyright/pytest/alembic 등이 오작동할 수 있음
 
 ### `__pycache__`
 - Python이 자동 생성하는 컴파일 캐시
-- JS의 `.next/` 폴더와 동일 — 신경 안 써도 됨
+- JS의 `.next/` 폴더와 동일 - 신경 안 써도 됨
 
 ### `pyrightconfig.json`
 - Pyright LSP가 `.venv`를 찾을 수 있도록 설정

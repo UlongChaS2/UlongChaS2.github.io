@@ -39,6 +39,7 @@ const visiblePostSlugs = new Set([
   '/stack-queue-hash-from-scratch/',
   '/shift-drag-multi-select/',
   '/dns-reverse-proxy-domain-access/',
+  '/aho-corasick-multi-keyword-matching/',
 ]);
 
 const PageInner = styled.div`

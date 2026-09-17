@@ -116,7 +116,7 @@ private String title;
 
 ## uniqueConstraints vs @Index
 
-**uniqueConstraints** — 중복 데이터 방지
+**uniqueConstraints** - 중복 데이터 방지
 ```java
 // TITLE + AUTHOR 조합이 같으면 중복으로 막음
 uniqueConstraints = @UniqueConstraint(columnNames = {"TITLE", "AUTHOR"})
@@ -127,7 +127,7 @@ uniqueConstraints = @UniqueConstraint(columnNames = {"TITLE", "AUTHOR"})
 제목: "Spring", 작성자: "김철수"  → OK (작성자 다름)
 ```
 
-**@Index** — 조회 속도 향상
+**@Index** - 조회 속도 향상
 ```java
 // AUTHOR 컬럼에 인덱스 → author로 검색할 때 빠름
 @Index(name = "idx_post_author", columnList = "AUTHOR")
@@ -157,7 +157,7 @@ Post.builder()
 
 ---
 
-## 캡슐화 — 데이터와 동작을 한 곳에
+## 캡슐화 - 데이터와 동작을 한 곳에
 
 ```java
 // ❌ 나쁜 예 - 외부에서 데이터 직접 수정

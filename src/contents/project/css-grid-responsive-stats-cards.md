@@ -57,17 +57,17 @@ repeat(auto-fill, minmax(300px, 1fr))
 ### 문제 상황 (수정 전)
 
 ```typescript
-// 카드 A — 직접 작성
+// 카드 A - 직접 작성
 const statsA = [
-  { label: '마지막 동기화', value: data?.lastSyncAt ?? '—' },
+  { label: '마지막 동기화', value: data?.lastSyncAt ?? '-' },
   { label: '동기화 건수', value: `${data?.successCount}건` },
   { label: '소요 시간', value: '1.3초' },
   // 미동기화 항목 없음
 ]
 
-// 카드 B — 별도로 직접 작성 (항목 순서도 다름)
+// 카드 B - 별도로 직접 작성 (항목 순서도 다름)
 const statsB = [
-  { label: '마지막 동기화', value: data?.lastSyncAt ?? '—' },
+  { label: '마지막 동기화', value: data?.lastSyncAt ?? '-' },
   { label: '동기화 건수', value: `${data?.successCount}건` },
   { label: '미동기화', value: `${data?.failedCount}건` },
   // 소요 시간 없음
@@ -77,18 +77,18 @@ const statsB = [
 ### 해결 (공통 함수로 통일)
 
 ```typescript
-// 공통 포맷 함수 — 4개 항목 고정
+// 공통 포맷 함수 - 4개 항목 고정
 const formatSyncStats = (
   status: ISyncStatusDto | null | undefined,
   labels: { lastSync: string; syncCount: string; elapsed: string; unsyncCount: string }
 ) => [
   {
     label: labels.lastSync,
-    value: status?.lastSyncAt ? dayjs(status.lastSyncAt).format('YY.MM.DD HH:mm') : '—',
+    value: status?.lastSyncAt ? dayjs(status.lastSyncAt).format('YY.MM.DD HH:mm') : '-',
   },
   {
     label: labels.syncCount,
-    value: status?.successCount != null ? `${status.successCount}건` : '—',
+    value: status?.successCount != null ? `${status.successCount}건` : '-',
   },
   {
     label: labels.elapsed,
@@ -96,16 +96,16 @@ const formatSyncStats = (
       ? status.durationMs < 1000
         ? `${status.durationMs}ms`
         : `${(status.durationMs / 1000).toFixed(1)}초`
-      : '—',
+      : '-',
   },
   {
     label: labels.unsyncCount,
-    value: status?.failedCount != null ? `${status.failedCount}건` : '—',
+    value: status?.failedCount != null ? `${status.failedCount}건` : '-',
     valueColor: status?.failedCount ? 'var(--color-red-500)' : undefined,
   },
 ]
 
-// 사용 — 각 카드에서 동일한 함수 호출
+// 사용 - 각 카드에서 동일한 함수 호출
 const statLabels = useMemo(() => ({
   lastSync: t('label.last_sync'),
   syncCount: t('label.sync_count'),

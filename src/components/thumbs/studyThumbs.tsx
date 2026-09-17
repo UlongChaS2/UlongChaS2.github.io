@@ -707,3 +707,34 @@ export const StackQueueHashFromScratch: React.FC = () => (
     </VStack>
   </Surface>
 );
+
+/** Aho-Corasick — 여러 키워드를 텍스트 한 번의 스캔으로 찾기 */
+export const AhoCorasickMultiKeywordMatching: React.FC = () => (
+  <Surface>
+    <VStack gap={9} pad="14px">
+      <HStack gap={5}>
+        <Chip>
+          <Mono size={8}>he</Mono>
+        </Chip>
+        <Chip>
+          <Mono size={8}>she</Mono>
+        </Chip>
+        <Chip>
+          <Mono size={8}>his</Mono>
+        </Chip>
+        <Chip filled>
+          <Mono size={8}>+N</Mono>
+        </Chip>
+      </HStack>
+      <span style={{ color: 'var(--card-accent-ink)', display: 'inline-flex', transform: 'rotate(90deg)' }}>
+        <ArrowRightSm size={11} />
+      </span>
+      <HStack gap={5}>
+        <Bar w={34} tone="soft" />
+        <Bar w={26} tone="accent" />
+        <Bar w={40} tone="soft" />
+        <Bar w={22} tone="accent" />
+      </HStack>
+    </VStack>
+  </Surface>
+);

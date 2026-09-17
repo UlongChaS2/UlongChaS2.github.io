@@ -1,5 +1,5 @@
 ---
-title: '손으로 베낀 API 타입 지우기 — openapi-typescript와 zod로 타입 drift 없애기'
+title: 'openapi-typescript와 zod로 타입 drift 없애기'
 date: '2026-07-14'
 category: 'project'
 keywords: ['zod', 'openapi', 'CI']
@@ -33,11 +33,11 @@ BE (springdoc) ──/v3/api-docs──▶ openapi.json (스냅샷, git 커밋)
 
 - API 응답 타입은 `openapi-typescript`로 BE 스펙에서 파생 (경로①, 기본)
 - 스펙에 스키마가 없는 엔드포인트는 `zod` 스키마 + `z.infer` + 경계 검증 (경로②)
-- 재생성을 잊는 건 CI가 잡는다 — 스펙 스냅샷을 커밋해두고 PR마다 diff 검사
-- **모든 타입이 대상은 아니다** — 폼 상태·편집 행 타입은 FE 소유라 손타입 유지
+- 재생성을 잊는 건 CI가 잡는다 - 스펙 스냅샷을 커밋해두고 PR마다 diff 검사
+- **모든 타입이 대상은 아니다** - 폼 상태·편집 행 타입은 FE 소유라 손타입 유지
 - 보정(Omit)이 필드 절반을 넘으면 파생을 포기하는 게 낫다
 
-## 경로① — 컴파일 타임 파생 (기본)
+## 경로① - 컴파일 타임 파생 (기본)
 
 `schema.d.ts`는 타입 선언만 있는 파일이라 번들에 0바이트다. 도메인 모델에서는 alias만 긋는다:
 
@@ -51,13 +51,13 @@ export type ProductResponse = components['schemas']['ProductResponse']
 스펙과 실제가 다른 필드가 있으면 그 필드만 보정하고 이유를 주석으로 남긴다:
 
 ```ts
-// id: 스펙은 optional이지만 목록 행엔 항상 존재 — 필수로 조임
+// id: 스펙은 optional이지만 목록 행엔 항상 존재 - 필수로 조임
 export type ProductRow = components['schemas']['ProductResponse'] & { id: string }
 ```
 
 포인트는 **export 타입명을 유지**하는 것. 그러면 사용처는 한 줄도 안 바뀌고, model.ts 안의 정의만 교체된다. 덕분에 도메인 하나씩 점진적으로 갈 수 있었다 (빅뱅 금지).
 
-## 경로② — zod 런타임 검증 (스펙에 스키마가 없을 때)
+## 경로② - zod 런타임 검증 (스펙에 스키마가 없을 때)
 
 BE가 응답을 `Object`로 반환하면 스펙에 타입 정보가 아예 없다. 이런 엔드포인트는 코드젠이 불가능해서 zod로 계약을 직접 고정했다:
 
@@ -71,14 +71,14 @@ export const orderSummarySchema = z.object({
 })
 export type OrderSummary = z.infer<typeof orderSummarySchema>  // 손타입 불필요
 
-// api.ts — 무검증 캐스팅을 경계 검증으로
+// api.ts - 무검증 캐스팅을 경계 검증으로
 const res = await api.get(url).json<ApiEnvelope<unknown>>()
 return { ...res, data: parseResponse(orderSummarySchema, res.data) }
 ```
 
-경로①의 타입은 "BE가 약속을 지킨다고 가정"만 한다. zod는 응답이 실제로 계약과 맞는지 **매 요청 검사**하고, 어긋나면 화면 깊은 곳이 아니라 경계에서 어떤 필드가 어떻게 다른지까지 찍으면서 throw한다. 대신 이건 런타임 동작 변경이라, 지금까지 조용히 어긋나 있던 응답이 배포 후에 시끄럽게 터질 수 있다 — 도입할 때 주요 화면 스모크 테스트는 필수였다.
+경로①의 타입은 "BE가 약속을 지킨다고 가정"만 한다. zod는 응답이 실제로 계약과 맞는지 **매 요청 검사**하고, 어긋나면 화면 깊은 곳이 아니라 경계에서 어떤 필드가 어떻게 다른지까지 찍으면서 throw한다. 대신 이건 런타임 동작 변경이라, 지금까지 조용히 어긋나 있던 응답이 배포 후에 시끄럽게 터질 수 있다 - 도입할 때 주요 화면 스모크 테스트는 필수였다.
 
-## CI drift 게이트 — 재생성을 사람이 잊는 문제
+## CI drift 게이트 - 재생성을 사람이 잊는 문제
 
 이 구조의 최대 리스크는 도구가 아니라 사람이다. BE가 바뀌었는데 아무도 `gen:api`를 안 돌리면? 코드가 멀쩡히 컴파일되니까 tsc도 못 잡는다. 그래서 CI에 이걸 넣었다:
 
@@ -98,7 +98,7 @@ return { ...res, data: parseResponse(orderSummarySchema, res.data) }
 
 처음엔 `openapi-typescript http://localhost:8080/v3/api-docs -o schema.d.ts` 한 줄이었다. 그런데 CI에서 검증하려면 CI가 BE를 띄워야 하는 문제가 생겼고(느리고 DB 필요), 스펙을 **파일(openapi.json)로 커밋**하는 걸로 풀었다. CI는 BE 없이 커밋된 스냅샷에서 재생성만 해서 diff를 비교하면 된다. 스냅샷은 JSON 키를 재귀 정렬해서 저장하는데, springdoc이 주는 키 순서가 실행마다 달라질 수 있어서 정렬 안 하면 내용이 같아도 diff가 매번 지저분해지기 때문이다.
 
-## 전환 못 한 것들 — 그리고 어떻게 정리했나
+## 전환 못 한 것들 - 그리고 어떻게 정리했나
 
 작업하면서 제일 중요했던 건 도구 사용법이 아니라 **분류**였다. 손타입 200여 개를 까보니 세 부류가 섞여 있었다:
 
@@ -111,19 +111,19 @@ return { ...res, data: parseResponse(orderSummarySchema, res.data) }
 | 케이스 | 정리 |
 |---|---|
 | BE가 스펙에 타입을 안 실음 (`Object` 반환) | 경로②(zod)로 전환 |
-| FE가 일부러 필드명을 개명 (`errorMessage`→`error`) | 유지 — 파생하면 사용처 전체 리팩토링이라 별도 과제 |
+| FE가 일부러 필드명을 개명 (`errorMessage`→`error`) | 유지 - 파생하면 사용처 전체 리팩토링이라 별도 과제 |
 | DB nullable 필드를 FE가 필수로 단정하고 있음 | 보정이 절반 넘으면 파생 포기 + 유지 사유 주석 |
 | 사용처 없는 죽은 타입 | 어느 엔드포인트인지 확정 불가 → 파생 불가 |
-| as-const 런타임 enum | 대상 외 — 타입만 바꾸면 런타임 값을 잃음 |
+| as-const 런타임 enum | 대상 외 - 타입만 바꾸면 런타임 값을 잃음 |
 
 여기서 원칙 두 개가 생겼다:
 
 - **보정(Omit 재정의)이 필드 절반을 넘으면 파생 가치가 없다.** `Omit<S,'a'|'b'|'c'|'d'> & {...}` 도배는 손타입보다 읽기 나쁘다.
 - **required 거짓말이 optional 거짓말보다 나쁘다.** 스펙이 "없을 수도 있다"고 하면 FE가 null 체크를 하니까 안전한데, 안 오는 필드를 required로 박으면 FE가 체크를 지우고 프로덕션에서 터진다.
 
-## 반전 — 스펙이 맞고 FE가 틀린 경우
+## 반전 - 스펙이 맞고 FE가 틀린 경우
 
-한 엔드포인트는 스펙이 실제 응답과 전혀 다른 DTO를 가리키고 있어서 "BE 스펙이 잘못 문서화됐네" 하고 zod로 손타입 모양을 고정했다. 그런데 BE 코드를 파보니 **반대였다.** 두 달 전 커밋에서 BE가 응답 구조를 바꿨고(원본 데이터 passthrough → 처리 요약만 반환), FE 손타입이 옛날 모양을 기억하고 있던 거다. 심지어 손타입의 필드들이 BE의 **내부 파싱용 DTO**와 글자 단위로 일치했다 — 애초에 응답이 아니라 내부 DTO를 베낀 거였다.
+한 엔드포인트는 스펙이 실제 응답과 전혀 다른 DTO를 가리키고 있어서 "BE 스펙이 잘못 문서화됐네" 하고 zod로 손타입 모양을 고정했다. 그런데 BE 코드를 파보니 **반대였다.** 두 달 전 커밋에서 BE가 응답 구조를 바꿨고(원본 데이터 passthrough → 처리 요약만 반환), FE 손타입이 옛날 모양을 기억하고 있던 거다. 심지어 손타입의 필드들이 BE의 **내부 파싱용 DTO**와 글자 단위로 일치했다 - 애초에 응답이 아니라 내부 DTO를 베낀 거였다.
 
 화면이 안 터졌던 이유는 허무했는데, 그 응답 바디를 읽는 코드가 아무 데도 없었다. 버튼 누르면 refetch만 하고 결과는 다른 API로 조회하는 구조.
 
@@ -151,7 +151,7 @@ public class IdSchemaConverter implements ModelConverter {
 
 처음엔 ID 클래스 수십 개에 `@Schema(type="string")`을 하나씩 붙이는 방향으로 갔다가 컴파일이 깨졌다. ID 클래스들은 도메인 모듈에 있는데 거기엔 swagger 의존성이 없었던 것. 도메인 레이어에 문서화 라이브러리를 넣는 건 모듈 경계를 깨는 거라, web 모듈의 컨버터 한 개로 방향을 틀었다. 결과적으로 앞으로 생길 ID 클래스까지 자동 커버되니 이쪽이 더 낫다.
 
-**② 전 필드 optional로 뽑히는 DTO.** springdoc은 기본적으로 모든 필드를 optional로 문서화한다. 그래서 required를 명시했는데, 조건을 하나 걸었다 — **엔티티 컬럼 `nullable=false` 같은 코드 근거가 있는 필드만**:
+**② 전 필드 optional로 뽑히는 DTO.** springdoc은 기본적으로 모든 필드를 optional로 문서화한다. 그래서 required를 명시했는데, 조건을 하나 걸었다 - **엔티티 컬럼 `nullable=false` 같은 코드 근거가 있는 필드만**:
 
 ```java
 public record ProductResponse(
@@ -164,7 +164,7 @@ public record ProductResponse(
 
 이 감사에서 재밌는 게 나왔는데, "FE는 필수라고 믿는데 DB는 nullable인 필드"가 여러 개 발견됐다. 스펙을 정직하게 만들면 FE가 어디서 낙관하고 있었는지가 드러난다.
 
-## 재사용 함정 — 응답 타입이 요청 payload를 겸할 때
+## 재사용 함정 - 응답 타입이 요청 payload를 겸할 때
 
 required 정리 후 `id`를 스펙대로 필수로 파생했더니 그리드 화면들이 컴파일 에러가 났다. 원인을 따라가 보니 같은 타입을 **신규 행 생성 payload**(아직 id 없음)로도 쓰고 있었다:
 
@@ -175,9 +175,9 @@ export type CategoryResponse = Omit<components['schemas']['CategoryResponse'], '
 }
 ```
 
-손타입 시절엔 이 겸용 사실이 아무 데도 드러나지 않았다. 파생으로 조이는 순간 tsc가 강제로 자백시킨 것 — 이런 발견이 이관의 부수 수확이었다.
+손타입 시절엔 이 겸용 사실이 아무 데도 드러나지 않았다. 파생으로 조이는 순간 tsc가 강제로 자백시킨 것 - 이런 발견이 이관의 부수 수확이었다.
 
-## 방어선 정리 — 에러를 없애는 게 아니라 터지는 위치를 옮기는 것
+## 방어선 정리 - 에러를 없애는 게 아니라 터지는 위치를 옮기는 것
 
 이번 작업을 하면서 정리된 관점인데, 에러가 "안 나게" 만들 수는 없다. BE는 계속 바뀌고 사람은 재생성을 잊는다. 설계할 수 있는 건 **에러가 어디서 터지느냐**다:
 
@@ -188,13 +188,13 @@ export type CategoryResponse = Omit<components['schemas']['CategoryResponse'], '
 배포 후 조용한 undefined    →  발견까지 몇 주
 ```
 
-결함을 이 사다리의 위쪽으로 끌어올리고(shift-left), 못 올리는 건 최소한 시끄럽게 터지게(fail-fast). 진짜 적은 맨 아래 칸 — 조용한 실패 — 하나다.
+결함을 이 사다리의 위쪽으로 끌어올리고(shift-left), 못 올리는 건 최소한 시끄럽게 터지게(fail-fast). 진짜 적은 맨 아래 칸 - 조용한 실패 - 하나다.
 
 | 방어선 | 잡는 실패 | 실제 잡은 사례 |
 |---|---|---|
 | ① tsc (타입 파생) | BE가 필드를 바꿈 | 재사용 함정, optional 필드 폴백 누락 |
 | ② pre-commit 훅 | 검사 없이 커밋 | 매 커밋 |
-| ③ CI drift 게이트 | 재생성 잊음 (컴파일은 통과하니 ①이 못 잡음) | — |
+| ③ CI drift 게이트 | 재생성 잊음 (컴파일은 통과하니 ①이 못 잡음) | - |
 | ④ zod 경계 검증 | BE가 계약과 다르게 응답 (컴파일 타임에 원리적으로 불가) | 미타이핑 엔드포인트 상시 감시 |
 
 각 층이 잡는 실패가 다르다는 게 포인트. "체크를 몇 개 두지?"가 아니라 "실패 경로를 나열했을 때 각 경로가 어느 층에 걸리나?"로 생각하면 빈 구멍이 보인다.
@@ -203,13 +203,13 @@ export type CategoryResponse = Omit<components['schemas']['CategoryResponse'], '
 
 그리고 이 모든 것의 실질적인 보상은 에러가 줄어드는 것보다, **BE 변경이 무섭지 않아진 것**이다. DTO 리팩토링하면 FE 어디가 깨질지 몰라 망설이던 상태에서, `gen:api` 돌리고 빨간 줄 따라가면 되는 상태로.
 
-## 유지보수 — 이후에 할 일
+## 유지보수 - 이후에 할 일
 
 1. **BE API 변경 후 `npm run gen:api` 한 번** → `openapi.json` + `schema.d.ts` + 수정 코드 함께 커밋. 잊어도 CI가 PR을 막는다
-2. **새 응답 타입은 파생이 기본, 손 미러 금지** — 코드리뷰에서 잡는다. 스펙과 다른 필드는 개별 Omit 보정 + 사유 주석
-3. **ZodError가 나면** BE가 계약을 바꿨거나 원래 어긋나 있던 것 — 에러 메시지가 필드를 짚어주니 스키마 한 줄 수정으로 대응
-4. `schema.d.ts`·`openapi.json`은 생성물 — 직접 수정 금지
-5. BE에서 새 DTO 만들 때 항상 오는 필드는 `requiredMode=REQUIRED` 붙이기 — 안 붙이면 FE에서 전부 optional로 떠서 보정 노가다가 되살아난다
+2. **새 응답 타입은 파생이 기본, 손 미러 금지** - 코드리뷰에서 잡는다. 스펙과 다른 필드는 개별 Omit 보정 + 사유 주석
+3. **ZodError가 나면** BE가 계약을 바꿨거나 원래 어긋나 있던 것 - 에러 메시지가 필드를 짚어주니 스키마 한 줄 수정으로 대응
+4. `schema.d.ts`·`openapi.json`은 생성물 - 직접 수정 금지
+5. BE에서 새 DTO 만들 때 항상 오는 필드는 `requiredMode=REQUIRED` 붙이기 - 안 붙이면 FE에서 전부 optional로 떠서 보정 노가다가 되살아난다
 
 ## 키워드 정리 (학습용)
 
@@ -224,15 +224,15 @@ export type CategoryResponse = Omit<components['schemas']['CategoryResponse'], '
 | **타입 drift** | 두 시스템(BE 실제 ↔ FE 타입)이 시간이 지나며 어긋나는 현상 | 이 프로젝트가 없애려던 것 |
 | **SSOT (Single Source of Truth)** | 같은 정보의 원본을 한 곳에만 두는 원칙 | 타입의 원본 = BE 스펙. 손타입은 SSOT 위반(같은 사실을 두 군데 기록) |
 | **파생 타입 (derived type)** | 원본 타입에서 `Omit`/`Pick`/교차(`&`)로 만들어낸 타입 | `components['schemas'][...]` alias + 필드 보정 |
-| **`Omit<T, K>` / 교차 타입 `&`** | TS 유틸리티 — 필드 제거 / 타입 합성. `{id?: string} & {id: string}`은 required로 좁혀짐 | 스펙과 현실이 다른 필드의 "보정" 수단 |
-| **zod** | TS 런타임 스키마 검증 라이브러리. `z.infer`로 스키마에서 타입도 뽑음 | 경로② — 스키마가 곧 타입의 원본이라 손타입이 사라짐 |
+| **`Omit<T, K>` / 교차 타입 `&`** | TS 유틸리티 - 필드 제거 / 타입 합성. `{id?: string} & {id: string}`은 required로 좁혀짐 | 스펙과 현실이 다른 필드의 "보정" 수단 |
+| **zod** | TS 런타임 스키마 검증 라이브러리. `z.infer`로 스키마에서 타입도 뽑음 | 경로② - 스키마가 곧 타입의 원본이라 손타입이 사라짐 |
 | **신뢰 경계 (trust boundary)** | 검증 없이 믿으면 안 되는 데이터가 넘어오는 지점(외부 API, 사용자 입력) | zod 검증을 api.ts 경계에 두는 이유. "안에선 관대, 밖에선 엄격" |
 | **shift-left** | 결함 발견 시점을 개발 흐름의 앞쪽(코딩·빌드)으로 당기는 것 | 런타임 undefined → 컴파일 에러로 이동 |
 | **fail-fast** | 문제를 조용히 넘기지 말고 최대한 빨리·시끄럽게 실패시키는 설계 | ZodError가 경계에서 즉시 throw |
 | **drift gate / CI 게이트** | 특정 조건을 만족 못 하면 머지를 막는 CI 검사 | `gen:api:types` + `git diff --exit-code` |
 | **결정적 출력 (deterministic output)** | 같은 입력이면 바이트 단위로 같은 출력. diff·캐시·재현성의 전제 | 스냅샷 JSON 키 재귀 정렬을 한 이유 |
-| **ModelConverter** | springdoc/swagger-core의 확장점 — 특정 타입이 스펙에서 어떻게 표현될지 가로채는 훅 | ID 값 객체를 `string(uuid)`으로 노출 |
-| **`requiredMode = REQUIRED`** | springdoc `@Schema` 속성 — 필드를 스펙의 required 목록에 올림 | "코드 근거 있는 필드만" 원칙과 세트 |
+| **ModelConverter** | springdoc/swagger-core의 확장점 - 특정 타입이 스펙에서 어떻게 표현될지 가로채는 훅 | ID 값 객체를 `string(uuid)`으로 노출 |
+| **`requiredMode = REQUIRED`** | springdoc `@Schema` 속성 - 필드를 스펙의 required 목록에 올림 | "코드 근거 있는 필드만" 원칙과 세트 |
 | **값 객체 (Value Object)** | 식별자 없이 값으로 동등성을 판단하는 도메인 객체 (ID 래퍼, Money 등) | 직렬화는 string인데 스펙은 객체로 뜨던 갭의 주인공 |
 | **모듈 경계 / 헥사고날** | 도메인 레이어는 프레임워크(웹·문서화)에 의존하지 않게 나누는 구조 | 도메인 모듈에 swagger 의존성을 안 넣고 컨버터로 푼 이유 |
 | **defense in layers (심층 방어)** | 서로 다른 실패를 잡는 검증을 여러 층에 겹치는 설계 | tsc / pre-commit / CI / zod 4겹 |
@@ -240,4 +240,4 @@ export type CategoryResponse = Omit<components['schemas']['CategoryResponse'], '
 
 ## 관련 개념
 
-- react-compiler 도입 시도하다 ESLint & useEffect 톺은 이야기 (aka. useEffect와 react-compiler의 연관관계) — 같은 프로젝트의 다른 개선기
+- react-compiler 도입 시도하다 ESLint & useEffect 톺은 이야기 (aka. useEffect와 react-compiler의 연관관계) - 같은 프로젝트의 다른 개선기

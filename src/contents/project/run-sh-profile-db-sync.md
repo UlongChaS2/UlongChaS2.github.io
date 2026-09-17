@@ -1,5 +1,5 @@
 ---
-title: '개발 실행 스크립트 개선 — 프로파일 정리와 dev DB 동기화'
+title: '개발 실행 스크립트 개선 - 프로파일 정리와 dev DB 동기화'
 date: '2026-05-15'
 category: 'project'
 keywords: ['스크립트', 'Docker', 'Infra']
