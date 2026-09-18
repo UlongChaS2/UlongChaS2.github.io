@@ -35,6 +35,7 @@ const visiblePostSlugs = new Set([
   '/programmers-target-number-dfs/',
   '/sorting-algorithm-comparison/',
   '/time-complexity-from-constraints/',
+  '/idempotency-key-uuid/',
   '/event-propagation-capture-bubble/',
   '/raf-throttle-high-frequency-events/',
   '/stack-queue-hash-from-scratch/',
