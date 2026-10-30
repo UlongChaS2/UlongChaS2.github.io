@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="400" viewBox="0 0 520 400">
+<style>text{font-family:Arial,Helvetica,sans-serif}</style>
+<rect width="520" height="400" rx="28" fill="#F8FAFC"/>
+<rect x="18" y="18" width="484" height="364" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
+
+<text x="34" y="50" font-size="17" font-weight="800" fill="#1F2937">같은 주문을 두 번 보냈을 때</text>
+<text x="34" y="72" font-size="12" font-weight="700" fill="#64748B">네트워크 장애로 재시도가 일어난 상황입니다</text>
+
+<rect x="34" y="88" width="452" height="248" rx="14" fill="#FFFFFF" stroke="#CBD5E1"/>
+<text x="50" y="114" font-size="13" font-weight="800" fill="#1F2937"></text>
+
+<!-- 위: 올바른 방식 -->
+<rect x="34" y="88" width="452" height="112" rx="14" fill="#F1F5F9"/>
+<circle cx="52" cy="112" r="7" fill="#6BA6FF"/>
+<path d="M48.5 112l2.4 2.4 4.4-4.8" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="66" y="116" font-size="13" font-weight="800" fill="#1F2937">재시도에 같은 키를 유지</text>
+
+<text x="56" y="150" font-size="10" font-weight="700" fill="#94A3B8">1차</text>
+<rect x="90" y="135" width="74" height="19" rx="6" fill="#6BA6FF" opacity="0.18"/>
+<rect x="90" y="135" width="74" height="19" rx="6" fill="none" stroke="#6BA6FF"/>
+<text x="127" y="149" text-anchor="middle" font-size="9" font-weight="700" fill="#6BA6FF" font-family="monospace">a1b2-c3d4</text>
+<path d="M172 144h18m-4-4l4 4-4 4" stroke="#94A3B8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="196" y="149" font-size="10" font-weight="700" fill="#64748B">주문 생성</text>
+<text x="56" y="180" font-size="10" font-weight="700" fill="#94A3B8">재시도</text>
+<rect x="90" y="165" width="74" height="19" rx="6" fill="#6BA6FF" opacity="0.18"/>
+<rect x="90" y="165" width="74" height="19" rx="6" fill="none" stroke="#6BA6FF"/>
+<text x="127" y="179" text-anchor="middle" font-size="9" font-weight="700" fill="#6BA6FF" font-family="monospace">a1b2-c3d4</text>
+<path d="M172 174h18m-4-4l4 4-4 4" stroke="#94A3B8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="196" y="179" font-size="10" font-weight="700" fill="#6BA6FF">이미 처리됨 - 저장된 결과 반환</text>
+
+<!-- 아래: 잘못된 방식 -->
+<circle cx="52" cy="232" r="7" fill="#F87171"/>
+<path d="M49.5 229.5l5 5m0-5l-5 5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+<text x="66" y="236" font-size="13" font-weight="800" fill="#1F2937">요청마다 새 키를 생성</text>
+
+<text x="56" y="270" font-size="10" font-weight="700" fill="#94A3B8">1차</text>
+<rect x="90" y="255" width="74" height="19" rx="6" fill="#F87171" opacity="0.18"/>
+<rect x="90" y="255" width="74" height="19" rx="6" fill="none" stroke="#F87171"/>
+<text x="127" y="269" text-anchor="middle" font-size="9" font-weight="700" fill="#F87171" font-family="monospace">a1b2-c3d4</text>
+<path d="M172 264h18m-4-4l4 4-4 4" stroke="#94A3B8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="196" y="269" font-size="10" font-weight="700" fill="#64748B">주문 생성</text>
+<text x="56" y="300" font-size="10" font-weight="700" fill="#94A3B8">재시도</text>
+<rect x="90" y="285" width="74" height="19" rx="6" fill="#F87171" opacity="0.18"/>
+<rect x="90" y="285" width="74" height="19" rx="6" fill="none" stroke="#F87171"/>
+<text x="127" y="299" text-anchor="middle" font-size="9" font-weight="700" fill="#F87171" font-family="monospace">e5f6-g7h8</text>
+<path d="M172 294h18m-4-4l4 4-4 4" stroke="#94A3B8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="196" y="299" font-size="10" font-weight="700" fill="#F87171">새 요청으로 인식 - 주문 중복 생성</text>
+
+<rect x="34" y="322" width="452" height="44" rx="12" fill="#F1F5F9"/>
+<text x="50" y="341" font-size="11.5" font-weight="700" fill="#64748B">키가 매번 바뀌면 서버는 중복을 판단할 근거가 없습니다</text>
+<text x="50" y="357" font-size="11.5" font-weight="700" fill="#64748B">하나의 논리적 요청에 키 하나 - 재시도는 그 키를 그대로 씁니다</text>
+</svg>
