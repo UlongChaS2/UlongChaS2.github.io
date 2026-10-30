@@ -38,7 +38,7 @@
   ],
   "license": "0BSD",
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "scripts": {
     "build": "gatsby build",
