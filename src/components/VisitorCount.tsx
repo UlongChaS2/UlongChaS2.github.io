@@ -6,13 +6,16 @@ import { IconEye } from './icons';
 // ============================================================
 // VisitorCount — 푸터에 작게 두는 방문자 메타.
 //
-// GoatCounter 공개 카운터(counter/TOTAL.json)로 오늘/이번 달 순 방문자 수를
+// GoatCounter 공개 카운터(counter/TOTAL.json)로 최근 7일/이번 달 순 방문자 수를
 // 실시간으로 읽는다. 서버가 필요 없다.
 //
 // 페이지를 옮길 때마다 헤더가 다시 마운트되어 매번 새로 fetch한다.
 // 숫자가 뒤늦게 채워지며 폭이 늘어나지 않게 숫자 영역에 min-width를 둔다.
 //
-// 오늘/이번 달 수는 공개 카운터의 ?start= 파라미터로 받는다 — 인증 불필요.
+// 최근 7일/이번 달 수는 공개 카운터의 ?start= 파라미터로 받는다 — 인증 불필요.
+//
+// '오늘'이 아니라 '최근 7일'인 이유: 공개 카운터는 날짜를 UTC로 나누고 시각을 받지 않아서
+// '오늘'이 한국 시간 오전 9시부터만 셌고, 방문자가 적어 거의 매일 0이었다.
 // ============================================================
 
 const Badge = styled.span`
@@ -68,7 +71,7 @@ const fetchCount = (query = ''): Promise<string> =>
 
 const VisitorCount: React.FC = () => {
   const [month, setMonth] = React.useState('');
-  const [today, setToday] = React.useState('');
+  const [week, setWeek] = React.useState('');
   const [state, setState] = React.useState<State>('loading');
 
   React.useEffect(() => {
@@ -78,9 +81,11 @@ const VisitorCount: React.FC = () => {
     }
     let cancelled = false;
 
+    const ymd = (d: Date) =>
+      `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     const now = new Date();
-    const ymd = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    const monthStart = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
+    const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+    const monthStart = `${ymd(now).slice(0, 8)}01`;
 
     fetchCount(`?start=${monthStart}`).then((monthly) => {
       if (cancelled) return;
@@ -93,9 +98,9 @@ const VisitorCount: React.FC = () => {
       }
     });
 
-    // 오늘 0시(로컬)부터의 수. 실패해도 툴팁에서만 빠지면 되니 조용히 무시.
-    fetchCount(`?start=${ymd}`).then((n) => {
-      if (!cancelled) setToday(n);
+    // 오늘 포함 7일. 실패하면 '-'로 두고 조용히 넘어간다.
+    fetchCount(`?start=${ymd(weekStart)}`).then((n) => {
+      if (!cancelled) setWeek(n);
     });
 
     return () => {
@@ -111,8 +116,8 @@ const VisitorCount: React.FC = () => {
     <Badge>
       <IconEye size={12} />
       <span>
-        <span className="label">오늘 </span>
-        <span className="num">{today || '-'}</span>
+        <span className="label">최근 7일 </span>
+        <span className="num">{week || '-'}</span>
       </span>
       <span className="divider" />
       <span>
