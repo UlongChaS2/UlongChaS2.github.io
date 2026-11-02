@@ -32,13 +32,13 @@ AI로 개발 방식이 바뀌면서 프로젝트 하나를 혼자 맡게 됐습�
 
 ## 왜 별도 운영 경로로 옮겼나
 
-서버 디스크를 바로 늘릴 수 있다면 증설이 가장 확실합니다. 다만 증설이 어렵거나 승인 절차가 필요할 때는, root 파티션을 계속 채우지 않도록 앱 운영 파일을 별도 경로로 모으는 쪽이 낫다고 판단했습니다
+서버 디스크를 바로 늘릴 수 있다면 증설이 가장 확실합니다. 다만 증설이 어려울때는 root 파티션을 계속 채우지 않도록 앱 운영 파일을 별도 경로로 모으는 쪽이 낫다고 판단했습니다
 
 root나 home 쪽에 계속 쌓으면 OS·계정·기본 도구가 쓰는 공간과 앱 산출물이 섞입니다. root 파티션 압박이 서버 전체 안정성에 영향을 줄 수 있고, 장애가 나도 어떤 파일을 지워도 되는지 판단하기 어렵습니다. JAR, 로그, PID, 재시작 기준이 흩어지는 것도 문제였습니다
 
 별도 운영 디렉터리로 모으면 앱 운영 파일의 책임 경계가 명확해집니다. releases, logs, pid, restart script를 한 기준 아래에서 관리할 수 있고, 오래된 JAR와 로그 정리 정책을 붙이기 쉬워집니다. 무엇보다 rollback 구조를 얹기 쉬워집니다
 
-## 문제의 시작: 삭제 후 재업로드 방식
+## 문제의 시작점 - 삭제 후 재업로드 방식
 
 기존 방식은 대략 이랬습니다
 
@@ -70,7 +70,7 @@ java -jar /deploy/app.jar
 
 배포는 언제든 실패할 수 있습니다. 문제는 실패했을 때 되돌릴 기준이 없다는 점이었습니다
 
-## 개선 방향: 삭제하지 말고 포인터를 바꾼다
+## 개선 방향 - 삭제하지 말고 포인터를 바꾼다
 
 개선한 방식은 JAR를 삭제하지 않습니다
 
@@ -126,41 +126,27 @@ java -jar /opt/myapp/deploy/current.jar
 
 이렇게 나뉘어도 배포 구조(`releases`, `current.jar`, `previous`, health check, rollback)는 그대로 쓸 수 있습니다. 달라지는 건 restart 명령을 누가 관리하느냐뿐입니다
 
-## 여기까지 한 일
+## 실제로 바꾼 것
 
-### 운영 경로 정리
+위 구조를 실제 서버에 옮기면서 손댄 곳은 생각보다 자잘했습니다. 서버에만 있던 restart 스크립트를 `scripts/server-restart.sh`로 저장소에 가져왔고, 예전 JAR를 찾아 실행하던 fallback은 지웠습니다. 이제 서버는 `current.jar`만 실행합니다
 
-삭제 실패와 용량 문제를 계기로 배포 산출물·로그·PID·restart 기준을 별도 운영 디렉터리로 통일했습니다. restart 스크립트 원본도 `scripts/server-restart.sh`로 옮겨 저장소에서 관리하고, `current.jar`만 실행하도록 fallback을 제거했습니다
+rollback은 기준이 될 정상 버전이 하나는 있어야 해서, 구조를 바꾼 뒤 처음 성공한 배포를 baseline으로 잡았습니다
 
-### rollback 구조
+health check는 Actuator endpoint를 추가하고 인증 예외로 열어뒀습니다. `deploy.sh`가 liveness와 readiness를 둘 다 확인하고, readiness가 실패해도 rollback하게 바꿨습니다. 실제로 readiness가 UP으로 돌아오는 걸 보고 나서야 DB까지 붙은 상태라는 게 확인됐습니다
 
-`releases/current/previous` 구조를 설계하고 첫 정상 배포를 baseline으로 잡았습니다. `current.jar` symlink로 실행하고, 문제가 생기면 `previous`로 되돌립니다
+## DB까지 되돌리지는 않았습니다
 
-### health check
+여기까지 하고 나니 DB도 같이 되돌리면 좋겠다는 생각이 들었습니다. 그런데 운영 DB는 배포 직후에도 사용자가 새 데이터를 넣을 수 있어서, 자동 restore를 붙이면 오히려 정상 데이터를 날릴 수 있겠다 싶었습니다
 
-Actuator health endpoint를 추가하고 liveness와 readiness를 분리했습니다. health endpoint는 인증 예외로 열어두고, `deploy.sh`에서 두 check를 모두 확인합니다. readiness가 실패하면 rollback하도록 기본 정책을 강화했습니다. 실제로 readiness UP으로 DB 포함 준비 상태까지 확인했습니다
+그래서 JAR rollback까지만 자동으로 하고, DB restore는 자동화하지 않았습니다. 백업 보관 정책이나 migration 위험도 분석, GitHub Actions 배포 파이프라인도 이번 범위에서는 뺐습니다
 
-## 여기서 멈춘 선
+## 아직 남은 것
 
-이번 단계에서는 배포 안정화 범위를 의도적으로 좁혔습니다
+DB 백업은 계속 마음에 걸립니다. JAR rollback은 애플리케이션 파일만 되돌리기 때문에, schema나 데이터가 바뀌는 배포에서는 따로 백업이 필요할 수 있습니다. 저는 아직 localhost에서 IDE로 restore해 본 경험밖에 없어서, 운영 DB와 migration 흐름이 정해지면 배포 전에 `pg_dump` 하나 남기고, 백업이 실패하면 배포를 멈추고, 테스트 DB에 restore를 연습해 보는 정도부터 해보려고 합니다
 
-| 자동화한 것 | 자동화하지 않은 것 |
-| --- | --- |
-| JAR releases 보관 | DB 자동 restore |
-| current.jar 기준 실행 | 복잡한 백업 보관 정책 |
-| previous 기반 rollback | migration 위험도 자동 분석 |
-| liveness, readiness check | GitHub Actions 전체 배포 파이프라인 |
-| readiness 실패 시 rollback | |
+liveness와 readiness가 UP이어도 업무 기능이 멀쩡하다는 뜻은 아니었습니다. 특정 API가 null 조건으로 터지거나 화면이 깨지는 건 health check로는 안 잡혀서, 로그인과 주요 화면 진입, 주요 조회와 저장 정도는 smoke test로 확인하고 싶습니다
 
-DB restore 자동화는 이 단계에서는 과하다고 판단했습니다. 운영 DB는 배포 직후라도 사용자가 새 데이터를 입력할 수 있어서, 자동 restore가 오히려 정상 데이터를 날릴 수 있기 때문입니다. 그래서 JAR rollback은 자동화하고, DB restore는 자동화하지 않기로 했습니다
-
-## 나중에 다시 볼 작업
-
-**DB 백업과 복구 테스트.** JAR rollback은 애플리케이션 파일 rollback입니다. DB schema나 데이터가 바뀌는 배포에서는 별도 백업이 필요할 수 있습니다. 지금은 localhost에서 IDE 기반 restore 경험만 있고, 운영 DB restore 자동화까지 만들 단계는 아닙니다. 나중에 운영 DB와 migration 흐름이 확정되면 배포 전 `pg_dump` 파일 하나 남기기, 백업 실패 시 배포 중단, 테스트 DB에 restore 연습 정도를 검토할 생각입니다
-
-**Smoke test 연결.** liveness와 readiness는 업무 기능 정상 여부를 보장하지 않습니다. 특정 API에서 null 조건 오류가 나거나 화면이 깨지는 문제는 별도 smoke test가 필요합니다. 최소 범위는 로그인, 주요 화면 진입, 주요 조회 API, 저장/수정 같은 핵심 플로우, 콘솔 에러 확인 정도로 잡고 있습니다
-
-**GitHub Actions artifact 배포.** 아직 붙이지 않았지만, rollback 구조를 설계할 때 나중에 이걸 얹는 상황까지 고려했습니다. GitHub Actions는 배포 서버에 직접 접속할 수 있으면 SSH 배포까지 수행할 수 있는데, 외부 네트워크에서 서버로 직접 접근할 수 없는 환경도 있습니다. 그래도 지금 만든 rollback 구조는 양쪽 모두에서 유효합니다
+GitHub Actions로 배포하는 것도 아직입니다. 다만 rollback 구조를 만들 때 나중에 이걸 얹는 상황은 생각해 뒀습니다. 서버에 바로 접속할 수 있는 환경이면 Actions가 SSH로 올리면 되고, 외부 접근이 막힌 환경이면 artifact를 받아 반입 절차를 거쳐 `releases/`에 올리면 됩니다
 
 ```text
 인터넷 접근이 가능한 서버:
@@ -173,7 +159,7 @@ DB restore 자동화는 이 단계에서는 과하다고 판단했습니다. 운
   -> current 변경 -> restart -> health check -> rollback
 ```
 
-GitHub Actions는 산출물을 만들고, 서버의 rollback 구조는 들어온 산출물을 실행하다 실패하면 되돌립니다. GitHub Actions를 붙여도 결국 이 rollback 구조 위에서 돌아가므로, 지금 먼저 만들어 둔 것이 나중에 헛일이 되지는 않는다고 생각했습니다
+어느 쪽이든 마지막은 같은 rollback 구조 위에서 돕니다. 그래서 이번에 먼저 만들어 둔 게 나중에 헛일이 되지는 않겠다고 생각했습니다
 
 ## 핵심 포인트
 
