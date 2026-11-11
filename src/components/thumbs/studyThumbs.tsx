@@ -197,36 +197,41 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
 );
 
 const ClaudeWordmark = styled.div`
+  position: relative;
   width: 170px;
   height: 92px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  color: #fff;
+  overflow: hidden;
 
   img {
-    width: 39px;
-    height: 39px;
-    flex-shrink: 0;
-    filter: grayscale(1) brightness(0.7) contrast(1000%);
-    mix-blend-mode: screen;
-    transform: translateY(5px);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 170px;
+    height: 170px;
+    display: block;
+    transform: translate(-50%, -50%);
   }
 
-  span {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: -0.055em;
-    white-space: nowrap;
+  img:last-of-type {
+    display: none;
+  }
+
+  [data-theme='dark'] & {
+    img:first-of-type {
+      filter: brightness(0) invert(1);
+    }
+
+    img:last-of-type {
+      display: block;
+      clip-path: inset(0 76.5% 0 0);
+    }
   }
 `;
 
 export const ClaudeKoreanLanguageRule: React.FC = () => (
   <ClaudeWordmark>
     <img src={claudeLogo} alt="" />
-    <span>Claude</span>
+    <img src={claudeLogo} alt="" aria-hidden="true" />
   </ClaudeWordmark>
 );
 
