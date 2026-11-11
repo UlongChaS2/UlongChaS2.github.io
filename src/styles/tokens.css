@@ -121,6 +121,8 @@
   --color-accent-yellow-ink:     #B58600;
   --color-accent-blue-surface:   #EAF2FE;
   --color-accent-blue-ink:       #3182F6;
+  --color-accent-orange-surface: #D77655;
+  --color-accent-orange-ink:     #262626;
 
   /* 형광펜 하이라이트 (히어로 밑줄, 콜아웃 배경) */
   --color-highlighter:        #FFD84D;
@@ -236,7 +238,6 @@
   --color-brand-hover:   #9CC4FF;
   --color-brand-subtle:  #14284A;
 
-  /* Accent — 다크에서는 표면을 낮은 채도로 눌러 텍스트 대비 확보 */
   --color-accent-mint-surface:   #10281F;
   --color-accent-mint-ink:       #4FD1A0;
   --color-accent-pink-surface:   #2E1720;
@@ -245,6 +246,8 @@
   --color-accent-yellow-ink:     #F2C744;
   --color-accent-blue-surface:   #14284A;
   --color-accent-blue-ink:       #6BA6FF;
+  --color-accent-orange-surface: #D77655;
+  --color-accent-orange-ink:     #262626;
 
   --color-highlighter:        #C9A21A;
   --color-highlighter-subtle: #2A2312;

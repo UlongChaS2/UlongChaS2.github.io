@@ -4,14 +4,6 @@ import { IconAlert, IconCheck, IconSun, IconMoon } from 'src/components/icons';
 import { thumbForSlug } from 'src/components/thumbs';
 import type { ThumbVariant } from 'src/styles/accents';
 
-// ============================================================
-// PostThumbnail — 이미지 없는 글의 "디자인된 커버"
-// 글마다 전용 일러스트(thumbs/ 레지스트리)를 먼저 찾고,
-// 없는 글(새 글)만 변형 프리셋 6종으로 폴백한다.
-// 색은 부모가 pickAccent로 주입한 --card-accent-* 변수를 그대로 쓴다.
-// 전부 벡터라 다크 모드는 토큰이 바뀌면 공짜로 따라온다.
-// ============================================================
-
 const Wrapper = styled.div<{ featured?: boolean }>`
   width: 100%;
   aspect-ratio: ${({ featured }) => (featured ? '16 / 10' : '16 / 9')};
@@ -25,7 +17,6 @@ const Wrapper = styled.div<{ featured?: boolean }>`
   overflow: hidden;
   flex-shrink: 0;
 
-  /* 데코 원 — 카드는 우상단, Featured는 좌하단(기존 규칙 유지) */
   &::before {
     content: '';
     position: absolute;
@@ -37,7 +28,6 @@ const Wrapper = styled.div<{ featured?: boolean }>`
         : 'right: -30px; top: -30px; width: 120px; height: 120px; opacity: 0.14;'}
   }
 
-  /* Featured 전용 우상단 형광 사각형 */
   ${({ featured }) =>
     featured &&
     `&::after {
@@ -50,6 +40,11 @@ const Wrapper = styled.div<{ featured?: boolean }>`
       border-radius: 18px;
       background: var(--color-highlighter);
     }`}
+
+  &[data-brand-only]::before,
+  &[data-brand-only]::after {
+    display: none;
+  }
 `;
 
 const Caption = styled.span<{ featured?: boolean }>`
@@ -63,7 +58,6 @@ const Caption = styled.span<{ featured?: boolean }>`
   z-index: 1;
 `;
 
-/* Featured는 같은 목업을 1.5배로 키워서 쓴다. 벡터라 깨지지 않는다. */
 const MockScale = styled.div<{ featured?: boolean }>`
   transform: ${({ featured }) => (featured ? 'scale(1.5)' : 'none')};
 `;
@@ -406,12 +400,13 @@ export interface PostThumbnailProps {
 
 const PostThumbnail: React.FC<PostThumbnailProps> = ({ variant, label, slug, featured }) => {
   const Mock = (slug && thumbForSlug(slug)) || MOCKS[variant];
+  const brandOnly = slug?.replace(/^\/+|\/+$/g, '') === 'claude-code-korean-language-rule';
   return (
-    <Wrapper featured={featured}>
+    <Wrapper featured={featured} data-brand-only={brandOnly ? 'true' : undefined}>
       <MockScale featured={featured}>
         <Mock />
       </MockScale>
-      <Caption featured={featured}>{label}</Caption>
+      {!brandOnly && <Caption featured={featured}>{label}</Caption>}
     </Wrapper>
   );
 };

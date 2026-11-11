@@ -15,6 +15,7 @@ const visiblePostSlugs = new Set([
   '/shift-drag-multi-select/',
   '/dns-reverse-proxy-domain-access/',
   '/aho-corasick-multi-keyword-matching/',
+  '/claude-code-korean-language-rule/',
 ]);
 
 /**

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { IconCheck, IconClose, IconSearch, IconEye } from 'src/components/icons';
+import claudeLogo from 'src/images/claude-logo.png';
 import programmersLogoDark from 'src/images/programmers-logo-dark.png';
 import {
   Surface,
@@ -193,6 +194,30 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
       </svg>
     </ProgrammersTreeSurface>
   </ProgrammersThumbWrap>
+);
+
+const ClaudeWordmark = styled.div`
+  position: relative;
+  width: 170px;
+  height: 92px;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 170px;
+    height: 170px;
+    display: block;
+    filter: brightness(0) invert(1);
+    transform: translate(-50%, -50%);
+  }
+`;
+
+export const ClaudeKoreanLanguageRule: React.FC = () => (
+  <ClaudeWordmark>
+    <img src={claudeLogo} alt="" />
+  </ClaudeWordmark>
 );
 
 /** 공통 로직 추출 — 두 모듈에서 공통 블록을 위로 뽑아낸다 */
