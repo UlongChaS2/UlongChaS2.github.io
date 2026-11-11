@@ -209,29 +209,14 @@ const ClaudeWordmark = styled.div`
     width: 170px;
     height: 170px;
     display: block;
+    filter: brightness(0) invert(1);
     transform: translate(-50%, -50%);
-  }
-
-  img:last-of-type {
-    display: none;
-  }
-
-  [data-theme='dark'] & {
-    img:first-of-type {
-      filter: brightness(0) invert(1);
-    }
-
-    img:last-of-type {
-      display: block;
-      clip-path: inset(0 76.5% 0 0);
-    }
   }
 `;
 
 export const ClaudeKoreanLanguageRule: React.FC = () => (
   <ClaudeWordmark>
     <img src={claudeLogo} alt="" />
-    <img src={claudeLogo} alt="" aria-hidden="true" />
   </ClaudeWordmark>
 );
 
