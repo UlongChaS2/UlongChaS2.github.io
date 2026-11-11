@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { IconCheck, IconClose, IconSearch, IconEye } from 'src/components/icons';
+import claudeLogo from 'src/images/claude-logo.png';
 import programmersLogoDark from 'src/images/programmers-logo-dark.png';
 import {
   Surface,
@@ -195,12 +196,22 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
   </ProgrammersThumbWrap>
 );
 
-const ClaudeLogoText = styled.span`
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #1f1f1f;
+const ClaudeLogoPanel = styled(ProgrammersLogoPanel)`
+  gap: 6px;
+
+  img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+  }
+
+  span {
+    color: #262626;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
 `;
 
 const StackRows = styled(VStack)`
@@ -211,11 +222,12 @@ const StackRows = styled(VStack)`
 
 export const ClaudeKoreanLanguageRule: React.FC = () => (
   <ProgrammersThumbWrap>
-    <ProgrammersLogoPanel>
-      <ClaudeLogoText>Claude Code</ClaudeLogoText>
-    </ProgrammersLogoPanel>
+    <ClaudeLogoPanel>
+      <img src={claudeLogo} alt="" />
+      <span>Claude Code</span>
+    </ClaudeLogoPanel>
     <ProgrammersTreeSurface>
-      <StackRows gap={6} pad="0 14px 12px">
+      <StackRows gap={5} pad="0 14px 8px">
         <HStack gap={6}>
           <Mono size={7} tone="muted">
             CLAUDE.md

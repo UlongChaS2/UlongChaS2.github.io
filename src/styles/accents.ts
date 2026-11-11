@@ -1,16 +1,10 @@
 import type { CSSProperties } from 'react';
 
-// ============================================================
-// Accent 배정
-// 썸네일 이미지가 없는 포스트에 색을 입힌다.
-// 슬러그 해시로 고르므로 같은 글은 항상 같은 색이고,
-// 목록에서 색이 반복되지 않게 4종을 돌린다.
-// ============================================================
-
 const ACCENTS = ['mint', 'pink', 'yellow', 'blue'] as const;
 const PROGRAMMERS_SLUG = 'programmers-target-number-dfs';
+const CLAUDE_SLUG = 'claude-code-korean-language-rule';
 
-export type AccentName = (typeof ACCENTS)[number];
+export type AccentName = (typeof ACCENTS)[number] | 'orange';
 
 /** 실제 색은 tokens.css가 모드별로 정의한다. 여기서는 변수 이름만 연결한다. */
 export const accentVars = (name: AccentName): CSSProperties =>
@@ -38,7 +32,6 @@ const stableHash = (seed: string): number => {
   return hash;
 };
 
-/** 문자열 → 안정적인 accent. 프로그래머스 글은 네이비 커버를 고정으로 쓴다. */
 export const pickAccent = (seed: string): CSSProperties => {
   const slug = seed.replace(/^\/+|\/+$/g, '');
 
@@ -48,6 +41,8 @@ export const pickAccent = (seed: string): CSSProperties => {
       '--card-accent-ink': 'var(--color-programmers-ink)',
     } as CSSProperties;
   }
+
+  if (slug === CLAUDE_SLUG) return accentVars('orange');
 
   return accentVars(ACCENTS[stableHash(seed) % ACCENTS.length]);
 };
