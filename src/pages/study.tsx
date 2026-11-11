@@ -13,6 +13,7 @@ interface StudyPageProps {
 
 const visibleStudySlugs = new Set([
   '/aho-corasick-multi-keyword-matching/',
+  '/claude-code-korean-language-rule/',
   '/linked-list-kth-node-from-last/',
   '/binary-search-recursion-vs-while/',
   '/programmers-target-number-dfs/',

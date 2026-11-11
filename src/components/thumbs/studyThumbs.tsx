@@ -195,6 +195,58 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
   </ProgrammersThumbWrap>
 );
 
+const ClaudeLogoText = styled.span`
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1f1f1f;
+`;
+
+const StackRows = styled(VStack)`
+  position: absolute;
+  inset: 0;
+  justify-content: flex-end;
+`;
+
+export const ClaudeKoreanLanguageRule: React.FC = () => (
+  <ProgrammersThumbWrap>
+    <ProgrammersLogoPanel>
+      <ClaudeLogoText>Claude Code</ClaudeLogoText>
+    </ProgrammersLogoPanel>
+    <ProgrammersTreeSurface>
+      <StackRows gap={6} pad="0 14px 12px">
+        <HStack gap={6}>
+          <Mono size={7} tone="muted">
+            CLAUDE.md
+          </Mono>
+          <Bar w={46} tone="soft" />
+        </HStack>
+        <HStack gap={6}>
+          <Mono size={7} tone="muted">
+            mcp
+          </Mono>
+          <Bar w={112} />
+        </HStack>
+        <HStack gap={6}>
+          <Mono size={7} tone="muted">
+            mcp
+          </Mono>
+          <Bar w={98} />
+        </HStack>
+        <HStack gap={6}>
+          <Mono size={7} tone="muted">
+            settings.json
+          </Mono>
+          <Chip filled>
+            <Mono size={7}>korean</Mono>
+          </Chip>
+        </HStack>
+      </StackRows>
+    </ProgrammersTreeSurface>
+  </ProgrammersThumbWrap>
+);
+
 /** 공통 로직 추출 — 두 모듈에서 공통 블록을 위로 뽑아낸다 */
 const LiftedBlock = styled.div`
   align-self: center;

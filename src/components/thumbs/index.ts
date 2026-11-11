@@ -15,6 +15,7 @@ export const THUMB_REGISTRY: Record<string, React.FC> = {
   'array-from-without-new': study.ArrayFromWithoutNew,
   'backend-search-batch-debugging': study.BackendSearchBatchDebugging,
   'binary-search-recursion-vs-while': study.BinarySearchRecursionVsWhile,
+  'claude-code-korean-language-rule': study.ClaudeKoreanLanguageRule,
   'event-propagation-capture-bubble': study.EventPropagationCaptureBubble,
   'extracting-common-logic': study.ExtractingCommonLogic,
   'file-transfer-protocols': study.FileTransferProtocols,
