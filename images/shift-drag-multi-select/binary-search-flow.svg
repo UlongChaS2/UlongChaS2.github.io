@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="520" height="360" viewBox="0 0 520 360">
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="360" viewBox="0 0 560 360">
 <style>text{font-family:Arial,Helvetica,sans-serif}</style>
-<rect width="520" height="360" rx="28" fill="#F8FAFC"/>
-<rect x="18" y="18" width="484" height="324" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
+<rect width="560" height="360" rx="28" fill="#F8FAFC"/>
+<rect x="18" y="18" width="524" height="324" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
 <text x="34" y="52" font-size="24" font-weight="800" fill="#1F2937">Binary Search</text>
 <text x="486" y="52" text-anchor="end" font-size="12" font-weight="700" fill="#94A3B8">반복 재생</text>
 <text x="34" y="78" font-size="13" font-weight="700" fill="#64748B">노란색은 비교 중인 mid, 흐린 막대는 탈락한 구간입니다</text>

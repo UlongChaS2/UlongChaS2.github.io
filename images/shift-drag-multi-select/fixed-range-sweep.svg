@@ -44,10 +44,10 @@
   <text x="388" y="180">구간과 겹치는</text>
   <text x="388" y="196">보이는 행만 ✓</text>
   <text x="388" y="240" fill="#10B981">그룹 경계를 넘는</text>
-  <text x="388" y="256" fill="#10B981">드래그가 공짜</text>
+  <text x="388" y="256" fill="#10B981">드래그도 처리</text>
   <text x="388" y="316" fill="#94A3B8">접힌 그룹은</text>
   <text x="388" y="332" fill="#94A3B8">가시성 판정에서 제외</text>
 </g>
 
-<text x="260" y="352" text-anchor="middle" font-size="12" font-weight="700" fill="#94A3B8">구간은 연속이라 이벤트가 누락돼도 항목이 빠질 수 없습니다 — 구간 채우기 보정이 사라진 이유</text>
+<text x="260" y="352" text-anchor="middle" font-size="12" font-weight="700" fill="#94A3B8">이벤트 사이에 지난 행도 시작점과 현재 위치 사이의 구간에 포함됩니다</text>
 </svg>
