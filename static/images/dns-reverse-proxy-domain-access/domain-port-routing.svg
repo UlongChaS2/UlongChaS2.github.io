@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title description">
+  <title id="title">DNS 조회와 서버 포트 연결 전후</title>
+  <desc id="description">DNS는 도메인에 대응하는 IP 주소만 알려준다. nginx가 없으면 브라우저의 80 포트 요청이 8080 포트의 앱에 닿지 않는다. nginx를 80 포트에 두면 앱으로 요청이 전달된다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#596579"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#E86821"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" rx="18" fill="#FFFFFF"/>
+  <g font-family="Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" fill="#1F2937">
+    <text x="40" y="48" font-size="24" font-weight="750">DNS는 IP를 알려주고, 서버가 포트를 연결합니다</text>
+    <rect x="40" y="70" width="880" height="66" rx="12" fill="#F4F6F8"/>
+    <text x="66" y="111" font-size="17" font-weight="650">app.example.co.kr</text>
+    <line x1="275" y1="103" x2="356" y2="103" stroke="#596579" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="380" y="110" font-size="16">DNS A 레코드</text>
+    <line x1="542" y1="103" x2="622" y2="103" stroke="#596579" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="646" y="111" font-size="17" font-weight="650">172.16.10.5</text>
+    <text x="40" y="173" font-size="17" font-weight="700">nginx를 두기 전</text>
+    <rect x="40" y="187" width="880" height="132" rx="14" fill="#FFF8F6"/>
+    <rect x="62" y="217" width="225" height="70" rx="10" fill="#FFFFFF" stroke="#C9D1D9" stroke-width="1.5"/>
+    <text x="82" y="246" font-size="16" font-weight="700">브라우저</text>
+    <text x="82" y="270" font-size="14" fill="#596579">서버의 80 포트로 접속</text>
+    <line x1="292" y1="252" x2="359" y2="252" stroke="#596579" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="370" y="217" width="220" height="70" rx="10" fill="#FFFFFF" stroke="#E05252" stroke-width="2"/>
+    <text x="390" y="246" font-size="16" font-weight="700">서버의 80 포트</text>
+    <text x="390" y="270" font-size="14" fill="#B43F3F">받는 프로그램 없음</text>
+    <text x="610" y="262" font-size="20" font-weight="700" fill="#D94B4B">×</text>
+    <rect x="655" y="217" width="240" height="70" rx="10" fill="#FFFFFF" stroke="#C9D1D9" stroke-width="1.5"/>
+    <text x="675" y="246" font-size="16" font-weight="700">앱의 8080 포트</text>
+    <text x="675" y="270" font-size="14" fill="#596579">앱은 실행 중</text>
+    <text x="40" y="360" font-size="17" font-weight="700">nginx를 80 포트에 둔 뒤</text>
+    <rect x="40" y="374" width="880" height="132" rx="14" fill="#F2F8F4"/>
+    <rect x="62" y="404" width="225" height="70" rx="10" fill="#FFFFFF" stroke="#C9D1D9" stroke-width="1.5"/>
+    <text x="82" y="433" font-size="16" font-weight="700">브라우저</text>
+    <text x="82" y="457" font-size="14" fill="#596579">서버의 80 포트로 접속</text>
+    <line x1="292" y1="439" x2="359" y2="439" stroke="#596579" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="370" y="404" width="220" height="70" rx="10" fill="#FFFFFF" stroke="#E86821" stroke-width="2"/>
+    <text x="390" y="433" font-size="16" font-weight="700">nginx의 80 포트</text>
+    <text x="390" y="457" font-size="14" fill="#B4541A">앱으로 요청 전달</text>
+    <line x1="595" y1="439" x2="644" y2="439" stroke="#E86821" stroke-width="2" marker-end="url(#arrowOrange)"/>
+    <rect x="655" y="404" width="240" height="70" rx="10" fill="#FFFFFF" stroke="#45A06A" stroke-width="2"/>
+    <text x="675" y="433" font-size="16" font-weight="700">앱의 8080 포트</text>
+    <text x="675" y="457" font-size="14" fill="#29804D">요청에 응답</text>
+  </g>
+</svg>
