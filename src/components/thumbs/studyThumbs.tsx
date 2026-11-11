@@ -196,67 +196,38 @@ export const ProgrammersTargetNumberDfs: React.FC = () => (
   </ProgrammersThumbWrap>
 );
 
-const ClaudeLogoPanel = styled(ProgrammersLogoPanel)`
-  gap: 6px;
+const ClaudeWordmark = styled.div`
+  width: 170px;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #fff;
 
   img {
-    width: 20px;
-    height: 20px;
-    border-radius: 5px;
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+    filter: grayscale(1) brightness(0.7) contrast(1000%);
+    mix-blend-mode: screen;
+    transform: translateY(5px);
   }
 
   span {
-    color: #262626;
-    font-family: var(--font-mono);
-    font-size: 10px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 34px;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.055em;
+    white-space: nowrap;
   }
 `;
 
-const StackRows = styled(VStack)`
-  position: absolute;
-  inset: 0;
-  justify-content: flex-end;
-`;
-
 export const ClaudeKoreanLanguageRule: React.FC = () => (
-  <ProgrammersThumbWrap>
-    <ClaudeLogoPanel>
-      <img src={claudeLogo} alt="" />
-      <span>Claude Code</span>
-    </ClaudeLogoPanel>
-    <ProgrammersTreeSurface>
-      <StackRows gap={5} pad="0 14px 8px">
-        <HStack gap={6}>
-          <Mono size={7} tone="muted">
-            CLAUDE.md
-          </Mono>
-          <Bar w={46} tone="soft" />
-        </HStack>
-        <HStack gap={6}>
-          <Mono size={7} tone="muted">
-            mcp
-          </Mono>
-          <Bar w={112} />
-        </HStack>
-        <HStack gap={6}>
-          <Mono size={7} tone="muted">
-            mcp
-          </Mono>
-          <Bar w={98} />
-        </HStack>
-        <HStack gap={6}>
-          <Mono size={7} tone="muted">
-            settings.json
-          </Mono>
-          <Chip filled>
-            <Mono size={7}>korean</Mono>
-          </Chip>
-        </HStack>
-      </StackRows>
-    </ProgrammersTreeSurface>
-  </ProgrammersThumbWrap>
+  <ClaudeWordmark>
+    <img src={claudeLogo} alt="" />
+    <span>Claude</span>
+  </ClaudeWordmark>
 );
 
 /** 공통 로직 추출 — 두 모듈에서 공통 블록을 위로 뽑아낸다 */

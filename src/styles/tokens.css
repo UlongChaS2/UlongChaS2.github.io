@@ -121,8 +121,8 @@
   --color-accent-yellow-ink:     #B58600;
   --color-accent-blue-surface:   #EAF2FE;
   --color-accent-blue-ink:       #3182F6;
-  --color-accent-orange-surface: #FFF1EB;
-  --color-accent-orange-ink:     #C86445;
+  --color-accent-orange-surface: #D77655;
+  --color-accent-orange-ink:     #262626;
 
   /* 형광펜 하이라이트 (히어로 밑줄, 콜아웃 배경) */
   --color-highlighter:        #FFD84D;
@@ -247,8 +247,8 @@
   --color-accent-yellow-ink:     #F2C744;
   --color-accent-blue-surface:   #14284A;
   --color-accent-blue-ink:       #6BA6FF;
-  --color-accent-orange-surface: #352019;
-  --color-accent-orange-ink:     #F0A082;
+  --color-accent-orange-surface: #8F4F3B;
+  --color-accent-orange-ink:     #FFFFFF;
 
   --color-highlighter:        #C9A21A;
   --color-highlighter-subtle: #2A2312;
